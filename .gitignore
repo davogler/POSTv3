@@ -1,0 +1,37 @@
+*.log
+*.pot
+*.pyc
+.git
+media/uploads
+settings_private.py
+settings_local.py
+settings_vm.py
+*.sqlite
+logs
+blaster.html
+master.html
+static_local
+static
+gunicorn_local.sh
+conf
+
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+
+# OS or Editor folders
+.DS_Store
+.cache
+.project
+.settings
+.tmproj
+nbproject
+Thumbs.db
