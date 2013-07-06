@@ -3,13 +3,16 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Development:  David Vogler dave@sparkhouse.com
+    Designopment: Anne Esse 
+    Everything Else: Robin Lohkamp
 
 # THANKS
 
-    <name>
+    Mike Calabrese
+    Amy Metcalfe 
 
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    Normalize.css, jQuery, Modernizr
+    Normalize.css, jQuery, Modernizr, Django, nginx, gunicorn, maximage
