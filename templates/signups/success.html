@@ -1,24 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-
-	
 	 
-	
-	
+	    
+	 
+	    	
 	{% include "splash.html" %}
 	
-      <div class="row">
-        <div class="span6 columns">
-        <p>This is in signups/signup.html</p>
-        </div>
-      </div>
-      <div class="page-header">
-        <h1>Sign Up</h1>
-      </div>
-      <div class="row">
-        <div class="span6 columns">
-          <p>Thanks, man. Y'all been submitted.</p>
-        </div>
-      </div>  
-{% endblock %}
+	
+	<footer class="site-footer">
+	
+		<div id="dis">This is Rochester.</div>
+		
+		<div id="social">
+			<ul>
+				<li class="fb"><a href="https://www.facebook.com/PostRochester">FB</a></li>
+				<li class="tw"><a href="https://twitter.com/postrochester">TW</a></li>
+			</ul>
+		</div>
+		
+		
+		
+	          		  
+	  <form name="email_signup_form" id="email_signup_form" method="post" accept-charset="UTF-8" action="{% url "connect" %}" >   
+	              <p class="cta">Sign up. <span>Stay Connected.</span> <img src="{{ STATIC_URL }}i/go.png"/></p>
+	              	              {% csrf_token %}
+	            
+	              
+	              <span id="signerupper">
+		              <div id="successkid">
+		              	You're in!
+		              </div>
+	              </span>
+	              
+	              
+	                
+	                  <input name="submit_email_signup" id="submit_email_signup" class="input_button" type="submit" value="OK" />
+	                  
+	              </form>
+	  
+	</footer>
+	
+	
+     {% endblock %}
 
