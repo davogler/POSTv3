@@ -2,10 +2,7 @@ $(document).ready(function() {
     
    
     
-    $('#result').load('ajax/test.html', function() {
-      alert('Load was performed.');
-    });
-    
+        
     $('#email_signup_form').ajaxForm({
     	dataType: 'json',
     	success: processJson
@@ -17,17 +14,11 @@ $(document).ready(function() {
         if(data.status == true) { //form submission was successful
         	//alert(data.message + '/n' + data.status);
         	$('#signerupper').load('signups/messages.html #successkid').hide().fadeIn('slow');
-        	//$('#id_email_signup').replaceWith('<p>Your in</p>');
-        	//$('.msg-bubble').addClass('hide');
         	
         }
         
         else { //form submission was NIT successful
             //alert(data.message + '/n' + data.status);
-            //$('cta').after('<span></span').load('signups/messages.html #msg-bubble').hide().fadeIn('slow');
-            //$('.msg').empty().append(data.message);
-            //$('.chat-bubble').removeClass('hide');
-            //$('.msg-bubble').fadeIn('fast');
             
             $('<span></span').insertAfter('.cta').load('signups/messages.html #msg-bubble', function() {
               $('.msg').empty().append(data.message);
@@ -54,7 +45,7 @@ $(document).ready(function() {
     				cycleOptions: {
     					fx: 'fade',
     					speed: 1000, // Has to match the speed for CSS transitions in jQuery.maximage.css (lines 30 - 33)
-    					timeout: 0, // kill for auto
+    					//timeout: 0, // kill for auto
     					prev: '#arrow_left',
     					next: '#arrow_right',
     					pause: 1,

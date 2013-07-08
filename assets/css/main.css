@@ -151,6 +151,12 @@ b{
 	font-weight: normal;
 }
 
+.vibe{
+	position: absolute;
+	
+	top: 180px;
+}
+
 .wrapper{
 	width: 100%;
 }
@@ -177,8 +183,9 @@ html, body {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
    box-sizing:        border-box;
+   
 
-xposition: relative;
+
 
 
 }
@@ -336,19 +343,14 @@ xposition: relative;
 				color:#333;
 				float:left;
 				text-transform: uppercase;
-				
-				
-				
 				margin:0 20px;
 				padding: 0px;
 				position:absolute;
 				top:50px;
 				left: 30px;
-				
 				z-index:9999; /* Show above .gradient */
 				text-shadow: 0 1px 0 #fafaf9;
 				-webkit-font-smoothing:antialiased;
-				
 				font-size: 1.4em;
 				line-height: 1em;
 				width: 232px;
@@ -368,21 +370,30 @@ xposition: relative;
 				top:0;
 			} 
 			
+			.rapido{
+				position: absolute;
+				
+				
+				top: 160px;
+			}
+			
+		
+			
 			p.roch{
 			
-			padding: 120px 0 0 0;
 				line-height: .1em;
 			}
 			
 			ul#aheadlist li{
 				text-transform: uppercase;
 				line-height: .1em;
-				
+				padding: 0;
+				margin: -.6em 0 0 0;
 				color: #0073b6;
 			}
 			
 			p.rochahead{
-				padding: 1.1em 0;
+				padding: .4em 0;
 				line-height: .1em;
 			}
 
@@ -708,7 +719,7 @@ x#controlbar{
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
-@media only screen and (min-width: 26em) {
+@media only screen and (min-width: 27em) {
     /* Style adjustments for viewports above 35em */
     
     h1.logo{
@@ -725,8 +736,16 @@ x#controlbar{
     	bottom: 220px;
     }
     
+    .vibe{
+    	top: 220px;
+    }
+    
+    .rapido{
+    	top: 190px;
+    }
+    
     p.roch{
-    	padding: 220px 0 0 0; 
+    	padding: 0;
     }
 
 	.in-slide-content { 
@@ -771,6 +790,7 @@ x#controlbar{
 		
 		
 		
+		
 	#email_signup_form{
 	
 		position: absolute;
@@ -786,7 +806,12 @@ x#controlbar{
     	width: 450px;
     }
     
-  
+  .vibe{
+  	top: 310px;
+  }
+  .rapido{
+  	top: 272px;
+  }
     
 }
 
