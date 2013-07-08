@@ -322,11 +322,11 @@ html, body {
 				right: 1px;
 				width: 0px;
 				height: 0px;
-				border-style: solid;
+				border-style: inset inset inset solid;
 				border-width: 6px 0 6px 29px;
 				border-color: transparent transparent transparent #0073b6;
 				-webkit-transform: rotate(0.05deg);
-				-moz-transform: scale(1.1);
+				-moz-transform: rotate(360deg);
 				-o-transform: rotate(0.05deg); /* Didn't check Opera yet */
 				transform: rotate(0.05deg);
 			}
@@ -336,7 +336,7 @@ html, body {
 			left: 1px;
 				width: 0px;
 				height: 0px;
-				border-style: solid;
+				border-style: inset solid inset inset;
 				border-width: 6px 29px 6px 0;
 				border-color: transparent #0073b6 transparent transparent;
 				-webkit-transform: rotate(0.05deg);
