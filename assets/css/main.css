@@ -69,12 +69,18 @@ input {
 .chromeframe {
     margin: 0;
 	color: #000;
-    padding: 0 1em;
+    padding: .5em 1em;
 	background-color: #eceda4;
 	border: 2px solid #e3e51e;
+	line-height: 1em;
 }
 .chromeframe a{
 	color: #4285f4;
+}
+
+.chromeframe p{
+	margin: 0;
+	padding: 0;
 }
 
 /* =============================================
@@ -152,6 +158,26 @@ html, body {
 	min-height: 92.5%;
 }
 
+.lt-ie7 .page-wrap{
+	height: 600px;
+	width: 800px;
+	background: pink url('../i/patina_bg.jpg') no-repeat left top;
+}
+
+
+
+.lt-ie7 .site-footer{
+	position: absolute;
+	top:  682px;
+	left: 0;
+	width: 800px;
+}
+.lt-ie7 #arrow_left,
+.lt-ie7 #arrow_right, 
+.lt-ie7 .ditty,
+.lt-ie7 #cycle-loader{
+	display: none;
+}
 .site-footer{
 	position: absolute;
 	bottom: 0px;
@@ -344,6 +370,11 @@ footer.site-footer{
 	padding: 0;
 	height: 20px;
 	color: #fff;
+}
+
+.lt-ie8 #social ul li{
+	zoom: 1;
+	display: inline;
 }
 
 #social ul li a{
