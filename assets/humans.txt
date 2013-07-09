@@ -5,7 +5,7 @@
 
     Development:  David Vogler dave@sparkhouse.com
     Designopment: Anne Esse 
-    Creatice Direction: Robin Lohkamp
+    Creative Direction: Robin Lohkamp
 
 # THANKS
 
@@ -15,4 +15,4 @@
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    Normalize.css, jQuery, Modernizr, Django, nginx, gunicorn, maximage
+    Normalize.css, jQuery, Modernizr, Django, nginx, gunicorn, maximage.js
