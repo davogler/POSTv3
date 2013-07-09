@@ -81,25 +81,13 @@ input {
   POST
    ============================================= */
 
-@font-face {
-    font-family: 'helvetica_neueregular';
-    src: url('helveticaneue-thincond-webfont.eot');
-    src: url('helveticaneue-thincond-webfont.eot?#iefix') format('embedded-opentype'),
-         url('helveticaneue-thincond-webfont.woff') format('woff'),
-         url('helveticaneue-thincond-webfont.ttf') format('truetype'),
-         url('helveticaneue-thincond-webfont.svg#helvetica_neueregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
 
-}
 
 @font-face {
-    font-family: 'mrs_peaves_otroman';
-    src: url('mrspeavesot-roman-webfont.eot');
-    src: url('mrspeavesot-roman-webfont.eot?#iefix') format('embedded-opentype'),
-         url('mrspeavesot-roman-webfont.woff') format('woff'),
-         url('mrspeavesot-roman-webfont.ttf') format('truetype'),
-         url('mrspeavesot-roman-webfont.svg#mrs_peaves_otroman') format('svg');
+    font-family: 'MrsEavesRomanLiningRegular';
+    src: url('mrseavromlin-071211001EmigreWebOnly.eot');
+    src: url('mrseavromlin-071211001EmigreWebOnly.eot?#iefix') format('embedded-opentype'),
+         url('mrseavromlin-071211001EmigreWebOnly.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -110,13 +98,14 @@ html{
 }
 
 body {
-   font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-family: "HelveticaNeueW01-ThinCn 673383", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   	line-height: 2.6em;
   
 }
 
+
 .source{
-	font-family: "mrs_peaves_otroman", Georgia, Times, serif; 
+	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif; 
 	font-size: .45em;
 	line-height: 1.4em;
 	padding: 15px 0;
@@ -320,7 +309,7 @@ p.rochahead{
 
 
 footer.site-footer{
-	font-family: "mrs_peaves_otroman", Georgia, Times, serif;
+	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
 	font-size: .8em;
 }
 
@@ -419,7 +408,7 @@ input#id_email_signup{
 	width: 100px;
 	height: 20px;
 	color: #bab9b9;
-	font-family: "mrs_peaves_otroman", Georgia, Times, serif;
+	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
 	padding: 0px 0 0 0;
 }
 input#submit_email_signup{
@@ -427,7 +416,7 @@ input#submit_email_signup{
 	background-color:#0073b6;
 	border:none;
 	margin:0px 0px;
-	font-family: "mrs_peaves_otroman", Georgia, Times, serif;
+	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
 	position: absolute;
 	top: 0;
 	left: 188px;
