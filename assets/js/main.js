@@ -44,7 +44,7 @@ $(document).ready(function() {
     				cycleOptions: {
     					fx: 'fade',
     					speed: 1000, // Has to match the speed for CSS transitions in jQuery.maximage.css (lines 30 - 33)
-    					timeout: 6000, // 0 for stop
+    					timeout: 6000, // 0 for stop 6000 live
     					prev: '#arrow_left',
     					next: '#arrow_right',
     					pause: 1,

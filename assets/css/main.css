@@ -207,8 +207,10 @@ html, body {
 	left: 0px;
 	height: 4px;
 	z-index: 1000;
-	bottom: 160px;	
+	bottom: 76px;	
 }
+
+
 
 .ditty{
 	display: block;
@@ -222,27 +224,35 @@ html, body {
 
 
 h1.logo {
-	top:5px;
-	height:64px;
-	left:45px;
 	position:absolute;
-	width: 220px;
+	width: 120px;
+	height: 27px;
+	top: -7px;
+	left: 35px;
+	background: transparent url('../i/post-logo-sm.png') no-repeat left top;
 	z-index:1000;
 	font-family: Georgia, Times, serif;
-	background: transparent url('../i/post-logo-med.png') no-repeat left top;
 	text-indent: -999em;
 	overflow: hidden;
 }
+
+
+
+
 .tagline{
 	position: absolute;
 	color: #0073b6;
 	text-transform: uppercase;
 	line-height: 1.0em;
-	width: 300px;
-	left: 45px;
-	font-size: 1.5em;
-	top:80px;	
+	left:159px;
+	top: 13px;
+	font-size: .9em;
+	width: 166px;
+		
 }
+
+
+
 
 #arrow_left, #arrow_right {
 	display: block;	
@@ -294,11 +304,11 @@ a:hover {text-decoration:underline;}
 	color:#333;
 	float:left;
 	text-transform: uppercase;
-	margin:0 20px;
+	
 	padding: 0px;
 	position:absolute;
 	top:50px;
-	left: 30px;
+	left: 40px;
 	z-index:9999; /* Show above .gradient */
 	text-shadow: 0 1px 0 #fafaf9;
 	-webkit-font-smoothing:antialiased;
@@ -306,6 +316,9 @@ a:hover {text-decoration:underline;}
 	line-height: 1em;
 	width: 232px;
 }
+
+
+
 
 .in-slide-content p{
 	margin: 0;
@@ -421,7 +434,7 @@ p.cta span{
 	width: 225px;
 	padding: 0;
 	position: absolute;
-	left: 13%;
+	left: 14%;
 	top: 0px;
 	line-height: 2px;
 	text-transform: uppercase;
@@ -547,13 +560,22 @@ input#submit_email_signup:active{
     
     h1.logo{
     width:280px;
+    top:5px;
+    height:64px;
+    left:45px;
 	background: transparent url('../i/post-logo-lg.png') no-repeat left top;  	
     }
+    
+    
     
     .tagline{
     	font-size: 1.9em;
     	top: 90px;	
+    	width: 300px;
+    	left: 45px;
     }
+    
+    
     
     #controlbar{
     	bottom: 220px;
@@ -575,7 +597,9 @@ input#submit_email_signup:active{
 		font-size: 2em;
 		line-height: 1em;
 		width: 400px;
+		left: 45px;
     }
+    
     
     .source{
     	padding: 30px 0;
