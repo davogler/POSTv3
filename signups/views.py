@@ -21,13 +21,13 @@ def connect(request):
           double_optin = False,
       )
       
-      ms.listStaticSegmentMembersAdd(
-          id = lists['data'][0]['id'],
-          seg_id = 157, #Fake Development People... kill this in production!
-          batch = {
-              'email_address': form.cleaned_data['email_signup']
-              },
-      )
+      #ms.listStaticSegmentMembersAdd(
+      #    id = lists['data'][0]['id'],
+      #    seg_id = 157, #Fake Development People... kill this in production!
+      #    batch = {
+      #        'email_address': form.cleaned_data['email_signup']
+      #        },
+      #)
       
       
       if request.is_ajax(): #success with js
