@@ -19,8 +19,11 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'signups.views.connect', name='connect'),
     url(r'^signups/success/$', 'signups.views.success', name='success'),
-    url(r'^signups/messages.html$', TemplateView.as_view(template_name='signups/messages.html'))
+    url(r'^signups/messages.html$', TemplateView.as_view(template_name='signups/messages.html')),
+   
     
 )
 
 urlpatterns += staticfiles_urlpatterns()
+
+handler404 = 'post.views.custom404'
