@@ -592,6 +592,7 @@ input#submit_email_signup:active{
     position: absolute;
     	top: 92px;
     	left: 230px;
+    	z-index: 100;
     }
     
     #controlbar{
