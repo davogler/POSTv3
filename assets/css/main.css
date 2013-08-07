@@ -249,10 +249,15 @@ h1.logo {
 	top: 13px;
 	font-size: .9em;
 	width: 166px;
+	display: none;
 		
 }
 
-
+.helium-buy-now{
+position: absolute;
+	top: -2px;
+	left: 160px;
+}
 
 
 #arrow_left, #arrow_right {
@@ -345,6 +350,10 @@ ul#aheadlist li{
 p.rochahead{
 	padding: .4em 0;
 	line-height: .1em;
+}
+
+.premiere{
+	font-size: .75em;
 }
 
 
@@ -576,9 +585,14 @@ input#submit_email_signup:active{
     	top: 90px;	
     	width: 300px;
     	left: 45px;
+    	display: block;
     }
     
-    
+    .helium-buy-now{
+    position: absolute;
+    	top: 92px;
+    	left: 230px;
+    }
     
     #controlbar{
     	bottom: 220px;
