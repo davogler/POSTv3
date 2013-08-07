@@ -59,3 +59,15 @@ def connect(request):
 
 def success(request):
     return render_to_response('signups/success.html', context_instance=RequestContext(request))
+
+def get_subscriber(request):
+    subscriber = None
+    data = json.loads(request.body)
+    subscriber = Subscriber(
+        body = data['type']
+    )
+    
+    try:
+      subscriber.save()
+    except:
+      pass
