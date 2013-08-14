@@ -63,7 +63,7 @@ def success(request):
     return render_to_response('signups/success.html', context_instance=RequestContext(request))
 
 def get_subscriber(request):
-    h = Helium(api_key='217225ec4affa1a60cd073e014a93901')
+    h = Helium(settings.HELIUM_API_KEY)
     data = h.get_charges()
     email = data[0]['customer']['email']
     splifflist=[]
