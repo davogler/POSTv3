@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<p>This is list template </p>
+
+{{ record.email }}
+
+{{ eggnog }}
+<br>
+{% for value in eggnog %}
+    {{ value }}
+{% endfor %}
+<br>
+
+{% for dict in eggnog %}
+    {% for key,value in dict.items %}
+    	<tr>
+    		<td>{{ key }}</td>
+    		<td>{{ value }}</td>
+    	</tr>
+    {% endfor %}
+{% endfor %}
+
+{{ splifflist }}
+<br>
+
+{% for gnop in splifflist %}
+    {{ gnop }}
+{% endfor %}
+<br>
+{% endblock %}

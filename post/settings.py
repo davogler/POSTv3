@@ -25,7 +25,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
+USE_TZ = False
 
 ROOT_PATH = os.path.dirname(__file__)
 
@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'mailsnake',
     'signups',
+    
 )
 
 # A sample logging configuration. The only tangible logging

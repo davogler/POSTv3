@@ -6,6 +6,8 @@ import post.settings as settings
 from mailsnake import MailSnake
 import json
 from django.http import HttpResponse
+from signups.helium import Helium
+import datetime
 
 def connect(request):
   ms = MailSnake(settings.MAILCHIMP_API_KEY)
@@ -61,13 +63,38 @@ def success(request):
     return render_to_response('signups/success.html', context_instance=RequestContext(request))
 
 def get_subscriber(request):
-    subscriber = None
-    data = json.loads(request.body)
-    subscriber = Subscriber(
-        body = data['type']
-    )
+    h = Helium(api_key='217225ec4affa1a60cd073e014a93901')
+    data = h.get_charges()
+    email = data[0]['customer']['email']
+    splifflist=[]
+    for obj in data:
+        splifflist.append(obj['customer']['email'])
+        obj, created = Subscriber.objects.get_or_create(
+            email = obj['customer']['email'],
+            cust_id = obj['customer']['id'],
+            name = obj['customer']['address']['recipient'],
+            street = obj['customer']['address']['street'],
+            city = obj['customer']['address']['city'],
+            state = obj['customer']['address']['state'],
+            zip = obj['customer']['address']['zipcode'],
+            charge_id = obj['id'],
+            charge_date = datetime.datetime.fromtimestamp(obj['created']),
+            )
+    for o in data:
+        record = Subscriber(email = o['customer']['email'])    
+    eggnog = [{'egg':'leg', 'blip':'lip'},{'snog':'log', 'nip':'snip'},{'blar':'lag', 'glop':'stop'}]
     
-    try:
-      subscriber.save()
-    except:
-      pass
+    
+    
+    return render_to_response(
+      'signups/list.html',
+      {
+        'email': email,
+        'record': record,
+        'eggnog': eggnog,
+        'splifflist': splifflist,
+        
+      },
+      context_instance=RequestContext(request)
+    )
+  
