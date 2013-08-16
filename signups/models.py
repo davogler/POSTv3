@@ -15,6 +15,7 @@ class Subscriber(models.Model):
     charge_id = models.CharField(max_length=255, blank=True, unique=True)
     charge_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
+    expires_on = models.DateField()
     updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):

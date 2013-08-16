@@ -1,0 +1,24 @@
+{% extends "admin/change_list.html" %}
+
+<!-- LOADING -->
+{% load url from future %}
+{% load admin_list i18n grp_tags %}
+
+{% block object-tools %}object template
+    {% if has_add_permission %}
+        <ul class="grp-object-tools">
+        		<li>
+	        		<form name="refresh_form" id="refresh_form" method="post" accept-charset="UTF-8" action="{% url "subscribe" %}" >   
+	              
+	        		   {% csrf_token %}
+	        		          
+	        		   <input name="submit_refresh" id="submit_refresh" class="grp-button" type="submit" value="Refresh" />
+	        		                
+	        		 </form>
+        	    </li>
+            {% block object-tools-items %}
+                <li><a href="add/{% if is_popup %}?_popup=1{% endif %}" class="grp-add-link grp-state-focus">{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}</a></li>
+            {% endblock %}
+        </ul>
+    {% endif %}
+{% endblock %}

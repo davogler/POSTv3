@@ -5,7 +5,7 @@ from signups.models import *
 import post.settings as settings
 from mailsnake import MailSnake
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from signups.helium import Helium
 import datetime
 
@@ -65,7 +65,7 @@ def success(request):
 def get_subscriber(request):
     h = Helium(settings.HELIUM_API_KEY)
     data = h.get_charges()
-    email = data[0]['customer']['email']
+    
     splifflist=[]
     for obj in data:
         splifflist.append(obj['customer']['email'])
@@ -79,22 +79,15 @@ def get_subscriber(request):
             zip = obj['customer']['address']['zipcode'],
             charge_id = obj['id'],
             charge_date = datetime.datetime.fromtimestamp(obj['created']),
+            expires_on = datetime.datetime.fromtimestamp(obj['created']) + datetime.timedelta(days=365)
             )
-    for o in data:
-        record = Subscriber(email = o['customer']['email'])    
-    eggnog = [{'egg':'leg', 'blip':'lip'},{'snog':'log', 'nip':'snip'},{'blar':'lag', 'glop':'stop'}]
-    
-    
-    
-    return render_to_response(
-      'signups/list.html',
-      {
-        'email': email,
-        'record': record,
-        'eggnog': eggnog,
-        'splifflist': splifflist,
         
-      },
-      context_instance=RequestContext(request)
-    )
+    
+    
+    
+    if 'HTTP_REFERER' in request.META:
+      return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    else:
+      return HttpResponseRedirect('/')    
+    
   

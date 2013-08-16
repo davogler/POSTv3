@@ -1,9 +1,17 @@
 from django.contrib import admin
 import models
 from signups.models import Subscriber
+from actions import export_as_csv_action
 
-admin.site.register(Subscriber)
 
+
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ('name','email','charge_date','charge_id','cust_id','expires_on',)
+    actions = [export_as_csv_action("CSV Export", fields=['name','email','charge_date','charge_id','cust_id','expires_on'])]
+    class Media:
+        css = {'all': ('css/grap_extend.css',)}
+        
+admin.site.register(Subscriber, SubscriberAdmin)
 
 class ButtonableModelAdmin(admin.ModelAdmin):
    """
