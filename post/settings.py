@@ -107,7 +107,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
 )
 
-GRAPPELLI_INDEX_DASHBOARD = 'signups.dashboard.CustomIndexDashboard'
+GRAPPELLI_INDEX_DASHBOARD = 'post.dashboard.CustomIndexDashboard'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'mailsnake',
     'signups',
+    'subscribers',
     
 )
 
