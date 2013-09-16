@@ -106,6 +106,7 @@ html{
 body {
    font-family: "HelveticaNeueW01-ThinCn 673383", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   	line-height: 2.6em;
+  	
   
 }
 
@@ -115,6 +116,7 @@ body {
 	font-size: .45em;
 	line-height: 1.4em;
 	padding: 15px 0;
+	
 }
 
 b{
@@ -281,6 +283,7 @@ position: absolute;
 	right: 1px;
 	width: 0px;
 	height: 0px;
+	top: -1px;
 	border-style: inset inset inset solid;
 	border-width: 6px 0 6px 29px;
 	border-color: transparent transparent transparent #0073b6;
@@ -288,6 +291,7 @@ position: absolute;
 	-moz-transform: rotate(360deg);
 	-o-transform: rotate(0.05deg); 
 	transform: rotate(0.05deg);
+
 }
 
 #arrow_left {
@@ -341,6 +345,15 @@ a:hover {text-decoration:underline;}
 
 .in-slide-content p{
 	margin: 0;
+	
+	
+}
+
+.in-slide-content .bg{
+	xbackground-color: rgba(255, 255, 255, 0.65);
+	xdisplay: inline-block;
+	xpadding: 5px;
+	xborder-radius: 2px;
 }
 
 .rapido{
@@ -368,6 +381,8 @@ p.rochahead{
 .premiere{
 	font-size: .75em;
 }
+
+
 
 
 footer.site-footer{
