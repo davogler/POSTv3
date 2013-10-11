@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+
+{% block title %}{{ block.super }} | {{ flatpage.title }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+<section class="content-static">
+
+{{ flatpage.content|safe }} 
+
+</section>
+
+
+{% endblock %}

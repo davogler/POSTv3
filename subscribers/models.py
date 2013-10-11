@@ -1,7 +1,5 @@
 from django.db import models
 
-from django.db import models
-
 
 class Subscriber(models.Model):
     """Model to store addresses for subscribers"""

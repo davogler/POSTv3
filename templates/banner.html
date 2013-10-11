@@ -1,0 +1,38 @@
+{% load fb_versions %}
+
+
+
+
+{% block content %}
+
+
+{% for Article in latest %}
+
+
+
+<header class="banner">
+	<div class="headerwrap{% if Article.screen %} screen{% endif %}">
+    	<h1 class="logo"><a href="/">POST</a></h1>
+    	
+    	<nav class="mm">
+    		<ul>
+    			<li><a href="/about/">about</a></li>
+    			<li><a href="{% url 'article_list' %}">archive</a></li>
+    			<li><a href="/subscribe/">subscribe</a></li>
+    			
+    		</ul>
+    	</nav>
+    </div>
+ 
+    <img class="sticky" <img class="sticky" src="{% version Article.hero 'large' %} " alt="{{ Article.hero.filename }}" />
+    
+    <div class="hr-flat"> </div>
+	
+</header>
+
+
+
+
+{% endfor %} 
+
+{% endblock %}

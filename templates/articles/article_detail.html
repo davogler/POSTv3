@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}| Entries{% endblock %}
+
+{% block bodyclass %}article {{ object.slug }}{% endblock %}
+
+{% load fb_versions %}
+
+{% block headernav %}
+<header class="banner">
+	<div class="headerwrap{% if object.screen %} screen{% endif %}">
+    	<h1 class="logo"><a href="/">POST</a></h1>
+    	
+    	<nav class="mm">
+    		<ul>
+    			<li><a href="/about/">about</a></li>
+    			<li><a href="{% url 'article_list' %}">archive</a></li>
+    			<li><a href="/subscribe/">subscribe</a></li>
+    			
+    		</ul>
+    	</nav>
+    </div>
+ 
+    <img class="sticky" <img class="sticky" src="{% version object.hero 'large' %} " alt="{{ object.hero.filename }}" />
+    
+    <div class="hr"> </div>
+	
+</header>
+
+{% endblock %}
+
+{% block sticky %} {{ block.super }} <img class="sticky" src="{% version article.hero 'large' %} " alt="{{ object.hero.filename }}" /> {% endblock %}
+
+{% block content %}
+
+
+<article class="full">
+ 	<header>
+     	<img class="boom" src="{% version article.hero 'large' %} " alt="{{ object.hero.filename }}" />
+     	<div class="hgroup">
+	        	<h2 class="unique">{{ object.title }}</h2>
+	        	<p class="tagline">{{ object.tagline }}</p>
+     	</div>
+ 	</header>
+ 
+
+<section class="content">
+	<div class="brick first">
+		 <section class="primary">
+		<p><em>{{ object.intro|safe }}</em></p>
+		
+		</section>       		
+	</div>
+
+
+    
+    
+    
+    
+    
+    {{ object.body|safe }}
+    
+    </section>
+    
+    	 </article>
+ 
+
+{% endblock %}
+
+{% block js-slug %}{{ object.slug }}{% endblock %}

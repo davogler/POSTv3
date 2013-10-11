@@ -81,6 +81,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -107,6 +108,37 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
 )
 
+FILEBROWSER_DIRECTORY = 'uploads/'
+FILEBROWSER_URL_FILEBROWSER_MEDIA =  STATIC_URL + "filebrowser/"
+FILEBROWSER_PATH_FILEBROWSER_MEDIA = os.path.join(STATIC_ROOT, 'filebrowser/')
+FILEBROWSER_MAX_UPLOAD_SIZE = '10485760'
+FILEBROWSER_EXTENSIONS = {
+    'Folder': [''],
+    'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
+    'Document': ['.pdf','.doc','.rtf','.txt','.xls','.csv'],
+    'Video': ['.mov','.wmv','.mpeg','.mpg','.avi','.rm'],
+    'Audio': ['.mp3','.mp4','.wav','.aiff','.midi','.m4p']
+}
+
+FILEBROWSER_SELECT_FORMATS = {
+    'file': ['Folder','Image','Document','Video','Audio'],
+    'image': ['Image'],
+    'document': ['Document'],
+    'media': ['Video','Audio'],
+}
+
+
+FILEBROWSER_VERSIONS = {
+    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail(60x60)', 'width': 60, 'height': 60, 'opts': 'crop'},
+    'thumbnail': {'verbose_name': 'Thumbnail(60x60)', 'width': 60, 'height': 60, 'opts': 'crop'},
+    'small': {'verbose_name': 'Small(140x-)', 'width': 140, 'height': '', 'opts': ''},
+    'medium': {'verbose_name': 'Medium(315x-)', 'width': 315, 'height': '', 'opts': ''},
+    'big': {'verbose_name': 'Big(643x-)', 'width': 643, 'height': '', 'opts': ''},
+    'large': {'verbose_name': 'Large(1280x-)', 'width': 1280, 'height': '', 'opts': ''},
+}
+FILEBROWSER_ADMIN_VERSIONS = ['thumbnail', 'small', 'medium', 'big', 'large']
+FILEBROWSER_ADMIN_THUMBNAIL = 'admin_thumbnail'
+
 GRAPPELLI_INDEX_DASHBOARD = 'post.dashboard.CustomIndexDashboard'
 
 INSTALLED_APPS = (
@@ -118,11 +150,14 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'grappelli.dashboard',
     'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.flatpages',
     'mailsnake',
     'signups',
     'subscribers',
+    'articles',
     
 )
 
