@@ -21,7 +21,7 @@
     	</nav>
     </div>
  
-    <img class="sticky" <img class="sticky" src="{% version object.hero 'large' %} " alt="{{ object.hero.filename }}" />
+    <img class="sticky" src="{% version object.hero 'large' %} " alt="{{ object.hero.filename }}" />
     
     <div class="hr"> </div>
 	
@@ -51,14 +51,50 @@
 		
 		</section>       		
 	</div>
+	
+	<div class="brick">
+	   			<aside class="secondary">
+	   				<div class="authorship">
+	       				<p>by <a href="{{ object.author.link }}">{{ object.author.name }}</a></p>
+	       				<p>photography by <a href="{{ object.photog.link }}">{{ object.photog.name }}</a></p>
+	   				</div>
+	   				
+	   			
+	   				
+	   				<div class="sponsor">
+	   					<p> This article has been sponsored by: </p>
+	   					<img src="{% version object.sponsor.adimg 'medium' %} " alt="{{ object.sponsor.name }}" />
+	   					
+	   				</div>
+	   			
+	   			</aside>
+	   		
+	   		</div>
 
 
-    
-    
-    
-    
     
     {{ object.body|safe }}
+    
+ <div class="brick last clearfix">
+ 	        	<aside class="more">
+ 	        		
+ 	        		<p>{{ object.more_info|safe }}</p>
+ 	        		
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        	<aside class="creators">
+ 	        		<p>{{ object.author.colophon|safe }}</p>
+ 	        		
+ 	        		<p>{{ object.photog.colophon|safe }}</p>
+ 	        		
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        
+ 	        	
+ 	        	
+ 	        </div><!--brick-->   
     
     </section>
     
@@ -67,4 +103,6 @@
 
 {% endblock %}
 
-{% block js-slug %}{{ object.slug }}{% endblock %}
+
+{% block inlinejs %}<script type="text/javascript">{{ object.special_js|safe }}</script>{% endblock %}
+{% block inlinecss %}<style type="text/css">{{ object.special_css|safe }}</style>{% endblock %}
