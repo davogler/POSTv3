@@ -61,6 +61,7 @@ class ArticleList(ListView):
     context_object_name = 'article'
     queryset = Article.published.all()
     
+    
 class ArticlePreviewList(ListView):
     '''A List view of published articles- authenticated required via URL'''
     template_name = 'article_list.html'
