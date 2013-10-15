@@ -132,8 +132,8 @@ FILEBROWSER_VERSIONS = {
     'admin_thumbnail': {'verbose_name': 'Admin Thumbnail(60x60)', 'width': 60, 'height': 60, 'opts': 'crop'},
     'thumbnail': {'verbose_name': 'Thumbnail(60x60)', 'width': 60, 'height': 60, 'opts': 'crop'},
     'small': {'verbose_name': 'Small(140x-)', 'width': 140, 'height': '', 'opts': ''},
-    'medium': {'verbose_name': 'Medium(315x-)', 'width': 315, 'height': '', 'opts': ''},
-    'big': {'verbose_name': 'Big(643x-)', 'width': 643, 'height': '', 'opts': ''},
+    'medium': {'verbose_name': 'Medium(300x-)', 'width': 300, 'height': '', 'opts': ''},
+    'big': {'verbose_name': 'Big(960x-)', 'width': 960, 'height': '', 'opts': ''},
     'large': {'verbose_name': 'Large(1280x-)', 'width': 1280, 'height': '', 'opts': ''},
 }
 FILEBROWSER_ADMIN_VERSIONS = ['thumbnail', 'small', 'medium', 'big', 'large']

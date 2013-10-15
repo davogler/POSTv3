@@ -102,21 +102,7 @@ $(document).ready(function() {
     
     
 	
-$(window).ready(function() {
-    var wi = $(window).width(); 
-    
-    $("p.testp").text('Initial screen width is currently: ' + wi + 'px.');
- 	$("section.content").css("margin-top", function() { return (wi* .66084)-100 });
- 	$("article.full header .hgroup").css("top", function() { return wi*.4 }).css("left", function() { return wi*.15 });
-    $(window).resize(function() {
-        var wi = $(window).width();
- 
-       
-        $("p.testp").text('Screen width is currently: ' + wi + 'px.');
-        $("section.content").css("margin-top", function() { return wi*.62 });
-        $("article.full header .hgroup").css("top", function() { return wi*.4 }).css("left", function() { return wi*.15 });
-        });            
-	});
+
 
 // This function will be executed when the user scrolls the page.
 $(window).scroll(function(e) {
@@ -145,6 +131,7 @@ $(window).scroll(function(e) {
     $("article.full header .hgroup").css("opacity",op);
    
     });
+
 
 
      

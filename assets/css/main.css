@@ -1,6 +1,18 @@
 /* @override 
 	http://127.0.0.1:8000/assets/css/main.css */
 
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
 html,
 button,
 input,
@@ -8,38 +20,555 @@ select,
 textarea {
     color: #222;
 }
-body {
+
+html {
     font-size: 1em;
     line-height: 1.4;
 }
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
 ::-moz-selection {
     background: #b3d4fc;
     text-shadow: none;
 }
+
 ::selection {
     background: #b3d4fc;
     text-shadow: none;
 }
-img {
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+
+audio,
+canvas,
+img,
+video {
     vertical-align: middle;
 }
+
+/*
+ * Remove default fieldset styles.
+ */
+
 fieldset {
     border: 0;
     margin: 0;
     padding: 0;
 }
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
 textarea {
     resize: vertical;
 }
-input {
-    -webkit-appearance: none;
-    border-radius: 0;
+
+/* ==========================================================================
+   Browse Happy prompt
+   ========================================================================== */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
 }
+
+/* develpment fonts */
+
+@font-face {
+    font-family: 'helvetica_neueregular';
+    src: url('helveticaneue-thincond-webfont.eot');
+    src: url('helveticaneue-thincond-webfont.eot?#iefix') format('embedded-opentype'),
+         url('helveticaneue-thincond-webfont.woff') format('woff'),
+         url('helveticaneue-thincond-webfont.ttf') format('truetype'),
+         url('helveticaneue-thincond-webfont.svg#helvetica_neueregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+ 
+}
+ 
+ @font-face {
+    font-family: 'mrs_peaves_otroman';
+    src: url('mrspeavesot-roman-webfont.eot');
+    src: url('mrspeavesot-roman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('mrspeavesot-roman-webfont.woff') format('woff'),
+         url('mrspeavesot-roman-webfont.ttf') format('truetype'),
+         url('mrspeavesot-roman-webfont.svg#mrs_peaves_otroman') format('svg');
+}
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+body{
+   font-family: "mrs_peaves_otroman", Georgia, Times, serif; 
+   font-size: 100%;
+	xwidth: 100%;
+	xoverflow-x: hidden;
+	xborder: 10px solid #333;
+	color: #333;
+	}
+	
+h1,h2,h3,h4{
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	text-transform: uppercase;
+	font-weight: normal;
+}
+
+a{
+	color: #0073b6;
+	text-decoration: none;
+}
+
+a:hover,a:focus{
+	color: gray;
+}
+header.banner{
+	position: fixed;
+	z-index: 500;
+	width: 100%;
+	xmargin: 0 10px 0 10px;
+	height: 60px;
+	overflow: hidden;
+	border-top: 10px solid #333;
+	border-left: 10px solid #333;
+	border-right: 10px solid #333;
+	box-sizing:        border-box;
+
+   
+}
+
+.hr{
+	width: 100%;
+	z-index: 2000;
+	height: 10px;
+	position: fixed;
+	top: 60px;
+	display: none;
+	background-color: #333;
+}
+
+.hr-flat{
+	width: 100%;
+	z-index: 2000;
+	height: 10px;
+	position: fixed;
+	top: 60px;
+
+	background-color: #333;
+}
+
+.hr-static{
+	width: 100%;
+	z-index: 2000;
+	height: 10px;
+	position: fixed;
+	top: 60px;
+	margin-left: -10px;
+
+	background-color: #333;
+}
+
+
+img.sticky{
+	width: 100%;
+
+	xposition: fixed;
+	overflow: hidden;
+		
+			
+}
+
+.headerwrap{
+	position: fixed;
+	top: 10px;
+	left: 0px;
+	width: 100%;
+	border-right: 10px solid #333;
+	border-left: 10px solid #333;
+	box-sizing:        border-box;
+	
+
+}
+
+.screen{
+	background: rgba(250, 250, 250, .5);
+
+}
+
+h1.logo{
+	margin: 0;
+}
+
+h1.logo a {
+	position:relative;
+	float: left;
+	width: 120px;
+	height: 37px;
+	margin: 12px 0 1px 9px;
+	background: transparent url('../i/post-logo-sm-2x.png') no-repeat left top;
+		background-size:  120px 27px;
+	font-family: Georgia, Times, serif;
+	text-indent: -999em;
+	overflow: hidden;
+
+	
+}
+
+nav.mm{
+	display: block;
+	float: left;
+	width: 50%;
+	margin:16px 0 0 12px;
+	
+}
+
+nav.mm ul{
+
+	margin: 0;
+	padding: 0;
+	position: relative;
+
+	
+	}
+
+nav.mm ul li {
+	display: inline-block;
+	margin: 0 0 0 1%;
+	
+	
+	
+}
+
+nav.mm ul li a{
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	text-transform: uppercase;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+#wrapper{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	
+}
+
+
+article.main{
+	
+	
+}
+
+img.boom{
+	width: 100%;
+	position: fixed;
+	overflow: hidden;
+	border: 10px solid #333;
+	box-sizing:        border-box;
+
+	
+	
+			
+}
+
+article header h2{
+	margin: 0;
+}
+
+article.full header .hgroup{
+	position: relative;
+	color: #fff;
+	z-index: 200;
+	margin: 0;
+	
+}
+
+h2.unique{
+	font-size: 3em;
+	text-shadow: 1px 1px 1px rgba(35, 33, 33, 0.68);
+	
+}
+
+p.tagline{
+	font-size: 1.0em;
+	text-shadow: 1px 1px 1px rgba(35, 33, 33, 0.68);
+	z-index: 200;
+	position: relative;
+	text-transform: uppercase;
+	color: #c9c8c8;
+	margin: -1% 0 0 0;
+	width: 75%;
+}
+
+.testp,.scrollthang{
+	display: none;
+}
+
+.content img{
+	width: 100%;
+}
+
+.brick{
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+section.content{
+	margin: 0 auto;
+	xwidth: 100%;
+	z-index: 200;
+	position: relative;
+	xtop: 300px;
+	background: wheat;
+	background:  url('../i/texture_paper_bg.png');
+	xbackground-size: cover;
+	padding:  0 5.1%;
+	border: 10px solid #333;
+	xbackground-position: center;
+	box-sizing:        border-box;
+	font-size: 1.2em;
+	
+}
+
+section.content p{
+	position: relative;
+	display: block;
+	margin: 2.5% 0 2.5% 0;
+	xwidth: 100%;
+	float: left;
+	
+}
+
+
+
+
+section.content-static{
+	margin: 0 auto;
+	width: 100%;
+	z-index: 200;
+	position: relative;
+	background: wheat;
+	background:  url('../i/texture_paper_bg.png');
+
+	padding:  70px 5.1%;
+	
+	border: 10px solid #333;
+	
+	box-sizing:        border-box;
+	font-size: 1.2em;
+	
+}
+
+/* @end */
+
+figcaption{
+	float: right;
+	color: gray;
+	font-style: italic;
+	font-size: .8em;
+}
+
+.brick.first{
+	margin-top: 2%;
+}
+
+aside.secondary{
+	font-size: .9em;
+}
+
+aside .authorship{
+	font-size: .8em;
+	color: gray;
+	
+	border-bottom: 1px solid #e0cbad;
+	font-family:  Georgia, Times, serif;
+	font-style: italic;
+}
+
+aside .sponsor{
+	font-size: .85em;
+	text-align: center;
+}
+
+.secondary .pullquote{
+	font-size: 1.6em;
+	font-style: italic;
+	color: gray;
+	margin: 0;
+}
+
+.primary .pullquote,
+.fullwidth .pullquote{
+	font-size: 1.6em;
+	font-style: italic;
+	color: gray;
+	margin: 0;
+}
+
+.brick.last{
+	border-top: 1px solid #e0cbad;
+	margin-bottom: 4%;
+	margin-top: 3%;
+}
+
+aside.more{
+	font-size: .9em;
+}
+
+aside.creators{
+ font-size: .9em;
+	border-top: 1px solid #e0cbad;
+	}
+	
+aside.secondary cite{
+	float: right;
+	
+}
+
+/*static pages */
+section.content-static{
+	
+}
+
+h2.list{
+	display: inline-block;
+	font-size: 2.5em;
+	margin: 0 1% 0 0;
+	line-height: .9em;
+}
+
+p.tagline-list{
+	display: inline-block;
+	text-transform: uppercase;
+	margin: 0;
+}
+
+article.teaser{
+	margin-bottom: 30px;
+}
+
+.brick.only{
+	margin-bottom: 30px;
+}
+
+
+footer.footer{
+	
+	margin: 0 auto;
+	width: 90%;
+	z-index: 200;
+	position: relative;
+	background: #333;
+	color: #fff;
+	padding:  1% 5.1%;
+	text-align: center;
+
+}
+
+footer .tehweb{
+	width: 30%;
+	float: right;
+}
+
+footer .internalnav{
+	width: 30%;
+	float: left;
+	text-align: left;
+}
+
+nav.footy ul,
+nav.tehweb ul{
+	margin: 0 0 30px 0;
+	padding: 0;
+}
+
+nav.tehweb ul{
+	text-align: right;
+}
+
+nav.footy ul li a,
+nav.tehweb ul li a{
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+h1.deadly{
+	font-size: 2.5em;
+	text-align: center;
+	margin: 0;
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
 
 .hidden {
     display: none !important;
     visibility: hidden;
 }
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
 
 .visuallyhidden {
     border: 0;
@@ -52,6 +581,11 @@ input {
     width: 1px;
 }
 
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
     clip: auto;
@@ -62,518 +596,25 @@ input {
     width: auto;
 }
 
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
 .invisible {
     visibility: hidden;
 }
 
-.chromeframe {
-    margin: 0;
-	color: #000;
-    padding: .5em 1em;
-	background-color: #eceda4;
-	border: 2px solid #e3e51e;
-	line-height: 1em;
-}
-.chromeframe a{
-	color: #4285f4;
-}
-
-.chromeframe p{
-	margin: 0;
-	padding: 0;
-}
-
-/* =============================================
-  POST
-   ============================================= */
-
-
-
-@font-face {
-    font-family: 'MrsEavesRomanLiningRegular';
-    src: url('mrseavromlin-071211001EmigreWebOnly.eot');
-    src: url('mrseavromlin-071211001EmigreWebOnly.eot?#iefix') format('embedded-opentype'),
-         url('mrseavromlin-071211001EmigreWebOnly.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-html{
-	background-color: #f4ede3;
-}
-
-body {
-   font-family: "HelveticaNeueW01-ThinCn 673383", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-  	line-height: 2.6em;
-  	
-  
-}
-
-
-.source{
-	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif; 
-	font-size: .45em;
-	line-height: 1.4em;
-	padding: 15px 0;
-	
-}
-
-b{
-	color: #0073b6;
-	font-weight: normal;
-}
-
-.vibe{
-	position: absolute;
-	top: 180px;
-}
-
-.wrapper{
-	width: 100%;
-}
-
-.wrapper img{
-	width: 100%;
-}
-
-#maximage{
-	background-color: #e9e4d9;
-}
-
-* {
-  margin: 0;
-}
-html, body {
-  height: 100%;
-}
-
-.page-wrap {
-  min-height: 100%;
-  border: 30px solid #333;
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-   box-sizing:        border-box;
-}
-
-.lt-ie9 .page-wrap{
-	min-height: 92.5%;
-}
-
-.lt-ie7 .page-wrap{
-	height: 600px;
-	width: 800px;
-	background: pink url('../i/patina_bg.jpg') no-repeat left top;
-}
-
-
-
-.lt-ie7 .site-footer{
-	position: absolute;
-	top:  682px;
-	left: 0;
-	width: 800px;
-}
-.lt-ie7 #arrow_left,
-.lt-ie7 #arrow_right, 
-.lt-ie7 .ditty,
-.lt-ie7 #cycle-loader{
-	display: none;
-}
-.site-footer{
-	position: absolute;
-	bottom: 0px;
-	left: 0;
-	width: 100%;
-	height: 30px;
-	background-color: #333;
-}
-#cycle-loader {
-	height:32px;
-	left:50%;
-	margin:-8px 0 0 -8px;
-	position:absolute;
-	top:50%;
-	width:32px;
-	z-index:999;
-}
-
-#maximage {
-	display:none;
-	position:fixed !important;
-}
-
-#controlbar{
-	width: 100%;
-	position: absolute;
-	left: 0px;
-	height: 4px;
-	z-index: 1000;
-	bottom: 76px;	
-}
-
-
-
-.ditty{
-	display: block;
-	color: transparent;
-	float: left;
-	width: 99%;
-	height: 4px;
-	margin: 3px 0 0 2px;
-	background: transparent url('../i/dit.png') repeat-x;
-}
-
-
-h1.logo {
-	position:absolute;
-	width: 120px;
-	height: 27px;
-	top: -7px;
-	left: 35px;
-	background: transparent url('../i/post-logo-sm-2x.png') no-repeat left top;
-	z-index:1000;
-	background-size:  120px 27px;
-	font-family: Georgia, Times, serif;
-	text-indent: -999em;
-	overflow: hidden;
-}
-
-
-
-
-.tagline{
-	position: absolute;
-	color: #0073b6;
-	text-transform: uppercase;
-	line-height: 1.0em;
-	left:159px;
-	top: 13px;
-	font-size: .9em;
-	width: 166px;
-	display: none;
-		
-}
-
-.helium-buy-now{
-position: absolute;
-	top: -2px;
-	left: 160px;
-	
-	
-}
-
-#buy{
-	text-transform: uppercase;
-	border-radius: 0;
-	
-	background-color: #0178be;
-	font: 14px "MrsEavesRomanLiningRegular", Georgia, Times, serif;
-	padding: 8px 8px 5px 8px;
-}
-
-
-
-
-#arrow_left, #arrow_right {
-	display: block;	
-}
-#arrow_right {
-	position: absolute;
-	right: 1px;
-	width: 0px;
-	height: 0px;
-	top: -1px;
-	border-style: inset inset inset solid;
-	border-width: 6px 0 6px 29px;
-	border-color: transparent transparent transparent #0073b6;
-	-webkit-transform: rotate(0.05deg);
-	-moz-transform: rotate(360deg);
-	-o-transform: rotate(0.05deg); 
-	transform: rotate(0.05deg);
-
-}
-
-#arrow_left {
-	position: absolute;
-	left: 1px;
-	width: 0px;
-	height: 0px;
-	border-style: inset solid inset inset;
-	border-width: 6px 29px 6px 0;
-	border-color: transparent #0073b6 transparent transparent;
-	-webkit-transform: rotate(0.05deg);
-	-moz-transform: scale(1.1);
-	-o-transform: rotate(0.05deg); 
-	transform: rotate(0.05deg);
-	
-}
-
-#arrow_left:hover{
-	border-color: transparent #0390e3 transparent transparent;
-}
-
-#arrow_right:hover {
-	border-color: transparent transparent transparent #0390e3;
-}
-#arrow_left:active, #arrow_right:active {
-	
-}
-
-a {color:#666;text-decoration:none;}
-a:hover {text-decoration:underline;}
-
-.in-slide-content { 
-	color:#333;
-	float:left;
-	text-transform: uppercase;
-	
-	padding: 0px;
-	position:absolute;
-	top:50px;
-	left: 40px;
-	z-index:9999; /* Show above .gradient */
-	text-shadow: 0 1px 0 #fafaf9;
-	-webkit-font-smoothing:antialiased;
-	font-size: 1.4em;
-	line-height: 1em;
-	width: 232px;
-}
-
-
-
-
-.in-slide-content p{
-	margin: 0;
-	
-	
-}
-
-.in-slide-content .bg{
-	xbackground-color: rgba(255, 255, 255, 0.65);
-	xdisplay: inline-block;
-	xpadding: 5px;
-	xborder-radius: 2px;
-}
-
-.rapido{
-	position: absolute;
-	top: 160px;
-}
-
-p.roch{
-	line-height: .1em;
-}
-
-ul#aheadlist li{
-	text-transform: uppercase;
-	line-height: .1em;
-	padding: 0;
-	margin: -.6em 0 0 0;
-	color: #0073b6;
-}
-
-p.rochahead{
-	padding: .4em 0;
-	line-height: .1em;
-}
-
-.premiere{
-	font-size: .75em;
-}
-
-
-
-
-footer.site-footer{
-	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
-	font-size: .8em;
-}
-
-#dis{
-	color: #fff;
-	text-transform: uppercase;
-	position: absolute;
-	left: 45px;
-	bottom: 28px;
-	height:10px;
-	display: none;
-}
-
-#social{
-	position: absolute;
-	top: 0;
-	left: 45px;
-	display: none;
-}
-
-#social ul{
-	margin: 0;
-	padding: 1px 0 0 0;
-	height: 25px;
-	line-height: 1.7em;	
-}
-
-
-#social ul li {
-	display: inline-block;
-	margin: 0 5px 0 0;
-	padding: 0;
-	height: 20px;
-	color: #fff;
-}
-
-.lt-ie8 #social ul li{
-	zoom: 1;
-	display: inline;
-}
-
-#social ul li a{
-	display: block;
-	width: 21px;
-}
-
-#social ul li.fb a{
-	background: transparent url('../i/post_social.png') no-repeat 0 -18px ;
-	text-indent: -999em;
-	overflow: hidden;
-}
-
-#social ul li.tw a{
-	background: transparent url('../i/post_social.png') no-repeat -27px -17px;
-	text-indent: -999em;
-	overflow: hidden;
-}
-
-#social ul li.tw a:hover{
-	background-position: -27px 3px;
-}
-
-#social ul li.fb a:hover{
-	background-position: 0 2px;
-}
-
-p.cta{
-	margin: 0;
-	padding: 2px 10px 0 10px;
-	height: 20px;
-	color: #fff;
-	display: inline-block;
-	background: #0073b6;
-}
-
-p.cta span{
-	display: none;
-}
-
-
-#email_signup_form{
-	margin: 0px auto;
-	width: 225px;
-	padding: 0;
-	position: absolute;
-	left: 14%;
-	top: 0px;
-	line-height: 2px;
-	text-transform: uppercase;
-}
-
-
-input#id_email_signup{
-	margin: 0 0 0 0;
-	position: absolute;
-	top: 0;
-	left: 86px;
-	text-transform: uppercase;
-	text-align:center;
-	border: 1px solid transparent;
-	width: 100px;
-	height: 20px;
-	color: #bab9b9;
-	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
-	padding: 0px 0 0 0;
-}
-input#submit_email_signup{
-	color:white;
-	background-color:#0073b6;
-	border:none;
-	margin:0px 0px;
-	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
-	position: absolute;
-	top: 0;
-	left: 188px;
-	height: 22px;
-	width: 35px;
-	padding: 2px 0 0 0;
-}
-
-input#submit_email_signup:hover,
-input#submit_email_signup:active{
-	background-color: #0390e3;
-}
-
-input#submit_email_signup:active{
-	top: 1px;	
-}
-
-/* trouble bubble */
-
-.msg-bubble {
-  background-color:pink;
-  border:2px solid #666666;
-  font-size:16px;
-  line-height:1.3em;
-  margin:10px auto;
-  padding:3px 3px;
-  position:absolute;
-  z-index: 1000;
-  bottom: 25px;
-  left: 50px;
-  text-align:center;
-  width:160px;
-  -moz-border-radius:5px;
-  -webkit-border-radius:5px;
-  -moz-box-shadow:0 0 5px #888888;
-  -webkit-box-shadow:0 0 5px #888888;
-  text-transform: capitalize;
-}
-.msg-bubble-arrow-border {
-  border-color: #666666 transparent transparent transparent;
-  border-style: solid;
-  border-width: 10px;
-  height:0;
-  width:0;
-  position:absolute;
-  bottom:-22px;
-  left:60px
-}
-.msg-bubble-arrow {
-  border-color: pink transparent transparent transparent;
-  border-style: solid;
-  border-width: 10px;
-  height:0;
-  width:0;
-  position:absolute;
-  bottom:-19px;
-  left: 60px;
-}
-.hide{
-	display: none;
-}
-
-#successkid{
-	position: absolute;
-	top: 0px;
-	left: 89px;
-	width: 82px;
-	height: 12px;
-	padding: 10px 0 0 15px;
-	background-color: #0390e3;
-	color: #fff;
-}
-
-
-
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
 
 .clearfix:before,
 .clearfix:after {
@@ -585,136 +626,66 @@ input#submit_email_signup:active{
     clear: both;
 }
 
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
 
 .clearfix {
     *zoom: 1;
 }
 
-/* =====================================================
-   Media Queries
-   ====================================================== */
-@media only screen and (min-width: 27em) {
-    /* Style adjustments for viewports above 27em */
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 39em) {
+    /* Style adjustments for viewports that meet the condition */
     
-    h1.logo{
-    width:280px;
-    top:5px;
-    height:64px;
-    left:45px;
-	background: transparent url('../i/post-logo-lg-2x.png') no-repeat left top;  
-	background-size: 280px 64px;	
-	display: block;
+    section.primary{
+    	width: 68%;
+    	float: left;
     }
     
-    
-    
-    .tagline{
-    	font-size: 1.9em;
-    	top: 100px;	
-    	width: 300px;
-    	left: 45px;
-    	display: block;
+    aside.secondary{
+    	width: 28%;
+    	float: right;
     }
     
-    .helium-buy-now{
-    position: absolute;
-    	top: 86px;
-    	left: 230px;
-    	z-index: 100;
+    aside.more{
+    	width: 45%;
+    	float: left;
+    	margin: 0 2% 0 0;
+    }
+    
+    aside.creators{
+    width: 48%;
+    float: left;
+    border-left: 1px solid #e0cbad;
+    padding: 0 0 0 2%;
+    border-top: none;
+    
+    	
+    }
+    aside.message{
+    width: 32%;
+    float: left;
     	
     }
     
-    #controlbar{
-    	bottom: 220px;
+    h2.unique{
+    	font-size: 4em;	
     }
     
-    .vibe{
-    	top: 220px;
+    h2.unique a{
+    	color: #fff;
     }
     
-    .rapido{
-    	top: 190px;
-    }
-    
-    p.roch{
-    	padding: 0;
-    }
-
-	.in-slide-content { 
-		font-size: 2em;
-		line-height: 1em;
-		width: 400px;
-		left: 45px;
-    }
-    
-    
-    .source{
-    	padding: 30px 0;
-    }
-    
-    #email_signup_form{
-    	width: 350px;
-	}
-	p.cta span{
-		display: inline;
-	}
-	
-	input#id_email_signup{
-		left: 200px;
-	}
-	
-	input#submit_email_signup{
-		left: 302px;
-	}
-	.msg-bubble{
-		left: 190px;
-	}
-	
-	#successkid{
-		left: 207px;
-	}
-}
-
-@media only screen and (min-width: 33em) {
-    /* Style adjustments for viewports above 33em */
-
-		#social{
-			display: block;
-		}
-	
-	#email_signup_form{
-		position: absolute;
-		left: 30%;
-		}
-}
-
-@media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports above 35em */
-    
-  .in-slide-content{
-   	font-size: 2.5em;
-    width: 450px;
-   }
-    
-  .vibe{
-  	top: 310px;
-  }
-  .rapido{
-  	top: 272px;
-  }
-    
-}
-
-
-@media only screen and (min-width: 50em) {
-    /* Style adjustments for viewports above 50em */
-    
-   #social{
-   	left: 22%;
-   }
-    
-    #dis{
-     	display: block;	
+    p.tagline{
+    	font-size: 1.2em;
+    	
     }
     
 }
@@ -726,10 +697,10 @@ input#submit_email_signup:active{
     /* Style adjustments for high resolution devices */
 }
 
-/* ==============================================================
+/* ==========================================================================
    Print styles.
    Inlined to avoid required HTTP connection: h5bp.com/r
-   ============================================================ */
+   ========================================================================== */
 
 @media print {
     * {
@@ -752,7 +723,10 @@ input#submit_email_signup:active{
         content: " (" attr(title) ")";
     }
 
-  
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
     .ir a:after,
     a[href^="javascript:"]:after,
     a[href^="#"]:after {
@@ -766,7 +740,7 @@ input#submit_email_signup:active{
     }
 
     thead {
-        display: table-header-group; 
+        display: table-header-group; /* h5bp.com/t */
     }
 
     tr,
@@ -794,66 +768,3 @@ input#submit_email_signup:active{
         page-break-after: avoid;
     }
 }
-
-/*
-    ColorBox Core Style
-    The following rules are the styles that are consistant between themes.
-    Avoid changing this area to maintain compatability with future versions of ColorBox.
-*/
-#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
-#cboxOverlay{position:fixed; width:100%; height:100%;}
-#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
-#cboxContent{position:relative; overflow:hidden;}
-#cboxLoadedContent{overflow:auto;}
-#cboxLoadedContent iframe{display:block; width:100%; height:100%; border:0;}
-#cboxTitle{margin:0;}
-#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%;}
-#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
-
-/* 
-    Example user style
-    The following rules are ordered and tabbed in a way that represents the
-    order/nesting of the generated HTML, so that the structure easier to understand.
-*/
-#cboxOverlay{background:url(images/overlay.png) 0 0 repeat;}
-#colorbox{}
-    #cboxTopLeft{width:21px; height:21px; background:url(images/controls.png) -100px 0 no-repeat;}
-    #cboxTopRight{width:21px; height:21px; background:url(images/controls.png) -129px 0 no-repeat;}
-    #cboxBottomLeft{width:21px; height:21px; background:url(images/controls.png) -100px -29px no-repeat;}
-    #cboxBottomRight{width:21px; height:21px; background:url(images/controls.png) -129px -29px no-repeat;}
-    #cboxMiddleLeft{width:21px; background:url(images/controls.png) left top repeat-y;}
-    #cboxMiddleRight{width:21px; background:url(images/controls.png) right top repeat-y;}
-    #cboxTopCenter{height:21px; background:url(images/border.png) 0 0 repeat-x;}
-    #cboxBottomCenter{height:21px; background:url(images/border.png) 0 -29px repeat-x;}
-    #cboxContent{background:#fff;}
-        #cboxLoadedContent{margin-bottom:28px;}
-        #cboxTitle{position:absolute; bottom:4px; left:0; text-align:center; width:100%; color:#949494;}
-        #cboxCurrent{position:absolute; bottom:4px; left:58px; color:#949494;}
-        #cboxSlideshow{position:absolute; bottom:4px; right:30px; color:#0092ef;}
-        #cboxPrevious{position:absolute; bottom:0; left:0px; background:url(images/controls.png) -75px 0px no-repeat; width:25px; height:25px; text-indent:-9999px;}
-        #cboxPrevious.hover{background-position:-75px -25px;}
-        #cboxNext{position:absolute; bottom:0; left:27px; background:url(images/controls.png) -50px 0px no-repeat; width:25px; height:25px; text-indent:-9999px;}
-        #cboxNext.hover{background-position:-50px -25px;}
-        #cboxLoadingOverlay{background:url(images/loading_background.png) center center no-repeat;}
-        #cboxLoadingGraphic{background:url(images/loading.gif) center center no-repeat;}
-        #cboxClose{position:absolute; bottom:0; right:0; background:url(images/controls.png) -25px 0px no-repeat; width:25px; height:25px; text-indent:-9999px;}
-        #cboxClose.hover{background-position:-25px -25px;}
-
-/*
-    The following fixes png-transparency for IE6.  
-    It is also necessary for png-transparency in IE7 & IE8 to avoid 'black halos' with the fade transition
-    
-    Since this method does not support CSS background-positioning, it is incompatible with CSS sprites.
-    Colorbox preloads navigation hover classes to account for this.
-    
-    !! Important Note: AlphaImageLoader src paths are relative to the HTML document,
-    while regular CSS background images are relative to the CSS document.
-*/
-.cboxIE #cboxTopLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderTopLeft.png, sizingMethod='scale');}
-.cboxIE #cboxTopCenter{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderTopCenter.png, sizingMethod='scale');}
-.cboxIE #cboxTopRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderTopRight.png, sizingMethod='scale');}
-.cboxIE #cboxBottomLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderBottomLeft.png, sizingMethod='scale');}
-.cboxIE #cboxBottomCenter{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderBottomCenter.png, sizingMethod='scale');}
-.cboxIE #cboxBottomRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderBottomRight.png, sizingMethod='scale');}
-.cboxIE #cboxMiddleLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderMiddleLeft.png, sizingMethod='scale');}
-.cboxIE #cboxMiddleRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderMiddleRight.png, sizingMethod='scale');}
