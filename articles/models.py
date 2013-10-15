@@ -71,6 +71,7 @@ class Image(models.Model):
     article = models.ForeignKey('Article')
     name = models.CharField(max_length=35)
     image = FileBrowseField("Inline IMage", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Inline image, yo.')
+    caption = models.CharField(max_length=500, blank=True, null=True)
 
 
 class Sponsor(models.Model):

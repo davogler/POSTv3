@@ -20,19 +20,24 @@ def entry_sort(request):
     return queryset
 
 class ArticleDetail(DetailView):
-    '''wrap DETAIL generic view with a new view class, applying sorted entry queryset via dispatch'''
+    '''The individual article view- permalink location.  Uses dispatch to apply a sorted queryset, depending on authentication state of requesting user.'''
     template_name = 'article_detail.html'
     allow_empty = True
     allow_future = False
     
     model = Article
     context_object_name = 'article'
-    queryset = Article.objects.all()
+   
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.queryset = entry_sort(request)
+        
+        return super(ArticleDetail, self).dispatch(request, *args, **kwargs)
     
     
             
 class ArticleFeatured(DetailView):
-    '''wrap DETAIL generic view with a new view class, applying sorted entry queryset via dispatch'''
+    '''The featured article on the home page'''
     template_name = 'article_detail.html'
 
     
@@ -47,7 +52,7 @@ class ArticleFeatured(DetailView):
      
     
 class ArticleList(ListView):
-    '''wrap DETAIL generic view with a new view class, applying sorted entry queryset via dispatch'''
+    '''A List view of published articles'''
     template_name = 'article_list.html'
     allow_empty = True
     allow_future = False
@@ -56,5 +61,14 @@ class ArticleList(ListView):
     context_object_name = 'article'
     queryset = Article.published.all()
     
+class ArticlePreviewList(ListView):
+    '''A List view of published articles- authenticated required via URL'''
+    template_name = 'article_list.html'
+    allow_empty = True
+    allow_future = False
+    
+    model = Article
+    context_object_name = 'article'
+    queryset = Article.draft.all()
     
             

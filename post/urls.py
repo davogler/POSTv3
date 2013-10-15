@@ -2,10 +2,11 @@ from django.conf.urls import *
 from django.conf import settings
 from filebrowser.sites import site
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.views.generic.dates import YearArchiveView, MonthArchiveView, DayArchiveView, DateDetailView
 from articles.models import Article
-from articles.views import ArticleDetail, ArticleList, ArticleFeatured
+from articles.views import ArticleDetail, ArticleList, ArticleFeatured, ArticlePreviewList
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -23,10 +24,12 @@ urlpatterns = patterns('',
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
+    
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT }),
     # url(r'^$', 'signups.views.connect', name='connect'),
     url(r'^$', ArticleFeatured.as_view(), name='article_detail'),
     url(r'^archive/$', ArticleList.as_view(), name='article_list'),
+    url(r'^preview/$', login_required(ArticlePreviewList.as_view()), name='article_preview_list'),
     url(r'^(?P<slug>[-\w]+)/$', ArticleDetail.as_view(), name='article_detail'),
     url(r'^signups/success/$', 'signups.views.success', name='success'),
     url(r'^signups/messages.html$', TemplateView.as_view(template_name='signups/messages.html')),

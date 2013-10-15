@@ -66,7 +66,7 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-
+LOGIN_URL = '/admin/'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -158,6 +158,7 @@ INSTALLED_APPS = (
     'signups',
     'subscribers',
     'articles',
+    'south',
     
 )
 
