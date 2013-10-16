@@ -78,7 +78,7 @@ class Image(models.Model):
 
 class Sponsor(models.Model):
     name = models.CharField(max_length=250)
-    adimg = FileBrowseField("Ad Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload an image to be used for advertising min width 250px')
+    adimg = FileBrowseField("Ad Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload an image to be used for advertising min width 300px')
     adlink = models.URLField()
     endorsement = models.TextField(blank=True) 
     add_date = models.DateTimeField(default=datetime.datetime.now())    

@@ -1,6 +1,6 @@
 # Post Rochester Teaser Website
-A Django for collecting email addresses.  
+A Django site for publishing POST articles.  
 
 Development:  David Vogler dave@sparkhouse.com
-Designopment: Anne Esse 
-Everything Else: Robin Lohkamp
+
+Under heavy development.  Don't look too close.
