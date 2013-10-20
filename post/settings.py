@@ -158,6 +158,7 @@ INSTALLED_APPS = (
     'signups',
     'subscribers',
     'articles',
+    'staff',
     'south',
     
 )
