@@ -1,5 +1,6 @@
 /* @override 
-	http://127.0.0.1:8000/assets/css/main.css */
+	http://127.0.0.1:8000/assets/css/main.css
+	http://127.0.01:8000/assets/css/main.css */
 
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
@@ -306,11 +307,13 @@ article.full header .hgroup{
 	z-index: 200;
 	margin: 0;
 	
+	
 }
 
 h2.unique{
 	font-size: 3em;
 	text-shadow: 1px 1px 1px rgba(35, 33, 33, 0.68);
+	
 	
 }
 
@@ -475,6 +478,51 @@ article.teaser{
 
 .brick.only{
 	margin-bottom: 30px;
+}
+
+ul.bios{
+	margin: 0;
+	padding: 0;
+}
+
+ul.bios li{
+	list-style: none;
+	
+	display: block;
+}
+
+li.person{
+	margin: 1em 0;
+	width: 33%;
+	float: left;
+	height: 200px;
+}
+
+li.person .title{
+	text-transform: uppercase;
+	font-size: .8em;
+	color: #898888;
+}
+
+.bios h3{
+	margin: 0;
+}
+
+ul.bios li i{
+	font-size: 1.1em;
+	vertical-align: middle;
+	margin: 0 2% 0 0;
+	opacity: .4;
+	x-webkit-transition: all .2s ease-in-out; 
+}
+ul.bios li i:hover{
+	x-webkit-transform: scale(1.5); 
+}
+
+ul.chiclets{
+	margin: 0;
+	padding: 0 0 0 1%;
+	font-size: .9em;
 }
 
 

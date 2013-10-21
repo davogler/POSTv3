@@ -133,9 +133,21 @@ $(window).scroll(function(e) {
     });
 
 
+//$( ".chiclets i" ).hover(function() {
+  //$( this ).css( 'margin-left','10px' );
+ // $( this ).css( 'margin-left','0px' );
+  
+//});
 
+
+$( ".chiclets li" )
+  .mouseenter(function() {
+    $( this ).animate({marginLeft:"+=3px"}, 100);
+  })
+  .mouseleave(function() {
+    $( this ).animate({marginLeft:"-=3px"}, 100);
+  });
      
 }); 
-
 
 
