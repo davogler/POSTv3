@@ -6,6 +6,7 @@ media/uploads
 settings_private.py
 settings_local.py
 settings_vm.py
+logging.py
 *.sqlite
 logs
 blaster.html
