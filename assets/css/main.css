@@ -399,15 +399,18 @@ figcaption{
 
 .brick.first{
 	margin-top: 2%;
+	color: gray;
 }
 
 aside.secondary{
 	font-size: .9em;
+	
 }
 
 aside .authorship{
 	font-size: .8em;
 	color: gray;
+	padding-bottom: 20px;
 	
 	border-bottom: 1px solid #e0cbad;
 	font-family:  Georgia, Times, serif;
@@ -417,6 +420,7 @@ aside .authorship{
 aside .sponsor{
 	font-size: .85em;
 	text-align: center;
+	padding-top: 20px;
 }
 
 .secondary .pullquote{
@@ -537,6 +541,12 @@ footer.footer{
 	padding:  1% 5.1%;
 	text-align: center;
 
+}
+
+.footernavs{
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
 }
 
 footer .tehweb{
