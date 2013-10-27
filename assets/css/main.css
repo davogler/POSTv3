@@ -153,13 +153,14 @@ header.banner{
 	z-index: 500;
 	width: 100%;
 	xmargin: 0 10px 0 10px;
-	height: 60px;
+	height: 46px;
 	overflow: hidden;
 	border-top: 10px solid #333;
 	border-left: 10px solid #333;
 	border-right: 10px solid #333;
 	box-sizing:        border-box;
-
+	
+	
    
 }
 
@@ -168,7 +169,7 @@ header.banner{
 	z-index: 2000;
 	height: 10px;
 	position: fixed;
-	top: 60px;
+	top: 37px;
 	display: none;
 	background-color: #333;
 }
@@ -178,7 +179,7 @@ header.banner{
 	z-index: 2000;
 	height: 10px;
 	position: fixed;
-	top: 60px;
+	top: 40px;
 
 	background-color: #333;
 }
@@ -211,8 +212,11 @@ img.sticky{
 	width: 100%;
 	border-right: 10px solid #333;
 	border-left: 10px solid #333;
-	box-sizing:        border-box;
-	
+	xbox-sizing:        border-box;
+	xborder-bottom: 10px solid #333;
+	z-index: 200;
+	xbackground-color: black;
+	box-sizing: inherit;
 
 }
 
@@ -228,17 +232,17 @@ h1.logo{
 h1.logo a {
 	position:relative;
 	float: left;
-	margin: 12px 0 1px 9px;
 	background: transparent url('../i/post-logo-sm-2x.png') no-repeat left top;	
 	font-family: Georgia, Times, serif;
 	text-indent: -999em;
 	overflow: hidden;
 	
-	width: 80px;
-	height:38px;
-	background-size:  80px 18px;
-
+		
 	
+	background-size:  53px 12px;
+	height:18px;
+	margin: 8px 0 1px 9px;
+	width: 60px;
 }
 
 
@@ -247,7 +251,10 @@ nav.mm{
 	display: block;
 	float: left;
 	width: 50%;
-	margin:10px 0 0 12px;
+	
+	
+	
+	margin:6px 0 0 2px;
 	
 }
 
@@ -268,6 +275,7 @@ nav.mm ul li {
 	
 	
 	
+	
 }
 
 nav.mm ul li a{
@@ -285,6 +293,7 @@ nav.mm ul li a{
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	-webkit-overflow-scrolling : touch;
 	
 }
 
@@ -300,7 +309,7 @@ img.boom{
 	overflow: hidden;
 	border: 10px solid #333;
 	box-sizing:        border-box;
-
+		
 	
 	
 			
@@ -310,11 +319,19 @@ article header h2{
 	margin: 0;
 }
 
-article.full header .hgroup{
+article.full header{
+	xheight: 60px;
 	position: relative;
+	
+}
+
+article.full header .hgroup{
+	position: absolute;
 	color: #fff;
 	z-index: 200;
 	margin: 0;
+
+	width: 100%;
 	
 	
 }
@@ -322,7 +339,6 @@ article.full header .hgroup{
 h2.unique{
 	font-size: 3em;
 	text-shadow: 1px 1px 1px rgba(35, 33, 33, 0.68);
-
 }
 
 h2.unique a{
@@ -461,6 +477,10 @@ aside.more{
 	font-size: .9em;
 }
 
+aside .socialper iframe#twitter-widget-0{
+	margin-left: 10%;
+}
+
 aside.creators{
  font-size: .9em;
 	border-top: 1px solid #e0cbad;
@@ -553,6 +573,7 @@ footer.footer{
 	color: #fff;
 	padding:  1% 5.1%;
 	text-align: center;
+	font-size: .7em;
 
 }
 
@@ -717,18 +738,32 @@ h1.deadly{
     body{
     	font-size: 100%;
     }
+    
+    header.banner{
+    	height: 50px;
+    }
     h1.logo a {
     	
-    	width: 120px;
-    	height: 37px;
-    	background-size:  120px 27px;
+    
+    	
+    	background-size:  80px 18px;
+    	height:28px;
+    	width: 80px;
+    	margin: 12px 0 1px 9px;
+    	
     	
     }
     
+    .hr{
+    	top: 50px;
+    	}
+    .hr-flat{
+    	top: 50px;
+    }
     nav.mm{
     	width: 50%;
     	
-    	margin:16px 0 0 12px;
+    	margin:10px 0 0 12px;
     }
     
     nav.mm ul li a{
@@ -769,6 +804,7 @@ h1.deadly{
     
     h2.unique{
     	font-size: 4em;	
+    	
     }
     
     h2.unique a{
@@ -778,6 +814,10 @@ h1.deadly{
     p.tagline{
     	font-size: 1.2em;
     	
+    }
+    
+    footer.footer{
+    	font-size: 1em;
     }
     
 }
