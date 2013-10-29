@@ -55,7 +55,7 @@
 	
 	<div class="brick">
 	   			<aside class="secondary">
-	   				<div class="authorship clearfix">
+	   				<div id="authorship" class="authorship clearfix">
 	       				<p>by <a href="{{ object.author.link }}">{{ object.author.name }}</a></p>
 	       				<p>photography by <a href="{{ object.photog.link }}">{{ object.photog.name }}</a></p>
 	   				</div>
@@ -63,11 +63,7 @@
 	   				
 	   			
 	   				
-	   				<div class="sponsor">
-	   					<p> This article has been sponsored by: </p>
-	   					<img src="{% version object.sponsor.adimg 'medium' %} " alt="{{ object.sponsor.name }}" />
-	   					
-	   				</div>
+	   				
 	   			
 	   			</aside>
 	   		
@@ -115,7 +111,13 @@
  	        	
  	        	</aside>
  	        	
- 	        
+ 	        <div class="sponsor"
+ 	             intent
+ 	             in-standard-after="#authorship">
+ 	        	<p> This article has been sponsored by: </p>
+ 	        	<img src="{% version object.sponsor.adimg 'medium' %} " alt="{{ object.sponsor.name }}" />
+ 	        	
+ 	        </div>
  	        	
  	        	
  	        </div><!--brick-->   
