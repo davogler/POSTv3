@@ -26,7 +26,7 @@ class Helium:
         return json.loads(r.content)
 
     def get_charges(self):
-        r = requests.get(self.api_endpoints['charges'], auth=(self.api_key, ''))
+        r = requests.get(self.api_endpoints['charges'], auth=(self.api_key, ''), verify=False)
         return json.loads(r.content)
 
     def get_charge(self, charge_id):
