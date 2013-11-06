@@ -13,8 +13,8 @@
 {% version_object article.hero 'large' as hero_large %}
 	<meta property="og:title" content="{{ object.title }}">
 	<meta name="description" content="{{ object.intro }}">
-	<meta property='og:url' content='{{ site.domain }}{{ object.get_absolute_url }}'/>
-	<meta property='og:image' content="{{ site.domain }}{% version object.hero 'large' %}"/>
+	<meta property='og:url' content='{{ site.domain }}{{ object.get_absolute_url }}'>
+	<meta property='og:image' content="http://{{ site.domain }}{% version object.hero 'large' %}">
 	<meta property="og:image:type" content="image/jpg">
 	<meta property="og:image:width" content="{{ hero_large.width }}">
 	<meta property="og:image:height" content="{{ hero_large.height }}">
@@ -28,8 +28,8 @@
 	<meta name="twitter:site" content="@postrochester">
 	<meta name="twitter:creator" content="@postrochester">
 	<meta name="twitter:title" content="{{ object.title }}">
-	<meta name="twitter:description" content="{{ object.intro }}"/>
-	<meta name="twitter:image:src" content="{{ site.domain }}{% version object.hero 'small' %}"/>
+	<meta name="twitter:description" content="{{ object.intro }}">
+	<meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero 'small' %}">
 
 
 
