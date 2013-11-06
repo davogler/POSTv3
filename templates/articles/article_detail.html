@@ -1,10 +1,41 @@
 {% extends "base.html" %}
 
-{% block title %}| {{ object.title }}{% endblock %}
+{% block title %}{{ object.title }} | {{ block.super }}{% endblock %}
 
 {% block bodyclass %}article {{ object.slug }}{% endblock %}
 
 {% load fb_versions %}
+{% load static %}
+
+
+
+{% block smmeta %}
+{% version_object article.hero 'large' as hero_large %}
+	<meta property="og:title" content="{{ object.title }}">
+	<meta name="description" content="{{ object.intro }}">
+	<meta property='og:url' content='{{ site.domain }}{{ object.get_absolute_url }}'/>
+	<meta property='og:image' content="{{ site.domain }}{% version object.hero 'large' %}"/>
+	<meta property="og:image:type" content="image/jpg">
+	<meta property="og:image:width" content="{{ hero_large.width }}">
+	<meta property="og:image:height" content="{{ hero_large.height }}">
+	
+	
+	
+
+
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@postrochester">
+	<meta name="twitter:creator" content="@postrochester">
+	<meta name="twitter:title" content="{{ object.title }}">
+	<meta name="twitter:description" content="{{ object.intro }}"/>
+	<meta name="twitter:image:src" content="{{ site.domain }}{% version object.hero 'small' %}"/>
+
+
+
+	
+{% endblock %}
+
 
 {% block headernav %}
 <header class="banner">
@@ -21,7 +52,7 @@
     	</nav>
     </div>
  
-    <img class="sticky" src="{% version object.hero 'large' %} " alt="{{ object.hero.filename }}" />
+    <img class="sticky" src="{% version object.hero 'large' %}" alt="{{ object.hero.filename }}" />
     
     <div class="hr"> </div>
 	
@@ -36,7 +67,7 @@
 
 <article class="full">
  	<header>
-     	<img class="boom" src="{% version article.hero 'large' %} " alt="{{ object.hero.filename }}" />
+     	<img class="boom" src="{% version article.hero 'large' %}" alt="{{ object.hero.filename }}" />
      	<div class="hgroup">
 	        	<h2 class="unique"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
 	        	<p class="tagline">{{ object.tagline }}</p>

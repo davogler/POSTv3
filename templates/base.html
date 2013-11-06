@@ -6,8 +6,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Post. This is Rochester.</title>
-        <meta name="description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+        <title>{% block title %}Post. This is Rochester.{% endblock %}</title>
+        
         
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
@@ -25,21 +25,19 @@
        
         </script>
                 
-        <!--SM meta -->
+        <!--global SM meta -->
         
-      <meta name="apple-mobile-web-app-capable" content="yes" />
+      	<meta name="apple-mobile-web-app-capable" content="yes" />
         <meta property='og:locale' content='en_US'/>
         <meta property='og:type' content='website'/>
-        <meta property='og:title' content='Post. This is Rochester'/>
-        <meta property='og:url' content='http://postrochester.com'/>
         <meta property='og:site_name' content='Post'/>
         <meta property='fb:admins' content='1395962689'/>
         <meta property='fb:admins' content='1161550079'/>
-        <meta property='og:image' content='https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-ash4/1000837_175802752593615_1524246974_n.jpg'/>
-        <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:site" content="@postrochester"/>
-        <meta name='twitter:image' content='https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-ash4/1000837_175802752593615_1524246974_n.jpg'/>
-        <meta name="twitter:description" content="A magazine about innovators, artists, entrepreneurs, dreamers, doers. This is Rochester. Ahead."/>
+        
+        
+        
+		{% block smmeta %}{% endblock %}
+        
         
     </head>
     <body class="{% block bodyclass %}{% endblock %}">
