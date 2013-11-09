@@ -422,7 +422,7 @@ section.content-static{
 figcaption{
 	float: right;
 	color: #a7a7a7;
-	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	font-family:  Georgia, Times, serif;
 	font-style: italic;
 	font-size: .7em;
 	letter-spacing: .09em;
@@ -431,7 +431,7 @@ figcaption{
 .brick.first{
 	margin-top: 2%;
 	color: gray;
-	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	font-family:  Georgia, Times, serif;
 	line-height: 1.7em;
 	font-style: italic;
 	xfloat: left;
@@ -460,7 +460,7 @@ aside .authorship{
 	border-top: 1px solid #e0cbad;
 	float: right;
 	width: 100%;
-	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	font-family:  Georgia, Times, serif;
 	line-height: 1.6;
 	font-style: italic;
 	margin-top: 3%;
@@ -480,7 +480,7 @@ aside div.sponsor{
 
 .secondary .pullquote{
 	font-size: 1.4em;
-	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	font-family:  Georgia, Times, serif;
 	font-style: italic;
 	letter-spacing: 1px;
 	line-height: 1.5em;
@@ -565,9 +565,9 @@ article.teaser{
 article.teaser p.intro{
 	color: gray;
 	font-size: .9em;
-	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	font-family: Georgia, Times, serif;
 	font-style: italic;
-	letter-spacing: 1px;
+	xletter-spacing: 1px;
 	line-height: 1.5em;
 	color: #a7a7a7;
 	margin: 8px 0 0 0;
