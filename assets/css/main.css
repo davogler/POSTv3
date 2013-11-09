@@ -425,7 +425,7 @@ figcaption{
 	font-family:  Georgia, Times, serif;
 	font-style: italic;
 	font-size: .7em;
-	letter-spacing: .09em;
+	xletter-spacing: .09em;
 }
 
 .brick.first{
@@ -454,7 +454,7 @@ aside .authorship{
 	font-size: .8em;
 	color: gray;
 	padding-bottom: 8px;
-	letter-spacing: .8pt;
+	xletter-spacing: .8pt;
 	height: auto;
 	border-bottom: 1px solid #e0cbad;
 	border-top: 1px solid #e0cbad;
@@ -467,7 +467,8 @@ aside .authorship{
 }
 
 aside .authorship p{
-	padding: 2% 2% 0 0;
+	width: 100%;
+	padding: 0 2% 0 0;
 }
 
 aside div.sponsor{
@@ -482,7 +483,7 @@ aside div.sponsor{
 	font-size: 1.4em;
 	font-family:  Georgia, Times, serif;
 	font-style: italic;
-	letter-spacing: 1px;
+	xletter-spacing: 1px;
 	line-height: 1.5em;
 	color: #a7a7a7;
 	margin: 0;
@@ -492,7 +493,7 @@ aside div.sponsor{
 .fullwidth .pullquote{
 	font-size: 1.4em;
 	font-style: italic;
-	letter-spacing: 1px;
+	xletter-spacing: 1px;
 	line-height: 1.5em;
 	color: #a7a7a7;
 	margin: 0;
