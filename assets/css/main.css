@@ -146,7 +146,7 @@ a{
 }
 
 a:hover,a:focus{
-	color: gray;
+	color: #a7a7a7;
 }
 header.banner{
 	position: fixed;
@@ -391,7 +391,7 @@ section.content{
 section.content p{
 	position: relative;
 	display: block;
-	margin: 2.5% 0 2.5% 0;
+	margin: 2.3% 0 2.3% 0;
 	xwidth: 100%;
 	float: left;
 	
@@ -421,15 +421,29 @@ section.content-static{
 
 figcaption{
 	float: right;
-	color: gray;
+	color: #a7a7a7;
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
 	font-style: italic;
-	font-size: .8em;
+	font-size: .7em;
+	letter-spacing: .09em;
 }
 
 .brick.first{
 	margin-top: 2%;
 	color: gray;
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	line-height: 1.7em;
+	font-style: italic;
+	xfloat: left;
+	font-size: .89em;
+	xwidth: 100%;
+	
+	xmax-width: 650px;
+	
+	
 }
+
+
 
 aside.secondary{
 	font-size: .9em;
@@ -439,31 +453,48 @@ aside.secondary{
 aside .authorship{
 	font-size: .8em;
 	color: gray;
-	padding-bottom: 20px;
-	
+	padding-bottom: 8px;
+	letter-spacing: .8pt;
+	height: auto;
 	border-bottom: 1px solid #e0cbad;
-	font-family:  Georgia, Times, serif;
+	border-top: 1px solid #e0cbad;
+	float: right;
+	width: 100%;
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	line-height: 1.6;
 	font-style: italic;
+	margin-top: 3%;
 }
 
-aside .sponsor{
+aside .authorship p{
+	padding: 2% 2% 0 0;
+}
+
+aside div.sponsor{
 	font-size: .85em;
 	text-align: center;
 	padding-top: 20px;
+	xfloat: right;
+	
 }
 
 .secondary .pullquote{
-	font-size: 1.6em;
+	font-size: 1.4em;
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
 	font-style: italic;
-	color: gray;
+	letter-spacing: 1px;
+	line-height: 1.5em;
+	color: #a7a7a7;
 	margin: 0;
 }
 
 .primary .pullquote,
 .fullwidth .pullquote{
-	font-size: 1.6em;
+	font-size: 1.4em;
 	font-style: italic;
-	color: gray;
+	letter-spacing: 1px;
+	line-height: 1.5em;
+	color: #a7a7a7;
 	margin: 0;
 }
 
@@ -478,18 +509,36 @@ aside.more{
 }
 
 aside .socialper iframe#twitter-widget-0{
-	margin-left: 10%;
+	margin: 3px 0 0 0%;
+	width: 10px;
+}
+
+aside .fb-share-button{
+	float: left;
+	
+}
+
+aside .fb-like{
+	float: left;
+	margin: 4px 4% 6%;
 }
 
 aside.creators{
  font-size: .9em;
 	border-top: 1px solid #e0cbad;
+	border-bottom: 1px solid #e0cbad;
+	height: auto;
 	}
+	
+	
 	
 aside.secondary cite{
 	float: right;
+	color: gray;
 	
 }
+
+
 
 /*static pages */
 section.content-static{
@@ -498,7 +547,7 @@ section.content-static{
 
 h2.list{
 	display: inline-block;
-	font-size: 2.5em;
+	font-size: 2.0em;
 	margin: 0 1% 0 0;
 	line-height: .9em;
 }
@@ -510,7 +559,18 @@ p.tagline-list{
 }
 
 article.teaser{
-	margin-bottom: 30px;
+	margin-bottom: 40px;
+}
+
+article.teaser p.intro{
+	color: gray;
+	font-size: .9em;
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	font-style: italic;
+	letter-spacing: 1px;
+	line-height: 1.5em;
+	color: #a7a7a7;
+	margin: 8px 0 0 0;
 }
 
 .brick.only{
@@ -733,6 +793,8 @@ h1.deadly{
    Modify as content requires.
    ========================================================================== */
 
+
+
 @media only screen and (min-width: 39em) {
     /* Style adjustments for viewports that meet the condition */
     body{
@@ -776,10 +838,33 @@ h1.deadly{
     	float: left;
     }
     
+   
+    
+    x.brick.first{
+    	width: 68%;
+    }
+    
+   x.brick.first .primary{
+    	width: 100%;
+    }
+    
     aside.secondary{
     	width: 28%;
     	float: right;
     }
+    aside .authorship{
+    border-top: none;
+    margin-top: 7%;
+    padding-bottom: 15px;
+    
+    
+    }
+    
+    aside.secondary .pullquote{
+    	font-size: 1.3em;
+    	display: block;
+    }
+    
     
     aside.more{
     	width: 45%;
@@ -787,12 +872,21 @@ h1.deadly{
     	margin: 0 2% 0 0;
     }
     
+    aside .sponsor{
+    	margin-top: 10px;
+    	border-top: none;
+    	
+    }
+    
+    
+    
     aside.creators{
     width: 48%;
     float: left;
     border-left: 1px solid #e0cbad;
     padding: 0 0 0 2%;
     border-top: none;
+    border-bottom: none;
     
     	
     }
@@ -800,6 +894,10 @@ h1.deadly{
     width: 32%;
     float: left;
     	
+    }
+    
+    h2.list{
+    	font-size: 2.5em;
     }
     
     h2.unique{

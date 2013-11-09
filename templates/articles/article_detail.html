@@ -81,22 +81,23 @@
 		 <section class="primary">
 		<p><em>{{ object.intro|safe }}</em></p>
 		
-		</section>       		
+		</section> 
+		<aside class="secondary">
+			<div id="authorship" class="authorship clearfix">
+				<p>by <a href="{{ object.author.link }}">{{ object.author.name }}</a></p>
+				<p>photography by <a href="{{ object.photog.link }}">{{ object.photog.name }}</a></p>
+			</div>
+			
+			
+		
+			
+			
+		
+		</aside>      		
 	</div>
 	
 	<div class="brick">
-	   			<aside class="secondary">
-	   				<div id="authorship" class="authorship clearfix">
-	       				<p>by <a href="{{ object.author.link }}">{{ object.author.name }}</a></p>
-	       				<p>photography by <a href="{{ object.photog.link }}">{{ object.photog.name }}</a></p>
-	   				</div>
-	   				
-	   				
 	   			
-	   				
-	   				
-	   			
-	   			</aside>
 	   		
 	   		</div>
 
@@ -111,6 +112,7 @@
  	        		
  	        		<div class="socialper">
  	        			<div id="fb-root"></div>
+ 	        			<div class="fb-share-button" data-href="{{ request.build_absolute_uri }}{{ object.get_absolute_url }}" data-type="button_count"></div>
  	        			<script>(function(d, s, id) {
  	        			  var js, fjs = d.getElementsByTagName(s)[0];
  	        			  if (d.getElementById(id)) return;
@@ -134,7 +136,7 @@
  	        	
  	        	</aside>
  	        	
- 	        	<aside class="creators">
+ 	        	<aside class="creators clearfix">
  	        		<p>{{ object.author.colophon|safe }}</p>
  	        		
  	        		<p>{{ object.photog.colophon|safe }}</p>
