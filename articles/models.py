@@ -32,9 +32,8 @@ class Article(models.Model):
 
     slug = models.SlugField(unique_for_date='pub_date')
     hero = FileBrowseField("Hero Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Choose an huge image for this article. Minimum 1280 x 900')
+    hero_credit = models.TextField(blank=True)
     screen = models.BooleanField(default=False)
-    #pub_date = models.DateTimeField(default=datetime.datetime.now())
-    #pub_date = models.DateTimeField(auto_now_add=True, blank=True)
     pub_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
     author = models.ForeignKey('Author', blank=True, null=True)
     photog = models.ForeignKey('Photog', blank=True, null=True)
