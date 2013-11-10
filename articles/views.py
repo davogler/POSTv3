@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render_to_response, get_list_or_404
+from django.contrib.syndication.views import Feed
 from articles.models import Article
 import datetime
 from django.views.generic import ListView, DetailView
@@ -72,4 +73,28 @@ class ArticlePreviewList(ListView):
     context_object_name = 'article'
     queryset = Article.draft.all()
     
-            
+
+class ArticleFeed(Feed):
+    title = "Post Magazine Featured Articles"
+    link = "/"
+    description = "Updates as new articles are published"
+    description_template = 'feeds/latest_description.html'
+    item_copyright = 'Copyright (c) Post Magazine'
+    
+    def items(self):
+        return Article.objects.all().order_by('-pub_date')[:5]
+        
+    def item_title(self, item):
+        return item.title
+        
+    def item_pubdate(self, item):
+        return item.pub_date
+        
+    def item_author_name(self, item):
+        return item.author
+        
+    def item_description(self, item):
+        return item.intro
+        
+
+                   
