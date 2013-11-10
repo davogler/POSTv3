@@ -7,7 +7,7 @@ class ImageInline(admin.StackedInline):
     extra = 1
 
 class ArticleAdminForm(forms.ModelForm):
-	
+    
     class Meta:
         model = Article
 	    
@@ -15,6 +15,7 @@ class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ['title'] }
     list_display = ('title','author', 'photog', 'pub_date','status','featured', 'sponsor')
     list_editable = ('status','featured',)
+    
     inlines = [ ImageInline, ]
     form = ArticleAdminForm
 

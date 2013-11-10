@@ -20,7 +20,7 @@ def entry_sort(request):
     return queryset
 
 class ArticleDetail(DetailView):
-    '''The individual article view- permalink location.'''
+    '''The individual article view- permalink location.  Uses dispatch to apply a sorted queryset, depending on authentication state of requesting user.'''
     template_name = 'article_detail.html'
     allow_empty = True
     allow_future = False
