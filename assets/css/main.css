@@ -681,10 +681,200 @@ h1.deadly{
 }
 
 
+#email_signup_form{
+	margin: 0px 0;
+	width: 400px;
+	padding: 0;
+	position: relative;
+	xleft: 14%;
+	xtop: 0px;
+	line-height: 2px;
+	
+}
+
+
+input#id_email_signup{
+	margin: 15px 0 0 0;
+	
+	text-transform: uppercase;
+	text-align:center;
+	border: 1px solid;
+	width: 200px;
+	height: 25px;
+	color: #bab9b9;
+	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
+	padding: 5px 0 0 0;
+}
+input#submit_email_signup{
+	color:white;
+	background-color:#0073b6;
+	border:none;
+	margin:0px 0px;
+	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
+	xposition: absolute;
+	top: 0;
+	
+	width: 40px;
+	padding:0 0 0 0;
+	
+}
+
+input#submit_email_signup{
+	box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-ms-box-sizing: content-box;
+	-o-box-sizing: content-box;
+	background-clip: padding;
+	font-family: "Helvetica","Arial",sans-serif;
+	border: 1px solid #4C5C68;
+	display: inline-block;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 1;
+	text-decoration: none;
+	height: 12px;
+	padding: 7px 10px;
+	margin: 8px;
+	color: whiteSmoke;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 5);
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(rgba(255, 255, 255, .15)),to(rgba(0, 0, 0, .1)));
+	background: -moz-linear-gradient(0% 100% 90deg,rgba(0, 0, 0, .1),rgba(255, 255, 255, .15));
+	background-color: #798895;
+	box-shadow: 0 0 3px rgba(0, 0, 0, .4),0 3px 4px rgba(0, 0, 0, .2),inset 0 1px 0 rgba(255, 255, 255, .2);
+	-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .4),0 3px 4px rgba(0, 0, 0, .2),inset 0 1px 0 rgba(255, 255, 255, .2);
+	-moz-box-shadow: 0 0 3px rgba(0, 0, 0, .4),0 3px 4px rgba(0, 0, 0, .2),inset 0 1px 0 rgba(255, 255, 255, .2);
+	cursor: pointer;
+	text-align: center;
+	position: relative;
+	text-transform: none;
+	-moz-box-sizing: content-box!important;
+	background-color: #0073B6;
+}
+input#submit_email_signup:hover,
+input#submit_email_signup:active{
+	background-color: #0390e3;
+	outline: 0;
+}
+
+input#submit_email_signup:active{
+	top: 1px;	
+}
+
+/* trouble bubble */
+
+.msg-bubble {
+  background-color:pink;
+  border:2px solid #666666;
+  font-size:16px;
+  line-height:1.3em;
+  margin:10px auto;
+  padding:3px 3px;
+  position:absolute;
+  z-index: 1000;
+  bottom: 39px;
+  left: 160px;
+  text-align:center;
+  width:160px;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  -moz-box-shadow:0 0 5px #888888;
+  -webkit-box-shadow:0 0 5px #888888;
+  text-transform: capitalize;
+}
+.msg-bubble-arrow-border {
+  border-color: #666666 transparent transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  bottom:-22px;
+  left:20px
+}
+.msg-bubble-arrow {
+  border-color: pink transparent transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  bottom:-19px;
+  left: 20px;
+}
+.hide{
+	display: none;
+}
+
+#successkid{
+	xposition: absolute;
+	xtop: 0px;
+	xleft: 89px;
+	width: 260px;
+	height: 23px;
+	padding: 5px 0 0 15px;
+	background-color: #0390e3;
+	color: #fff;
+	margin: 25px 0 8px 0;
+	border: 1px solid #333;
+}
+
+.cta-item{
+	background-color: rgba(0,0,0,0.07);
+	-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
+	-moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
+	box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
+	width: auto;
+	padding: 10px 2%;
+	border: 1px solid #333;
+}
+
+.cta-item p{
+	margin: 8px;
+}
+
+.avatard{
+	border: 1px solid #333;
+}
 
 
 
+.cta-item.soc{
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	padding: 15px;
+	
+	margin: 20px auto;
+	
+}
 
+.cta-item.soc:hover{
+	background-color: rgba(0,0,0,0.15);
+	}
+
+.cta-item.soc.twit,
+.cta-item.soc.farce{
+	
+}
+
+.soc-body:after{
+	content: '';
+	  width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
+	  display: inline-block;
+}
+
+
+a#buy.helium-buy-now{
+	background-color:#0073b6;
+}
+
+a#buy.helium-buy-now:hover{
+	background-color: #0390e3;
+}
 
 
 /* ==========================================================================
@@ -794,6 +984,36 @@ h1.deadly{
    Modify as content requires.
    ========================================================================== */
 
+@media only screen and (min-width: 30em) {
+
+
+
+.soc-body{
+	text-align: justify;
+	min-width: 400px;
+	height: 200px;
+	
+}
+
+.cta-item.soc{
+
+	
+	display: inline-block;
+	
+}
+
+.cta-item.soc.twit,
+.cta-item.soc.farce{
+	
+}
+
+.soc-body:after{
+	content: '';
+	  width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
+	  display: inline-block;
+}
+
+}
 
 
 @media only screen and (min-width: 39em) {

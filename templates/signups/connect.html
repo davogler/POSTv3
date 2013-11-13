@@ -1,46 +1,130 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+
+{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+{% block smmeta %}
+	<meta name="description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+
+	<meta property='og:title' content='Post. This is Rochester'>
+	<meta name="description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+	<meta property='og:url' content='http://{{ site.domain }}{{ flatpage.url }}'>
+	<meta property='og:image' content='https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-ash4/1000837_175802752593615_1524246974_n.jpg'>
+	
+	
+	
+	
+
+
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@postrochester">
+	<meta name="twitter:creator" content="@postrochester">
+	<meta name="twitter:title" content="Post. This is Rochester">
+	<meta name="twitter:description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+	<meta name='twitter:image' content='https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-ash4/1000837_175802752593615_1524246974_n.jpg'>
+{% endblock %}
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
 {% block content %}
-	 
-	    
-	 
-	    	
-	{% include "splash.html" %}
+
+<section class="content-static">
+	<div class="brick">
 	
+	<h2>Stay Connected</h2>
 	
-	<footer class="site-footer">
+	<p>Make sure you don't miss a single issue of POST.  There's more than one way to keep in touch.<p> 
+	<p class="source"> You can pick up a copy at these locations:<br>
 	
-		<div id="dis">This is Rochester.</div>
+	<p>Java's on Gibbs<br>
+	      					Good Luck<br>
+	      					Scott Miller Salon<br>
+	      					Abundance Co-op<br>
+	      					Memorial Art Gallery<br>
+	      					Starry Nights Cafe<br>
+	      					Red Barn<br>
+	      					Dado<br>
+	      					Arena's<br>
+	      					Thread<br>
+	      					Pittsford Dairy Bakery
+	      				</p>
+	
+	<h2>Delivered to Your Door</h2>
+	<p>You can subscribe for home delivery:</p>
+	
+	<div class="cta-item">
+		<p>A one-year subscription: $25 <a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01" id="buy">Subscribe</a></p>
+	</div>
+	
+	<h2 id="eml">Delivered to Your Inbox</h2>
+	<p>We send out updates.  We promise never to share your email with anyone else.</p>
+	
+	<div class="cta-item">
+	
+	<form name="email_signup_form" id="email_signup_form" method="post" accept-charset="UTF-8" action=" " >   
+	            <p class="cta">Sign up for our Email List:</p>
+	            <div class="msg-bubble hide">
+	              <span class="msg">Invalid Email Address</span>
+	              <div class="msg-bubble-arrow-border"></div>
+	              <div class="msg-bubble-arrow"></div>
+	            </div>
+	            {% csrf_token %}
+	          
+	            
+	            <span id="signerupper">
+		            {{ form.email_signup }}
+		            <input name="submit_email_signup" id="submit_email_signup" class="input_button" type="submit" value="OK" />       
+	            </span>
+	                
+	            </form>
+	</div>
+	
+	<h2>We're Out There</h2>
+	
+	<div class="soc-body">
+	
+		<div class="cta-item soc twit">
+			
+			
+			<a href="https://twitter.com/PostRochester"><img class="avatard" src="{{ STATIC_URL }}i/p.jpg"/></a>
+			<a href="https://twitter.com/PostRochester">Twitter</a>
+		</div>
 		
-		<div id="social">
-			<ul>
-				<li class="fb"><a href="https://www.facebook.com/PostRochester">FB</a></li>
-				<li class="tw"><a href="https://twitter.com/postrochester">TW</a></li>
-			</ul>
+		<div class="cta-item soc farce">
+			
+			
+			<a href="https://www.facebook.com/PostRochester"><img class="avatard" src="{{ STATIC_URL }}i/post-avatar.jpg"/></a>
+			<a href="https://www.facebook.com/PostRochester">Facebook</a>
+		</div>
+		
+		<div class="cta-item soc insta">
+			
+			
+			<a href="http://instagram.com/postrochester"><img class="avatard" src="{{ STATIC_URL }}i/instapost.jpg"/></a>
+			<a href="http://instagram.com/postrochester">Instagram</a>
 		</div>
 		
 		
+			
 		
-	          		  
-	  <form name="email_signup_form" id="email_signup_form" method="post" accept-charset="UTF-8" action="{% url "connect" %}" >   
-	              <p class="cta">Sign up. <span>Stay Connected.</span> <img src="{{ STATIC_URL }}i/go.png"/></p>
-	              <div class="msg-bubble hide">
-	                <span class="msg">Invalid Email Address</span>
-	                <div class="msg-bubble-arrow-border"></div>
-	                <div class="msg-bubble-arrow"></div>
-	              </div>
-	              {% csrf_token %}
-	            
-	              
-	              <span id="signerupper">{{ form.email_signup }}</span>
-	              
-	              
-	                
-	                  <input name="submit_email_signup" id="submit_email_signup" class="input_button" type="submit" value="OK" />
-	                  
-	              </form>
-	  
-	</footer>
+		</div>
+		
+	</div>
 	
 	
-     {% endblock %}
+	<h2>Back Issues</h2>
+	
+	<p>Coming Soon!</p>
+
+</section>
+
+
+{% endblock %}
+
 
