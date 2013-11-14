@@ -844,15 +844,15 @@ input#submit_email_signup:active{
 
 .cta-item.soc{
 	width: 100px;
-	height: 100px;
+	xheight: 100px;
 	text-align: center;
-	padding: 15px;
+	padding: 25px 15px;
 	
 	margin: 20px auto;
 	
 }
 
-.cta-item.soc:hover{
+.cta-item:hover{
 	background-color: rgba(0,0,0,0.15);
 	}
 
@@ -997,7 +997,7 @@ a#buy.helium-buy-now:hover{
 
 .cta-item.soc{
 
-	
+	width: 20%;
 	display: inline-block;
 	
 }
