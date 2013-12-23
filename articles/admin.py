@@ -23,15 +23,6 @@ admin.site.register(Article, ArticleAdmin)
 
 
 
-
-
-
-
-
-
-
-
-
 class AuthorAdminForm(forms.ModelForm):
 	
     class Meta:
@@ -53,6 +44,17 @@ class PhotogAdmin(admin.ModelAdmin):
     form = PhotogAdminForm	
 
 admin.site.register(Photog, PhotogAdmin)
+
+class IllusAdminForm(forms.ModelForm):
+	
+    class Meta:
+        model = Illus
+	    
+class IllusAdmin(admin.ModelAdmin): 
+    list_display = ('name',)
+    form = IllusAdminForm	
+
+admin.site.register(Illus, IllusAdmin)
 
 class SponsorAdminForm(forms.ModelForm):
 	

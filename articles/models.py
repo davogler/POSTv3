@@ -41,7 +41,8 @@ class Article(models.Model):
     more_info = models.TextField(blank=True)
     featured = models.BooleanField(default=False)
     special_js = models.TextField(blank=True)
-    special_css = models.TextField(blank=True, help_text='Mainly h2.unique and p.tagline')
+    special_css = models.TextField(blank=True, null=True, help_text='Mainly h2.unique and p.tagline')
+    template_name = models.CharField(max_length=250, blank=True, help_text='enter optional template to override default')
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT_STATUS)
     objects = models.Manager()	
     live = LiveEntryManager()
@@ -86,7 +87,6 @@ class Sponsor(models.Model):
     class Meta:
         ordering = ['-add_date']
         verbose_name_plural = "Sponsors"
-        #app_label = "blog"
     	
     def __unicode__(self):
         return self.name  
@@ -99,7 +99,6 @@ class Author(models.Model):
     class Meta:
         ordering = ['name']
         verbose_name_plural = "Authors"
-        #app_label = "blog"
     	
     def __unicode__(self):
         return self.name
@@ -112,9 +111,20 @@ class Photog(models.Model):
     class Meta:
         ordering = ['name']
         verbose_name_plural = "Photographers"
-        #app_label = "blog"
     	
     def __unicode__(self):
-        return self.name         
+        return self.name 
+        
+class Illus(models.Model):
+    name = models.CharField(max_length=250)
+    link = models.URLField(blank=True)
+    colophon = models.TextField(blank=True) 
+    
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = "Illustrators"
+        	
+    def __unicode__(self):
+        return self.name        
 
 	

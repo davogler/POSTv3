@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.template import RequestContext
+from django.template import loader, Context
 
 
 def entry_sort(request):
@@ -22,14 +23,18 @@ def entry_sort(request):
 
 class ArticleDetail(DetailView):
     '''The individual article view- permalink location.  Uses dispatch to apply a sorted queryset, depending on authentication state of requesting user.'''
-    template_name = 'article_detail.html'
+    
+    
     allow_empty = True
     allow_future = False
     
     model = Article
     context_object_name = 'article'
-   
-    
+        
+    def get_template_names(self):
+        '''if the article has template name set, use that template.  otherwise, go standard'''
+        return [(self.get_object().template_name), 'articles/article_detail.html']
+            
     def dispatch(self, request, *args, **kwargs):
         self.queryset = entry_sort(request)
         
@@ -39,7 +44,7 @@ class ArticleDetail(DetailView):
             
 class ArticleFeatured(DetailView):
     '''The featured article on the home page'''
-    template_name = 'article_detail.html'
+    
 
     
     model = Article
@@ -50,6 +55,10 @@ class ArticleFeatured(DetailView):
         qs = Article.published.filter(featured=True).latest('pub_date')
         pk = qs.id
         return get_object_or_404(Article, pk=pk)
+    
+    def get_template_names(self):
+        '''if the article has template name set, use that template.  otherwise, go standard'''
+        return [(self.get_object().template_name), 'articles/article_detail.html']
      
     
 class ArticleList(ListView):

@@ -37,90 +37,94 @@
 <section class="content-static">
 	<div class="brick">
 	
-	<h2>Stay Connected</h2>
-	
-	<p>Make sure you don't miss a single issue of POST.  There's more than one way to keep in touch.<p> 
-	<p class="source"> You can pick up a copy at these locations:<br>
-	
-	<p>Java's on Gibbs<br>
-	      					Good Luck<br>
-	      					Scott Miller Salon<br>
-	      					Abundance Co-op<br>
-	      					Memorial Art Gallery<br>
-	      					Starry Nights Cafe<br>
-	      					Red Barn<br>
-	      					Dado<br>
-	      					Arena's<br>
-	      					Thread<br>
-	      					Pittsford Dairy Bakery
-	      				</p>
-	
-	<h2>Delivered to Your Door</h2>
-	<p>You can subscribe for home delivery:</p>
-	
-	<div class="cta-item">
-		<p>A one-year subscription: $25 <a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01" id="buy">Subscribe</a></p>
+		<h2>Stay Connected</h2>
+		
+		<p>Make sure you don't miss a single issue of POST.  There's more than one way to keep in touch.<p> 
+		<p class="source"> You can pick up a copy at these locations:<br>
+		
+		<p>Java's on Gibbs<br>
+		      					Good Luck<br>
+		      					Scott Miller Salon<br>
+		      					Abundance Co-op<br>
+		      					Memorial Art Gallery<br>
+		      					Starry Nights Cafe<br>
+		      					Red Barn<br>
+		      					Dado<br>
+		      					Arena's<br>
+		      					Thread<br>
+		      					Pittsford Dairy Bakery
+		      				</p>
+		
+		<h2>Delivered to Your Door</h2>
+		<p>You can subscribe for home delivery:</p>
+		
+		<div class="cta-item">
+			<p>A one-year subscription: $25 <a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01" id="buy">Subscribe</a></p>
+		</div>
+		
+		<h2 id="eml">Delivered to Your Inbox</h2>
+		<p>We send out updates.  We promise never to share your email with anyone else.</p>
+		
+		<div class="cta-item">
+		
+		<form name="email_signup_form" id="email_signup_form" method="post" accept-charset="UTF-8" action=" " >   
+		            <p class="cta">Sign up for our Email List:</p>
+		            <div class="msg-bubble hide">
+		              <span class="msg">Invalid Email Address</span>
+		              <div class="msg-bubble-arrow-border"></div>
+		              <div class="msg-bubble-arrow"></div>
+		            </div>
+		            {% csrf_token %}
+		          
+		            
+		            <span id="signerupper">
+			            {{ form.email_signup }}
+			            <input name="submit_email_signup" id="submit_email_signup" class="input_button" type="submit" value="OK" />       
+		            </span>
+		                
+		            </form>
+		</div>
+		
+		<h2>We're Out There</h2>
+		
+		<div class="soc-body">
+		
+			<div class="cta-item soc twit">
+				
+				
+				<a href="https://twitter.com/PostRochester"><img class="avatard" src="{{ STATIC_URL }}i/plogo.jpg"/></a>
+				<a href="https://twitter.com/PostRochester">Twitter</a>
+			</div>
+			
+			<div class="cta-item soc farce">
+				
+				
+				<a href="https://www.facebook.com/PostRochester"><img class="avatard" src="{{ STATIC_URL }}i/post-avatar.jpg"/></a>
+				<a href="https://www.facebook.com/PostRochester">Facebook</a>
+			</div>
+			
+			<div class="cta-item soc insta">
+				
+				
+				<a href="http://instagram.com/postrochester"><img class="avatard" src="{{ STATIC_URL }}i/instapost.jpg"/></a>
+				<a href="http://instagram.com/postrochester">Instagram</a>
+			</div>
+			
+			
+				
+			
+			</div>
+		
 	</div>
 	
-	<h2 id="eml">Delivered to Your Inbox</h2>
-	<p>We send out updates.  We promise never to share your email with anyone else.</p>
+	<div class="brick">
 	
-	<div class="cta-item">
 	
-	<form name="email_signup_form" id="email_signup_form" method="post" accept-charset="UTF-8" action=" " >   
-	            <p class="cta">Sign up for our Email List:</p>
-	            <div class="msg-bubble hide">
-	              <span class="msg">Invalid Email Address</span>
-	              <div class="msg-bubble-arrow-border"></div>
-	              <div class="msg-bubble-arrow"></div>
-	            </div>
-	            {% csrf_token %}
-	          
-	            
-	            <span id="signerupper">
-		            {{ form.email_signup }}
-		            <input name="submit_email_signup" id="submit_email_signup" class="input_button" type="submit" value="OK" />       
-	            </span>
-	                
-	            </form>
+		<h2>Back Issues</h2>
+		
+		<p>Coming Soon!</p>
+	
 	</div>
-	
-	<h2>We're Out There</h2>
-	
-	<div class="soc-body">
-	
-		<div class="cta-item soc twit">
-			
-			
-			<a href="https://twitter.com/PostRochester"><img class="avatard" src="{{ STATIC_URL }}i/plogo.jpg"/></a>
-			<a href="https://twitter.com/PostRochester">Twitter</a>
-		</div>
-		
-		<div class="cta-item soc farce">
-			
-			
-			<a href="https://www.facebook.com/PostRochester"><img class="avatard" src="{{ STATIC_URL }}i/post-avatar.jpg"/></a>
-			<a href="https://www.facebook.com/PostRochester">Facebook</a>
-		</div>
-		
-		<div class="cta-item soc insta">
-			
-			
-			<a href="http://instagram.com/postrochester"><img class="avatard" src="{{ STATIC_URL }}i/instapost.jpg"/></a>
-			<a href="http://instagram.com/postrochester">Instagram</a>
-		</div>
-		
-		
-			
-		
-		</div>
-		
-	</div>
-	
-	
-	<h2>Back Issues</h2>
-	
-	<p>Coming Soon!</p>
 
 </section>
 
