@@ -84,8 +84,40 @@
 		</section> 
 		<aside class="secondary">
 			<div id="authorship" class="authorship clearfix">
-				<p>by <a href="{{ object.author.link }}">{{ object.author.name }}</a></p>
-				<p>photography by <a href="{{ object.photog.link }}">{{ object.photog.name }}</a></p>
+				
+				
+				{% if object.author.all %}
+				<p>by 
+				
+				{% for author in object.author.all %}
+				    {% if author.link %}
+					  <a href="{{ author.link }}">{{ author.name }}</a>
+					{% else %}
+					  {{ author.name }}
+					{% endif %}
+					{% if forloop.last %}{% else %}
+					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
+					{% endif %}
+				{% endfor %}
+				</p>
+				{% endif %}
+				
+				
+				{% if object.photog.all %}
+				<p>photography by 
+				
+				{% for photog in object.photog.all %}
+				    {% if photog.link %}
+					  <a href="{{ photog.link }}">{{ photog.name }}</a>
+					{% else %}
+					  {{ photog.name }}
+					{% endif %}
+					{% if forloop.last %}{% else %}
+					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
+					{% endif %}
+				{% endfor %}
+				</p>
+				{% endif %}
 			
 			
 				{% if object.illus.all %}
@@ -101,9 +133,7 @@
 					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
 					{% endif %}
 				{% endfor %}
-				
 				</p>
-				
 				{% endif %}
 			</div>
 			

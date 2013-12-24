@@ -13,7 +13,7 @@ class ArticleAdminForm(forms.ModelForm):
 	    
 class ArticleAdmin(admin.ModelAdmin): 
     prepopulated_fields = { 'slug': ['title'] }
-    list_display = ('title','author', 'photog', 'pub_date','status','featured', 'sponsor')
+    list_display = ('title', 'pub_date','status','featured', 'sponsor')
     list_editable = ('status','featured',)
     
     inlines = [ ImageInline, ]
