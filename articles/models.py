@@ -37,6 +37,7 @@ class Article(models.Model):
     pub_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
     author = models.ForeignKey('Author', blank=True, null=True)
     photog = models.ForeignKey('Photog', blank=True, null=True)
+    illus = models.ManyToManyField('Illus', blank=True)
     sponsor = models.ForeignKey('Sponsor', blank=True, null=True)
     more_info = models.TextField(blank=True)
     featured = models.BooleanField(default=False)

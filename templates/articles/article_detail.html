@@ -86,10 +86,26 @@
 			<div id="authorship" class="authorship clearfix">
 				<p>by <a href="{{ object.author.link }}">{{ object.author.name }}</a></p>
 				<p>photography by <a href="{{ object.photog.link }}">{{ object.photog.name }}</a></p>
+			
+			
+				{% if object.illus.all %}
+				<p>Illustrations by 
+				
+				{% for illus in object.illus.all %}
+				    {% if illus.link %}
+					  <a href="{{ illus.link }}">{{ illus.name }}</a>
+					{% else %}
+					  {{ illus.name }}
+					{% endif %}
+					{% if forloop.last %}{% else %}
+					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
+					{% endif %}
+				{% endfor %}
+				
+				</p>
+				
+				{% endif %}
 			</div>
-			
-			
-		
 			
 			
 		

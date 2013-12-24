@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from articles.models import Article, Author, Sponsor, Photog, Image
+from articles.models import Article, Author, Sponsor, Photog, Image, Illus
 
 class ImageInline(admin.StackedInline):
     model = Image
