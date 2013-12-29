@@ -79,7 +79,7 @@
 
 	<div class="brick first">
 		 <section class="primary">
-		<p><em>{{ object.intro|safe }}</em></p>
+		<p><em>{{ object.standfirst|safe }}</em></p>
 		
 		</section> 
 		<aside class="secondary">
@@ -156,36 +156,51 @@
  	        		
  	        		<p>{{ object.more_info|safe }}</p>
  	        		
- 	        		<div class="socialper">
- 	        			<div id="fb-root"></div>
- 	        			<div class="fb-share-button" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" data-type="button_count"></div>
- 	        			<script>(function(d, s, id) {
- 	        			  var js, fjs = d.getElementsByTagName(s)[0];
- 	        			  if (d.getElementById(id)) return;
- 	        			  js = d.createElement(s); js.id = id;
- 	        			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=195388327314885";
- 	        			  fjs.parentNode.insertBefore(js, fjs);
- 	        			}(document, 'script', 'facebook-jssdk'));</script>
- 	        			
- 	        			<div class="fb-like" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" data-width="90"  data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="false" data-send="false"></div>
- 	        			
- 	        			
- 	        			
- 	        			
- 	        			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-via="postrochester" data-text="{{ object.title }} " data-lang="en">Tweet</a>
- 	        			
- 	        			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
- 	        				   				
- 	        			
- 	        		</div>
  	        		
+ 	        		
+ 	        		
+ 	        		
+ 	        		<div class="socialper">
+ 	        		
+ 	        		<!-- Replace YOUR_CUSTOM_URL with the URL you're sharing -->
+ 	        		
+ 	        		<ul class="socialcount" data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" >
+ 	        		
+ 	        		<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://{{ site.domain }}{{ object.get_absolute_url }}" title="Share on Facebook"><span class="icon icon-facebook"></span><span class="count">Like</span></a></li>
+ 	        		
+ 	        		<li class="twitter"><a href="https://twitter.com/intent/tweet?text=http://{{ site.domain }}{{ object.get_absolute_url }}" title="Share on Twitter"><span class="icon icon-twitter"></span><span class="count">Tweet</span></a></li>
+ 	        		
+ 	        		<li class="googleplus"><a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ object.get_absolute_url }}" title="Share on Google Plus"><span class="icon icon-googleplus"></span><span class="count">+1</span></a></li>
+ 	        		
+ 	        		</ul>
+ 	        		
+ 	        		</div>
  	        	
  	        	</aside>
  	        	
  	        	<aside class="creators clearfix">
- 	        		<p>{{ object.author.colophon|safe }}</p>
  	        		
- 	        		<p>{{ object.photog.colophon|safe }}</p>
+ 	        		
+ 	        		{% if object.author.all %}
+ 	        		   {% for author in object.author.all %}
+ 	        			  <p>{{ author.colophon|safe }}</p>
+ 	        		   {% endfor %}
+ 	        		{% endif %}
+ 	        		
+ 	        		{% if object.photog.all %}
+ 	        		    {% for photog in object.photog.all %}
+ 	        			  <p>{{ photog.colophon|safe }}</p>
+ 	        			{% endfor %}
+ 	        		{% endif %}
+ 	        		
+ 	        		{% if object.illus.all %}
+ 	        		    {% for illus in object.illus.all %}
+ 	        			  <p>{{ illus.colophon|safe }}</p>
+ 	        			{% endfor %}
+ 	        		{% endif %}
+ 	        			
+ 	        			
+ 	        		
  	        		
  	        	
  	        	</aside>
