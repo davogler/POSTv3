@@ -99,7 +99,20 @@ $( ".chiclets li" )
   .mouseleave(function() {
     $( this ).animate({marginLeft:"-=3px"}, 100);
   });
+  
+  
+  
+  
+ $('.socialper').one('mouseenter', function()
+                  {
+                          Socialite.load($(this)[0]);
+                  });
+  
      
+
+
+
+
 }); 
 
 

@@ -162,16 +162,20 @@
  	        		
  	        		<div class="socialper">
  	        		
- 	        		<!-- Replace YOUR_CUSTOM_URL with the URL you're sharing -->
- 	        		
- 	        		<ul class="socialcount" data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" >
- 	        		
- 	        		<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://{{ site.domain }}{{ object.get_absolute_url }}" title="Share on Facebook"><span class="icon icon-facebook"></span><span class="count">Like</span></a></li>
- 	        		
- 	        		<li class="twitter"><a href="https://twitter.com/intent/tweet?text=http://{{ site.domain }}{{ object.get_absolute_url }}" title="Share on Twitter"><span class="icon icon-twitter"></span><span class="count">Tweet</span></a></li>
- 	        		
- 	        		<li class="googleplus"><a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ object.get_absolute_url }}" title="Share on Google Plus"><span class="icon icon-googleplus"></span><span class="count">+1</span></a></li>
- 	        		
+ 	        		<ul class="social-buttons cf">
+ 	        		    <li>
+ 	        		        <a href="http://twitter.com/share" class="socialite twitter-share" data-text="{{ object.title }} " data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-count="vertical" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite googleplus-one" data-size="tall" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" rel="nofollow" target="_blank"><span class="vhidden">Share on Google+</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.facebook.com/sharer.php?u=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite facebook-like" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" data-send="false" data-layout="box_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Share on Facebook</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite linkedin-share" data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-counter="top" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a>
+ 	        		    </li>
+ 	        		    
  	        		</ul>
  	        		
  	        		</div>
