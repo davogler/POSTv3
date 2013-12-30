@@ -1,7 +1,8 @@
 /* @override 
 	http://127.0.0.1:8000/assets/css/main.css
 	http://127.0.01:8000/assets/css/main.css
-	http://192.168.0.197:8000/assets/css/main.css */
+	http://192.168.0.197:8000/assets/css/main.css
+	http://127.0.0.1:8000/assets/css/main.css?v1.0 */
 
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
@@ -519,6 +520,8 @@ aside .fb-share-button{
 	
 }
 
+
+
 aside .fb-like{
 	float: left;
 	margin: 4px 4% 6%;
@@ -882,8 +885,8 @@ a#buy.helium-buy-now:hover{
  * Socialite Look-a-like defaults
  */
 
-.social-buttons { display: block; list-style: none; padding: 0; margin: 20px; }
-.social-buttons > li { display: block; margin: 0; padding: 10px; float: left; }
+.social-buttons { display: block; list-style: none; padding: 0; margin: 20px 0 20px 0; }
+.social-buttons > li { display: block; margin: 0; padding: 10px 20px 10px 35px; float: left; }
 .social-buttons .socialite { display: block; position: relative; background: url('../i/social-sprite.png') 0 0 no-repeat; }
 .social-buttons .socialite-loaded { background: none !important; }
 
@@ -1032,6 +1035,8 @@ a#buy.helium-buy-now:hover{
 	  display: inline-block;
 }
 
+.social-buttons > li { display: block; margin: 0; padding: 8px; float: left; }
+
 }
 
 
@@ -1118,13 +1123,22 @@ a#buy.helium-buy-now:hover{
     	
     }
     
+    .socialper{
+    	height: 150px;
+    	
+    	
+    }
     
     
+    aside.more{
+    	border-right: 1px solid #e0cbad;
+    	padding:  0 2% 0 0;
+    }
     aside.creators{
     width: 48%;
     float: left;
-    border-left: 1px solid #e0cbad;
-    padding: 0 0 0 2%;
+    
+    padding: 0 0 0 0;
     border-top: none;
     border-bottom: none;
     
