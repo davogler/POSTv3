@@ -620,10 +620,9 @@ li.person .name{
 
 ul.bios li i{
 	font-size: .9em;
-	vertical-align: top;
 	margin: 0 0 0 6px;
 	opacity: .4;
-	x-webkit-transition: all .2s ease-in-out; 
+	-webkit-transition: all .2s ease-in-out; 
 }
 ul.bios li i:hover{
 	x-webkit-transform: scale(1.5); 
