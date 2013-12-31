@@ -586,6 +586,15 @@ ul.bios{
 	padding: 0;
 }
 
+li.person ul{
+	margin: .3em 0 0 0;
+	padding: 0 0 0 0;
+}
+
+li.person ul li{
+	margin: 0;
+}
+
 ul.bios li{
 	list-style: none;
 	
@@ -594,15 +603,15 @@ ul.bios li{
 
 li.person{
 	margin: 1em 0;
-	width: 33%;
-	float: left;
-	height: 200px;
+	xwidth: 33%;
+	
 }
 
-li.person .title{
+li.person .name{
 	text-transform: uppercase;
 	font-size: .8em;
 	color: #898888;
+	margin: 0 0 0 .5em;
 }
 
 .bios h3{
@@ -610,9 +619,9 @@ li.person .title{
 }
 
 ul.bios li i{
-	font-size: 1.1em;
-	vertical-align: middle;
-	margin: 0 2% 0 0;
+	font-size: .9em;
+	vertical-align: top;
+	margin: 0 0 0 6px;
 	opacity: .4;
 	x-webkit-transition: all .2s ease-in-out; 
 }
@@ -620,11 +629,7 @@ ul.bios li i:hover{
 	x-webkit-transform: scale(1.5); 
 }
 
-ul.chiclets{
-	margin: 0;
-	padding: 0 0 0 1%;
-	font-size: .9em;
-}
+
 
 
 footer.footer{
