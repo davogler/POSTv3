@@ -139,6 +139,7 @@ h1,h2,h3,h4{
 	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 	text-transform: uppercase;
 	font-weight: normal;
+	margin: 20px 0 0 0;
 }
 
 a{
@@ -409,7 +410,7 @@ section.content-static{
 	background: wheat;
 	background:  url('../i/texture_paper_bg.png');
 
-	padding:  70px 5.1%;
+	padding:  45px 5.1%;
 	
 	border: 10px solid #333;
 	
@@ -545,9 +546,7 @@ aside.secondary cite{
 
 
 /*static pages */
-section.content-static{
-	
-}
+
 
 h2.list{
 	display: inline-block;
@@ -628,6 +627,25 @@ ul.bios li i:hover{
 	x-webkit-transform: scale(1.5); 
 }
 
+.jobtitle, .addr, .phone{
+	text-transform: uppercase;
+	font-size: .8em;
+	color: #898888;
+	margin: 0 ;
+}
+
+.threequarter{
+	float: left;
+	width: 95%;
+}
+
+.adpic{
+	
+	border: 10px solid #333;
+	
+	margin: 10% 0 0 0;
+	width: 95%;
+}
 
 
 
@@ -1087,7 +1105,9 @@ a#buy.helium-buy-now:hover{
     	float: left;
     }
     
-   
+   section.content-static{
+   	 padding:  70px 5.1%;
+   }
     
     x.brick.first{
     	width: 68%;
@@ -1097,6 +1117,17 @@ a#buy.helium-buy-now:hover{
     	width: 100%;
     }
     
+    
+    .threequarter{
+    	float: left;
+    	width: 50%;
+    }
+    
+    .adpic{
+    	float: right;
+    	width: 40%;
+    	margin: 0;
+    }
     aside.secondary{
     	width: 28%;
     	float: right;
