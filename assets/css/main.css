@@ -711,8 +711,8 @@ h1.deadly{
 	width: 400px;
 	padding: 0;
 	position: relative;
-	xleft: 14%;
-	xtop: 0px;
+	left: 3%;
+	top: 10px;
 	line-height: 2px;
 	
 }
@@ -724,7 +724,7 @@ input#id_email_signup{
 	text-transform: uppercase;
 	text-align:center;
 	border: 1px solid;
-	width: 200px;
+	width: 120px;
 	height: 25px;
 	color: #bab9b9;
 	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
@@ -764,6 +764,7 @@ input#submit_email_signup{
 	height: 12px;
 	padding: 7px 10px;
 	margin: 8px;
+	top: -3px;
 	color: whiteSmoke;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 5);
 	background: -webkit-gradient(linear,0% 0,0% 100%,from(rgba(255, 255, 255, .15)),to(rgba(0, 0, 0, .1)));
@@ -786,7 +787,7 @@ input#submit_email_signup:active{
 }
 
 input#submit_email_signup:active{
-	top: 1px;	
+	top: -2px;	
 }
 
 /* trouble bubble */
@@ -847,18 +848,60 @@ input#submit_email_signup:active{
 	border: 1px solid #333;
 }
 
+p.findat{
+	width: 49%;
+	float: left;
+	text-transform: uppercase;
+	font-size: .8em;
+	color: #898888;
+	
+}
+
+p.findat2{
+	width: 49%;
+	float: right;
+	text-transform: uppercase;
+	font-size: .8em;
+	color: #898888;
+	
+}
+
 .cta-item{
-	background-color: rgba(0,0,0,0.07);
-	-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
-	-moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
-	box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
+	xbackground-color: rgba(0,0,0,0.07);
+	x-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
+	x-moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
+	xbox-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
 	width: auto;
 	padding: 10px 2%;
-	border: 1px solid #333;
+	border-top: 1px solid #e0cbad;
+	border-bottom: 1px solid #e0cbad;
+}
+
+.cta-item.oneyr{
+	margin-top: 40px;
+	
 }
 
 .cta-item p{
 	margin: 8px;
+}
+
+p.subber{
+	xpadding-left: 100px;
+	margin: 8px 0 0 0;
+}
+img.stack{
+	position: relative;
+	float: left;
+	margin: -20px 10px -10px -25px;
+}
+
+.cta-item.eml i{
+	float: left;
+	color: #898888;
+	font-size: 3em;
+	
+	
 }
 
 .avatard{
@@ -866,14 +909,17 @@ input#submit_email_signup:active{
 }
 
 
+.soc-body{
+	margin-top: 25px;
+}
 
 .cta-item.soc{
-	width: 100px;
+	xwidth: 100px;
 	xheight: 100px;
-	text-align: center;
-	padding: 25px 15px;
-	
-	margin: 20px auto;
+	xtext-align: center;
+	padding: 10px 15px;
+	color: #898888;
+	margin: 0 auto;
 	
 }
 
@@ -881,9 +927,25 @@ input#submit_email_signup:active{
 	background-color: rgba(0,0,0,0.15);
 	}
 
+.cta-item.soc i{
+	float: left;
+	font-size: 3em;
+}
+
+.cta-item.soc i.fa-external-link{
+	float: none;
+	font-size: .6em;
+	margin: 0 0 0 5px;
+}
+
+.cta-item.soc p{
+	padding: 6px 0 0 15px;
+	float: left;
+	width: 60%;
+}
 .cta-item.soc.twit,
 .cta-item.soc.farce{
-	
+	border-bottom: none;
 }
 
 .soc-body:after{
@@ -1032,17 +1094,12 @@ a#buy.helium-buy-now:hover{
 
 
 
-.soc-body{
-	text-align: justify;
-	min-width: 400px;
-	height: 200px;
-	
-}
+
 
 .cta-item.soc{
 
-	width: 20%;
-	display: inline-block;
+	xwidth: 20%;
+	xdisplay: inline-block;
 	
 }
 
@@ -1128,6 +1185,21 @@ a#buy.helium-buy-now:hover{
     	width: 40%;
     	margin: 0;
     }
+    
+    .cta-item.soc i,
+    .cta-item.eml i{
+    	font-size: 5em;
+    }
+    .cta-item.soc p{padding-top: 25px;}
+    
+    img.stack{
+    	
+    	margin: -40px 20px -10px -25px;
+    }
+    
+    input#id_email_signup{
+    	width: 200px;
+	}
     aside.secondary{
     	width: 28%;
     	float: right;

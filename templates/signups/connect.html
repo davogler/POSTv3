@@ -35,39 +35,64 @@
 {% block content %}
 
 <section class="content-static">
-	<div class="brick">
+	<div class="brick clearfix">
 	
-		<h2>Stay Connected</h2>
+		<h2>Where to Find Us</h2>
 		
-		<p>Make sure you don't miss a single issue of POST.  There's more than one way to keep in touch.<p> 
-		<p class="source"> You can pick up a copy at these locations:<br>
+		<p>Make sure you don't miss a single issue of POST.  There's more than one way to keep in touch:<p> 
 		
-		<p>Java's on Gibbs<br>
-		      					Good Luck<br>
-		      					Scott Miller Salon<br>
-		      					Abundance Co-op<br>
-		      					Memorial Art Gallery<br>
-		      					Starry Nights Cafe<br>
-		      					Red Barn<br>
-		      					Dado<br>
-		      					Arena's<br>
-		      					Thread<br>
-		      					Pittsford Dairy Bakery
-		      				</p>
+		<h3>Newstand Locations</h3>
+		<p>Pick up a copy at the following locations:</p>
 		
-		<h2>Delivered to Your Door</h2>
-		<p>You can subscribe for home delivery:</p>
-		
-		<div class="cta-item">
-			<p>A one-year subscription: $25 <a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01" id="buy">Subscribe</a></p>
+		<div class="find clearfix">
+			<p class="findat">Java's on Gibbs<br>
+			Good Luck<br>
+			Scott Miller Salon<br>
+			Abundance Co-op<br>
+			Memorial Art Gallery<br>
+			Starry Nights Cafe<br>
+			Red Barn<br>
+			Dado<br>
+			Arena's<br>
+			Thread<br>
+			Pittsford Dairy Bakery<br>
+			Surface Salon<br>
+			Metro Salon<br>
+			</p>
+			<p class="findat2">
+			
+			Hedonist<br>
+			Peppermint<br>
+			Love Hate Tattoo<br>
+			Writers &amp; Books<br>
+			Record Archive <br>
+			Del Monte Spa<br>
+			Breathe Yoga <br>
+			Embrasse Moi<br>
+			Dryden Theater<br>
+			Open Face <br>
+			Zeppa Bistro<br>
+			Flour City Bakery<br>
+			and Many others..
+			</p>
 		</div>
 		
-		<h2 id="eml">Delivered to Your Inbox</h2>
-		<p>We send out updates.  We promise never to share your email with anyone else.</p>
+		<h3>Delivered to Your Door</h3>
+		<p>You can subscribe for home delivery:</p>
 		
-		<div class="cta-item">
+		<div class="cta-item clearfix oneyr">
+			<img src="/assets/i/mini_stack_covers.png" alt="stack of magazines" class="stack">
+			<p class="subber">A one-year subscription: $30 <a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01" id="buy">Subscribe</a></p>
+		</div>
 		
-		<form name="email_signup_form" id="email_signup_form" method="post" accept-charset="UTF-8" action=" " >   
+		<h3 id="eml">Delivered to Your Inbox</h3>
+		<p>We send out updates to let you know what's happening.  We promise never to share your email with anyone else.</p>
+		
+		<div class="cta-item eml clearfix">
+		
+			<i class="fa fa-inbox fa-5x"></i>
+		
+			<form name="email_signup_form" id="email_signup_form" method="post" accept-charset="UTF-8" action=" " >   
 		            <p class="cta">Sign up for our Email List:</p>
 		            <div class="msg-bubble hide">
 		              <span class="msg">Invalid Email Address</span>
@@ -82,49 +107,44 @@
 			            <input name="submit_email_signup" id="submit_email_signup" class="input_button" type="submit" value="OK" />       
 		            </span>
 		                
-		            </form>
+		       </form>
 		</div>
 		
-		<h2>We're Out There</h2>
+		<h3>We're Out There</h3>
 		
-		<div class="soc-body">
+		<div class="soc-body clearfix">
 		
-			<div class="cta-item soc twit">
+			<div class="cta-item soc twit clearfix">
 				
+				<i class="fa fa-twitter-square fa-5x"></i>
 				
-				<a href="https://twitter.com/PostRochester"><img class="avatard" src="{{ STATIC_URL }}i/plogo.jpg"/></a>
-				<a href="https://twitter.com/PostRochester">Twitter</a>
+				<p><a target="_blank" href="https://twitter.com/PostRochester">Follow us on Twitter<i class="fa fa-external-link"></i></a></p>
 			</div>
 			
-			<div class="cta-item soc farce">
+			<div class="cta-item soc farce clearfix">
 				
+				<i class="fa fa-facebook-square fa-5x"></i>
 				
-				<a href="https://www.facebook.com/PostRochester"><img class="avatard" src="{{ STATIC_URL }}i/post-avatar.jpg"/></a>
-				<a href="https://www.facebook.com/PostRochester">Facebook</a>
+				<p><a target="_blank" href="https://www.facebook.com/PostRochester">Find us on Facebook<i class="fa fa-external-link"></i></a></p>
 			</div>
 			
-			<div class="cta-item soc insta">
+			<div class="cta-item soc insta clearfix">
 				
+				<i class="fa fa-instagram fa-5x"></i>
 				
-				<a href="http://instagram.com/postrochester"><img class="avatard" src="{{ STATIC_URL }}i/instapost.jpg"/></a>
-				<a href="http://instagram.com/postrochester">Instagram</a>
+				<p><a target="_blank" href="http://instagram.com/postrochester">Follow us on Instagram<i class="fa fa-external-link"></i></a></p>
 			</div>
 			
+ 		</div>
 			
-				
 			
-			</div>
+			<h2>Back Issues</h2>
+			
+			<p>Coming Soon!</p>
 		
 	</div>
 	
-	<div class="brick">
 	
-	
-		<h2>Back Issues</h2>
-		
-		<p>Coming Soon!</p>
-	
-	</div>
 
 </section>
 
