@@ -1,6 +1,6 @@
 {% extends "base.html" %} 
 
-{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+{% block title %}Subscribe | {{ block.super }}{% endblock %}
 
 {% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
 
@@ -85,10 +85,10 @@
 			<p class="subber">A one-year subscription: $30 <a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01" id="buy">Subscribe</a></p>
 		</div>
 		
-		<h3 id="eml">Delivered to Your Inbox</h3>
+		<h3 >Delivered to Your Inbox</h3>
 		<p>We send out updates to let you know what's happening.  We promise never to share your email with anyone else.</p>
 		
-		<div class="cta-item eml clearfix">
+		<div id="eml" class="cta-item eml clearfix">
 		
 			<i class="fa fa-inbox fa-5x"></i>
 		
@@ -138,7 +138,7 @@
  		</div>
 			
 			
-			<h2>Back Issues</h2>
+			<h3>Back Issues</h3>
 			
 			<p>Coming Soon!</p>
 		

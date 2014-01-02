@@ -2,7 +2,8 @@
 	http://127.0.0.1:8000/assets/css/main.css
 	http://127.0.01:8000/assets/css/main.css
 	http://192.168.0.197:8000/assets/css/main.css
-	http://127.0.0.1:8000/assets/css/main.css?v1.0 */
+	http://127.0.0.1:8000/assets/css/main.css?v1.0
+	http://192.168.0.197:8000/assets/css/main.css?v1.0 */
 
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
@@ -606,6 +607,8 @@ li.person{
 	
 }
 
+
+
 li.person .name{
 	text-transform: uppercase;
 	font-size: .8em;
@@ -839,13 +842,14 @@ input#submit_email_signup:active{
 	xposition: absolute;
 	xtop: 0px;
 	xleft: 89px;
-	width: 260px;
+	xwidth: 200px;
 	height: 23px;
-	padding: 5px 0 0 15px;
+	padding: 5px 10px 0 10px;
 	background-color: #0390e3;
 	color: #fff;
-	margin: 25px 0 8px 0;
+	margin: 10px 0 8px 0;
 	border: 1px solid #333;
+	float: left;
 }
 
 p.findat{
@@ -930,6 +934,7 @@ img.stack{
 .cta-item.soc i{
 	float: left;
 	font-size: 3em;
+	margin: 0 0 0 -5px;
 }
 
 .cta-item.soc i.fa-external-link{
@@ -939,9 +944,9 @@ img.stack{
 }
 
 .cta-item.soc p{
-	padding: 6px 0 0 15px;
+	padding: 6px 0 0 9px;
 	float: left;
-	width: 60%;
+	width: 73%;
 }
 .cta-item.soc.twit,
 .cta-item.soc.farce{
@@ -1183,7 +1188,25 @@ a#buy.helium-buy-now:hover{
     .adpic{
     	float: right;
     	width: 40%;
-    	margin: 0;
+    	
+    	
+    }
+    
+    ul.bios{
+    	margin-top: 15px;
+    }
+    
+    li.person.col1{
+    	width: 50%;
+    	float: left;
+    	margin: 10px 0;
+    }
+    
+    
+    li.person.col2{
+    	width: 50%;
+    	float: right;
+    	margin: 10px 0;
     }
     
     .cta-item.soc i,

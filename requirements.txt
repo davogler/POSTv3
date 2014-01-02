@@ -2,7 +2,7 @@ Django==1.5.1
 Pillow==2.1.0
 South==0.8.2
 django-filebrowser==3.5.2
-django-grappelli==2.4.5
+django-grappelli==2.4.8
 gunicorn==17.5
 mailsnake==1.6.2
 requests==1.2.3
