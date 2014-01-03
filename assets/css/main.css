@@ -556,6 +556,10 @@ h2.list{
 	line-height: .9em;
 }
 
+h2.list-title{
+	margin-bottom: 20px;
+}
+
 p.tagline-list{
 	display: inline-block;
 	text-transform: uppercase;
