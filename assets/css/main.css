@@ -405,12 +405,11 @@ section.content p{
 
 section.content-static{
 	margin: 0 auto;
-	width: 100%;
+	xßwidth: 100%;
 	z-index: 200;
 	position: relative;
 	background: wheat;
 	background:  url('../i/texture_paper_bg.png');
-
 	padding:  45px 5.1%;
 	
 	border: 10px solid #333;
