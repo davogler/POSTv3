@@ -77,6 +77,24 @@
 			</p>
 		</div>
 		
+	<!--	<iframe width="100%" height="500px" frameBorder="0" src="https://a.tiles.mapbox.com/v3/dvpost.gpnf9phb/page.html?secure=1#12/43.1534/-77.5594"></iframe> -->
+		
+	
+		
+		<div id='map'></div>
+		
+		
+		<script type="text/javascript">
+		var map = L.mapbox.map('map', 'dvpost.gpnf9phb')
+		    .setView([43.141, -77.562], 13);
+		    
+		    
+		        map.addControl(L.mapbox.geocoderControl('dvpost.gpnf9phb'))
+		        map.addControl(L.mapbox.shareControl())
+		</script>
+		
+		
+		
 		<h3>Delivered to Your Door</h3>
 		<p>You can subscribe for home delivery:</p>
 		

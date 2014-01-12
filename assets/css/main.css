@@ -654,6 +654,13 @@ ul.bios li i:hover{
 	width: 95%;
 }
 
+#map { 
+	width:100%; 
+	height: 500px;
+	border: 1px solid #e0cbad;
+	margin: 10px 0;
+}
+
 
 
 footer.footer{
