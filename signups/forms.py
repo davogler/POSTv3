@@ -9,6 +9,7 @@ class ConnectForm(forms.Form):
       required = True,
       label = 'Sign Up. Stay Connected:',
       initial='Your Email',
+      widget=forms.TextInput(attrs={'class' : 'form-control'})
       
     )
     

@@ -81,7 +81,7 @@
 		
 	
 		
-		<div id='map'></div>
+		<!--<div id='map'></div>
 		
 		
 		<script type="text/javascript">
@@ -93,14 +93,18 @@
 		        map.addControl(L.mapbox.shareControl())
 		</script>
 		
-		
+		-->
 		
 		<h3>Delivered to Your Door</h3>
 		<p>You can subscribe for home delivery:</p>
 		
 		<div class="cta-item clearfix oneyr">
 			<img src="/assets/i/mini_stack_covers.png" alt="stack of magazines" class="stack">
-			<p class="subber">A one-year subscription: $30 <a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01" id="buy">Subscribe</a></p>
+			<p class="subber">A one-year subscription: $30 
+			
+			<a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01"m id="buy">Subscribe</a>
+			
+			</p>
 		</div>
 		
 		<h3 >Delivered to Your Inbox</h3>
@@ -120,10 +124,14 @@
 		            {% csrf_token %}
 		          
 		            
-		            <span id="signerupper">
+		            <div id="signerupper" class="input-group">
 			            {{ form.email_signup }}
-			            <input name="submit_email_signup" id="submit_email_signup" class="input_button" type="submit" value="OK" />       
-		            </span>
+			            <span class="input-group-btn">
+			            <input name="submit_email_signup" id="submit_email_signup" class="input_button btn btn-primary" type="submit" value="OK" /> 
+			            </span>      
+		            </div>
+		            
+		            
 		                
 		       </form>
 		</div>
