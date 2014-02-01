@@ -75,13 +75,13 @@ class Article(models.Model):
 class Image(models.Model):
     article = models.ForeignKey('Article')
     name = models.CharField(max_length=35)
-    image = FileBrowseField("Inline IMage", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Inline image, yo.')
+    image = FileBrowseField("Inline IMage", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Inline image, yo. 960 640 or 525')
     caption = models.CharField(max_length=500, blank=True, null=True)
 
 
 class Sponsor(models.Model):
     name = models.CharField(max_length=250)
-    adimg = FileBrowseField("Ad Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload an image to be used for advertising min width 300px')
+    adimg = FileBrowseField("Ad Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload an image to be used for advertising min width 525px')
     adlink = models.URLField()
     endorsement = models.TextField(blank=True) 
     add_date = models.DateTimeField(default=datetime.datetime.now())    

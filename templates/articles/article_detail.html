@@ -212,9 +212,10 @@
  	        <div class="sponsor"
  	             intent
  	             in-standard-after="#authorship">
- 	        	<p> This article has been sponsored by: </p>
- 	        	<img src="{% version object.sponsor.adimg 'medium' %} " alt="{{ object.sponsor.name }}" />
- 	        	
+ 	            {% if object.sponsor %}
+ 	        		<p> This article has been sponsored by: </p>
+ 	        		<img src="{% version object.sponsor.adimg 'medium' %} " alt="{{ object.sponsor.name }}" />
+ 	        	{% endif %}
  	        </div>
  	        	
  	        	
