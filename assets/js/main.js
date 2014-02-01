@@ -58,14 +58,17 @@ $(document).ready(function() {
 
 // This function will be executed when the user scrolls the page.
 $(window).scroll(function(e) {
+	if ( $("section.content").length ) {
+		var content_start = $("section.content").offset().top;
+		var head_ht = $("header.banner").height();
+		var where_at = $(this).scrollTop();
+		var title_at = $("article.full header .hgroup").offset().top;
+		var op = (3*((title_at-head_ht)-where_at))/(title_at-head_ht)
+		
+		 $("article.full header .hgroup").css("opacity",op);
+	}
     // Get the position of the location where the scroller starts.
-    var content_start = $("section.content").offset().top;
-    var head_ht = $("header.banner").height();
-    var where_at = $(this).scrollTop();
-    var title_at = $("article.full header .hgroup").offset().top;
-    var op = (3*((title_at-head_ht)-where_at))/(title_at-head_ht)
-    
-     
+   
      //when scrolltop is equal to or greater than content_start - head ht, put a black border on the bottom of header.banner
     
     $("p.scrollthang").text('content at' + content_start + 'head is' + head_ht + 'where?' + where_at + 'title at: ' + title_at +'op: '+op);
@@ -80,7 +83,7 @@ $(window).scroll(function(e) {
     	$("div.hr").css("display","none");
     }
     
-    $("article.full header .hgroup").css("opacity",op);
+    
    
     });
 

@@ -178,6 +178,7 @@ header.banner{
 	top: 37px;
 	display: none;
 	background-color: #333;
+	x-webkit-transform: translate3d(0,0,10px);
 }
 
 .hr-flat{
@@ -185,8 +186,8 @@ header.banner{
 	z-index: 2000;
 	height: 10px;
 	position: fixed;
-	top: 40px;
-
+	top: 20px;
+	x-webkit-transform: translate3d(0,0,0px);
 	background-color: #333;
 }
 
@@ -197,8 +198,9 @@ header.banner{
 	position: fixed;
 	top: 60px;
 	margin-left: -10px;
-
+x-webkit-transform: translate3d(0,0,10);
 	background-color: #333;
+	
 }
 
 
@@ -218,13 +220,12 @@ img.sticky{
 	width: 100%;
 	border-right: 10px solid #333;
 	border-left: 10px solid #333;
-	xbox-sizing:        border-box;
-	xborder-bottom: 10px solid #333;
 	z-index: 200;
-	xbackground-color: black;
 	box-sizing: inherit;
+	
 
 }
+
 
 .screen{
 	background: rgba(250, 250, 250, .5);
@@ -377,6 +378,16 @@ p.tagline{
 	max-width: 960px;
 	margin: 0 auto;
 }
+
+.brick.iso{
+	background-color: rgba(0,0,0,0.05);
+	padding: 1% 1% 1% 1%;
+	
+	color: gray;
+}
+
+
+	
 
 section.content{
 	margin: 0 auto;
@@ -978,7 +989,7 @@ img.stack{
 }
 
 .cta-item:hover{
-	background-color: rgba(0,0,0,0.15);
+	background-color: rgba(0,0,0,0.10);
 	}
 
 .cta-item.soc i{
@@ -1237,6 +1248,10 @@ a#buy.helium-buy-now:hover{
     
     nav.mm ul li a{
     font-size: 1em;
+    }
+    
+    .brick.iso{
+    	padding: 1% 2.5% 1% 1%;
     }
     
     #signerupper{
