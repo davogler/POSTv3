@@ -186,7 +186,7 @@ header.banner{
 	z-index: 2000;
 	height: 10px;
 	position: fixed;
-	top: 20px;
+	top: 37px;
 	x-webkit-transform: translate3d(0,0,0px);
 	background-color: #333;
 }
@@ -351,6 +351,10 @@ h2.unique{
 
 h2.unique a{
 	color: #fff;
+}
+
+h2.unique a:hover{
+	text-decoration: none;
 }
 
 p.tagline{
