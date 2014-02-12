@@ -133,8 +133,8 @@ FILEBROWSER_SELECT_FORMATS = {
 FILEBROWSER_VERSIONS = {
     'admin_thumbnail': {'verbose_name': 'Admin Thumbnail(60x60)', 'width': 60, 'height': 60, 'opts': 'crop'},
     'thumbnail': {'verbose_name': 'Thumbnail(60x60)', 'width': 60, 'height': 60, 'opts': 'crop'},
-    'small': {'verbose_name': 'Small(300x-)', 'width': 300, 'height': '', 'opts': ''},
-    'medium': {'verbose_name': 'Medium(653x-)', 'width': 653, 'height': '', 'opts': ''},
+    'small': {'verbose_name': 'Small(525x-)', 'width': 525, 'height': '', 'opts': ''},
+    'medium': {'verbose_name': 'Medium(640x-)', 'width': 640, 'height': '', 'opts': ''},
     'big': {'verbose_name': 'Big(960x-)', 'width': 960, 'height': '', 'opts': ''},
     'large': {'verbose_name': 'Large(1280x-)', 'width': 1280, 'height': '', 'opts': ''},
 }

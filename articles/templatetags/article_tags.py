@@ -22,7 +22,7 @@ def banner(request):
 	    unpubset = Article.published.exclude(pub_date__gte=datetime.datetime.now())
 	queryset = (pubset | unpubset)
 	
-	latest = Article.objects.all()[:1]
+	latest = Article.objects.filter(status=1)[:1]
 	return {'latest': latest}
 	
 register.inclusion_tag('banner.html')(banner)

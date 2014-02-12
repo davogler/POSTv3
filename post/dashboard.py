@@ -70,6 +70,11 @@ class CustomIndexDashboard(Dashboard):
                     'url': '/admin/filebrowser/browse/',
                     'external': False,
                 },
+                {
+                    'title': _('Unpublished Articles'),
+                    'url': '/preview/',
+                    'external': False,
+                },
             ]
         ))               
         # append another link list module for "support".
