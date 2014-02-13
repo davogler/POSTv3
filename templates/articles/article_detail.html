@@ -47,7 +47,10 @@
     			<li><a href="/about/">about</a></li>
     			<li><a href="{% url 'article_list' %}">articles</a></li>
     			<li><a href="/subscribe/">subscribe</a></li>
-    			
+    			{% if user.is_authenticated %}
+    			{% load article_tags %}
+    			{% admin_links request %} 
+    			{% endif %}
     		</ul>
     	</nav>
     </div>

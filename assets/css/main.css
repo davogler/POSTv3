@@ -1,24 +1,17 @@
 /* @override 
 	http://127.0.0.1:8000/assets/css/main.css
-	http://127.0.01:8000/assets/css/main.css
 	http://192.168.0.197:8000/assets/css/main.css
 	http://127.0.0.1:8000/assets/css/main.css?v1.0
-	http://192.168.0.197:8000/assets/css/main.css?v1.0 */
+	http://192.168.0.197:8000/assets/css/main.css?v1.0
+	http://stage2.postrochester.com/assets/css/main.css?v1.0 */
 @import url('bs-ui.css') screen;
 
 
 
-/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+/*! with love from HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
 
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
+/* Base Styles */
 
 html,
 button,
@@ -33,11 +26,6 @@ html {
     line-height: 1.4;
 }
 
-/*
- * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection rule sets have to be separate.
- * Customize the background color to match your design.
- */
 
 ::-moz-selection {
     background: #b3d4fc;
@@ -49,9 +37,7 @@ html {
     text-shadow: none;
 }
 
-/*
- * A better looking default horizontal rule
- */
+
 
 hr {
     display: block;
@@ -62,10 +48,7 @@ hr {
     padding: 0;
 }
 
-/*
- * Remove the gap between images, videos, audio and canvas and the bottom of
- * their containers: h5bp.com/i/440
- */
+
 
 audio,
 canvas,
@@ -74,19 +57,12 @@ video {
     vertical-align: middle;
 }
 
-/*
- * Remove default fieldset styles.
- */
-
 fieldset {
     border: 0;
     margin: 0;
     padding: 0;
 }
 
-/*
- * Allow only vertical resizing of textareas.
- */
 
 textarea {
     resize: vertical;
@@ -125,17 +101,12 @@ textarea {
          url('mrspeavesot-roman-webfont.ttf') format('truetype'),
          url('mrspeavesot-roman-webfont.svg#mrs_peaves_otroman') format('svg');
 }
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
+
 
 
 body{
    font-family: "mrs_peaves_otroman", Georgia, Times, serif; 
    font-size: 90%;
-	xwidth: 100%;
-	xoverflow-x: hidden;
-	xborder: 10px solid #333;
 	color: #333;
 	}
 	
@@ -158,7 +129,6 @@ header.banner{
 	position: fixed;
 	z-index: 500;
 	width: 100%;
-	xmargin: 0 10px 0 10px;
 	height: 46px;
 	overflow: hidden;
 	border-top: 10px solid #333;
@@ -178,7 +148,7 @@ header.banner{
 	top: 37px;
 	display: none;
 	background-color: #333;
-	x-webkit-transform: translate3d(0,0,10px);
+	
 }
 
 .hr-flat{
@@ -187,7 +157,6 @@ header.banner{
 	height: 10px;
 	position: fixed;
 	top: 37px;
-	x-webkit-transform: translate3d(0,0,0px);
 	background-color: #333;
 }
 
@@ -198,7 +167,6 @@ header.banner{
 	position: fixed;
 	top: 60px;
 	margin-left: -10px;
-x-webkit-transform: translate3d(0,0,10);
 	background-color: #333;
 	
 }
@@ -206,11 +174,7 @@ x-webkit-transform: translate3d(0,0,10);
 
 img.sticky{
 	width: 100%;
-
-	xposition: fixed;
-	overflow: hidden;
-		
-			
+	overflow: hidden;		
 }
 
 .headerwrap{
@@ -222,8 +186,6 @@ img.sticky{
 	border-left: 10px solid #333;
 	z-index: 200;
 	box-sizing: inherit;
-	
-
 }
 
 
@@ -243,9 +205,6 @@ h1.logo a {
 	font-family: Georgia, Times, serif;
 	text-indent: -999em;
 	overflow: hidden;
-	
-		
-	
 	background-size:  53px 12px;
 	height:18px;
 	margin: 8px 0 1px 9px;
@@ -257,32 +216,21 @@ h1.logo a {
 nav.mm{
 	display: block;
 	float: left;
-	width: 50%;
-	
-	
-	
+	width:60%;
 	margin:6px 0 0 2px;
-	
 }
 
 
 
 nav.mm ul{
-
 	margin: 0;
 	padding: 0;
-	position: relative;
-
-	
+	position: relative;	
 	}
 
 nav.mm ul li {
 	display: inline-block;
-	margin: 0 0 0 1%;
-	
-	
-	
-	
+	margin: 0 0 0 1%;	
 }
 
 nav.mm ul li a{
@@ -293,6 +241,29 @@ nav.mm ul li a{
 	font-size: .9em;
 }
 
+.notify{
+	height: 11px;
+	min-width: 12px;
+	display: block;
+	position: relative;
+}
+
+.preview{
+	background-color: #0073b6;
+	text-align: center;
+	color: #fff;
+	font-size: .2em;
+	padding: 0 4px;
+	border-radius: 3px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.preview:hover{
+		background-color: #a7a7a7;
+}
+
 
 
 #wrapper{
@@ -301,15 +272,10 @@ nav.mm ul li a{
 	padding: 0;
 	overflow: hidden;
 	-webkit-overflow-scrolling : touch;
-	background-color: #333;
-	
+	background-color: #333;	
 }
 
 
-article.main{
-	
-	
-}
 
 img.boom{
 	width: 100%;
@@ -317,9 +283,6 @@ img.boom{
 	overflow: hidden;
 	border: 10px solid #333;
 	box-sizing:        border-box;
-		
-	
-	
 			
 }
 
@@ -328,9 +291,7 @@ article header h2{
 }
 
 article.full header{
-	xheight: 60px;
 	position: relative;
-	
 }
 
 article.full header .hgroup{
@@ -338,10 +299,7 @@ article.full header .hgroup{
 	color: #fff;
 	z-index: 200;
 	margin: 0;
-
-	width: 100%;
-	
-	
+	width: 100%;	
 }
 
 h2.unique{
@@ -362,7 +320,6 @@ p.tagline{
 	text-shadow: 1px 1px 1px rgba(35, 33, 33, 0.68);
 	z-index: 200;
 	position: relative;
-	
 	text-transform: uppercase;
 	color: #c9c8c8;
 	margin: -1% 0 0 0;
@@ -385,8 +342,7 @@ p.tagline{
 
 .brick.iso{
 	background-color: rgba(0,0,0,0.05);
-	padding: 1% 1% 1% 1%;
-	
+	padding: 1% 1% 1% 1%;	
 	color: gray;
 }
 
@@ -395,28 +351,21 @@ p.tagline{
 
 section.content{
 	margin: 0 auto;
-	xwidth: 100%;
 	z-index: 200;
 	position: relative;
-	xtop: 300px;
 	background: wheat;
 	background:  url('../i/texture_paper_bg.png');
-	xbackground-size: cover;
 	padding:  0 5.1%;
 	border: 10px solid #333;
-	xbackground-position: center;
 	box-sizing:        border-box;
-	font-size: 1.2em;
-	
+	font-size: 1.2em;	
 }
 
 section.content p{
 	position: relative;
 	display: block;
 	margin: 2.3% 0 2.3% 0;
-	xwidth: 100%;
 	float: left;
-	
 }
 
 
@@ -430,9 +379,7 @@ section.content-static{
 	background: wheat;
 	background:  url('../i/texture_paper_bg.png');
 	padding:  45px 5.1%;
-	
 	border: 10px solid #333;
-	
 	box-sizing:        border-box;
 	font-size: 1.2em;
 	
@@ -446,7 +393,6 @@ figcaption{
 	font-family:  Georgia, Times, serif;
 	font-style: italic;
 	font-size: .7em;
-	xletter-spacing: .09em;
 }
 
 .brick.first{
@@ -455,11 +401,7 @@ figcaption{
 	font-family:  Georgia, Times, serif;
 	line-height: 1.7em;
 	font-style: italic;
-	xfloat: left;
 	font-size: .89em;
-	xwidth: 100%;
-	
-	xmax-width: 650px;
 	
 	
 }
@@ -475,7 +417,6 @@ aside .authorship{
 	font-size: .8em;
 	color: gray;
 	padding-bottom: 8px;
-	xletter-spacing: .8pt;
 	height: auto;
 	border-bottom: 1px solid #e0cbad;
 	border-top: 1px solid #e0cbad;
@@ -496,7 +437,6 @@ aside div.sponsor{
 	font-size: .85em;
 	text-align: center;
 	padding-top: 20px;
-	xfloat: right;
 	
 }
 
@@ -504,7 +444,6 @@ aside div.sponsor{
 	font-size: 1.4em;
 	font-family:  Georgia, Times, serif;
 	font-style: italic;
-	xletter-spacing: 1px;
 	line-height: 1.5em;
 	color: #a7a7a7;
 	margin: 0;
@@ -514,7 +453,6 @@ aside div.sponsor{
 .fullwidth .pullquote{
 	font-size: 1.4em;
 	font-style: italic;
-	xletter-spacing: 1px;
 	line-height: 1.5em;
 	color: #a7a7a7;
 	margin: 0;
@@ -554,14 +492,11 @@ aside.creators{
 	height: auto;
 	}
 	
-	
-	
 aside.secondary cite{
 	float: right;
 	color: gray;
 	
 }
-
 
 
 /*static pages */
@@ -593,7 +528,6 @@ article.teaser p.intro{
 	font-size: .9em;
 	font-family: Georgia, Times, serif;
 	font-style: italic;
-	xletter-spacing: 1px;
 	line-height: 1.5em;
 	color: #a7a7a7;
 	margin: 8px 0 0 0;
@@ -619,13 +553,11 @@ li.person ul li{
 
 ul.bios li{
 	list-style: none;
-	
 	display: block;
 }
 
 li.person{
 	margin: 1em 0;
-	xwidth: 33%;
 	
 }
 
@@ -648,9 +580,7 @@ ul.bios li i{
 	opacity: .4;
 	-webkit-transition: all .2s ease-in-out; 
 }
-ul.bios li i:hover{
-	x-webkit-transform: scale(1.5); 
-}
+
 
 .jobtitle, .addr, .phone{
 	text-transform: uppercase;
@@ -667,7 +597,6 @@ ul.bios li i:hover{
 .adpic{
 	
 	border: 10px solid #333;
-	
 	margin: 10% 0 0 0;
 	width: 95%;
 }
@@ -682,7 +611,6 @@ ul.bios li i:hover{
 
 
 footer.footer{
-	
 	margin: 0 auto;
 	width: 100%;
 	z-index: 200;
@@ -738,32 +666,6 @@ h1.deadly{
 }
 
 
-
-x#email_signup_form{
-	margin: 0px 0;
-	width: 400px;
-	padding: 0;
-	position: relative;
-	left: 3%;
-	top: 10px;
-	line-height: 2px;
-	
-}
-
-x#signerupper{
-	background: purple;
-	display: block;
-	margin: 0px 0;
-	height: 32px;
-	width: 300px;
-	padding: 0;
-	position: relative;
-	xleft: 3%;
-	top: 0px;
-	line-height: 2px;	
-	float: left;
-}
-
 #signerupper{
 	width: 100%;
 	
@@ -778,80 +680,9 @@ x#signerupper{
 input#id_email_signup{
 	text-transform: uppercase;
 	color: #bab9b9;
-}
-
-xinput#id_email_signup{
-	margin: 0px 0 0 0;
-	background: transparent;
-	
-	text-transform: uppercase;
-	text-align:center;
-	border: 1px solid;
-	width: 70%;
-	height: 25px;
-	color: #bab9b9;
-	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
-	padding: 5px 0 0 0;
-}
-xinput#submit_email_signup{
-	color:white;
-	background-color:#0073b6;
-	border:none;
-	margin:0px 0px;
-	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
-	xposition: absolute;
-	top: 0;
-	
-	width: 20%;
-	padding:0 0 0 0;
 	
 }
 
-xinput#submit_email_signup{
-	box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	-ms-box-sizing: content-box;
-	-o-box-sizing: content-box;
-	background-clip: padding;
-	font-family: "Helvetica","Arial",sans-serif;
-	xborder: 1px solid #4C5C68;
-	display: inline-block;
-	xborder-radius: 5px;
-	-webkit-border-radius: 0px;
-	-moz-border-radius:0px;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 1;
-	text-decoration: none;
-	height: 18px;
-	padding: 7px 10px;
-	margin: 0px 0 0 -5px;
-	top: -2px;
-	color: whiteSmoke;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 5);
-	xbackground: -webkit-gradient(linear,0% 0,0% 100%,from(rgba(255, 255, 255, .15)),to(rgba(0, 0, 0, .1)));
-	xbackground: -moz-linear-gradient(0% 100% 90deg,rgba(0, 0, 0, .1),rgba(255, 255, 255, .15));
-	xbackground-color: #798895;
-	xbox-shadow: 0 0 3px rgba(0, 0, 0, .4),0 3px 4px rgba(0, 0, 0, .2),inset 0 1px 0 rgba(255, 255, 255, .2);
-	x-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .4),0 3px 4px rgba(0, 0, 0, .2),inset 0 1px 0 rgba(255, 255, 255, .2);
-	x-moz-box-shadow: 0 0 3px rgba(0, 0, 0, .4),0 3px 4px rgba(0, 0, 0, .2),inset 0 1px 0 rgba(255, 255, 255, .2);
-	cursor: pointer;
-	text-align: center;
-	position: relative;
-	text-transform: none;
-	x-moz-box-sizing: content-box!important;
-	xbackground-color: #0073B6;
-}
-xinput#submit_email_signup:hover,
-xinput#submit_email_signup:active{
-	background-color: #0390e3;
-	outline: 0;
-}
-
-xinput#submit_email_signup:active{
-	top: -2px;	
-}
 
 
 /* trouble bubble */
@@ -900,10 +731,6 @@ xinput#submit_email_signup:active{
 }
 
 #successkid{
-	xposition: absolute;
-	xtop: 0px;
-	xleft: 89px;
-	xwidth: 200px;
 	height: 43px;
 	padding: 8px 10px 0 10px;
 	background-color: #0390e3;
@@ -936,10 +763,7 @@ p.findat2{
 }
 
 .cta-item{
-	xbackground-color: rgba(0,0,0,0.07);
-	x-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
-	x-moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
-	xbox-shadow: inset 0 1px 0 rgba(0,0,0,0.07),inset 0 -1px 0 rgba(0,0,0,0.07),inset 0 1px 3px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.4);
+	
 	width: auto;
 	padding: 10px 2%;
 	border-top: 1px solid #e0cbad;
@@ -956,7 +780,7 @@ p.findat2{
 }
 
 p.subber{
-	xpadding-left: 100px;
+
 	margin: 8px 0 0 0;
 }
 img.stack{
@@ -983,9 +807,6 @@ img.stack{
 }
 
 .cta-item.soc{
-	xwidth: 100px;
-	xheight: 100px;
-	xtext-align: center;
 	padding: 10px 15px;
 	color: #898888;
 	margin: 0 auto;
@@ -1044,7 +865,6 @@ a#buy.helium-buy-now{
 	white-space: nowrap;
 	padding: 11px 12px;
 	font-size: 14px;
-	xline-height: 1.428571429;
 	border-radius: 2px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -1194,17 +1014,8 @@ a#buy.helium-buy-now:hover{
 
 
 
-.cta-item.soc{
 
-	xwidth: 20%;
-	xdisplay: inline-block;
-	
-}
 
-.cta-item.soc.twit,
-.cta-item.soc.farce{
-	
-}
 
 .soc-body:after{
 	content: '';
@@ -1254,6 +1065,13 @@ a#buy.helium-buy-now:hover{
     font-size: 1em;
     }
     
+    nav.mm ul li a.notify{
+    	font-size: .7em;
+   
+    }
+    
+   
+    
     .brick.iso{
     	padding: 1% 2.5% 1% 1%;
     }
@@ -1275,15 +1093,7 @@ a#buy.helium-buy-now:hover{
    	 padding:  70px 5.1%;
    }
     
-    x.brick.first{
-    	width: 68%;
-    }
-    
-   x.brick.first .primary{
-    	width: 100%;
-    }
-    
-    
+
     .threequarter{
     	float: left;
     	width: 50%;
@@ -1324,9 +1134,7 @@ a#buy.helium-buy-now:hover{
     	margin: -40px 20px -10px -25px;
     }
     
-    xinput#id_email_signup{
-    	width: 200px;
-	}
+  
     aside.secondary{
     	width: 28%;
     	float: right;

@@ -2,6 +2,7 @@ from django.template import Library
 from django import template
 from django.db.models import get_model
 from articles.models import Article
+from django.contrib.auth.decorators import login_required
 
 
 from django.template import Context, loader
@@ -21,8 +22,16 @@ def banner(request):
 	else:
 	    unpubset = Article.published.exclude(pub_date__gte=datetime.datetime.now())
 	queryset = (pubset | unpubset)
-	
+	user = request.user
 	latest = Article.objects.filter(status=1)[:1]
-	return {'latest': latest}
+	return {'latest': latest, 'user':user }
 	
 register.inclusion_tag('banner.html')(banner)
+
+
+def admin_links(request):
+    
+    previews = Article.objects.filter(status=1)
+    return {'previews': previews}
+    
+register.inclusion_tag('admin_links.html')(admin_links)
