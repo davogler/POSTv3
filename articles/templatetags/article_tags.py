@@ -31,7 +31,7 @@ register.inclusion_tag('banner.html')(banner)
 
 def admin_links(request):
     
-    previews = Article.objects.filter(status=1)
+    previews = Article.objects.filter(status=2)
     return {'previews': previews}
     
 register.inclusion_tag('admin_links.html')(admin_links)

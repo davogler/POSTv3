@@ -1,10 +1,5 @@
-
-
 $(document).ready(function() { 
-    
-   
-    
-        
+      
     $('#email_signup_form').ajaxForm({
     	dataType: 'json',
     	success: processJson
@@ -31,8 +26,6 @@ $(document).ready(function() {
         	});
         }
         
-        
-        
     	
     }
     
@@ -50,11 +43,6 @@ $(document).ready(function() {
     	});
     });     
     
-   
-   
-    
-	
-
 
 // This function will be executed when the user scrolls the page.
 $(window).scroll(function(e) {
@@ -71,28 +59,20 @@ $(window).scroll(function(e) {
    
      //when scrolltop is equal to or greater than content_start - head ht, put a black border on the bottom of header.banner
     
-    $("p.scrollthang").text('content at' + content_start + 'head is' + head_ht + 'where?' + where_at + 'title at: ' + title_at +'op: '+op);
-    
+        
     if (where_at >= (content_start-head_ht)-10){
-    	//$("header.banner").css("border-bottom","10px solid #333");
+    	
     	$("div.hr").css("display","block");
     	
     }
     else{
-    	//$("header.banner").css("border-bottom","none");
-    	$("div.hr").css("display","none");
+       	$("div.hr").css("display","none");
     }
     
     
    
     });
 
-
-//$( ".chiclets i" ).hover(function() {
-  //$( this ).css( 'margin-left','10px' );
- // $( this ).css( 'margin-left','0px' );
-  
-//});
 
 
 $( ".chiclets li" )
@@ -103,8 +83,7 @@ $( ".chiclets li" )
     $( this ).animate({marginLeft:"-=3px"}, 100);
   });
   
-  
-  
+   
   
  $('.socialper').one('mouseenter', function()
                   {
@@ -112,9 +91,6 @@ $( ".chiclets li" )
                   });
   
      
-
-
-
 
 }); 
 
