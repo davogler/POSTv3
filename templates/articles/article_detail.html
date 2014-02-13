@@ -44,9 +44,9 @@
     	
     	<nav class="mm">
     		<ul>
-    			<li><a href="/about/">about</a></li>
-    			<li><a href="{% url 'article_list' %}">articles</a></li>
-    			<li><a href="/subscribe/">subscribe</a></li>
+    			<li><a href="/about/" title="About Post">about</a></li>
+    			<li><a href="{% url 'article_list' %}" title="Read More Articles">articles</a></li>
+    			<li><a href="/subscribe/" title="Subscribe">subscribe</a></li>
     			{% if user.is_authenticated %}
     			{% load article_tags %}
     			{% admin_links request %} 
