@@ -102,7 +102,9 @@ textarea {
          url('mrspeavesot-roman-webfont.svg#mrs_peaves_otroman') format('svg');
 }
 
-
+html{
+	background-color: #333;
+}
 
 body{
    font-family: "mrs_peaves_otroman", Georgia, Times, serif; 
@@ -194,6 +196,10 @@ img.sticky{
 
 }
 
+.lt-ie9 .screen{
+	background-color: #b7b6b6;
+}
+
 h1.logo{
 	margin: 0;
 }
@@ -209,6 +215,10 @@ h1.logo a {
 	height:18px;
 	margin: 8px 0 1px 9px;
 	width: 60px;
+}
+
+.lt-ie9 h1.logo a{
+	background: transparent url('../i/post-logo-derpy-sm.png') no-repeat left top;
 }
 
 
@@ -1038,15 +1048,15 @@ a#buy.helium-buy-now:hover{
     	height: 60px;
     }
     h1.logo a {
-    	
-    
-    	
     	background-size:  80px 18px;
     	height:28px;
     	width: 80px;
     	margin: 12px 0 1px 9px;
-    	
-    	
+
+    }
+    
+    .lt-ie9 h1.logo a{
+    	background: transparent url('../i/post-logo-derpy-med.png') no-repeat left top;
     }
     
     .hr{
