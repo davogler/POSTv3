@@ -568,6 +568,8 @@ ul.bios li{
 
 li.person{
 	margin: 1em 0;
+	width: 260px;
+	
 	
 }
 
@@ -577,8 +579,10 @@ li.person .name{
 	text-transform: uppercase;
 	font-size: .8em;
 	color: #898888;
-	margin: 0 0 0 .5em;
+		
 }
+
+
 
 .bios h3{
 	margin: 0;
@@ -592,7 +596,7 @@ ul.bios li i{
 }
 
 
-.jobtitle, .addr, .phone{
+.jobtitle, .addr{
 	text-transform: uppercase;
 	font-size: .8em;
 	color: #898888;
@@ -1120,19 +1124,9 @@ a#buy.helium-buy-now:hover{
     	margin-top: 15px;
     }
     
-    li.person.col1{
-    	width: 50%;
-    	float: left;
-    	margin: 10px 0;
-    }
+  
     
-    
-    li.person.col2{
-    	width: 50%;
-    	float: right;
-    	margin: 10px 0;
-    }
-    
+   
     .cta-item.soc i,
     .cta-item.eml i{
     	font-size: 5em;

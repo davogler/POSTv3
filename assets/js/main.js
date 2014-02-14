@@ -91,6 +91,14 @@ $( ".chiclets li" )
                   });
   
      
+var $container = $('.bios');
+// initialize
+$container.masonry({
+  gutter: 10,
+  isFitWidth: true,
+  itemSelector: '.person'
+});
+
 
 }); 
 
