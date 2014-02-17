@@ -94,7 +94,7 @@ $( ".chiclets li" )
 var $container = $('.bios');
 // initialize
 $container.masonry({
-  gutter: 10,
+  gutter: 25,
   isFitWidth: true,
   itemSelector: '.person'
 });
