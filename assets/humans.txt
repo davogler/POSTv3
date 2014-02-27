@@ -4,12 +4,12 @@
 # TEAM
 
     Design & Development:  David Vogler dave@sparkhouse.com
-	Creative Direction: Anne Esse anne@anneesse.com
+    Creative Direction: Anne Esse anne@anneesse.com
 	
 # THANKS
 
     Mike Calabrese
-    Amy Metcalfe Calabrese
+    Amy Calabrese Metcalfe 
     The entire fabulous and wonderful POST Team
 
 # TECHNOLOGY COLOPHON
