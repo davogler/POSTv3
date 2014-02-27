@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}article {{ object.slug }}{% endblock %}
+
+{% load fb_versions %}
+{% load static %}
+
+
+
+{% block smmeta %}
+{% version_object article.hero 'large' as hero_large %}
+	<meta property="og:title" content="{{ object.title }}">
+	<meta name="description" content="{{ object.intro }}">
+	<meta property='og:url' content='http://{{ site.domain }}{{ object.get_absolute_url }}'>
+	<meta property='og:image' content="http://{{ site.domain }}{% version object.hero 'large' %}">
+	<meta property="og:image:type" content="image/jpg">
+	<meta property="og:image:width" content="{{ hero_large.width }}">
+	<meta property="og:image:height" content="{{ hero_large.height }}">
+	
+	
+	
+
+
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@postrochester">
+	<meta name="twitter:creator" content="@postrochester">
+	<meta name="twitter:title" content="{{ object.title }}">
+	<meta name="twitter:description" content="{{ object.intro }}">
+	<meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero 'small' %}">
+
+     <link rel="canonical" href="http://{{ site.domain }}{{ object.get_absolute_url }}">
+  
+	
+{% endblock %}
+
+
+{% block headernav %}
+<header class="banner">
+	<div class="headerwrap{% if object.screen %} screen{% endif %}">
+    	<h1 class="logo"><a href="/">POST</a></h1>
+    	
+    	<nav class="mm">
+    		<ul>
+    			<li><a href="/about/" title="About Post">about</a></li>
+    			<li><a href="{% url 'article_list' %}" title="Read More Articles">articles</a></li>
+    			<li><a href="/subscribe/" title="Subscribe">subscribe</a></li>
+    			{% if user.is_authenticated %}
+    			{% load article_tags %}
+    			{% admin_links request %} 
+    			{% endif %}
+    		</ul>
+    	</nav>
+    </div>
+ 
+    <img class="sticky" src="{% version object.hero 'large' %}" alt="{{ object.hero.filename }}" />
+    
+    <div class="hr"> </div>
+	
+</header>
+
+{% endblock %}
+
+{% block sticky %} {{ block.super }} <img class="sticky" src="{% version article.hero 'large' %} " alt="{{ object.hero.filename }}" /> {% endblock %}
+
+{% block content %}
+
+
+<article class="full">
+ 	<header>
+     	<img class="boom" src="{% version article.hero 'large' %}" alt="{{ object.hero.filename }}" />
+     	<div class="hgroup">
+	        	<h2 class="unique"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
+	        	<p class="tagline">{{ object.tagline }}</p>
+     	</div>
+ 	</header>
+ 
+
+<section class="content">
+
+	<div class="brick first">
+		 <section class="primary">
+		<p><em>{{ object.standfirst|safe }}</em></p>
+		
+		</section> 
+		<aside class="secondary">
+						
+			
+		
+		</aside>      		
+	</div>
+	
+	<div class="brick">
+	   			
+	   		
+	   		</div>
+
+
+    
+    {{ object.body|safe }}
+    
+ <div class="brick last clearfix">
+ 	        	<aside class="more">
+ 	        		
+ 	        		<p>{{ object.more_info|safe }}</p>
+ 	        		
+ 	        		
+ 	        		
+ 	        		
+ 	        		
+ 	        		<div class="socialper">
+ 	        		
+ 	        		<ul class="social-buttons cf clearfix">
+ 	        		    <li>
+ 	        		        <a href="http://twitter.com/share" class="socialite twitter-share" data-text="{{ object.title }} " data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-count="vertical" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite googleplus-one" data-size="tall" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" rel="nofollow" target="_blank"><span class="vhidden">Share on Google+</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.facebook.com/sharer.php?u=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite facebook-like" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" data-send="false" data-layout="box_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Share on Facebook</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite linkedin-share" data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-counter="top" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a>
+ 	        		    </li>
+ 	        		    
+ 	        		</ul>
+ 	        		
+ 	        		</div>
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        	<aside class="creators clearfix">
+ 	        		
+ 	        		
+ 	        		<div class="cta-creators clearfix">
+ 	        			<img src="/assets/i/mini_stack_covers.png" alt="stack of magazines" class="stack-creators">
+ 	        			<p class="subber">A one-year subscription: $30 
+ 	        			
+ 	        			<a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01"m id="buy">Subscribe</a>
+ 	        			
+ 	        			</p>
+ 	        		</div>
+ 	        			
+ 	        			
+ 	        		
+ 	        		
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        <div class="sponsor"
+ 	             intent
+ 	             in-standard-after="#authorship">
+ 	            {% if object.sponsor %}
+ 	        		<p> sponsored by: </p>
+ 	        		<img src="{% version object.sponsor.adimg 'medium' %} " alt="{{ object.sponsor.name }}" />
+ 	        	{% endif %}
+ 	        </div>
+ 	        	
+ 	        	
+ 	        </div><!--brick-->   
+    
+    </section>
+    
+    	 </article>
+ 
+
+{% endblock %}
+
+
+{% block inlinejs %}<script type="text/javascript">{{ object.special_js|safe }}</script>{% endblock %}
+{% block inlinecss %}<style type="text/css">{{ object.special_css|safe }}</style>{% endblock %}
