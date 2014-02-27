@@ -3,16 +3,28 @@
 
 # TEAM
 
-    Development:  David Vogler dave@sparkhouse.com
-    Designopment: Anne Esse 
-    Creative Direction: Robin Lohkamp
-
+    Design & Development:  David Vogler dave@sparkhouse.com
+	Creative Direction: Anne Esse anne@anneesse.com
+	
 # THANKS
 
     Mike Calabrese
-    Amy Metcalfe 
+    Amy Metcalfe Calabrese
+    The entire fabulous and wonderful POST Team
 
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    Normalize.css, jQuery, Modernizr, Django, nginx, gunicorn, maximage.js
+    Normalize.css
+    jQuery 
+    Modernizr
+    Python
+    Django
+    nginx
+    gunicorn
+    socialcount.js
+    respond.js
+    fontawesome
+    Helium
+    Stripe
+    Mailchimp
