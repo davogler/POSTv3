@@ -4,6 +4,7 @@ from django.utils.timezone import utc
 from django.contrib.auth.models import User
 from filebrowser.fields import FileBrowseField
 from django.core.urlresolvers import reverse
+from django.utils.safestring import mark_safe
 
 class LiveEntryManager(models.Manager):
     def get_query_set(self):
@@ -43,6 +44,7 @@ class Article(models.Model):
     sponsor = models.ForeignKey('Sponsor', blank=True, null=True)
     more_info = models.TextField(blank=True)
     featured = models.BooleanField(default=False)
+    issue = models.ManyToManyField('Issue', blank=True)
     special_js = models.TextField(blank=True)
     special_css = models.TextField(blank=True, null=True, help_text='Mainly h2.unique and p.tagline')
     template_name = models.CharField(max_length=250, blank=True, help_text='enter optional template to override default')
@@ -79,7 +81,16 @@ class Image(models.Model):
     image = FileBrowseField("Inline IMage", max_length=200, extensions=[".jpg",".png", ".gif", ".svg"], blank=True, null=True, help_text='Inline image, yo. 960 640 or 525')
     caption = models.CharField(max_length=500, blank=True, null=True)
 
-
+class Issue(models.Model):
+    volume = models.CharField(max_length=250)
+    month = models.CharField(max_length=250)
+    cover_img = FileBrowseField("Cover Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload a cover image; 1280px wide pls.')
+    
+    def thumb(self):
+        return mark_safe(u'<img src="/media/%s" />' % (self.cover_img))
+        thumb.short_description = 'Thumb'
+        thumb.allow_tags = True
+    
 class Sponsor(models.Model):
     name = models.CharField(max_length=250)
     adimg = FileBrowseField("Ad Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload an image to be used for advertising min width 525px')

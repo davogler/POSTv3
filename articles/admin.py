@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from articles.models import Article, Author, Sponsor, Photog, Image, Illus
+from articles.models import Article, Author, Sponsor, Photog, Image, Illus, Issue
 
 class ImageInline(admin.StackedInline):
     model = Image
@@ -66,3 +66,14 @@ class SponsorAdmin(admin.ModelAdmin):
     form = SponsorAdminForm
     		
 admin.site.register(Sponsor, SponsorAdmin)
+
+class IssueAdminForm(forms.ModelForm):
+	
+    class Meta:
+        model = Issue
+	    
+class IssueAdmin(admin.ModelAdmin): 
+    list_display = ('month', 'thumb')
+    form = IssueAdminForm	
+
+admin.site.register(Issue, IssueAdmin)
