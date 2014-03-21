@@ -90,6 +90,13 @@ class Issue(models.Model):
         return mark_safe(u'<img src="/media/%s" />' % (self.cover_img))
         thumb.short_description = 'Thumb'
         thumb.allow_tags = True
+        
+    class Meta:
+        ordering = ['-month']
+        verbose_name_plural = "Issues"
+    	
+    def __unicode__(self):
+        return self.month
     
 class Sponsor(models.Model):
     name = models.CharField(max_length=250)
