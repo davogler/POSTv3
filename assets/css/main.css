@@ -387,6 +387,10 @@ p.sincerely{
 	width: 100%;
 	text-align: right;
 }
+
+span.q{
+	color: #a1744a;
+}
 	
 
 section.content{
@@ -424,6 +428,11 @@ section.content-static{
 	font-size: 1.2em;
 	
 }
+
+
+
+
+
 
 /* @end */
 
@@ -1250,6 +1259,9 @@ a#buy.helium-buy-now:hover{
     footer.footer{
     	font-size: 1em;
     }
+    
+       
+    	    
     
 }
 
