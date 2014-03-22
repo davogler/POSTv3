@@ -44,7 +44,7 @@ class Article(models.Model):
     sponsor = models.ForeignKey('Sponsor', blank=True, null=True)
     more_info = models.TextField(blank=True)
     featured = models.BooleanField(default=False)
-    issue = models.ManyToManyField('Issue', blank=True)
+    issue = models.ForeignKey('Issue', blank=True, null=True)
     special_js = models.TextField(blank=True)
     special_css = models.TextField(blank=True, null=True, help_text='Mainly h2.unique and p.tagline')
     template_name = models.CharField(max_length=250, blank=True, help_text='enter optional template to override default')
