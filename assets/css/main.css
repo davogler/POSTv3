@@ -430,6 +430,12 @@ section.content-static{
 }
 
 
+img.cover_img{
+	width: 50px;
+	float: left;
+	margin: 5px 10px 10px 0;
+}
+
 
 
 

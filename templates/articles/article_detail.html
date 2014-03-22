@@ -154,8 +154,13 @@
     
  <div class="brick last clearfix">
  	        	<aside class="more">
- 	        		
- 	        		
+ 	        	 	{% if object.issue %}
+ 	        	 	<div class="isthu clearfix">
+ 	        		 	<p class="which_isthu"><img class="cover_img" src="/media/{{ object.issue.cover_img }}" alt="{{ object.issue.month }}">
+                         This article originally appeared in the {{ object.issue.month }} issue of POST. <a href="/subscribe">Subscribe</a> for more.</p>
+ 	           	
+ 	           		</div>
+ 	        		{% endif %}
  	        		<p>{{ object.more_info|safe }}</p>
  	        		
  	        		
