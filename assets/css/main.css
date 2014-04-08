@@ -434,6 +434,7 @@ img.cover_img{
 	width: 50px;
 	float: left;
 	margin: 5px 10px 10px 0;
+	border: 1px solid #333;
 }
 
 
@@ -1069,6 +1070,8 @@ a#buy.helium-buy-now:hover{
 
 
 
+
+
 @media only screen and (min-width: 30em) {
 
 
@@ -1094,6 +1097,8 @@ a#buy.helium-buy-now:hover{
     body{
     	font-size: 100%;
     }
+    
+  
     
     header.banner{
     	height: 60px;
@@ -1267,7 +1272,6 @@ a#buy.helium-buy-now:hover{
     }
     
        
-    	    
     
 }
 

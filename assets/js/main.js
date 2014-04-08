@@ -69,8 +69,7 @@ $(window).scroll(function(e) {
        	$("div.hr").css("display","none");
     }
     
-    
-   
+       
     });
 
 
