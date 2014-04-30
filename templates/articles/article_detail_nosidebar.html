@@ -33,7 +33,11 @@
 	<meta name="twitter:creator" content="@postrochester">
 	<meta name="twitter:title" content="{{ object.title }}">
 	<meta name="twitter:description" content="{{ object.intro }}">
-	<meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero 'small' %}">
+{% if object.hero_alt %}
+	<meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero_alt 'small' %}">
+{% else %}	
+    <meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero 'small' %}">
+{% endif %}	
 
      <link rel="canonical" href="http://{{ site.domain }}{{ object.get_absolute_url }}">
   
