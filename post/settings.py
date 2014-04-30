@@ -67,6 +67,7 @@ STATICFILES_FINDERS = (
 )
 
 LOGIN_URL = '/admin/'
+LOGIN_REDIRECT_URL = '/admin/'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
