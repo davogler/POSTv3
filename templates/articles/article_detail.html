@@ -12,7 +12,11 @@
 {% block smmeta %}
 {% version_object article.hero 'large' as hero_large %}
 	<meta property="og:title" content="{{ object.title }}">
+{% if object.intro %}
 	<meta name="description" content="{{ object.intro }}">
+{% else %}	
+	<meta name="description" content="{{ object.standfirst }}">
+{% endif %}	
 	<meta property='og:url' content='http://{{ site.domain }}{{ object.get_absolute_url }}'>
 {% if object.hero_alt %}	
 	<meta property='og:image' content="http://{{ site.domain }}{% version object.hero_alt 'large' %}">
@@ -32,7 +36,11 @@
 	<meta name="twitter:site" content="@postrochester">
 	<meta name="twitter:creator" content="@postrochester">
 	<meta name="twitter:title" content="{{ object.title }}">
+{% if object.intro %}
 	<meta name="twitter:description" content="{{ object.intro }}">
+{% else %}	
+	<meta name="twitter:description" content="{{ object.standfirst }}">
+{% endif %}	
 {% if object.hero_alt %}
 	<meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero_alt 'small' %}">
 {% else %}	
