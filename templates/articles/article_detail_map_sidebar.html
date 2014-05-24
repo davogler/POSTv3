@@ -7,40 +7,29 @@
 
 
 {% block mapsidebar %}
-<div id="map">
-
+<div class="mapwrap" intent in-standard-after="#authorship" in-tablet-before="#ender">
+	<div id="sidemap">
+	
+	
+	
+	</div>
+	<a class="mapcredits"href='https://www.mapbox.com/about/maps/' target='_blank'>Map: &copy; Mapbox &copy; OpenStreetMap</a>
 </div>
-<script type="text/javascript">
-// initialize the map on the "map" div with a given center and zoom
-var map = L.mapbox.map('map', 'dvpost.ia0on66j', {attributionControl: false})
-    .setView([43.167753883874575, -77.60194480419158], 14);
-var marker = L.mapbox.featureLayer({
-    // this feature is in the GeoJSON format: see geojson.org
-    // for the full specification
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        // coordinates here are in longitude, latitude order because
-        // x, y is the standard for GeoJSON and many formats
-        coordinates: [-77.60194480419158, 43.167753883874575]
-    },
-    properties: {
-        title: 'R Community Bikes',
-        description: '226 Hudson Ave.',
-        // one can customize markers by adding simplestyle properties
-        // http://mapbox.com/developers/simplestyle/
-        'marker-size': 'medium',
-        "marker-symbol": 'bicycle',
-        'marker-color': '#0073b6'
-    }
-}).addTo(map);
 
-marker.eachLayer(function(m) {
-  m.openPopup();
-});
 
-</script>
-
-<a href='https://www.mapbox.com/about/maps/' target='_blank'>Maps &copy; Mapbox &copy; OpenStreetMap</a>
+{% block mapcode %}
+{% if object.mapcode %}
+	<script type="text/javascript"> 
+	{{ object.mapcode|safe }}
+	</script>
+{% endif %}
 
 {% endblock %}
+
+
+
+
+{% endblock %}
+
+
+

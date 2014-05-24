@@ -48,6 +48,7 @@ class Article(models.Model):
     special_js = models.TextField(blank=True)
     special_css = models.TextField(blank=True, null=True, help_text='Mainly h2.unique and p.tagline')
     template_name = models.CharField(max_length=250, blank=True, help_text='enter optional template to override default')
+    mapcode = models.TextField(blank=True, null=True, help_text='Straight up JS to display map.')
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT_STATUS)
     objects = models.Manager()	
     live = LiveEntryManager()
