@@ -4,6 +4,13 @@
 
 {% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
 
+{% block extrahead %}
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script> 
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/Leaflet.fullscreen.min.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/leaflet.fullscreen.css' rel='stylesheet' />
+{% endblock %}
+
 {% block smmeta %}
 	<meta name="description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
 
@@ -54,6 +61,11 @@
 			Calkins Road Wegmans<br>
 			Perinton Wegmans<br>
 			Irondequoit Wegmans<br>
+			
+			
+			</p>
+			<p class="findat2">
+			
 			Chili-Paul Wegmans<br>
 			Penfield Wegmans<br>
 			Latta Road Wegmans<br>
@@ -63,14 +75,23 @@
 			Barnes &amp; Noble at RIT<br>
 			Barnes &amp; Noble Webster<br>
 			Abundance Co-Op<br>
-			
-			</p>
-			<p class="findat2">
-			
-			
 
 			</p>
 		</div>
+		
+		<div class="mapwrap" >
+			<div id="map">
+			
+			
+			
+			</div>
+			<a class="mapcredits"href='https://www.mapbox.com/about/maps/' target='_blank'>Map: &copy; Mapbox &copy; OpenStreetMap</a>
+		</div>
+		<script type="text/javascript"> 
+		var map = L.mapbox.map('map', 'dvpost.gpnf9phb', {attributionControl: false})
+		    .setView([43.179, -77.588], 11);  
+		L.control.fullscreen().addTo(map);					
+		</script>
 		
 		<p>Buy one for a friend- help us spread the word!</p>
 		

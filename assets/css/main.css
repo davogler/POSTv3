@@ -825,7 +825,7 @@ input#id_email_signup{
 }
 
 p.findat{
-	width: 49%;
+	width: 100%;
 	float: left;
 	text-transform: uppercase;
 	font-size: .8em;
@@ -834,8 +834,8 @@ p.findat{
 }
 
 p.findat2{
-	width: 49%;
-	float: right;
+	width: 100%;
+	float: left;
 	text-transform: uppercase;
 	font-size: .8em;
 	color: #898888;
@@ -1098,6 +1098,19 @@ a#buy.helium-buy-now:hover{
 
 
 
+p.findat{
+	width: 49%;
+	float: left;
+	
+	
+}
+
+p.findat2{
+	width: 49%;
+	float: right;
+	
+	
+}
 
 
 
@@ -1288,6 +1301,7 @@ a#buy.helium-buy-now:hover{
     	
     }
     
+       
     footer.footer{
     	font-size: 1em;
     }
