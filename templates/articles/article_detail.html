@@ -7,6 +7,9 @@
 {% load fb_versions %}
 {% load static %}
 
+{% block extrahead %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/imagezoom.css">
+{% endblock %}
 
 
 {% block smmeta %}
@@ -252,6 +255,9 @@
 
 {% endblock %}
 
+{% block extrajs %}
+	<script src="{{ STATIC_URL }}js/vendor/imagezoom.js"></script>
+{% endblock %}
 
 {% block inlinejs %}<script type="text/javascript">{{ object.special_js|safe }}</script>{% endblock %}
 {% block inlinecss %}<style type="text/css">{{ object.special_css|safe }}</style>{% endblock %}

@@ -356,6 +356,13 @@ p.tagline{
 	width: 100%;
 }
 
+img.zoomer{
+	cursor: -webkit-zoom-in;
+	  cursor: -moz-zoom-in;
+	  cursor: -ms-zoom-in;
+	  cursor: zoom-in;
+}
+
 .brick{
 	width: 100%;
 	max-width: 960px;
@@ -670,7 +677,7 @@ ul.bios li i{
 }
 
 .mapwrap{
-	margin: 20px 0 40px 0;
+	margin: 90px 0 40px 0;
 }
 
 #sidemap{

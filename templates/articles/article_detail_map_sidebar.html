@@ -1,7 +1,9 @@
 {% extends "articles/article_detail.html" %}
 
-{% block extrahead %}<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
-<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script> {% endblock %}
+{% block extrahead %}{{ block.super }}
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script> 
+{% endblock %}
 
 
 
