@@ -135,12 +135,13 @@ FILEBROWSER_VERSIONS = {
     'admin_thumbnail': {'verbose_name': 'Admin Thumbnail(60x60)', 'width': 60, 'height': 60, 'opts': 'crop'},
     'thumbnail': {'verbose_name': 'Thumbnail(60x60)', 'width': 60, 'height': 60, 'opts': 'crop'},
     'micro': {'verbose_name': 'Micro(50x-)', 'width': 50, 'height': '', 'opts': ''},
+    'threeup': {'verbose_name': 'Three Col(313x-)', 'width': 313, 'height': '', 'opts': ''},
     'small': {'verbose_name': 'Small(525x-)', 'width': 525, 'height': '', 'opts': ''},
     'medium': {'verbose_name': 'Medium(640x-)', 'width': 640, 'height': '', 'opts': ''},
     'big': {'verbose_name': 'Big(960x-)', 'width': 960, 'height': '', 'opts': ''},
     'large': {'verbose_name': 'Large(1280x-)', 'width': 1280, 'height': '', 'opts': ''},
 }
-FILEBROWSER_ADMIN_VERSIONS = ['micro', 'thumbnail', 'small', 'medium', 'big', 'large']
+FILEBROWSER_ADMIN_VERSIONS = ['micro', 'thumbnail', 'threeup', 'small', 'medium', 'big', 'large']
 FILEBROWSER_ADMIN_THUMBNAIL = 'admin_thumbnail'
 
 GRAPPELLI_INDEX_DASHBOARD = 'post.dashboard.CustomIndexDashboard'

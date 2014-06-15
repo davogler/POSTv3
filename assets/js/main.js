@@ -101,7 +101,7 @@ $container.masonry({
 // add zoom attributes to each image with zoomer class
 $('img.zoomer').each(function() {
 		var oldurl = $(this).attr("src");
-		var url = oldurl.replace(/_big|_small/,"_large");
+		var url = oldurl.replace(/_threeup|_medium|_big|_small/,"_large");
 		$(this).attr('data-zoom-overlay', 'true').attr('data-zoom-padding', '5').attr('data-zoom-url', url);
 		});
 

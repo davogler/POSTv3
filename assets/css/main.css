@@ -420,7 +420,9 @@ section.content p{
 	width: 100%;
 }
 
-
+section.fullwidth.threeup img{
+	margin: 2% 0;
+}
 
 
 section.content-static{
@@ -1101,7 +1103,7 @@ a#buy.helium-buy-now:hover{
 
 @media only screen and (min-width: 30em) {
 
-
+/* Style adjustments for viewports larger than (480px/16px) = 30em */
 
 
 
@@ -1133,7 +1135,7 @@ p.findat2{
 
 
 @media only screen and (min-width: 39em) {
-    /* Style adjustments for viewports that meet the condition */
+    /* Style adjustments for viewports larger than (624px/16px) = 39em */
     body{
     	font-size: 100%;
     }
@@ -1193,6 +1195,19 @@ p.findat2{
     section.primary{
     	width: 68%;
     	float: left;
+    }
+    section.fullwidth.threeup figure:first-child {
+    	margin-left: 0;
+    }
+    
+    section.fullwidth.threeup figure:last-child {
+    	margin-right: 0;
+    }
+    
+    section.fullwidth.threeup figure{
+    	width: 32%;
+    	float: left;
+    	margin: 0 1%;
     }
     
    section.content-static{
