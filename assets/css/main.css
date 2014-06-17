@@ -472,6 +472,12 @@ figcaption{
 	
 }
 
+.brick.fence{
+	border-bottom: 1px solid #e0cbad;
+	border-top: 1px solid #e0cbad;
+	padding: 2% 0;
+}
+
 
 
 aside.secondary{
@@ -558,7 +564,8 @@ aside.creators{
 	height: auto;
 	}
 	
-aside.secondary cite{
+aside.secondary cite,
+section.primary cite{
 	float: right;
 	color: gray;
 	
