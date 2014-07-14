@@ -1025,7 +1025,18 @@ a#buy.helium-buy-now:hover{
 .social-buttons .linkedin-share { width: 60px; height: 65px; background-position: -215px 0; }
 .vhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 
+#mainmap{
+	width:100%; 
+	xheight: 600px;
+	height: 100%;
+	border: 10px solid #333;
+	margin: 30px 0 10px 0;
+	position: relative;
+}
 
+.leaflet-bar a{
+   background-color: #f6f1e3;
+}
 
 
 /* ==========================================================================
@@ -1185,7 +1196,10 @@ p.findat2{
    
     }
     
+   #mainmap{
+   		margin: 50px 0 10px 0;
    
+   }
     
     .brick.iso{
     	padding: 1% 2.5% 1% 1%;

@@ -108,4 +108,6 @@ $('img.zoomer').each(function() {
 
 }); 
 
+$("section.primary").fitVids();
+
 
