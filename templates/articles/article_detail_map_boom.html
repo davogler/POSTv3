@@ -26,31 +26,14 @@
      	</div>
  	</header>
  
- <script type="text/javascript">
- 
- // initialize the map on the "map" div with a given center and zoom
- var map = L.mapbox.map('mainmap', 'dvpost.ia0on66j', {attributionControl: false, scrollWheelZoom: false}).setView([43.155261763602375, -77.6007056236267], 15);
- map.zoomControl.setPosition('topright');
- 
- 
-  setTimeout(map.invalidateSize.bind(map));
-  
-     
- 
- 
- var featureLayer = L.mapbox.featureLayer()
-    
-     var imageUrl = '/media/uploads/inner-loop/inner_loop.gif',
-         imageBounds = [[43.15972282957958, -77.60426759719849], [43.15011156665853, -77.59426832199097]];        
-          
-     L.imageOverlay(imageUrl, imageBounds).addTo(map);
-     
-    
-   
+{% block mapcode %}
+{% if object.mapcode %}
+	<script type="text/javascript"> 
+	{{ object.mapcode|safe }}
+	</script>
+{% endif %}
 
- 
- 
- </script>
+{% endblock %}
 
 <section class="content">
 
