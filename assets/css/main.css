@@ -420,6 +420,17 @@ section.content p{
 	width: 100%;
 }
 
+section.narnia{
+	
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	padding: 0;
+	border-right: 10px solid;
+	border-left: 10px solid;
+}
+
 section.fullwidth.threeup img{
 	margin: 2% 0;
 }
@@ -523,6 +534,7 @@ aside div.sponsor{
 
 .primary .pullquote,
 .fullwidth .pullquote{
+	font-family:  Georgia, Times, serif;
 	font-size: 1.4em;
 	font-style: italic;
 	line-height: 1.5em;
@@ -1151,6 +1163,11 @@ p.findat2{
 .social-buttons > li { display: block; margin: 0; padding: 8px; float: left; }
 
 }
+
+section.narnia{
+	
+	background-attachment: fixed;
+	}
 
 
 @media only screen and (min-width: 39em) {

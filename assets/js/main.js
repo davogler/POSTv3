@@ -46,8 +46,8 @@ $(document).ready(function() {
 
 // This function will be executed when the user scrolls the page.
 $(window).scroll(function(e) {
-	if ( $("section.content").length ) {
-		var content_start = $("section.content").offset().top;
+	if ( $("section.content:first").length ) {
+		var content_start = $("section.content:first").offset().top;
 		var head_ht = $("header.banner").height();
 		var where_at = $(this).scrollTop();
 		var title_at = $("article.full header .hgroup").offset().top;
@@ -69,7 +69,14 @@ $(window).scroll(function(e) {
        	$("div.hr").css("display","none");
     }
     
-       
+    //make hero image go away for background-attachment:fixed inlines
+    if (where_at >= content_start){
+    	$("img.boom").css("display","none");
+    }
+    else{
+       	$("img.boom").css("display","block");
+    }
+    
     });
 
 
