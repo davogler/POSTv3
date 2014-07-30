@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from filebrowser.fields import FileBrowseField
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
+from filebrowser.settings import ADMIN_THUMBNAIL
 
 class LiveEntryManager(models.Manager):
     def get_query_set(self):
@@ -83,17 +84,25 @@ class Image(models.Model):
     caption = models.CharField(max_length=500, blank=True, null=True)
 
 class Issue(models.Model):
-    volume = models.CharField(max_length=250)
-    month = models.CharField(max_length=250)
-    cover_img = FileBrowseField("Cover Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload a cover image; 1280px wide pls.')
+    volume = models.CharField(max_length=250, help_text='As in Issue X')
+    month = models.CharField(max_length=250, help_text='As Month/Month 2014')
+    pub_date = models.DateTimeField(default=datetime.datetime.now, help_text='Pick first of first month, for ordering', blank=True)
+    cover_img = FileBrowseField("Cover Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload a cover image; pick any version')
+    price = models.FloatField(default=6.00, blank=True, null=True)
+    shipping = models.FloatField(default=0.00, blank=True, null=True)
+    for_sale = models.BooleanField(default=False, help_text='This will make it show up on product page.')
     
-    def thumb(self):
-        return mark_safe(u'<img src="/media/%s" />' % (self.cover_img))
+    
+    def image_thumbnail(self):
+        if self.cover_img and self.cover_img.filetype == "Image":
+            return mark_safe('<img src="%s" />' % self.cover_img.version_generate(ADMIN_THUMBNAIL).url)
+        else:
+            return ""  
         thumb.short_description = 'Thumb'
-        thumb.allow_tags = True
-        
+        thumb.allow_tags = True  
+    
     class Meta:
-        ordering = ['-month']
+        ordering = ['-pub_date']
         verbose_name_plural = "Issues"
     	
     def __unicode__(self):
