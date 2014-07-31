@@ -90,6 +90,8 @@ class Issue(models.Model):
     cover_img = FileBrowseField("Cover Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload a cover image; pick any version')
     price = models.FloatField(default=6.00, blank=True, null=True)
     shipping = models.FloatField(default=0.00, blank=True, null=True)
+    he_link = models.URLField(max_length=250, blank=True, null=True)
+    sku = models.CharField(max_length=200, blank=True, null=True)
     for_sale = models.BooleanField(default=False, help_text='This will make it show up on product page.')
     
     

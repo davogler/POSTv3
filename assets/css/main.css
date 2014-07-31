@@ -883,6 +883,11 @@ p.findat2{
 	
 }
 
+.cta-item.backish{
+	margin-top:70px;
+	
+}
+
 .cta-item p{
 	margin: 8px;
 }
@@ -895,6 +900,12 @@ img.stack{
 	position: relative;
 	float: left;
 	margin: -20px 10px -10px -25px;
+}
+
+img.prod{
+	position: relative;
+	float: left;
+	margin: -20px 10px -10px -15px;
 }
 
 img.stack-creators{

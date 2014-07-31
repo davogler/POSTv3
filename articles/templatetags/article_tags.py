@@ -1,7 +1,7 @@
 from django.template import Library
 from django import template
 from django.db.models import get_model
-from articles.models import Article
+from articles.models import Article, Issue
 from django.contrib.auth.decorators import login_required
 
 
@@ -35,3 +35,10 @@ def admin_links(request):
     return {'previews': previews}
     
 register.inclusion_tag('admin_links.html')(admin_links)
+
+def back_issues(request):
+    
+    backissueset = Issue.objects.filter(for_sale=True)
+    return {'backissueset': backissueset}
+    
+register.inclusion_tag('back_issues.html')(back_issues)

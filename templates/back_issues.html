@@ -1,0 +1,21 @@
+{% load fb_versions %}
+
+<h3>Back Issues</h3>
+<p>Available while supplies last. A shipping charge of $6 will automatically be added to your order.<br>
+For questions regarding your order, please contact us at <a href="mailto:info@postrochester.com">info@postrochester.com</a></p>
+
+{% for backissue in backissueset %}
+	
+
+
+<div class="cta-item clearfix backish">
+	<img src="{% version backissue.cover_img 'product_thumb' %}" alt="stack of magazines" class="prod">
+	<p class="subber">{{ backissue.volume }}&mdash; {{ backissue.month }}: ${{ backissue.price|floatformat:2 }} 
+	
+	<a href="{{ backissue.he_link }}" target="_blank" class="helium-buy-now" data-sku="{{ backissue.sku }}"m id="buy">Buy</a>
+	
+	</p>
+</div>
+
+{% endfor %}
+
