@@ -12,8 +12,7 @@ For questions regarding your order, please contact us at <a href="mailto:info@po
 	<img src="{% version backissue.cover_img 'product_thumb' %}" alt="stack of magazines" class="prod">
 	<p class="subber">{{ backissue.volume }}&mdash; {{ backissue.month }}: ${{ backissue.price|floatformat:2 }} 
 	
-	<a href="{{ backissue.he_link }}" target="_blank" class="helium-buy-now" data-sku="{{ backissue.sku }}"m id="buy">Buy</a>
-	
+	<a data-cart-add="{{ backissue.sku }}" data-cart-show="1" class="helium-addtocart" id="buy">Add to Cart</a>
 	</p>
 </div>
 
