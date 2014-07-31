@@ -91,7 +91,7 @@ class ArticleFeed(Feed):
     item_copyright = 'Copyright (c) Post Magazine'
     
     def items(self):
-        return Article.objects.all().order_by('-pub_date')[:5]
+        return Article.published.all().order_by('-pub_date')[:5]
         
     def item_title(self, item):
         return item.title
