@@ -10,22 +10,17 @@
 
 
 
+<div id="popnav"></div>
 <header class="banner">
+
 	<div class="headerwrap{% if Article.screen %} screen{% endif %}">
-    	<h1 class="logo"><a href="/">POST</a></h1>
     	
-    	<nav class="mm">
-    		<ul>
-    			<li><a href="/about/" title="About Post">about</a></li>
-    			<li><a href="{% url 'article_list' %}" title="Read More Articles">articles</a></li>
-    			<li><a href="/subscribe/" title="Subscribe">subscribe</a></li>
+    	
+    	{% include "nav.html" %}
+    			
+    			
     			  
-    			{% if user.is_authenticated %}
-    			{% load article_tags %}
-    			{% admin_links request %} 
-    			{% endif %}
-    		</ul>
-    	</nav>
+    			
     </div>
  
     <img class="sticky" src="{% version Article.hero 'large' %} " alt="{{ Article.hero.filename }}" />

@@ -118,3 +118,23 @@ $('img.zoomer').each(function() {
 $("section.primary").fitVids();
 
 
+$( "a.toggly" ).click(function() {
+  $( "ul#nav" ).toggle( "fast");
+   $("#popnav").toggleClass("superscreen");
+  $("a.toggly i").toggleClass("fa-bars").addClass("fa-times");
+ 
+  
+});
+
+// intention.js functions
+intent.on('mobile', function() {	
+    $('ul#nav').css('display','none');
+    });
+    
+intent.on('tablet', function() {
+   	$('ul#nav').css('display','block');
+   });
+   
+intent.on('standard', function() {
+   	$('ul#nav').css('display','block');
+   });

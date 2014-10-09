@@ -1,0 +1,23 @@
+<h1 class="logo"><a href="/">POST</a></h1>
+
+<div id="widenav">
+<nav intent in-standard-prepend="#widenav" in-mobile-prepend="#popnav" in-tablet-before="#widenav" id="nav" class="mm">
+	<a class="toggly" href="#">Menu<i class="fa fa-bars"></i></a>
+	<ul id="nav">
+		
+		<li><a href="/about/" title="About Post">about</a></li>
+		<li><a href="{% url 'article_list' %}" title="Read More Articles">articles</a></li>
+		<li><a href="/advertise/" title="Subscribe">advertise</a></li>
+		<li><a href="/subscribe/" title="Subscribe">subscribe</a></li>
+  
+		{% if user.is_authenticated %}
+		{% load article_tags %}
+		{% admin_links request %} 
+		{% endif %}
+		
+	</ul>
+	
+</nav>
+</div>
+
+

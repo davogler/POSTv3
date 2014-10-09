@@ -1,8 +1,8 @@
 {% extends "articles/article_detail.html" %}
 
 {% block extrahead %}{{ block.super }}
-	<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
-	<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script> 
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.css' rel='stylesheet' />
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.js'></script> 
 {% endblock %}
 
 
@@ -22,6 +22,7 @@
 {% block mapcode %}
 {% if object.mapcode %}
 	<script type="text/javascript"> 
+	L.mapbox.accessToken = 'pk.eyJ1IjoiZHZwb3N0IiwiYSI6ImxPbmw3RFEifQ.hgjg33qNqNNFJrfZXu0lxw';
 	{{ object.mapcode|safe }}
 	</script>
 {% endif %}

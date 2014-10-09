@@ -191,6 +191,7 @@ img.sticky{
 	border-right: 10px solid #333;
 	border-left: 10px solid #333;
 	z-index: 200;
+	overflow: hidden;
 	box-sizing: inherit;
 }
 
@@ -236,9 +237,9 @@ h1.logo a {
 nav.mm{
 	display: block;
 	float: left;
-	width:60%;
+	width:85%;
 	margin:6px 0 0 2px;
-}
+	}
 
 
 
@@ -261,6 +262,51 @@ nav.mm ul li a{
 	font-size: .9em;
 }
 
+#nav .toggly{
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	text-transform: uppercase;
+	font-weight: normal;
+	color: #0073b6;
+	text-decoration: none;
+	text-align: center;
+}
+
+#nav .toggly i{
+	margin-left: 3px;
+}
+
+
+ul#nav{
+	display: none;
+}
+
+/* nvp menu */
+
+#popnav{
+	width: 90px;
+	z-index: 2000;
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	padding: 0 10px;
+	text-align: center;
+}
+
+.superscreen{
+	background: rgba(225, 225, 225, 0.95);
+}
+
+
+@media only screen and (min-width: 509px) {
+#nav .toggly{
+	display: none;
+}
+ul#nav{
+	display: block;
+}
+}
+
+
 .notify{
 	height: 11px;
 	min-width: 12px;
@@ -281,7 +327,7 @@ nav.mm ul li a{
 }
 
 .preview:hover{
-		background-color: #a7a7a7;
+	background-color: #a7a7a7;
 }
 
 
@@ -1255,7 +1301,7 @@ section.narnia{
     	top: 50px;
     }
     nav.mm{
-    	width: 50%;
+    	width: 60%;
     	
     	margin:10px 0 0 12px;
     }
