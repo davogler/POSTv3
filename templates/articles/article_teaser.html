@@ -1,0 +1,15 @@
+{% load fb_versions %}
+<article class="fullwidth teaser clearfix">
+{% if article.hero_alt %}
+ <img class="thumbnail" src="{% version article.hero_alt 'threeup' %} " alt="{{ article.hero_alt.filename }}" />
+{% else %}
+ <img class="thumbnail" src="{% version article.hero 'threeup' %} " alt="{{ article.hero.filename }}" />
+{% endif %}
+	<div class="hgroup">
+	
+		<h2 class="list"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
+		<p class="tagline-list">{{ article.tagline }}</p>
+		<p class="intro">{{ article.intro|safe }}</p>
+	</div>	        	
+	
+</article>

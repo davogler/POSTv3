@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render_to_response, get_list_or_404
 from django.contrib.syndication.views import Feed
-from articles.models import Article
+from articles.models import Article, Issue
 import datetime
 from django.views.generic import ListView, DetailView
 
@@ -17,6 +17,17 @@ def entry_sort(request):
         unpubset = Article.draft.exclude(pub_date__gte=datetime.datetime.now())
     else:
         unpubset = Article.published.exclude(pub_date__gte=datetime.datetime.now())
+    queryset = (pubset | unpubset)
+    queryset = queryset.exclude(pub_date__gte=datetime.datetime.now())
+    return queryset
+    
+def issue_sort(request):
+    '''checks if the user is authenticated-if so, make a queryset consisting of unpublished entries and published entries.  If not authenticated, the queryset is just published entries'''
+    pubset = Issue.published.exclude(pub_date__gte=datetime.datetime.now())
+    if request.user.is_authenticated():
+        unpubset = Issue.draft.exclude(pub_date__gte=datetime.datetime.now())
+    else:
+        unpubset = Issue.published.exclude(pub_date__gte=datetime.datetime.now())
     queryset = (pubset | unpubset)
     queryset = queryset.exclude(pub_date__gte=datetime.datetime.now())
     return queryset
@@ -105,5 +116,51 @@ class ArticleFeed(Feed):
     def item_description(self, item):
         return item.intro
         
+class IssueFeatured(DetailView):
+    '''The featured issue on the home page'''
+    
 
+    
+    model = Issue
+    context_object_name = 'issue'
+    
+    
+    def get_object(self):
+        qs = Issue.published.latest('pub_date')
+        pk = qs.id
+        return get_object_or_404(Issue, pk=pk)
+    
+    def get_template_names(self):
+        '''if the issue has template name set, use that template.  otherwise, go standard'''
+        return [(self.get_object().template_name), 'articles/issue_detail.html']
+        
+class IssueList(ListView):
+    '''A List view of Issues'''
+    template_name = 'articles/issue_master_list.html'
+    allow_empty = True
+    allow_future = False
+    
+    model = Issue
+    context_object_name = 'issue'
+    queryset = Issue.published.all()
                    
+class IssueDetail(DetailView):
+    '''The individual article view- permalink location.  Uses dispatch to apply a sorted queryset, depending on authentication state of requesting user.'''
+    
+    
+    allow_empty = True
+    allow_future = False
+    
+    model = Issue
+    context_object_name = 'issue'
+    slug_field = 'slug'
+        
+    def get_template_names(self):
+        '''if the article has template name set, use that template.  otherwise, go standard'''
+        return [(self.get_object().template_name), 'articles/issue_detail.html']
+            
+    def dispatch(self, request, *args, **kwargs):
+        self.queryset = issue_sort(request)
+        
+        return super(IssueDetail, self).dispatch(request, *args, **kwargs)
+  

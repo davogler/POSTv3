@@ -51,6 +51,7 @@ class Article(models.Model):
     template_name = models.CharField(max_length=250, blank=True, help_text='enter optional template to override default')
     mapcode = models.TextField(blank=True, null=True, help_text='Straight up JS to display map.')
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT_STATUS)
+    popular = models.BooleanField(default=False)
     objects = models.Manager()	
     live = LiveEntryManager()
     draft = DraftEntryManager()
@@ -84,15 +85,38 @@ class Image(models.Model):
     caption = models.CharField(max_length=500, blank=True, null=True)
 
 class Issue(models.Model):
+    PUBLISHED_STATUS = 1
+    DRAFT_STATUS = 2
+    STATUS_CHOICES = (
+        (PUBLISHED_STATUS, 'Published'),
+        (DRAFT_STATUS, 'Draft'),
+    )
     volume = models.CharField(max_length=250, help_text='As in Issue X')
     month = models.CharField(max_length=250, help_text='As Month/Month 2014')
+    slug = models.SlugField(unique_for_date='pub_date')
+    title = models.CharField(max_length=250, default='A Magazine About Rochester', help_text='A Magazine About Rochester')
+    tagline = models.TextField(blank=True, default='Because Rochester is Awesome', help_text='Stories From the City We Love')
+    inside = models.TextField(blank=True, null=True, help_text='Brief listing of what is inside this issue.')
+    hero = FileBrowseField("Hero Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Choose an huge image for this article. Minimum 1280 x 900')
+    hero_alt = FileBrowseField("Hero Alternate Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='For displaying in SM metadata when Hero Image just aint right for it. Optional.')
+    screen = models.BooleanField(default=False, help_text='check for dark image needing light screen in header')
     pub_date = models.DateTimeField(default=datetime.datetime.now, help_text='Pick first of first month, for ordering', blank=True)
     cover_img = FileBrowseField("Cover Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload a cover image; pick any version')
+    special_js = models.TextField(blank=True)
+    special_css = models.TextField(blank=True, null=True, help_text='Mainly h2.unique and p.tagline')
+    template_name = models.CharField(max_length=250, blank=True, help_text='enter optional template to override default')
+    
     price = models.FloatField(default=6.00, blank=True, null=True)
-    shipping = models.FloatField(default=0.00, blank=True, null=True)
+    shipping = models.FloatField(default=4.00, blank=True, null=True)
     he_link = models.URLField(max_length=250, blank=True, null=True)
+    in_stores = models.BooleanField(default=False, help_text='Is this currently at newstands?')
     sku = models.CharField(max_length=200, blank=True, null=True)
     for_sale = models.BooleanField(default=False, help_text='This will make it show up on product page.')
+    status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT_STATUS)
+    objects = models.Manager()	
+    live = LiveEntryManager()
+    draft = DraftEntryManager()
+    published = PublishedEntryManager()
     
     
     def image_thumbnail(self):
@@ -109,6 +133,10 @@ class Issue(models.Model):
     	
     def __unicode__(self):
         return self.month
+    
+    @models.permalink	
+    def get_absolute_url(self):
+        return ('issue_detail', (), {'slug': self.slug })
     
 class Sponsor(models.Model):
     name = models.CharField(max_length=250)

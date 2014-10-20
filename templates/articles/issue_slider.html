@@ -1,0 +1,18 @@
+{% load fb_versions %}
+
+<div class="coverlist_wrapper">
+<ul class="coverlist">
+
+
+	{% for issue in issueset %}
+	<li>
+	<a href="{{ issue.get_absolute_url }}">
+	<img src="{% version issue.cover_img 'product_thumb' %}" alt="POST, {{ issue.volume }}" >
+	</a>
+	<span class="vol">{{ issue.volume }}</span>
+	</li>
+	{% endfor %}
+
+</ul>
+
+</div>

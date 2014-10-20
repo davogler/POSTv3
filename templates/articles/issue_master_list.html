@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Featured Articles | {{ block.super }} {% endblock %}
+{% block title %}Issues | {{ block.super }} {% endblock %}
 
 {% load fb_versions %}
 
@@ -48,33 +48,43 @@
 	        
 	        <div class="brick only clearfix">
 	        
-		        <h2 class="list-title">Featured Articles</h2>
+		        <h2 class="list-title">Issues</h2>
    
 
     {% for object in object_list %}
     
-    <article class="fullwidth teaser clearfix">
-    {% if object.hero_alt %}
-     <img class="thumbnail" src="{% version object.hero_alt 'threeup' %} " alt="{{ object.hero_alt.filename }}" />
-    {% else %}
-     <img class="thumbnail" src="{% version object.hero 'threeup' %} " alt="{{ object.hero.filename }}" />
-    {% endif %}
+    <article class="fullwidth issueteaser clearfix">
+        
+        <a class="issuthm" href="{{ object.get_absolute_url }}">
+        <img src="{% version object.cover_img 'threeup' %}" alt="{{ object.cover_img.filename }}" />
+        </a>
     	<div class="hgroup">
-    		<h2 class="list"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
-    		<p class="tagline-list">{{ object.tagline }}</p>
-    		<p class="intro">{{ object.intro|safe }}</p>
-    	</div>	        	
+    		<h2 class="list"><a href="{{ object.get_absolute_url }}">{{ object.volume }}</a></h2>
+    		<p class="tagline-list">{{ object.month }}</p>
+    		{% if object.for_sale %}
+    		<div class="btnprice">
+    			<a data-cart-add="{{ object.sku }}" data-cart-show="1" class="btn btn-primary pcta" >Buy It: ${{ object.price|add:object.shipping|floatformat:0 }}</a>
+    			<span>${{ object.price|floatformat:0 }}+${{ object.shipping|floatformat:0 }} S/H</span>
+    		</div>
+    		{% else %}
+    		<a  class="btn btn-default pcta" >Sold Out!</a>
+    		{% endif %}
+    	</div>
+    	<div class="inside-desc">
+    		<p>{{ object.inside }}</p>
+    		
+    		
+    	</div>	 
+    	
+    	
+    	       	
     	
     </article>
-    
-    
     
   
     {% endfor %}
     
-     
     </section>
-     
    
 {% endblock %}
 

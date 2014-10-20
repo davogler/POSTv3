@@ -13,8 +13,8 @@ class ArticleAdminForm(forms.ModelForm):
 	    
 class ArticleAdmin(admin.ModelAdmin): 
     prepopulated_fields = { 'slug': ['title'] }
-    list_display = ('title', 'pub_date','status','featured', 'sponsor')
-    list_editable = ('status','featured',)
+    list_display = ('title', 'pub_date','status','featured', 'popular')
+    list_editable = ('status','featured','popular')
     
     inlines = [ ImageInline, ]
     form = ArticleAdminForm
@@ -73,7 +73,7 @@ class IssueAdminForm(forms.ModelForm):
         model = Issue
 	    
 class IssueAdmin(admin.ModelAdmin): 
-    list_display = ('volume', 'month', 'image_thumbnail', 'for_sale', 'price', 'shipping')
+    list_display = ('volume', 'month', 'image_thumbnail', 'for_sale', 'in_stores', 'price', 'shipping')
     form = IssueAdminForm	
 
 admin.site.register(Issue, IssueAdmin)

@@ -6,14 +6,14 @@
 {% block content %}
 
 
-{% for Article in latest %}
+{% for Issue in latest %}
 
 
 
 <div id="popnav"></div>
 <header class="banner">
 
-	<div class="headerwrap{% if Article.screen %} screen{% endif %}">
+	<div class="headerwrap{% if Issue.screen %} screen{% endif %}">
     	
     	
     	{% include "nav.html" %}
@@ -23,7 +23,7 @@
     			
     </div>
  
-    <img class="sticky" src="{% version Article.hero 'large' %} " alt="{{ Article.hero.filename }}" />
+    <img class="sticky" src="{% version Issue.hero 'large' %} " alt="{{ Issue.hero.filename }}" />
     
     <div class="hr-flat"> </div>
 	

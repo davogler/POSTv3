@@ -5,8 +5,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.views.generic.dates import YearArchiveView, MonthArchiveView, DayArchiveView, DateDetailView
-from articles.models import Article
-from articles.views import ArticleDetail, ArticleList, ArticleFeatured, ArticlePreviewList, ArticleFeed
+from articles.models import Article, Issue
+from articles.views import ArticleDetail, ArticleList, ArticleFeatured, ArticlePreviewList, ArticleFeed, IssueFeatured, IssueList, IssueDetail
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -27,10 +27,15 @@ urlpatterns = patterns('',
     url(r'^feed/$', ArticleFeed()),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT }),
     # url(r'^$', 'signups.views.connect', name='connect'),
-    url(r'^$', ArticleFeatured.as_view(), name='article_detail'),
+    #url(r'^$', ArticleFeatured.as_view(), name='article_detail'),
+    url(r'^$', IssueFeatured.as_view(), name='issue_detail'),
     url(r'^articles/$', ArticleList.as_view(), name='article_list'),
+    
+    url(r'^issues/$', IssueList.as_view(), name='issue_master_list'),
+    url(r'^issues/(?P<slug>[-\w]+)/$', IssueDetail.as_view(), name='issue_detail'),
     url(r'^preview/$', login_required(ArticlePreviewList.as_view()), name='article_preview_list'),
     url(r'^subscribe/$', 'signups.views.connect', name='connect'),
+    
     url(r'^(?P<slug>[-\w]+)/$', ArticleDetail.as_view(), name='article_detail'),
     url(r'^signups/success/$', 'signups.views.success', name='success'),
     url(r'^signups/messages.html$', TemplateView.as_view(template_name='signups/messages.html')),

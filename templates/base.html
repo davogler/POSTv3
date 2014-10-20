@@ -83,6 +83,7 @@
         
         
         {% endblock %}
+  {% include "signups/email_signup.html" %}      
  
  <footer class="footer">
  
@@ -93,10 +94,11 @@
  	<nav class="footy">
  		<ul>
  			<li><a href="/about/" title="About Post">about</a></li>
+ 			<li><a href="/issues/" title="Post Issues">issues</a></li>
  			<li><a href="/articles/" title="Read More Articles">articles</a></li>
  			<li><a href="/subscribe/" title="Subscribe to Post">subscribe</a></li>
  			<li><a href="/advertise/" title="Advertise with Post">advertise</a></li>
- 			<li><a href="mailto:info@postrochester.com" title="email us">email us</a></li>
+ 			
  		</ul>
  	</nav>
  	 
@@ -110,7 +112,7 @@
  		 	<li><a href="https://twitter.com/PostRochester">Twitter</a></li>
  		 	<li><a href="http://instagram.com/postrochester">Instagram</a></li>
  		 	<li><a href="/feed/">RSS Feed</a></li>
- 		 	<li><a href="/subscribe#eml">Email List</a></li>
+ 		 	<li><a href="mailto:info@postrochester.com" title="email us">email us</a></li>
  		 </ul>
  	</nav>
  	

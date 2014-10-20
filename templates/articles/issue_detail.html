@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.title|striptags }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}issue {{ object.slug }}{% endblock %}
+
+{% load fb_versions %}
+{% load static %}
+
+{% block extrahead %}
+	
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/owl.carousel.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/owl.theme.css">
+{% endblock %}
+
+
+{% block smmeta %}
+{% version_object issue.hero 'large' as hero_large %}
+	<meta property="og:title" content="{{ object.title }}">
+{% if object.intro %}
+	<meta name="description" content="{{ object.intro }}">
+{% else %}	
+	<meta name="description" content="{{ object.standfirst }}">
+{% endif %}	
+	<meta property='og:url' content='http://{{ site.domain }}{{ object.get_absolute_url }}'>
+{% if object.hero_alt %}	
+	<meta property='og:image' content="http://{{ site.domain }}{% version object.hero_alt 'large' %}">
+{% else %}	
+	<meta property='og:image' content="http://{{ site.domain }}{% version object.hero 'large' %}">
+{% endif %}	
+	<meta property="og:image:type" content="image/jpg">
+	<meta property="og:image:width" content="{{ hero_large.width }}">
+	<meta property="og:image:height" content="{{ hero_large.height }}">
+	
+	
+	
+
+
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@postrochester">
+	<meta name="twitter:creator" content="@postrochester">
+	<meta name="twitter:title" content="{{ object.title }}">
+{% if object.intro %}
+	<meta name="twitter:description" content="{{ object.intro }}">
+{% else %}	
+	<meta name="twitter:description" content="{{ object.standfirst }}">
+{% endif %}	
+{% if object.hero_alt %}
+	<meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero_alt 'small' %}">
+{% else %}	
+    <meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero 'small' %}">
+{% endif %}	
+     <link rel="canonical" href="http://{{ site.domain }}{{ object.get_absolute_url }}">
+  
+	
+{% endblock %}
+
+
+{% block headernav %}
+<div id="popnav"></div>
+<header class="banner">
+	<div class="headerwrap{% if object.screen %} screen{% endif %}">
+    	
+    	
+    	{% include "nav.html" %}
+    	
+    	
+    </div>
+    <img class="sticky" src="{% version object.hero 'large' %}" alt="{{ object.hero.filename }}" />
+    <div class="hr"> </div>
+	
+</header>
+
+{% endblock %}
+
+{% block sticky %} {{ block.super }} <img class="sticky" src="{% version issue.hero 'large' %} " alt="{{ object.hero.filename }}" /> {% endblock %}
+ {% load article_tags %}
+{% block content %}
+
+
+<article class="full">
+ 	<header>
+     	<img class="boom" src="{% version issue.hero 'large' %}" alt="{{ object.hero.filename }}" />
+     	<div class="hgroup">
+	        	<h2 class="unique"><a href="{{ object.get_absolute_url }}">{{ object.title|safe }}</a></h2>
+	        	<p class="tagline">{{ object.tagline }}</p>
+     	</div>
+ 	</header>
+ 
+
+<section class="content">
+
+	<div class="inside clearfix">
+	<div class="brick">
+		<a class="bnrtease" href="{{ object.get_absolute_url }}"><img src="{% version issue.cover_img 'product_thumb' %}" alt="{{ object.cover_img.filename }}" /></a>
+				<p>{{ object.inside }}</p>
+				<div class="bnrcta">
+				{% if object.in_stores %}
+				<a href="/newsstands/" class="btn btn-primary pcta">Find a copy</a>
+				{% endif %}
+				
+				{% if object.for_sale %}
+				 <a data-cart-add="{{ object.sku }}" data-cart-show="1" class=" btn btn-primary pcta" >Buy Online</a>
+				{% endif %}
+				 <a href="/subscribe/" class="btn btn-primary pcta">Subscribe</a></div>
+				 
+			
+			
+	</div>
+	</div>
+
+
+	
+	
+
+<div class="brick">
+	 <section class="fullwidth">	
+	{% if object.article_set.all %}
+		 <h2 class="list-title">Featured Articles from {{ object.volume }}</h2>	
+		 {% for article in object.article_set.all %}
+		 
+		 {% include "articles/article_teaser.html" %}
+			
+		 {% endfor %}
+	{% endif %}
+	</section>
+</div>
+    	
+	
+<div class="brick">
+	 <section class="fullwidth">	 
+	 <h2 class="list-title">Popular Articles From All Issues</h2>
+	 
+	
+		
+	 {% article_popular_teasers request %}
+		
+	</section>
+</div>
+    
+
+    <div class="brick">
+    	 <section class="fullwidth clearfix">  
+    	 <h2>Issues</h2> 
+    	  {% issue_slider request %}
+    	</section>
+    </div> 
+   
+   
+   
+   
+   
+   
+ 
+ <div id="ender" class="brick last clearfix">
+ 	        	<aside class="more">
+ 	        	 	{% if object.issue %}
+ 	        	 	<div class="isthu clearfix">
+ 	        		 	<p class="which_isthu"><img class="cover_img" src="{% version object.issue.cover_img 'micro' %}" alt="{{ object.issue.month }}">
+                         This issue originally appeared in the {{ object.issue.month }} issue of POST. <a href="/subscribe">Subscribe</a> for more.</p>
+ 	           	
+ 	           		</div>
+ 	        		{% endif %}
+ 	        		<p>{{ object.more_info|safe }}</p>
+ 	        		
+ 	        		
+ 	        		
+ 	        		
+ 	        		
+ 	        		<div class="socialper">
+ 	        		
+ 	        		<ul class="social-buttons cf clearfix">
+ 	        		    <li>
+ 	        		        <a href="http://twitter.com/share" class="socialite twitter-share" data-text="{{ object.title }} " data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-count="vertical" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite googleplus-one" data-size="tall" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" rel="nofollow" target="_blank"><span class="vhidden">Share on Google+</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.facebook.com/sharer.php?u=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite facebook-like" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" data-send="false" data-layout="box_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Share on Facebook</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.linkedin.com/shareissue?mini=true&url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite linkedin-share" data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-counter="top" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a>
+ 	        		    </li>
+ 	        		    
+ 	        		</ul>
+ 	        		
+ 	        		</div>
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        	<aside class="creators clearfix">
+ 	        		
+ 	        		
+ 	        		{% if object.author.all %}
+ 	        		   {% for author in object.author.all %}
+ 	        			  <p>{{ author.colophon|safe }}</p>
+ 	        		   {% endfor %}
+ 	        		{% endif %}
+ 	        		
+ 	        		{% if object.photog.all %}
+ 	        		    {% for photog in object.photog.all %}
+ 	        			  <p>{{ photog.colophon|safe }}</p>
+ 	        			{% endfor %}
+ 	        		{% endif %}
+ 	        		
+ 	        		{% if object.illus.all %}
+ 	        		    {% for illus in object.illus.all %}
+ 	        			  <p>{{ illus.colophon|safe }}</p>
+ 	        			{% endfor %}
+ 	        		{% endif %}
+ 	        			
+ 	        			
+ 	        		
+ 	        		
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        <div class="sponsor"
+ 	             intent
+ 	             in-standard-after="#authorship">
+ 	            {% if object.sponsor %}
+ 	        		<p> sponsored by: </p>
+ 	        		<img src="{% version object.sponsor.adimg 'medium' %} " alt="{{ object.sponsor.name }}" />
+ 	        	{% endif %}
+ 	        </div>
+ 	        	
+ 	        	
+ 	        </div><!--brick-->   
+ 	        
+ 	       
+    
+    </section>
+    
+    	 </article>
+ 
+
+{% endblock %}
+
+{% block extrajs %}
+	
+	<script src="{{ STATIC_URL }}js/vendor/owl.carousel.min.js"></script>
+	<script type="text/javascript">
+		
+			$(function() {
+			 
+			  $('ul.coverlist li').hover(function() {
+			        $(this).children('.vol').show();
+			        $(this).children('a').css('opacity','.2');
+			     },function() {
+			     		$(this).children('.vol').hide();
+			           $(this).children('a').css('opacity','1');
+			        });
+			 
+			});
+		
+	</script>
+	
+	<style type="text/css">
+	
+		</style>
+{% endblock %}
+
+{% block inlinejs %}<script type="text/javascript">{{ object.special_js|safe }}</script>{% endblock %}
+{% block inlinecss %}<style type="text/css">{{ object.special_css|safe }}</style>{% endblock %}

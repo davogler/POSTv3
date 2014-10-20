@@ -116,7 +116,7 @@ h1,h2,h3,h4{
 	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 	text-transform: uppercase;
 	font-weight: normal;
-	margin: 20px 0 0 0;
+	margin: 25px 0 10px 0;
 }
 
 a{
@@ -453,9 +453,14 @@ section.content{
 	background: wheat;
 	background:  url('../i/texture_paper_bg.png');
 	padding:  0 5.1%;
-	border: 10px solid #333;
+	xborder: 10px solid #333;
+	border-top: 10px solid #333;
+	border-right: 10px solid #333;
+	border-left: 10px solid #333;
+	border-bottom: 10px solid #333;
 	box-sizing:        border-box;
 	font-size: 1.2em;	
+	
 }
 
 section.content p{
@@ -490,7 +495,10 @@ section.content-static{
 	background: wheat;
 	background:  url('../i/texture_paper_bg.png');
 	padding:  45px 5.1%;
-	border: 10px solid #333;
+	border-top: 10px solid #333;
+	border-right: 10px solid #333;
+	border-left: 10px solid #333;
+	border-bottom: 10px solid #333;
 	box-sizing:        border-box;
 	font-size: 1.2em;
 	
@@ -534,6 +542,7 @@ figcaption{
 	border-top: 1px solid #e0cbad;
 	padding: 2% 0;
 }
+
 
 
 
@@ -662,6 +671,19 @@ article.teaser p.intro{
 	line-height: 1.5em;
 	color: #a7a7a7;
 	margin: 8px 0 0 0;
+}
+
+article.teaser .thumbnail{
+	width: 33%;
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+article.teaser .hgroup{
+	width: 65%;
+	float: right;
+	width: 100%;
 }
 
 .brick.only{
@@ -831,10 +853,36 @@ h1.deadly{
 	position: relative;
 }
 
-input#id_email_signup{
+input#id_email_signup,
+input#mce-EMAIL{
 	text-transform: uppercase;
 	color: #bab9b9;
 	
+}
+
+ul.socbanner{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	float: right;
+}
+
+.socbanner li{
+	display: inline-block;
+	margin: 0 5px;
+}
+
+#beml{
+	width: 60%;
+	float: left;
+}
+
+#mc_embed_signup{
+	/*margin-left: 50px;*/
+	width: 100%;
+}
+#beml i{
+	position: absolute;
 }
 
 
@@ -977,7 +1025,6 @@ img.stack-creators{
    width: 100%;
  width: auto;
  padding: 10px 2% 5px 2%;
- xborder-top: 1px solid #e0cbad;
  border-bottom: 1px solid #e0cbad;
  position: relative;
 margin-top: 20px;
@@ -1039,6 +1086,163 @@ margin-top: 20px;
 	content: '';
 	  width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
 	  display: inline-block;
+}
+
+.issue section.fullwidth{
+	margin: 50px 0;
+}
+
+
+div.inside{
+	background-color: #8e8d8c;
+	width: 112%;
+	margin: 0 -6%;
+	border-bottom: 10px solid #333;
+	border-t: 10px solid #333;
+	color: #fff;
+	font-size: .9em;
+	padding:  0 5.1%;
+}
+
+div.inside p{
+	width: 100%;
+	float: right;
+}
+
+div.inside .bnrtease{
+	display: none;
+}
+
+div.binside{
+	background-color: #8e8d8c;
+	width: 111.6%;
+	xmargin: 0 -5.8%;
+	border-bottom: 10px solid #333;
+	xborder-top: 10px solid #333;
+	color: #fff;
+	font-size: .9em;
+	padding:  15px 5.1%;
+	width: 100%;
+	border-right: 10px solid #333;
+	border-left: 10px solid #333;
+
+	box-sizing: border-box;
+	
+	
+}
+
+
+
+.bnrcta{
+	float: right;
+	width: 100%;
+	margin: 0 0 3% 0;
+}
+
+.pcta{
+	text-transform: uppercase;
+	font-size: .75em;
+	margin: 2px 0;
+	width: 100%;
+	
+}
+
+.issueteaser{
+	margin: 0 0 60px 0;
+	position: relative;
+}
+
+.issueteaser .hgroup{
+	width: 69%;
+	float: right;
+	xwidth: 100%;
+}
+
+.issueteaser .inside-desc{
+	font-size: .95em;
+	color: #808080;
+	float: right;
+	width: 100%;
+}
+
+.issueteaser .issuthm{
+	width: 28%;
+	float: left;
+}
+.issueteaser .issuthm img{
+	width: 100%;
+}
+.issueteaser .tagline-list{
+	margin: 0 20px 0 5px;
+}
+.issueteaser .pcta{
+	margin: 5px 0 8px 0;
+}
+
+.btnprice{
+	position: relative;
+	display: inline-block;
+}
+
+.btnprice span{
+	xposition: absolute;
+	xtop: 40px;
+	font-size: .7em;
+	font-family: georgia, serif;
+	font-style: italic;
+	color: #898888;
+}
+
+/* small */
+
+.coverlist_wrapper{
+	display: block;
+}
+
+ul.coverlist{
+	display: block;	
+	padding: 0 0 0 10%;
+}
+
+ul.coverlist li{
+	display: block;
+	width: 40%;
+	margin:  10px ;
+	float: left;
+	
+}
+
+
+
+
+ul.coverlist li a img{
+	width: 90%;
+	text-align: center;
+	border: 1px solid transparent;
+	
+	
+	
+}
+
+
+
+ul.coverlist li span.vol{
+	display: block;
+	width: 100%;
+	text-align: center;
+	display: none;
+	position: absolute;
+	top: 50%;
+	left:0;
+}
+
+ul.coverlist li a img:hover ~ span.vol{
+	color: purple;
+}
+
+ul.coverlist li a img
+{
+	height: auto;
 }
 
 button.buy{
@@ -1241,19 +1445,13 @@ text-transform: none;
 
 p.findat{
 	width: 49%;
-	float: left;
-	
-	
+	float: left;	
 }
 
 p.findat2{
 	width: 49%;
-	float: right;
-	
-	
+	float: right;	
 }
-
-
 
 .soc-body:after{
 	content: '';
@@ -1263,12 +1461,68 @@ p.findat2{
 
 .social-buttons > li { display: block; margin: 0; padding: 8px; float: left; }
 
-}
 
 section.narnia{
-	
 	background-attachment: fixed;
 	}
+	
+.coverlist_wrapper{
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
+
+ul.coverlist{
+	display: table-row;	
+	width: 100%;
+}
+
+ul.coverlist li{
+	list-style: none;
+	display: table-cell;
+	height: auto;
+	position: relative;	
+	width: auto;
+	float: none;
+}
+
+div.inside .bnrtease{
+	display: block;
+	float: left;
+	width: 15%;
+	margin: 3% 0;
+}
+
+div.inside p{
+	width: 81%
+	}
+
+.bnrcta{
+	width: 81%;
+	}
+.pcta{
+	width: auto;
+}
+
+.issueteaser .inside-desc{
+	width: 69%;
+}
+
+.issueteaser .pcta{
+	margin-bottom: 18px;
+}
+
+article.teaser .thumbnail{
+	width: 33%;
+
+}
+
+article.teaser .hgroup{
+	width: 65%;
+
+}
+	
+}
 
 
 @media only screen and (min-width: 39em) {
@@ -1301,7 +1555,7 @@ section.narnia{
     	top: 50px;
     }
     nav.mm{
-    	width: 60%;
+    	width: 65%;
     	
     	margin:10px 0 0 12px;
     }
@@ -1387,6 +1641,9 @@ section.narnia{
     	
     	margin: -40px 20px -10px -25px;
     }
+    
+   
+    
     
     
   

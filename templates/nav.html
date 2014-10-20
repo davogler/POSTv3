@@ -7,7 +7,9 @@
 		
 		<li><a href="/about/" title="About Post">about</a></li>
 		<li><a href="{% url 'article_list' %}" title="Read More Articles">articles</a></li>
-		<li><a href="/advertise/" title="Subscribe">advertise</a></li>
+		<li><a href="{% url 'issue_master_list' %}" title="See All Issues">issues</a></li>
+		<li><a href="/newsstands/" title="Newsstands">newsstands</a></li>
+		<li><a href="/advertise/" title="Advertise">advertise</a></li>
 		<li><a href="/subscribe/" title="Subscribe">subscribe</a></li>
   
 		{% if user.is_authenticated %}
