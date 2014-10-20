@@ -3,7 +3,7 @@ from django.conf import settings
 from filebrowser.sites import site
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from django.views.generic.dates import YearArchiveView, MonthArchiveView, DayArchiveView, DateDetailView
 from articles.models import Article, Issue
 from articles.views import ArticleDetail, ArticleList, ArticleFeatured, ArticlePreviewList, ArticleFeed, IssueFeatured, IssueList, IssueDetail
@@ -35,6 +35,10 @@ urlpatterns = patterns('',
     url(r'^issues/(?P<slug>[-\w]+)/$', IssueDetail.as_view(), name='issue_detail'),
     url(r'^preview/$', login_required(ArticlePreviewList.as_view()), name='article_preview_list'),
     url(r'^subscribe/$', 'signups.views.connect', name='connect'),
+    url(r'^issue-four/$', RedirectView.as_view(url='/issues/4/')),
+    url(r'^issue-five/$', RedirectView.as_view(url='/issues/5/')),
+    url(r'^issue-6/$', RedirectView.as_view(url='/issues/6/')),
+    url(r'^issue-7/$', RedirectView.as_view(url='/issues/7/')),
     
     url(r'^(?P<slug>[-\w]+)/$', ArticleDetail.as_view(), name='article_detail'),
     url(r'^signups/success/$', 'signups.views.success', name='success'),
