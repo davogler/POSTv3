@@ -73,7 +73,8 @@ class IssueAdminForm(forms.ModelForm):
         model = Issue
 	    
 class IssueAdmin(admin.ModelAdmin): 
-    list_display = ('volume', 'month', 'image_thumbnail', 'for_sale', 'in_stores', 'price', 'shipping')
+    list_display = ('volume', 'month', 'image_thumbnail', 'status', 'for_sale', 'in_stores', 'price', 'shipping')
+    list_editable = ('status','for_sale','in_stores')
     form = IssueAdminForm	
 
 admin.site.register(Issue, IssueAdmin)

@@ -119,12 +119,12 @@ $("section.primary").fitVids();
 
 
 $( "a.toggly" ).click(function() {
-  $( "ul#nav" ).toggle( "fast");
-   $("#popnav").toggleClass("superscreen");
-  $("a.toggly i").toggleClass("fa-bars").addClass("fa-times");
- 
-  
-});
+  	$( "ul#nav" ).slideToggle( "fast");
+   	$("ul#nav").toggleClass("superscreen");
+  	$("a.toggly i").toggleClass("fa-bars").addClass("fa-times");
+
+}
+);
 
 // intention.js functions
 intent.on('mobile', function() {	

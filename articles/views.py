@@ -85,7 +85,7 @@ class ArticleList(ListView):
     
 class ArticlePreviewList(ListView):
     '''A List view of published articles- authenticated required via URL'''
-    template_name = 'article_list.html'
+    template_name = 'articles/unpublished.html'
     allow_empty = True
     allow_future = False
     
@@ -122,7 +122,7 @@ class IssueFeatured(DetailView):
 
     
     model = Issue
-    context_object_name = 'issue'
+    context_object_name = 'Issue'
     
     
     def get_object(self):
@@ -141,7 +141,7 @@ class IssueList(ListView):
     allow_future = False
     
     model = Issue
-    context_object_name = 'issue'
+    context_object_name = 'Issue'
     queryset = Issue.published.all()
                    
 class IssueDetail(DetailView):
@@ -152,7 +152,7 @@ class IssueDetail(DetailView):
     allow_future = False
     
     model = Issue
-    context_object_name = 'issue'
+    context_object_name = 'Issue'
     slug_field = 'slug'
         
     def get_template_names(self):

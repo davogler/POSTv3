@@ -24,6 +24,7 @@ def banner(request):
 	queryset = (pubset | unpubset)
 	user = request.user
 	latest = Issue.objects.filter(status=1)[:1]
+	context_object_name = 'issue'
 	return {'latest': latest, 'user':user }
 	
 register.inclusion_tag('banner.html')(banner)

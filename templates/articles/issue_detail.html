@@ -15,7 +15,7 @@
 
 
 {% block smmeta %}
-{% version_object issue.hero 'large' as hero_large %}
+{% version_object object.hero 'large' as hero_large %}
 	<meta property="og:title" content="{{ object.title }}">
 {% if object.intro %}
 	<meta name="description" content="{{ object.intro }}">
@@ -74,14 +74,14 @@
 
 {% endblock %}
 
-{% block sticky %} {{ block.super }} <img class="sticky" src="{% version issue.hero 'large' %} " alt="{{ object.hero.filename }}" /> {% endblock %}
+{% block sticky %} {{ block.super }} <img class="sticky" src="{% version object.hero 'large' %} " alt="{{ object.hero.filename }}" /> {% endblock %}
  {% load article_tags %}
 {% block content %}
 
 
 <article class="full">
  	<header>
-     	<img class="boom" src="{% version issue.hero 'large' %}" alt="{{ object.hero.filename }}" />
+     	<img class="boom" src="{% version object.hero 'large' %}" alt="{{ object.hero.filename }}" />
      	<div class="hgroup">
 	        	<h2 class="unique"><a href="{{ object.get_absolute_url }}">{{ object.title|safe }}</a></h2>
 	        	<p class="tagline">{{ object.tagline }}</p>
@@ -93,7 +93,7 @@
 
 	<div class="inside clearfix">
 	<div class="brick">
-		<a class="bnrtease" href="{{ object.get_absolute_url }}"><img src="{% version issue.cover_img 'product_thumb' %}" alt="{{ object.cover_img.filename }}" /></a>
+		<a class="bnrtease" href="{{ object.get_absolute_url }}"><img src="{% version object.cover_img 'product_thumb' %}" alt="{{ object.cover_img.filename }}" /></a>
 				<p>{{ object.inside }}</p>
 				<div class="bnrcta">
 				{% if object.in_stores %}
