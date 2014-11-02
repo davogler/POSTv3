@@ -16,7 +16,7 @@
 
 {% block smmeta %}
 {% version_object object.hero 'large' as hero_large %}
-	<meta property="og:title" content="{{ object.title }}">
+	<meta property="og:title" content="{{ object.title|striptags }}">
 {% if object.intro %}
 	<meta name="description" content="{{ object.intro }}">
 {% else %}	
@@ -40,7 +40,7 @@
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@postrochester">
 	<meta name="twitter:creator" content="@postrochester">
-	<meta name="twitter:title" content="{{ object.title }}">
+	<meta name="twitter:title" content="{{ object.title|striptags }}">
 {% if object.intro %}
 	<meta name="twitter:description" content="{{ object.intro }}">
 {% else %}	
