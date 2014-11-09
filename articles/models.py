@@ -35,7 +35,7 @@ class Article(models.Model):
 
     slug = models.SlugField(unique_for_date='pub_date')
     hero = FileBrowseField("Hero Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Choose an huge image for this article. Minimum 1280 x 900')
-    hero_alt = FileBrowseField("Hero Alternate Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='For displaying in SM metadata when Hero Image just aint right for it. Optional.')
+    hero_alt = FileBrowseField("Hero Alternate Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='For displaying in SM metadata. (FB:1280x670) Optional.')
     hero_credit = models.CharField(max_length=250, blank=True)
     screen = models.BooleanField(default=False, help_text='check for dark image needing light screen in header')
     pub_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
@@ -102,7 +102,7 @@ class Issue(models.Model):
     tagline = models.TextField(blank=True, default='Stories From the City We Love', help_text='Stories From the City We Love')
     inside = models.TextField(blank=True, null=True, help_text='Brief listing of what is inside this issue.')
     hero = FileBrowseField("Hero Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Choose a huge image for this article. Minimum 1280 x 900')
-    hero_alt = FileBrowseField("Hero Alternate Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='For displaying in SM metadata when Hero Image just aint right for it. Optional.')
+    hero_alt = FileBrowseField("Hero Alternate Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='For displaying in SM metadata. (FB:1280 x 670) Optional.')
     screen = models.BooleanField(default=False, help_text='check for dark image needing light screen in header')
     pub_date = models.DateTimeField(default=datetime.datetime.now, help_text='Pick first of first month, for ordering', blank=True)
     cover_img = FileBrowseField("Cover Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload a cover image; pick any version')
