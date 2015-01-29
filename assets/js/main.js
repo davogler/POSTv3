@@ -70,12 +70,15 @@ $(window).scroll(function(e) {
     }
     
     //make hero image go away for background-attachment:fixed inlines
-    if (where_at >= content_start){
-    	$("img.boom").css("display","none");
-    }
-    else{
-       	$("img.boom").css("display","block");
-    }
+    if ( $('div.videobox').length == 0 ) {
+    	
+	    if (where_at >= content_start){
+	    	$("img.boom").css("display","none");
+	    }
+	    else{
+	       	$("img.boom").css("display","block");
+	    }
+	 }
     
     });
 

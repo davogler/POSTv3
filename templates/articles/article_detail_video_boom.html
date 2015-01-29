@@ -1,0 +1,235 @@
+{% extends "articles/article_detail.html" %}
+
+{% block extrahead %}{{ block.super }}
+		
+	<style>
+		video{
+			width: 100%;
+			
+		}
+		.videobox{
+			width: 100%;
+			z-index: 500;
+			width: 100%;
+			border-top: 10px solid #333;
+			border-left: 10px solid #333;
+			border-right: 10px solid #333;
+			box-sizing:        border-box;
+		}
+		</style>
+{% endblock %}
+
+{% load fb_versions %}
+{% load static %}
+
+{% block headernav %}
+<div id="popnav"></div>
+<header class="banner">
+	<div class="headerwrap{% if object.screen %} screen{% endif %}">
+    	
+    	
+    	{% include "nav.html" %}
+    	
+    	
+    </div>
+    <img class="sticky" src="{% version object.hero 'large' %}" alt="{{ object.hero.filename }}" />
+    <div class="hr-flat"> </div>
+	
+</header>
+
+{% endblock %}
+
+{% block content %}
+
+
+<article class="full">
+ 	<header>
+ 	
+ 	<img class="boom" src="{% version article.hero 'large' %}" alt="{{ object.hero.filename }}" />
+ 	  
+ 	<div class="videobox" >
+     	<video autoplay="autoplay" loop poster="{% version object.hero 'large' %}"> 
+     		
+         </video>
+     	
+    
+     	
+     	
+     </div>
+     	
+     	<div class="hgroup">
+	        	<h2 class="unique"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
+	        	<p class="tagline">{{ object.tagline }}</p>
+     	</div>
+     	
+     	
+     	
+     	
+ 	</header>
+ 
+{% block mapcode %}
+{% if object.mapcode %}
+	<script type="text/javascript"> 
+	{{ object.mapcode|safe }}
+	</script>
+{% endif %}
+
+{% endblock %}
+
+<section class="content">
+
+	<div class="brick first">
+		 <section class="primary">
+		<p><em>{{ object.standfirst|safe }}</em></p>
+		
+		</section> 
+		<aside class="secondary">
+			<div id="authorship" class="authorship clearfix">
+				
+				
+				{% if object.author.all %}
+				<p>by 
+				
+				{% for author in object.author.all %}
+				    {% if author.link %}
+					  <a href="{{ author.link }}">{{ author.name }}</a>
+					{% else %}
+					  {{ author.name }}
+					{% endif %}
+					{% if forloop.last %}{% else %}
+					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
+					{% endif %}
+				{% endfor %}
+				</p>
+				{% endif %}
+				
+				
+				{% if object.photog.all %}
+				<p>photography by 
+				
+				{% for photog in object.photog.all %}
+				    {% if photog.link %}
+					  <a href="{{ photog.link }}">{{ photog.name }}</a>
+					{% else %}
+					  {{ photog.name }}
+					{% endif %}
+					{% if forloop.last %}{% else %}
+					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
+					{% endif %}
+				{% endfor %}
+				</p>
+				{% endif %}
+			
+			
+				{% if object.illus.all %}
+				<p>Illustrations by 
+				
+				{% for illus in object.illus.all %}
+				    {% if illus.link %}
+					  <a href="{{ illus.link }}">{{ illus.name }}</a>
+					{% else %}
+					  {{ illus.name }}
+					{% endif %}
+					{% if forloop.last %}{% else %}
+					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
+					{% endif %}
+				{% endfor %}
+				</p>
+				{% endif %}
+			</div>
+			
+			{% block mapsidebar %} {% endblock %}
+			
+		</aside>      		
+	</div>
+	
+	
+
+
+    
+    {{ object.body|safe }}
+    
+    
+    
+ <div id="ender" class="brick last clearfix">
+ 	        	<aside class="more">
+ 	        	 	{% if object.issue %}
+ 	        	 	<div class="isthu clearfix">
+ 	        		 	<p class="which_isthu"><img class="cover_img" src="/media/{{ object.issue.cover_img }}" alt="{{ object.issue.month }}">
+                         This article originally appeared in the {{ object.issue.month }} issue of POST. <a href="/subscribe">Subscribe</a> for more.</p>
+ 	           	
+ 	           		</div>
+ 	        		{% endif %}
+ 	        		<p>{{ object.more_info|safe }}</p>
+ 	        		
+ 	        		
+ 	        		
+ 	        		
+ 	        		
+ 	        		<div class="socialper">
+ 	        		
+ 	        		<ul class="social-buttons cf clearfix">
+ 	        		    <li>
+ 	        		        <a href="http://twitter.com/share" class="socialite twitter-share" data-text="{{ object.title }} " data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-count="vertical" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite googleplus-one" data-size="tall" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" rel="nofollow" target="_blank"><span class="vhidden">Share on Google+</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.facebook.com/sharer.php?u=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite facebook-like" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" data-send="false" data-layout="box_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Share on Facebook</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite linkedin-share" data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-counter="top" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a>
+ 	        		    </li>
+ 	        		    
+ 	        		</ul>
+ 	        		
+ 	        		</div>
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        	<aside class="creators clearfix">
+ 	        		
+ 	        		
+ 	        		{% if object.author.all %}
+ 	        		   {% for author in object.author.all %}
+ 	        			  <p>{{ author.colophon|safe }}</p>
+ 	        		   {% endfor %}
+ 	        		{% endif %}
+ 	        		
+ 	        		{% if object.photog.all %}
+ 	        		    {% for photog in object.photog.all %}
+ 	        			  <p>{{ photog.colophon|safe }}</p>
+ 	        			{% endfor %}
+ 	        		{% endif %}
+ 	        		
+ 	        		{% if object.illus.all %}
+ 	        		    {% for illus in object.illus.all %}
+ 	        			  <p>{{ illus.colophon|safe }}</p>
+ 	        			{% endfor %}
+ 	        		{% endif %}
+ 	        			
+ 	        			
+ 	        		
+ 	        		
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        <div class="sponsor"
+ 	             intent
+ 	             in-standard-after="#authorship">
+ 	            {% if object.sponsor %}
+ 	        		<p> sponsored by: </p>
+ 	        		<img src="{% version object.sponsor.adimg 'medium' %} " alt="{{ object.sponsor.name }}" />
+ 	        	{% endif %}
+ 	        </div>
+ 	        	
+ 	        	
+ 	        </div><!--brick-->   
+    
+    </section>
+    
+    	 </article>
+ 
+
+{% endblock %}
