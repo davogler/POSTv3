@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render_to_response, get_list_or_404
 from django.contrib.syndication.views import Feed
+from django.utils.feedgenerator import Rss201rev2Feed
 from articles.models import Article, Issue
 import datetime
 from django.views.generic import ListView, DetailView
@@ -93,13 +94,22 @@ class ArticlePreviewList(ListView):
     context_object_name = 'article'
     queryset = Article.draft.all()
     
-
+class CustomFeedGenerator(Rss201rev2Feed):
+    def add_item_elements(self, handler, item):
+        super(CustomFeedGenerator, self).add_item_elements(handler, item)
+        handler.addQuickElement(u"image", item['image'])
+        
+        
+        
 class ArticleFeed(Feed):
     title = "Post Magazine Featured Articles"
+    description_template = 'feeds/latest_title.html'
     link = "/"
     description = "Updates as new articles are published"
     description_template = 'feeds/latest_description.html'
+    image_template = 'feeds/latest_image.html'
     item_copyright = 'Copyright (c) Post Magazine'
+    feed_type = CustomFeedGenerator
     
     def items(self):
         return Article.published.all().order_by('-pub_date')[:5]
@@ -111,10 +121,19 @@ class ArticleFeed(Feed):
         return item.pub_date
         
     def item_author_name(self, item):
-        return item.author
+        return item.get_author()
         
     def item_description(self, item):
         return item.intro
+        
+    def item_extra_kwargs(self, obj):
+            """
+            Returns an extra keyword arguments dictionary that is used with
+            the `add_item` call of the feed generator.
+            Add the 'content' field of the 'Entry' item, to be used by the custom feed generator.
+            """
+            return { 'image': obj.get_feednail() if obj.hero.url else "",
+                     }
         
 class IssueFeatured(DetailView):
     '''The featured issue on the home page'''

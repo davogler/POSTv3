@@ -1,2 +1,2 @@
-{{ obj.tagline }}
-{{ obj.intro|striptags }}
+{{ obj.tagline }}-
+{{ obj.body|striptags|truncatewords_html:60 }}

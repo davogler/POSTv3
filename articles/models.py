@@ -1,11 +1,15 @@
+import os
 from django.db import models
 import datetime
 from django.utils.timezone import utc
+from django.utils.encoding import smart_str
 from django.contrib.auth.models import User
 from filebrowser.fields import FileBrowseField
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from filebrowser.settings import ADMIN_THUMBNAIL
+from django.conf import settings
+from django.contrib.sites.models import Site
 
 class LiveEntryManager(models.Manager):
     def get_query_set(self):
@@ -75,6 +79,19 @@ class Article(models.Model):
         #if self.excerpt:
         #	self.excerpt_html = markdown(self.excerpt)
         super(Article, self).save(force_insert, force_update)
+        
+    def get_author(self):
+        for name in self.author.all():
+            return name
+        endfor
+        
+    def get_feednail(self):
+        version = self.hero.version_generate("threeup")
+        version_url = version.url
+        domain=Site.objects.get_current()
+        version_path_full = smart_str(os.path.join(domain, version_url))
+        
+        return version_path_full
         
     @models.permalink	
     def get_absolute_url(self):
