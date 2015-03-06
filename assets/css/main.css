@@ -453,6 +453,10 @@ p.tagline{
 	width: 100%;
 }
 
+.content-static img.r{
+	width: 100%;
+}
+
 img.zoomer{
 	cursor: -webkit-zoom-in;
 	  cursor: -moz-zoom-in;
@@ -645,6 +649,14 @@ aside div.sponsor{
 	margin: 0;
 }
 
+.secondary .testimonial{
+	font-size: 1.2em;
+	font-family:  Georgia, Times, serif;
+	font-style: italic;
+	line-height: 1.35em;
+	color: #a7a7a7;
+	margin: 0;
+}
 .primary .pullquote,
 .fullwidth .pullquote{
 	font-family:  Georgia, Times, serif;
@@ -1318,7 +1330,8 @@ button.buy{
 }
 
 a#buy.helium-buy-now,
-a#buy.helium-addtocart{
+a#buy.helium-addtocart,
+a#buy.butn{
 	background-color: #428bca;
 	border-radius: 0px;
 	display: inline-block;
@@ -1344,7 +1357,8 @@ a#buy.helium-addtocart{
 }
 
 a#buy.helium-buy-now:hover,
-a#buy.helium-addtocart:hover{
+a#buy.helium-addtocart:hover,
+a#buy.butn:hover{
 	background-color: #3276b1;
 	border-color: #285e8e;
 }
@@ -1732,6 +1746,12 @@ article.teaser .hgroup{
     
     aside.secondary .pullquote{
     	font-size: 1.3em;
+    	display: block;
+    }
+    
+    aside.secondary .testimonial{
+    	font-size: 1.2em;
+    	line-height: 1.4em;
     	display: block;
     }
     
