@@ -541,6 +541,10 @@ section.fullwidth.threeup img{
 	margin: 2% 0;
 }
 
+section.fullwidth.twoup img{
+	margin: 2% 0;
+}
+
 
 section.content-static{
 	margin: 0 auto;
@@ -1674,16 +1678,24 @@ article.teaser .hgroup{
     	width: 68%;
     	float: left;
     }
+    section.fullwidth.twoup figure:first-child,
     section.fullwidth.threeup figure:first-child {
     	margin-left: 0;
     }
     
+    section.fullwidth.twoup figure:last-child,
     section.fullwidth.threeup figure:last-child {
     	margin-right: 0;
     }
     
     section.fullwidth.threeup figure{
     	width: 32%;
+    	float: left;
+    	margin: 0 1%;
+    }
+    
+    section.fullwidth.twoup figure{
+    	width: 49%;
     	float: left;
     	margin: 0 1%;
     }
