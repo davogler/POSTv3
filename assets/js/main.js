@@ -119,6 +119,7 @@ $('img.zoomer').each(function() {
 }); 
 
 $("section.primary").fitVids();
+$("section.fullwidth").fitVids();
 
 
 $( "a.toggly" ).click(function() {
