@@ -14,20 +14,21 @@ register = Library()
 register = template.Library()
 
 
-def banner(request):
-	'''a view for snagging featured entries for display on front page or sidebar.  This view requires the request object to be passed to it in order to check the user's authentication status.  For example, the templatetag {% featuredlist request %} is required in the template.  Authenticated users may see unpublished entries, anonymous users will not.'''
-	pubset = Issue.published.exclude(pub_date__gte=datetime.datetime.now())
-	if request.user.is_authenticated():
-	    unpubset = Issue.draft.exclude(pub_date__gte=datetime.datetime.now())
-	else:
-	    unpubset = Issue.published.exclude(pub_date__gte=datetime.datetime.now())
-	queryset = (pubset | unpubset)
-	user = request.user
-	latest = Issue.objects.filter(status=1)[:1]
-	context_object_name = 'issue'
-	return {'latest': latest, 'user':user }
-	
-register.inclusion_tag('banner.html')(banner)
+def banner(context, request):
+    '''a view for snagging featured entries for display on front page or sidebar.  This view requires the request object to be passed to it in order to check the user's authentication status.  For example, the templatetag {% featuredlist request %} is required in the template.  Authenticated users may see unpublished entries, anonymous users will not.'''
+    pubset = Issue.published.exclude(pub_date__gte=datetime.datetime.now())
+    if request.user.is_authenticated():
+        unpubset = Issue.draft.exclude(pub_date__gte=datetime.datetime.now())
+    else:
+        unpubset = Issue.published.exclude(pub_date__gte=datetime.datetime.now())
+    queryset = (pubset | unpubset)
+    user = request.user
+    latest = Issue.objects.filter(status=1)[:1]
+    
+    context_object_name = 'issue'
+    return {'latest': latest, 'user':user, 'request': request}
+    
+register.inclusion_tag('banner.html', takes_context=True)(banner)
 
 
 def admin_links(request):

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+<section class="content-static">
+  <div class="brick clearfix">
+  
+
+    <div class="wrapper content">
+        
+      
+        <h2>My Order</h2>
+      
+
+  
+  </div>
+
+</section>
+
+{% endblock %}
+
+
+

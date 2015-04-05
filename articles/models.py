@@ -12,16 +12,16 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 
 class LiveEntryManager(models.Manager):
-    def get_query_set(self):
-        return super(LiveEntryManager, self).get_query_set().exclude(status=self.model.DRAFT_STATUS)
+    def get_queryset(self):
+        return super(LiveEntryManager, self).get_queryset().exclude(status=self.model.DRAFT_STATUS)
 		
 class PublishedEntryManager(models.Manager):
-	def get_query_set(self):
-		return super(PublishedEntryManager, self).get_query_set().exclude(status=self.model.DRAFT_STATUS)
+	def get_queryset(self):
+		return super(PublishedEntryManager, self).get_queryset().exclude(status=self.model.DRAFT_STATUS)
 
 class DraftEntryManager(models.Manager):
-    def get_query_set(self):
-        return super(DraftEntryManager, self).get_query_set().filter(status=self.model.DRAFT_STATUS)
+    def get_queryset(self):
+        return super(DraftEntryManager, self).get_queryset().filter(status=self.model.DRAFT_STATUS)
 
 class Article(models.Model):
     """Model to store Articles"""
@@ -120,8 +120,8 @@ class Issue(models.Model):
     inside = models.TextField(blank=True, null=True, help_text='Brief listing of what is inside this issue.')
     hero = FileBrowseField("Hero Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Choose a huge image for this article. Minimum 1280 x 900')
     hero_alt = FileBrowseField("Hero Alternate Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='For displaying in SM metadata. (FB:1280 x 670) Optional.')
-    screen = models.BooleanField(default=False, help_text='check for dark image needing light screen in header')
     pub_date = models.DateTimeField(default=datetime.datetime.now, help_text='Pick first of first month, for ordering', blank=True)
+    #cutoff_date = models.DateTimeField(default=datetime.datetime.now, help_text='Last date to order subscription and still get this issue', blank=True)
     cover_img = FileBrowseField("Cover Image", max_length=200, extensions=[".jpg",".png", ".gif"], blank=True, null=True, help_text='Upload a cover image; pick any version')
     special_js = models.TextField(blank=True)
     special_css = models.TextField(blank=True, null=True, help_text='Mainly h2.unique and p.tagline')

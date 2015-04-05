@@ -63,8 +63,11 @@
     		<p class="tagline-list">{{ object.month }}</p>
     		{% if object.for_sale %}
     		<div class="btnprice">
-    			<a data-cart-add="{{ object.sku }}" data-cart-show="1" class="btn btn-primary pcta" >Buy It: ${{ object.price|add:object.shipping|floatformat:0 }}</a>
-    			<span>${{ object.price|floatformat:0 }}+${{ object.shipping|floatformat:0 }} S/H</span>
+                <form class="prodqty" method='POST' action='{% url "add_to_cart" object.slug %}'>
+                {% csrf_token %}
+                     <input type='submit' class="prodmit btn btn-primary pcta" value='Buy Now' />
+                </form>
+    			
     		</div>
     		{% else %}
     		<a  class="btn btn-default pcta" >Sold Out!</a>

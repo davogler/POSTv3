@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+<section class="content-static">
+  <div class="brick clearfix">
+  
+ {% load article_tags %}
+    {{ block.super }}
+    <div class="wrapper content">
+        
+      
+        <h2>My Cart</h2>
+        {% if empty %}
+            <p class="lead cart">{{ empty_message }} Here are some things you can put in it:</p>
+            
+             {% issue_slider request %}
+        {% else %}
+            
+        
+        
+        
+        
+          
+          
+              
+        <div class="table-responsive">
+            <div class="tertal">
+                <p><span class="tit">Sub Total: </span>${{ cart.product_total|floatformat:2 }}<br>
+                <span class="tit">Shipping:</span> ${{ cart.shipping_total|floatformat:2 }}</p>
+                <hr>
+                <p><span class="tit">Grand Total:</span> ${{ cart.total|floatformat:2 }}</p>
+            </div>
+
+          
+
+            
+         
+          <!-- Table -->
+          <table class="table cartshow">
+                 <thead>
+                  <tr>
+                    <th class="item">Item</th>
+                    <th class="qty">Qty</th>
+                    <th class="subttl">Sub Total</th>
+                    <th class="action"> Action</th>
+                  </tr>
+
+                </thead>
+                <tbody>
+
+                
+                
+                  {% for item in subbies %}
+                  <tr>
+                    <td class="item">{{ item.subscription.title }}</td>
+                   
+                    <td class="qty">{{ item.quantity }}</td>
+                    <td class="subttl">${{ item.line_total|floatformat:0 }}</td>
+                    
+                    <td class="action">
+                    <a href="{% url "increment_cart" item.flug %}"><i class="fa fa-plus fa-lg"></i></a>
+                    <a href="{% url "decrement_cart" item.flug %}"><i class="fa fa-minus fa-lg"></i></a>
+                    <a href="{% url "remove_from_cart" item.flug %}"><i class="fa fa-times fa-lg"></i></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+
+                  {% for item in singles %}
+                  <tr>
+                    <td class="item">{{ item.single.month }} issue</td>
+                    <td class="qty">{{ item.quantity }}</td>
+                    <td class="subttl">${{ item.line_total|floatformat:0 }}</td>
+                   
+                    <td class="action"><a href="{% url "increment_cart" item.flug %}"><i class="fa fa-plus fa-lg"></i></a>
+                    <a href="{% url "decrement_cart" item.flug %}"><i class="fa fa-minus fa-lg"></i></a>
+                    <a href="{% url "remove_from_cart" item.flug %}"><i class="fa fa-times fa-lg"></i></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+               
+
+
+               </tbody>
+                
+          </table>
+         </div>
+        </div>
+        
+        <div class="cart-form-control">
+          <a href="delete" class="btn btn-default pcta">Empty Cart</a>
+          <a href="#" class="btn btn-primary pcta">Checkout</a>
+        </div>
+        
+
+            {% endif %}
+        
+
+       
+    
+ 
+
+  
+  </div>
+
+</section>
+
+{% endblock %}
+
+
+

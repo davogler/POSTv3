@@ -40,7 +40,7 @@
 {% endblock %}
 
 {% block content %}
-
+{% load catalog_tags %}
 <section class="content-static">
 	<div class="brick clearfix">
 	
@@ -56,8 +56,7 @@
 			<img src="/assets/i/mini_stack_covers.png" alt="stack of magazines" class="stack">
 			<p class="subber">A one-year subscription: $30 
 			
-			<a href="http://he2.co/CL0N2M3I2I4" target="_blank" class="helium-buy-now" data-sku="py01"m id="buy">Subscribe</a>
-			
+			 {% subscribe_button request %}
 			</p>
 		</div>
 		

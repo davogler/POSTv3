@@ -1,8 +1,10 @@
 from django.db import models
+#from orders.models import Order
 
 
 class Subscriber(models.Model):
     """Model to store addresses for subscribers"""
+    #orders = models.ManyToManyField(Order)
     name = models.CharField(max_length=255, blank=True)
     street = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True)

@@ -59,6 +59,7 @@
 
 {% block sticky %} {{ block.super }} <img class="sticky" src="{% version object.hero 'large' %} " alt="{{ object.hero.filename }}" /> {% endblock %}
  {% load article_tags %}
+{% load catalog_tags %}
 {% block content %}
 
 
@@ -84,9 +85,13 @@
 				{% endif %}
 				
 				{% if object.for_sale %}
-				 <a data-cart-add="{{ object.sku }}" data-cart-show="1" class=" btn btn-primary pcta" >Buy Online</a>
+                <form class="prodqty" method='POST' action='{% url "add_to_cart" object.slug %}'>
+                {% csrf_token %}
+                <input type='submit' class="prodmit btn btn-primary pcta" value='Buy Now' />
+                </form>
+				
 				{% endif %}
-				 <a href="/subscribe/" class="btn btn-primary pcta">Subscribe</a></div>
+				{% subscribe_button request %}</div>
 				 
 			
 			

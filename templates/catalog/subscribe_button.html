@@ -1,0 +1,6 @@
+{% for sub in sub %}
+ <form class="prodqty" method='POST' action='{% url "add_to_cart" sub.slug %}'>
+    {% csrf_token %}
+     <input type='submit' class="prodmit btn btn-primary pcta" value='Subscribe' />
+</form>
+{% endfor %}

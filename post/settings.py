@@ -111,6 +111,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "articles.context_processors.site",
 )
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 FILEBROWSER_DIRECTORY = 'uploads/'
 FILEBROWSER_URL_FILEBROWSER_MEDIA =  STATIC_URL + "filebrowser/"
 FILEBROWSER_PATH_FILEBROWSER_MEDIA = os.path.join(STATIC_ROOT, 'filebrowser/')
@@ -162,10 +164,12 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'mailsnake',
     'signups',
-    'subscribers',
     'articles',
     'staff',
-    'south',
+    'cart',
+    'orders',
+    'customers',
+    'catalog',
     
 )
 
