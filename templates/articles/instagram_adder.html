@@ -1,0 +1,83 @@
+<div class="brick ighead clearfix">
+     <h2>Instagram pictures tagged with 
+         {% if object.igtag_set.count = 1 %}
+            #{{ object.igtag_set.first }}
+         {% elif object.igtag_set.count = 2 %}
+            #{{ object.igtag_set.first }} or #{{ object.igtag_set.last }}
+         {% else %}
+            {% for tag in object.igtag_set.all %}#{{tag}}{% spaceless %}
+                {% if forloop.last %}{% else %}
+                    {% ifequal forloop.revcounter0 1 %}, or {% else %}, {% endifequal %}
+                {% endif %}{% endspaceless %}
+            {% endfor %} 
+         {% endif %}
+
+    </h2>
+{% if realtime_igtags %}
+       <p>Share your images about this story: tag your Instagram pictures with <span class="igtags">{% spaceless %}
+        {% if realtime_igtags.count = 1 %}
+            <a href="https://instagram.com/explore/tags/{{ realtime_igtags.first }}">#{{ realtime_igtags.first }}</a>
+         {% elif realtime_igtags.count = 2 %}
+            <a href="https://instagram.com/explore/tags/{{ realtime_igtags.first }}">#{{ realtime_igtags.first }}</a> </span> or <span class="igtags">
+            <a href="https://instagram.com/explore/tags/{{ realtime_igtags.last }}">#{{ realtime_igtags.last }}</a>,
+         {% else %}
+            {% for tag in realtime_igtags.all %}<a href="https://instagram.com/explore/tags/{{tag}}">#{{tag}}</a>{% spaceless %}
+                {% if forloop.last %}{% else %}
+                    {% ifequal forloop.revcounter0 1 %}, or {% else %}, {% endifequal %}
+                {% endif %}{% endspaceless %}
+            {% endfor %}
+         {% endif %}{% endspaceless %}</span> and they will appear below!</p>
+
+         
+{% endif %}
+
+{% if inactive_igtags %}
+    <p>Real-time updates for <span class="igtags">
+    {% if inactive_igtags.count = 1 %}
+            <a href="https://instagram.com/explore/tags/{{ inactive_igtags.first }}">#{{ inactive_igtags.first }}</a>
+    {% elif realtime_igtags.count = 2 %}
+        <a href="https://instagram.com/explore/tags/{{ inactive_igtags.first }}">#{{ inactive_igtags.first }}</a> </span> and <span class="igtags"> 
+        <a href="https://instagram.com/explore/tags/{{ inactive_igtags.last }}">#{{ inactive_igtags.last }}</a>
+    {% else %}
+        {% for tag in inactive_igtags.all %}<a href="https://instagram.com/explore/tags/{{tag}}">#{{tag}}</a>{% spaceless %}
+            {% if forloop.last %}{% else %}
+                {% ifequal forloop.revcounter0 1 %}, </span> and <span class="igtags"> {% else %}, {% endifequal %}
+            {% endif %}{% endspaceless %}
+        {% endfor %}
+    {% endif %}</span>are closed, but some images with these tags appear below.
+
+    </p>
+{% endif %}
+
+
+
+
+ 
+     {% if user.is_authenticated %}
+        {% for tag in object.igtag_set.all %} 
+            <a href="{% url "search_media" tag.tag %}" class="btn btn-primary pcta">Refresh {{tag}}</a>
+        {% endfor %}
+     {% endif %}
+</div>
+
+<div class="ig brick clearfix">
+{% if media_list %}
+     <ul id="igul">
+        {% for ig in media_list %}
+            <li class="igbox">
+                <div class="ig_user">
+                {% if user.is_authenticated %}
+                <a class="hider" href="{% url "hide_media" ig.insta_id %}"><i class="fa fa-times fa-lg"></i></a>
+                {% endif %}
+                    <img class="igprof" src="{{ ig.profile_picture }}">
+                    <span><a href="https://instagram.com/{{ ig.username }}">{{ ig.username }}</a></span>
+                </div>
+                <a href="{{ ig.link }}"> <img class="ig_std" src="{{ ig.standard_resolution }}"></a>
+                <div class="ig_user">{{ ig.caption_text }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>[There's nothing here yet.  Be the first to tag a photo!]</p>
+{% endif %}
+</div>

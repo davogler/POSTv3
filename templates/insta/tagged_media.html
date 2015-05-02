@@ -1,0 +1,6 @@
+<h2>Here is IG Media</h2>
+
+{% for obj in media %}
+    <p>{{ obj.id }}<br>
+    <img src = "{{obj.standard_resolution}}"></p>
+{% endfor %}

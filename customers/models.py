@@ -1,13 +1,32 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
 
+class CreditCard(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    first_name = models.CharField("Payer first name", max_length=45, blank=True)
+    last_name = models.CharField("Payer last name", max_length=45, blank=True)
+    stripe_id = models.CharField(max_length=120, null=True, blank=True)
+    last4 = models.CharField(max_length=120)
+    card_type = models.CharField(max_length=120)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    class Meta:
+        verbose_name = 'Credit Card'
+        verbose_name_plural = 'Credit Cards'
+        ordering = ['-timestamp', ]
+
+    def __unicode__(self):
+        return self.last4
+
 class Recipient(models.Model):
 
     """Model to store recipients"""
-    first_name = models.CharField("Address line 1", max_length=45, blank=True)
-    last_name = models.CharField("Address line 1", max_length=45, blank=True)
+    first_name = models.CharField("First Name", max_length=45, blank=True)
+    last_name = models.CharField("Last Name", max_length=45, blank=True)
     org = models.CharField("Organization/Business", max_length=45, blank=True)
     address_line1 = models.CharField("Address line 1", max_length=45, blank=True)
     address_line2 = models.CharField("Address line 2", max_length=45, blank=True)
@@ -19,7 +38,10 @@ class Recipient(models.Model):
                                blank=True)
 
     def __unicode__(self):
-        return "%s %s %s" % (self.first_name, self.last_name, self.org)
+        return "%s %s, %s" % (self.first_name, self.last_name, self.org)
+
+    def get_address(self):
+        return "%s %s, %s, %s, %s, %s, %s, %s" %(self.first_name, self.last_name, self.org, self.address_line1, self.address_line2, self.city, self.state_province, self.postal_code)
 
     class Meta:
         verbose_name_plural = "Recipients"

@@ -88,6 +88,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = (
+    "post.email-auth.EmailBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
 ROOT_URLCONF = 'post.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -170,6 +175,7 @@ INSTALLED_APPS = (
     'orders',
     'customers',
     'catalog',
+    'insta',
     
 )
 

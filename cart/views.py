@@ -130,7 +130,7 @@ def decrement_cart(request, slug):
 
 def update_cart(request, slug):
     request.session.set_expiry(3000)
-    qty = request.POST['qty']
+    #qty = request.POST['qty']
 
     try:
         the_id = request.session['cart_id']
@@ -141,11 +141,11 @@ def update_cart(request, slug):
         the_id = new_cart.id
 
     cart = Cart.objects.get(id=the_id)
-    issue = Issue.objects.get(slug=slug)
-    cart_item = CartItem.objects.get(cart=cart, flug=slug)
-    cart_item.quantity = int(qty)
-    print cart_item.quantity
-    cart_item.line_total = issue.price * cart_item.quantity
+
+    subscription = Subscription.objects.get(slug=slug)
+    cart_item = CartItem.objects.create(cart=cart, subscription=subscription, flug=slug)
+    cart_item.line_total = subscription.price
+    print "line total is %s " % cart_item.line_total
     cart_item.save()
 
     calc_cart_shipping_total(cart.id)
@@ -174,28 +174,28 @@ def add_to_cart(request, slug):
         try:
             print "we got post and add subscription"
             subscription = Subscription.objects.get(slug=slug)
-            # cart_item = CartItem.objects.create(cart=cart, subscription=subscription, flug=slug)
-            # cart_item.line_total = subscription.price
-            # print "line total is %s " % cart_item.line_total
-            # cart_item.save()
-            cart_item, created = CartItem.objects.get_or_create(cart=cart, subscription=subscription, flug=slug)
-            if created:
-                print "subscritpion cart item created"
-                qty = 1
-                cart_item.quantity = qty
-                cart_item.line_total = subscription.price
-                cart_item.save()
+            cart_item = CartItem.objects.create(cart=cart, subscription=subscription, flug=slug)
+            cart_item.line_total = subscription.price
+            print "line total is %s " % cart_item.line_total
+            cart_item.save()
+            # cart_item, created = CartItem.objects.get_or_create(cart=cart, subscription=subscription, flug=slug)
+            # if created:
+            #     print "subscritpion cart item created"
+            #     qty = 1
+            #     cart_item.quantity = qty
+            #     cart_item.line_total = subscription.price
+            #     cart_item.save()
 
-                print "line total is %s " % cart_item.line_total
-            else:
-                print "subscription cart item found"
-                qty = cart_item.quantity
-                print qty
-                new_qty = qty + 1
-                cart_item.quantity = new_qty
-                print cart_item.quantity
-                cart_item.line_total = subscription.price * new_qty
-                cart_item.save()
+            #     print "line total is %s " % cart_item.line_total
+            # else:
+            #     print "subscription cart item found"
+            #     qty = cart_item.quantity
+            #     print qty
+            #     new_qty = qty + 1
+            #     cart_item.quantity = new_qty
+            #     print cart_item.quantity
+            #     cart_item.line_total = subscription.price * new_qty
+            #     cart_item.save()
 
         except Subscription.DoesNotExist:
             print "no sub exists, so this is a single issue"

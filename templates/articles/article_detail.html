@@ -159,10 +159,15 @@
 
     
     {{ object.body|safe }}
+
+
+
+
+  
+
+   
     
-    
-    
- <div id="ender" class="brick last clearfix">
+ <div id="ender" class="brick {% if object.igtag_set.all %}notsolast{% else %}last{% endif %} clearfix">
  	        	<aside class="more">
  	        	 	{% if object.issue %}
  	        	 	<div class="isthu clearfix">
@@ -237,6 +242,12 @@
  	        	
  	        	
  	        </div><!--brick-->   
+
+	 	{% if object.igtag_set.all %}
+
+			{% include "articles/instagram_adder.html" %}
+	 
+	  	{% endif %}
     
     </section>
     
@@ -249,5 +260,71 @@
 	<script src="{{ STATIC_URL }}js/vendor/imagezoom.js"></script>
 {% endblock %}
 
-{% block inlinejs %}<script type="text/javascript">{{ object.special_js|safe }}</script>{% endblock %}
+{% block inlinejs %}<script type="text/javascript">{{ object.special_js|safe }}</script>
+
+{% if object.igtag_set.all %}
+	<!--only load this on a page with instagram embeds-->
+	<script src="//use.typekit.net/akq3jtm.js"></script>
+	<script type="text/javascript">
+
+
+	$.fn.imagesLoaded = function(callback){
+	  var elems = this.find('img'),
+	      len   = elems.length,
+	      _this = this;
+
+	  elems.bind('load',function(){
+	    if (--len <= 0){ 
+	      callback.call( _this ); 
+	    }
+	  }).each(function(){
+	    // cached images don't fire load sometimes, so we reset src.
+	    if (this.complete || this.complete === undefined){
+	      var src = this.src;
+	      // webkit hack from http://groups.google.com/group/jquery-dev/browse_thread/thread/eee6ab7b2da50e1f
+	      // data uri bypasses webkit log warning (thx doug jones)
+	      this.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+	      this.src = src;
+	    }  
+	  }); 
+
+	  return this;
+	};
+
+
+
+
+	var $container;
+	var $container = $('#igul');
+
+	function triggerMasonry() {
+	  // don't proceed if $container has not been selected
+	  if ( !$container ) {
+	    return;
+	  }
+	  // init Masonry
+	  $container.masonry({
+	    gutter: 25,
+	  	isFitWidth: true,
+	  	itemSelector: '.igbox'
+	  });
+	}
+	// trigger masonry on document ready
+	$container.imagesLoaded(function(){
+	  $container = $('#igul');
+	  triggerMasonry();
+	});
+	// trigger masonry when fonts have loaded
+	Typekit.load({
+	  active: triggerMasonry,
+	  inactive: triggerMasonry
+	});
+
+{% endif %}
+
+
+
+
+</script>
+{% endblock %}
 {% block inlinecss %}<style type="text/css">{{ object.special_css|safe }}</style>{% endblock %}

@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from catalog.models import Subscription
 from articles.models import Issue
+from customers.models import Recipient
 
 class CartItemSubscriptionManager(models.Manager):
     def get_queryset(self):
@@ -46,8 +47,9 @@ class CartItem(models.Model):
     objects = models.Manager()  
     subbie_type = CartItemSubscriptionManager()
     single_type = CartItemSingleManager()
+    recipient = models.ForeignKey(Recipient, null=True, blank=True)
 
     def __unicode__(self):
-        return str(self.cart.id)
+        return str(self.id)
 
     

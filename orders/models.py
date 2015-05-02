@@ -3,7 +3,9 @@ from django.conf import settings
 
 
 
-from cart.models import Cart
+from cart.models import Cart, CartItem
+from customers.models import Recipient, CreditCard
+
 
 
 STATUS_CHOICES = (
@@ -14,17 +16,30 @@ STATUS_CHOICES = (
 )
 
 
+
+# class OrderItem(models.Model):
+#     cart_item = models.ForeignKey(CartItem)
+#     recipient = models.ForeignKey(Recipient, blank=True)
+#     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+#     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+#     class Meta:
+#         verbose_name = 'Order Item'
+#         verbose_name_plural = 'Order Items'
+#         ordering = ['-timestamp', ]
+
+#     def __unicode__(self):
+#         return self.last4
+
 class Order(models.Model):
-    #owner = models.ForeignKey(settings.AUTH_USER_MODEL, default=2)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     order_id = models.CharField(max_length=120, default='ABC123', unique=True)
-    
+    #credit_card = models.ForeignKey(CreditCard, null=True, blank=True)
     cart = models.ForeignKey(Cart)
     total = models.FloatField(default=0.00)
     status = models.CharField(max_length=120, choices=STATUS_CHOICES, default="Started")
-    requires_shipping = models.BooleanField(default=False) 
+    main_recipient = models.ForeignKey(Recipient, null=True, blank=True)
     notes = models.TextField("Comments", null=True, blank=True)
-    last4 = models.CharField(max_length=120)
-    card_type = models.CharField(max_length=120)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -39,3 +54,4 @@ class Order(models.Model):
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('order_detail', args=[self.order_id])
+

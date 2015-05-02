@@ -42,17 +42,17 @@
 
         <link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css?v1.0">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/socialcount-with-icons.min.css">
+        
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         {% block inlinecss %}{% endblock %}
         <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.2.min.js"></script>
         <script src="{{ STATIC_URL }}js/vendor/respond.min.js"></script>
-       
+      
        {% block extrahead %}{% endblock %}
-		  
+          
         <!--global SM meta -->
         
-      	<meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta property='og:locale' content='en_US'/>
         <meta property='og:type' content='website'/>
         <meta property='og:site_name' content='Post'/>
@@ -61,7 +61,7 @@
         
         
         
-		{% block smmeta %}{% endblock %}
+        {% block smmeta %}{% endblock %}
         
         
     </head>
@@ -89,63 +89,65 @@
  
  
  <div class="footernavs clearfix">
- 	
- 	<div class="internalnav">
- 	<nav class="footy">
- 		<ul>
- 			<li><a href="/about/" title="About Post">about</a></li>
- 			<li><a href="/issues/" title="Post Issues">issues</a></li>
- 			<li><a href="/articles/" title="Read More Articles">articles</a></li>
- 			<li><a href="/subscribe/" title="Subscribe to Post">subscribe</a></li>
- 			<li><a href="/advertise/" title="Advertise with Post">advertise</a></li>
- 			
- 		</ul>
- 	</nav>
- 	 
- 	
- 	</div>
- 	
- 	 <nav class="tehweb">
- 		 
- 		 <ul class="social">
- 		 	<li><a href="https://www.facebook.com/PostRochester">Facebook</a></li>
- 		 	<li><a href="https://twitter.com/PostRochester">Twitter</a></li>
- 		 	<li><a href="http://instagram.com/postrochester">Instagram</a></li>
- 		 	<li><a href="/feed/">RSS Feed</a></li>
- 		 	<li><a href="mailto:info@postrochester.com" title="email us">email us</a></li>
- 		 </ul>
- 	</nav>
- 	
- 	<h1 class="deadly">This is Rochester.</h1>
+    
+    <div class="internalnav">
+    <nav class="footy">
+        <ul>
+            <li><a href="/about/" title="About Post">about</a></li>
+            <li><a href="/issues/" title="Post Issues">issues</a></li>
+            <li><a href="/articles/" title="Read More Articles">articles</a></li>
+            <li><a href="/subscribe/" title="Subscribe to Post">subscribe</a></li>
+            <li><a href="/advertise/" title="Advertise with Post">advertise</a></li>
+            
+        </ul>
+    </nav>
+     
+    
+    </div>
+    
+     <nav class="tehweb">
+         
+         <ul class="social">
+            <li><a href="https://www.facebook.com/PostRochester">Facebook</a></li>
+            <li><a href="https://twitter.com/PostRochester">Twitter</a></li>
+            <li><a href="http://instagram.com/postrochester">Instagram</a></li>
+            <li><a href="/feed/">RSS Feed</a></li>
+            <li><a href="mailto:info@postrochester.com" title="email us">email us</a></li>
+         </ul>
+    </nav>
+    
+    <h1 class="deadly">This is Rochester.</h1>
  </div><!--footernavs-->
  
-         		
-			
+                
+            
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         
-        {% block extrajs %}{% endblock %}
+         {% block extrajs %}{% endblock %}
         <script src="{{ STATIC_URL }}js/plugins.js"></script>
- 		
- 		<script src="{{ STATIC_URL }}js/vendor/jquery.fittext.js"></script>
- 		<script src="{{ STATIC_URL }}js/vendor/underscore-min.js"></script>
- 		<script src="{{ STATIC_URL }}js/vendor/intention.js"></script>
- 		<script src="{{ STATIC_URL }}js/context.js"></script>
- 		<script src="{{ STATIC_URL }}js/vendor/socialite.min.js"></script>
- 		<script src="{{ STATIC_URL }}js/vendor/masonry.pkgd.min.js"></script>
- 		<script src="{{ STATIC_URL }}js/vendor/jquery.fitvids.js"></script>
- 		<script src="{{ STATIC_URL }}js/main.js?v1.0"></script>
- 		 		
- 		
- 		
- 		
- 		{% block inlinejs %}{% endblock %}
- 		
- 		
- 		
-        			
-		
-		
+    
+    <script src="{{ STATIC_URL }}js/vendor/jquery.fittext.js"></script>
+    <script src="{{ STATIC_URL }}js/vendor/underscore-min.js"></script>
+    <script src="{{ STATIC_URL }}js/vendor/intention.js"></script>
+    <script src="{{ STATIC_URL }}js/context.js"></script>
+    <script src="{{ STATIC_URL }}js/vendor/socialite.min.js"></script>
+    <script src="{{ STATIC_URL }}js/vendor/masonry.pkgd.min.js"></script>
+    <script src="{{ STATIC_URL }}js/vendor/jquery.fitvids.js"></script>
+    <script src="{{ STATIC_URL }}js/main.js?v1.0"></script>
+       
+        
+        
+        {% block inlinejs %}{% endblock %}
+        
+        
+        
+                    
+        
+        
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

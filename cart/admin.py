@@ -10,4 +10,12 @@ class CartAdmin(admin.ModelAdmin):
 admin.site.register(Cart, CartAdmin)
 
 
-admin.site.register(CartItem)
+
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('id',  'cart', 'subscription', 'single', 'quantity')
+
+    class Meta:
+        model = CartItem
+
+
+admin.site.register(CartItem, CartItemAdmin)

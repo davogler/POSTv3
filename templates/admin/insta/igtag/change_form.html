@@ -1,0 +1,42 @@
+{% extends "admin/change_form.html" %}
+
+<!-- LOADING -->
+{% load admin_static i18n admin_modify admin_urls grp_tags %}
+
+
+
+<!-- OBJECT TOOLS -->
+{% block object-tools %}asd
+    {% if change %}
+        {% if not is_popup %}
+            <ul class="grp-object-tools">
+                <li>
+                    <form name="refresh_form" id="refresh_form" method="post" accept-charset="UTF-8" action="{% url "instagram_subscribe" original.tag %}" >   
+                  
+                       {% csrf_token %}
+                              
+                       <input name="submit_refresh" id="submit_subscribe" class="grp-button" type="submit" value="Subscribe to IG" />
+                                    
+                     </form>
+                </li>
+
+                <li>
+                    <form name="refresh_form" id="refresh_form" method="post" accept-charset="UTF-8" action="{% url "delete_igsubscription" original.tag %}" >   
+                  
+                       {% csrf_token %}
+                              
+                       <input name="submit_refresh" id="submit_delete" class="grp-button" type="submit" value="Delete from IG" />
+                                    
+                     </form>
+                </li>
+
+                {% block object-tools-items %}
+                    {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+                    <li><a href="{% add_preserved_filters history_url %}">{% trans "History" %}</a></li>
+                    {% if has_absolute_url %}<li><a href="{% url 'admin:view_on_site' content_type_id original.pk %}" class="grp-state-focus" target="_blank">{% trans "View on site" %}</a></li>{% endif%}
+                {% endblock %}
+            </ul>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+

@@ -1,3 +1,12 @@
 from django.contrib import admin
+from customers.models import Recipient
 
-# Register your models here.
+
+class RecipientAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Recipient
+
+
+admin.site.register(Recipient, RecipientAdmin)
+
+
