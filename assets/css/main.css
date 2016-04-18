@@ -3,15 +3,16 @@
 	http://192.168.0.197:8000/assets/css/main.css
 	http://127.0.0.1:8000/assets/css/main.css?v1.0
 	http://192.168.0.197:8000/assets/css/main.css?v1.0
-	http://stage2.postrochester.com/assets/css/main.css?v1.0 */
+	http://stage2.postrochester.com/assets/css/main.css?v1.0
+	http://127.0.0.1:8000/assets/css/main.css?v1.2 */
 @import url('bs-ui.css') screen;
 
 
 
 /*! with love from HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
-
-/* Base Styles */
+ 
+/* Base  Styles */
 
 html,
 button,
@@ -263,7 +264,7 @@ h1.logo a {
 nav.mm{
 	display: block;
 	float: left;
-	width:72%;
+	width:73.5%;
 	margin:6px 0 0 2px;
 	}
 
@@ -344,7 +345,9 @@ ul#nav{
 	border: 1px solid #333;
 }
 
-
+#widecart .title_popcart{
+	display: none;
+}
 
 
 
@@ -369,7 +372,7 @@ ul#nav{
 	background-color: #0073b6;
 	text-align: center;
 	color: #fff;
-	font-size: .2em;
+	font-size: 9px;
 	padding: 0 4px;
 	border-radius: 3px;
 	position: absolute;
@@ -379,6 +382,20 @@ ul#nav{
 
 .preview:hover{
 	background-color: #a7a7a7;
+}
+
+.ct-badge{
+	background-color: #0073b6;
+		  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
+	text-align: center;
+	color: #fff;
+	font-size: 9px;
+	padding: 0 4px;
+	border-radius: 3px;
+	top: 12%;
+	right: 1.8%;
+	position: absolute;
+
 }
 
 
@@ -518,7 +535,10 @@ section.content{
 	
 }
 
-section.content p{
+section.content p,
+section.content-static .flatreg p
+
+{
 	position: relative;
 	display: block;
 	margin: 2.3% 0 2.3% 0;
@@ -572,12 +592,17 @@ img.cover_img{
 }
 
 
-
+figure cite {
+	color: #a7a7a7;
+	font-family:  Georgia, Times, serif;
+	font-style: italic;
+	font-size: .7em;
+}
 
 
 /* @end */
 
-figcaption{
+figcaption, caption{
 	float: right;
 	color: #a7a7a7;
 	font-family:  Georgia, Times, serif;
@@ -677,6 +702,14 @@ aside div.sponsor{
 	margin-top: 3%;
 }
 
+.brick.notsolast{
+   border-top: 1px solid #e0cbad;
+	border-bottom: 1px solid #e0cbad;
+	margin-top: 3%;
+	margin-bottom: 1%;
+	
+}
+
 aside.more{
 	font-size: .9em;
 }
@@ -712,6 +745,207 @@ section.primary cite{
 	
 }
 
+/* video */
+
+.video_tile{
+	width: 48%;
+	float: left;
+	border: 1px solid #e0cbad;
+	margin: 2% 2% 2% 0;
+	background-color:  #fbfaf9;
+}
+
+.video_tile h3{
+	margin: 2%;
+	float: left;
+}
+
+.video_tile img{
+	width: 100%;
+}
+
+.video_tile i.fa-play-circle{
+	float: right;
+	margin: 3.5% 4% 0 0 ;
+}
+.video_tile a:hover{
+	text-decoration: none;
+}
+
+ul.videolist{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul.com_videolist{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul.com_videolist .video_tile{
+	width: 31.3%;
+	min-width: 286px;
+	
+}
+
+@media only screen and (max-width: 1054px) {
+	ul.com_videolist .video_tile{
+		width: 48%;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	ul.com_videolist .video_tile{
+		width: 100%;
+	}
+	ul.videolist .video_tile{
+		width: 100%;
+	}
+}
+
+ul.com_videolist .video_tile h3{
+	font-size: 1em;
+}
+
+ul.morevid{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+ul.morevid .video_tile{
+	width: 23.4%;
+	min-width: 190px;
+}
+ul.morevid li.video_tile:last-child{
+	margin-right: 0;
+}
+ul.morevid .video_tile h3{
+	font-size: .8em;
+}
+@media only screen and (max-width: 920px) {
+	ul.morevid .video_tile{
+		width: 48%;
+	}
+}
+@media only screen and (max-width: 480px) {
+	ul.morevid .video_tile{
+		width: 100%;
+	}
+	
+}
+
+
+.underwriter{
+	text-align: center;
+	margin: 6% auto;
+}
+
+.underwriter p{
+	font-family: arial;
+	font-size: .6em;
+	font-style: italic;
+	color: #a7a7a7;
+	text-transform: uppercase;
+	margin-bottom: 0;
+}
+
+.banner728{
+text-align: center;
+	max-width: 728px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.banner728 img{
+	width: 100%;
+}
+
+.vidthu .thumbnail{
+	float: left;
+}
+.vidthu h4{
+	margin-left: 2%;
+	float: left;
+}
+
+ul.vidcreator{
+	list-style: none;
+	
+	padding: 0;	
+}
+
+ul.vidcreator li{
+	margin: 0 0 5% 0;
+}
+
+.nexte{
+	xheight: 80px;
+	background: transparent;
+	overflow: hidden;
+	xbackground-color: rgba(0,0,0,0.10);
+	box-sizing:        border-box;
+}
+
+h3.more{
+	float: right;
+}
+
+
+/* instagram adders */
+
+.ig ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+img.igprof{
+	width: 40px;
+	margin-bottom: 5px;
+	border-radius: 2px;
+	box-shadow: inset 0 0 0 1px rgba(0,0,0,.3);
+}
+
+.igbox{
+	xwidth: 30%;
+	display: block;
+	  border: 1px solid #d0d0d0;
+	  background: #fff;
+	  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
+	  padding: 8px;
+	  font-size: .7em;
+	  float: left;
+	  margin: 1em 0;
+	  width: 268 px;
+	  border-radius: 2px;
+	  
+}
+
+.igbox .ig_std{
+	margin-bottom: 10px;
+	border-radius: 2px;
+	box-shadow: inset 0 0 0 1px rgba(0,0,0,.3);
+}
+
+.igtags{
+	text-transform: uppercase;
+	font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
+	font-size: .8em;
+}
+div.ig_user{
+	word-wrap: break-word;
+	xoverflow: hidden;
+}
+
+.hider{
+	float: right;
+}
+
+.brick.ighead p{
+	margin: 1% 0;
+}
 
 /*static pages */
 
@@ -932,6 +1166,10 @@ input#mce-EMAIL{
 	text-transform: uppercase;
 	color: #bab9b9;
 	
+}
+
+#mc-embedded-subscribe{
+	margin-top: 0px;
 }
 
 ul.socbanner{
@@ -1156,6 +1394,363 @@ margin-top: 20px;
 	border-bottom: none;
 }
 
+table.subshow{
+	width: 100%;
+	float: left;
+	font-family:  Georgia, Times, serif;
+	font-family: "Helvetica","Arial",sans-serif;
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	
+	
+}
+table.subshow th{
+	height: 1em;
+}
+
+table.subshow tr td{
+	border-bottom: 1px solid #e0cbad;
+	padding: 13px 0;
+}
+
+.asteriskField{
+	color: #c85252;
+	font-size: .6em;
+	vertical-align: super;
+}
+
+/* cart */
+
+table.cartshow, table.ordershow{
+	width: 100%;
+	float: left;
+	font-family:  Georgia, Times, serif;
+	font-family: "Helvetica","Arial",sans-serif;
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	border-bottom: 1px solid #e0cbad;
+}
+
+table.cartshow thead, 
+table.ordershow thead,
+table.subshow thead{
+	background-color: rgba(0,0,0,0.10);
+}
+table.cartshow tr, table.ordershow tr{
+	height: 40px;
+	
+}
+
+
+table.ordershow tr.subbie{
+	border-bottom: 1px solid #e0cbad;
+}
+
+table.ordershow  .pcta{
+	margin: 0px 0 20px 0;
+}
+
+table.ordershow h3{
+	margin: 0;
+}
+.sendto{
+	color: gray;
+	font-family: 'Arial Narrow', Arial, sans-serif;
+	font-style: italic;
+	font-size: 14px;
+}
+
+table th.item{
+	padding: 0 0 0 10px;
+}
+
+table td.item,
+table th.item{
+	width: 30%;
+	text-align: left;
+	xbackground-color: lightblue;
+}
+
+table td.subttl,
+table th.subttl{
+	width: 5%;
+	xbackground-color: pink;
+	text-align: center;
+}
+
+table td.qty,
+table th.qty{
+	width: 5%;
+	xbackground-color: green;
+	text-align: center;
+}
+table td.update,
+table th.update{
+	width:10%;
+	xbackground-color: gray;
+	text-align: center;
+}
+table td.action,
+table th.action{
+	width: 10%;
+	xbackground-color: pink;
+	text-align: center;
+}
+
+table td.recip,
+table th.recip{
+	width: 40%;
+	xbackground-color: pink;
+	text-align: left;
+}
+
+table th.orderno{
+	width: 7em;
+	text-align: left;
+	padding-left: 10px;
+}
+table th.orderdate{
+	width: 8em;
+	text-align: left;
+	padding-left: 10px;
+}
+table th.orderdesc{
+	text-align: left;
+}
+table th.orderamt{
+	width: 4em;
+	text-align: left;
+	padding-left: 10px;
+}
+
+tr.ender
+{
+	width: 100%;
+	border-bottom: 1px solid #e0cbad;
+	height: 2px;
+}
+
+
+.records td {
+	white-space: nowrap;
+}
+
+span.subitem{
+	display: block;
+	color: #7e7b7b;
+	font-size: .9em;
+	font-style: italic;
+}
+
+.tertal{
+	float: right;
+	border: 1px solid #e0cbad;
+	width: 200px;
+	padding: 10px 15px;
+	text-align: right;
+	margin: -60px 0 20px 0;
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	text-transform: uppercase;
+}
+.tertal .tit{
+		text-transform: uppercase;
+		color: gray;
+}
+.tertal p {
+	margin: 0;
+}
+
+.tertal hr{
+	margin: 10px 0;
+	}
+
+.cartlink{
+	margin: 5px 15px 0 0;
+	float: right;	
+}
+
+a.loglink{
+	margin: 10px 15px 0 0;
+	float: right;
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	text-transform: uppercase;
+	font-weight: normal;
+	text-decoration: none;
+	font-size: .9em;
+}
+
+.cart-form-control{
+	float: right;
+	margin: 40px 0;
+}
+
+.content-static .btn,
+.content .btn{
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: .9em;
+	
+}
+
+
+#payment-form{
+	margin-top: 20px;
+	
+}
+
+#payment-form input{
+	width: 100%;
+}
+
+#payment-form textarea{
+	width: 100%;
+	height: 8rem;
+}
+
+#div_id_card{
+	width: 75%;
+	float: left;
+}
+
+#cvc {
+	width: 20%;
+	float: right;
+}
+
+#card_month{
+	width: 48%;
+	float: left;
+}
+
+#card_year{
+	width: 48%;
+	float: right;
+}
+.halfsies-left{
+	width: 50%;
+	float: left;
+}
+.thirdsies-right{
+	width: 37%;
+	float: right;
+}
+
+.thirdsies-right img{
+	width: 100%;
+}
+
+.order-id-dim{
+	float: left;
+	margin: 0;
+	font-family: arial;
+	font-weight:bold;
+	font-size:.8em;
+	color:#827f7f;
+	
+	
+}
+
+.trustbox{
+	width: 100%;
+}
+
+.reassure{
+	font-family: arial;
+	font-weight:bold;
+	font-size:12px;
+	color:#827f7f;
+	text-align: center;
+}
+
+td.substatus{
+	font-family: arial;
+	font-weight:bold;
+	font-size:.8em;
+	color:#827f7f;
+	text-align: center;
+}
+
+#usergo{
+	border-bottom: 1px solid #e0cbad;
+	margin-bottom: 50px;
+}
+
+img.secure{
+float: right;	
+margin: 20px 45% 0 0;
+width: 100px;
+}
+ul.accepted{
+	width: 65%;
+	float: left;
+	margin-top: 20px;
+	display: block;
+}
+
+.accepted li{
+	display: inline-block;
+	xmargin-right: 1px;
+	xmargin-top: 10px;
+	
+	
+}
+
+.accepted li img{
+	xwidth: 40px;
+}
+a.chchange{
+	margin: 10px;
+}
+
+.order_summary{
+	margin: 20px 0 0 0;
+}
+
+#paystub,
+#recipadd{
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	text-transform: uppercase;
+	font-weight: normal;
+}
+#recipadd legend,
+legend.fs-title{
+	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
+	text-transform: none;
+	font-weight: normal;
+	margin-bottom: 30px;
+	display: block;
+	position: 	relative;
+}
+
+.twocol{
+	width: 40%;
+	float: left;
+}
+
+.or{
+	width: 8%;
+	float: left;
+	text-align: center;
+	padding-top: 15%;
+	margin-left: 5%;
+}
+
+.twocol_2{
+	width: 40%;
+	float: right;
+}
+ul.reciplist{
+	padding: 0;
+}
+
+ul.reciplist li{
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+	font-weight: normal;
+	list-style-type: none;
+	border-bottom: 1px solid #E0CBAD;
+	
+}
+
+
 .soc-body:after{
 	content: '';
 	  width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
@@ -1216,8 +1811,32 @@ div.binside{
 .pcta{
 	text-transform: uppercase;
 	font-size: .75em;
-	margin: 2px 0;
+	margin: 5px 5px;
 	width: 100%;
+	
+}
+
+.pcta i {margin-right: 5px;}
+
+input.prodmit {
+	width: 100%;
+	
+}
+
+input.subrenew,
+a.edit_rec{
+	text-transform: uppercase;
+	margin: 5px 5px;
+	float: right;
+	width: 8em;
+}
+
+.btnprice span{
+	margin:  5px;
+	vertical-align: bottom;
+}
+
+.btnprice input{
 	
 }
 
@@ -1251,20 +1870,26 @@ div.binside{
 }
 .issueteaser .pcta{
 	margin: 5px 0 8px 0;
+	
 }
 
 .btnprice{
 	position: relative;
 	display: inline-block;
+	width: 100%;
 }
 
 .btnprice span{
-	xposition: absolute;
-	xtop: 40px;
+	
 	font-size: .7em;
 	font-family: georgia, serif;
 	font-style: italic;
 	color: #898888;
+	
+	display: block;
+	width: 100%;
+	text-align: center;
+
 }
 
 /* small */
@@ -1432,6 +2057,38 @@ text-transform: none;
    background-color: #f6f1e3;
 }
 
+/* remodal overides */
+
+.remodal {
+max-width: 550px;
+}
+
+.remodal-cancel{
+	font-family:"helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif ;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	background-color: gray;
+	padding: 10px;
+}
+.remodal-confirm{
+	font-family:"helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif ;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	color: white;
+	color: #ffffff;
+	 background-color: #428bca;
+	 border-color: #357ebd;
+	 padding: 10px;
+	 }
+	 
+.remodal-confirm:hover,
+.remodal-confirm:focus {
+  background-color: #3276B1;
+  border-color: #285E8E;
+}	 
+	
+}
+
 
 /* ==========================================================================
    Helper classes
@@ -1517,7 +2174,9 @@ text-transform: none;
 
 /* Style adjustments for viewports larger than (480px/16px) = 30em */
 
-
+.loglink{
+	font-size: 1em;
+}
 
 p.findat{
 	width: 49%;
@@ -1578,6 +2237,15 @@ div.inside p{
 	}
 .pcta{
 	width: auto;
+	float: left;
+}
+
+input.prodmit{
+	width: auto;
+	float: left;
+	
+	margin-left: 2%;
+	
 }
 
 .issueteaser .inside-desc{
@@ -1588,6 +2256,14 @@ div.inside p{
 	margin-bottom: 18px;
 }
 
+.btnprice span{
+	
+
+	
+	display: inline;
+	}
+
+
 article.teaser .thumbnail{
 	width: 33%;
 
@@ -1596,6 +2272,10 @@ article.teaser .thumbnail{
 article.teaser .hgroup{
 	width: 65%;
 
+}
+
+.igbox{
+	width: 300px;
 }
 	
 }
@@ -1643,7 +2323,7 @@ article.teaser .hgroup{
     	top: 50px;
     }
     nav.mm{
-    	width: 65%;
+    	width: 73.5%;
     	
     	margin:10px 0 0 12px;
     }
@@ -1655,6 +2335,11 @@ article.teaser .hgroup{
     nav.mm ul li a.notify{
     	font-size: .7em;
    
+    }
+    
+    .cartlink{
+    	margin: 10px 20px 0 0;
+    	float: right;	
     }
     
    #mainmap{
@@ -1769,7 +2454,7 @@ article.teaser .hgroup{
     
     
     aside.more{
-    	width: 45%;
+    	width: 48%;
     	float: left;
     	margin: 0 2% 0 0;
     }
@@ -1830,8 +2515,16 @@ article.teaser .hgroup{
     	font-size: 1em;
     }
     
-       
     
+        
+}
+
+
+@media only screen and (min-width: 46em) {
+    /* Style adjustments for viewports larger than (736px/16px) = 39em */
+    span.subitem{
+    	display: inline;
+    }
 }
 
 @media print,

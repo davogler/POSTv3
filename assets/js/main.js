@@ -1,36 +1,36 @@
 $(document).ready(function() { 
       
-    $('#email_signup_form').ajaxForm({
-    	dataType: 'json',
-    	success: processJson
+    // $('#email_signup_form').ajaxForm({
+    // 	dataType: 'json',
+    // 	success: processJson
     	
-    });
+    // });
     
     
-    function processJson(data){
-        if(data.status == true) { //form submission was successful
-        	//alert(data.message + '/n' + data.status);
-        	$('#signerupper').load('/signups/messages.html #successkid').hide().fadeIn('slow');
+    // function processJson(data){
+    //     if(data.status == true) { //form submission was successful
+    //     	//alert(data.message + '/n' + data.status);
+    //     	$('#signerupper').load('/signups/messages.html #successkid').hide().fadeIn('slow');
         	
-        }
+    //     }
         
-        else { //form submission was NIT successful
-            //alert(data.message + '/n' + data.status);
+    //     else { //form submission was NIT successful
+    //         //alert(data.message + '/n' + data.status);
             
-            $('<span></span').insertAfter('.cta').load('/signups/messages.html #msg-bubble', function() {
-              $('.msg').empty().append(data.message);
-            }).hide().fadeIn('slow');
+    //         $('<span></span').insertAfter('.cta').load('/signups/messages.html #msg-bubble', function() {
+    //           $('.msg').empty().append(data.message);
+    //         }).hide().fadeIn('slow');
             
-        	$('#id_email_signup').keyup(function() {
-        	  $('.msg-bubble').fadeOut('fast');
-        	});
-        }
+    //     	$('#id_email_signup').keyup(function() {
+    //     	  $('.msg-bubble').fadeOut('fast');
+    //     	});
+    //     }
         
     	
-    }
+    // }
     
     $(function(){
-    	$('input:text').each(function(){
+    	$('input:text.with-placeholder').each(function(){
     		var txtval = $(this).val();
     		$(this).focus(function(){
     			$(this).val('').css('color', 'black')
@@ -43,6 +43,7 @@ $(document).ready(function() {
     	});
     });     
     
+
 
 // This function will be executed when the user scrolls the page.
 $(window).scroll(function(e) {
@@ -99,14 +100,17 @@ $( ".chiclets li" )
                           Socialite.load($(this)[0]);
                   });
   
-     
+// masonry for about page     
 var $container = $('.bios');
-// initialize
+
 $container.masonry({
   gutter: 25,
   isFitWidth: true,
   itemSelector: '.person'
 });
+
+
+
 
 // add zoom attributes to each image with zoomer class
 $('img.zoomer').each(function() {
@@ -118,8 +122,10 @@ $('img.zoomer').each(function() {
 
 }); 
 
+// responsive video embeds
 $("section.primary").fitVids();
 $("section.fullwidth").fitVids();
+$("section.content-static").fitVids();
 
 
 $( "a.toggly" ).click(function() {
