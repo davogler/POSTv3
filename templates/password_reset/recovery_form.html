@@ -1,0 +1,44 @@
+{% extends "password_reset/base.html" %}
+
+{% block title %}Reset Password{% endblock %}
+
+{% load i18n grp_tags %}
+
+
+{% block content %}
+
+<section class="content-static">
+  <div class="brick clearfix">
+
+
+
+	<form method="post" action=" ">
+		{% csrf_token %}
+		<fieldset class="grp-module grp-module-login">
+		    <h1>
+		        <span class="grp-admin-title">{% if grappelli_admin_title %}{{ grappelli_admin_title }}{% else %}{% get_admin_title %}{% endif %}</span>
+		        <span class="grp-current-page">{% trans "Password Recovery" %}</span>
+		    </h1>
+		    <div class="grp-module">
+		    <div class="grp-row{% if form.username.errors %} grp-errors{% endif %}">
+		        {{ form.as_p }}
+		    </div>
+		    </div>
+		</fieldset>
+		
+		<div class="grp-module grp-submit-row">
+		    
+		        <input type="submit" value="{% trans "Reset Password" %}" class='btn btn-primary pcta'>
+		    
+		    <a href="{% url 'auth_login' %}" class='btn btn-default pcta'>Back to Login</a> 
+		    
+		</div>
+		
+	
+	</form>
+
+
+  </div>
+</section>
+{% endblock %}
+

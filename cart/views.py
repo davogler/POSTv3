@@ -6,6 +6,9 @@ from django.core.urlresolvers import reverse
 from cart.models import Cart, CartItem
 from catalog.models import Subscription
 from articles.models import Issue
+from customers.models import Recipient
+from catalog.views import issue_date
+from orders.models import Record
 
 # Create your views here.
 
@@ -53,7 +56,7 @@ def view_cart(request):
     else:
         empty_message = 'Your Cart is currently empty. '
         context = {"empty": True, "empty_message": empty_message}
-    #print request.session['items_total']
+    # print request.session['items_total']
 
     template = "cart/cart.html"
     return render(request, template, context)
@@ -71,13 +74,12 @@ def remove_from_cart(request, slug):
 
     cart_item_to_go = CartItem.objects.filter(cart=cart, flug=slug)[:1].values_list("id", flat=True)
     CartItem.objects.filter(pk__in=list(cart_item_to_go)).delete()
-   
+
     calc_cart_shipping_total(cart.id)
 
     calc_cart_total(request, cart.id)
-    
-    
-    return HttpResponseRedirect(reverse("view_cart"))
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def increment_cart(request, slug):
@@ -90,16 +92,17 @@ def increment_cart(request, slug):
 
     cart = Cart.objects.get(id=the_id)
     cart_item = CartItem.objects.get(cart=cart, flug=slug)
-    piece_price = cart_item.line_total/cart_item.quantity
+    piece_price = cart_item.line_total / cart_item.quantity
     cart_item.quantity += 1
     cart_item.line_total = cart_item.quantity * piece_price
     cart_item.save()
-    
+
     calc_cart_shipping_total(cart.id)
 
     calc_cart_total(request, cart.id)
 
-    return HttpResponseRedirect(reverse("view_cart"))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 def decrement_cart(request, slug):
     request.session.set_expiry(3000)
@@ -111,21 +114,19 @@ def decrement_cart(request, slug):
 
     cart = Cart.objects.get(id=the_id)
     cart_item = CartItem.objects.get(cart=cart, flug=slug)
-    piece_price = cart_item.line_total/cart_item.quantity
+    piece_price = cart_item.line_total / cart_item.quantity
     cart_item.quantity += -1
     cart_item.line_total = cart_item.quantity * piece_price
     if cart_item.quantity == 0:
         cart_item.delete()
     else:
         cart_item.save()
-    
+
     calc_cart_shipping_total(cart.id)
 
     calc_cart_total(request, cart.id)
 
-    return HttpResponseRedirect(reverse("view_cart"))
-
-
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def update_cart(request, slug):
@@ -155,6 +156,50 @@ def update_cart(request, slug):
     return HttpResponseRedirect(reverse("view_cart"))
 
 
+def add_subscribe_again_to_cart(request, recipient_id):
+    request.session.set_expiry(3000)
+
+    try:
+        the_id = request.session['cart_id']
+    except:
+        new_cart = Cart()
+        new_cart.save()
+        request.session['cart_id'] = new_cart.id
+        the_id = new_cart.id
+
+    cart = Cart.objects.get(id=the_id)
+
+    if request.method == "POST":
+        #qty = request.POST['qty']
+        print "we got post add to cart"
+        try:
+            print "we got post and add subscription"
+            subscription = Subscription.objects.filter(is_active=1).filter(type=1).first()
+            print subscription
+            flug = subscription.slug
+            recipient = Recipient.objects.get(id=recipient_id)
+            print flug
+            print recipient
+            cart_item = CartItem.objects.create(cart=cart, subscription=subscription, flug=flug, recipient=recipient)
+            cart_item.line_total = subscription.price
+            print "line total is %s " % cart_item.line_total
+            cart_item.save()
+        except:
+            pass
+    else:
+        pass
+
+    
+    calc_cart_shipping_total(cart.id)
+
+    calc_cart_total(request, cart.id)
+    # success message
+    request.session['items_total'] = cart.cartitem_set.count()
+
+    return HttpResponseRedirect(reverse("view_cart"))    
+
+
+
 def add_to_cart(request, slug):
     request.session.set_expiry(3000)
 
@@ -178,24 +223,6 @@ def add_to_cart(request, slug):
             cart_item.line_total = subscription.price
             print "line total is %s " % cart_item.line_total
             cart_item.save()
-            # cart_item, created = CartItem.objects.get_or_create(cart=cart, subscription=subscription, flug=slug)
-            # if created:
-            #     print "subscritpion cart item created"
-            #     qty = 1
-            #     cart_item.quantity = qty
-            #     cart_item.line_total = subscription.price
-            #     cart_item.save()
-
-            #     print "line total is %s " % cart_item.line_total
-            # else:
-            #     print "subscription cart item found"
-            #     qty = cart_item.quantity
-            #     print qty
-            #     new_qty = qty + 1
-            #     cart_item.quantity = new_qty
-            #     print cart_item.quantity
-            #     cart_item.line_total = subscription.price * new_qty
-            #     cart_item.save()
 
         except Subscription.DoesNotExist:
             print "no sub exists, so this is a single issue"
@@ -234,34 +261,52 @@ def add_to_cart(request, slug):
         request.session['items_total'] = cart.cartitem_set.count()
         return HttpResponseRedirect(reverse("view_cart"))
 
-        # cart_item.quantity = qty
-        # new_subtotal = 0
-        # new_shipping_total = 0
-        # new_total = 0
-        # print "new totals reset"
-        # for item in cart.cartitem_set.all():
-        #     print "in item cycle"
-        #     print "line total is %s " % item.line_total
-        #     print item
-        #     print item.flug, item.quantity, item.line_total
-        #     new_subtotal += item.line_total
-        #     print item.line_total
-        #     print new_subtotal
-        #     new_shipping_total += item.shipping_line_total
-        #     print new_shipping_total
+    return HttpResponseRedirect(reverse("view_cart"))
 
-        # cart.product_total = new_subtotal
-        # cart.shipping_total = new_shipping_total
-        # cart.total = cart.product_total + cart.shipping_total
-        # print "all calcs done"
-        # print cart.product_total, cart.shipping_total, cart.total
-        # cart.save()
 
-        # request.session['items_total'] = cart.cartitem_set.count()
-        # cart_item.save()
+def add_renewal_to_cart(request, slug, recipient_id):
+    request.session.set_expiry(3000)
+
+    try:
+        the_id = request.session['cart_id']
+    except:
+        new_cart = Cart()
+        new_cart.save()
+        request.session['cart_id'] = new_cart.id
+        the_id = new_cart.id
+
+    cart = Cart.objects.get(id=the_id)
+
+    if request.method == "POST":
+        print "we got post add renewal to cart"
+        try:
+            print "we got post and add renewal"
+            subscription = Subscription.objects.get(slug=slug)
+            print subscription
+            recipient = Recipient.objects.get(id=recipient_id)
+            print recipient
+            cart_item = CartItem.objects.create(cart=cart, subscription=subscription, flug=slug, recipient=recipient)
+            print cart_item
+            cart_item.line_total = subscription.price
+            print "line total is %s " % cart_item.line_total
+            last_record = Record.objects.filter(recipient=recipient).order_by('issue').last()
+            begin_issue = last_record.issue + 1
+            print "first issue is %s" % begin_issue
+            cart_item.begin_date = issue_date(begin_issue)
+            cart_item.save()
+
+        except:
+            print "other"
+            # error message
+            return HttpResponseRedirect(reverse("view_cart"))
+
+        calc_cart_shipping_total(cart.id)
+
+        calc_cart_total(request, cart.id)
         # success message
-        # return HttpResponseRedirect(reverse("view_cart"))
-    # error message
+        request.session['items_total'] = cart.cartitem_set.count()
+        return HttpResponseRedirect(reverse("view_cart"))
+
     return HttpResponseRedirect(reverse("view_cart"))
 
 

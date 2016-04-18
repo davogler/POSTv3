@@ -24,10 +24,12 @@ USE_I18N = True
 # calendars according to the current locale.
 USE_L10N = True
 
+
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False
 
 ROOT_PATH = os.path.dirname(__file__)
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -66,8 +68,8 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-LOGIN_URL = '/admin/'
-LOGIN_REDIRECT_URL = '/admin/'
+LOGIN_URL = '/account/login/'
+LOGIN_REDIRECT_URL = '/account/'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -118,6 +120,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 FILEBROWSER_DIRECTORY = 'uploads/'
 FILEBROWSER_URL_FILEBROWSER_MEDIA =  STATIC_URL + "filebrowser/"
 FILEBROWSER_PATH_FILEBROWSER_MEDIA = os.path.join(STATIC_ROOT, 'filebrowser/')
@@ -167,6 +172,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.flatpages',
+    'crispy_forms',
     'mailsnake',
     'signups',
     'articles',
@@ -176,6 +182,9 @@ INSTALLED_APPS = (
     'customers',
     'catalog',
     'insta',
+    'video',
+    'sponsors',
+    'password_reset',
     
 )
 

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+{% block title %}Checkout | {{ block.super }}{% endblock %}
 
 {% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
 
@@ -12,15 +12,15 @@
 {% banner request %} 
 {% endblock %}
 
+{% load cart_tags %}
+{% load order_tags %}
+
 {% block content %}
 {{ block.super }}
- <!-- The required Stripe lib -->
+
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
  
-  <!-- jQuery is used only for this example; it isn't required to use Stripe -->
-  <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
   
-
  
   
 
@@ -32,6 +32,7 @@
         
       
         <h2>My Order</h2>
+         <p class="order-id-dim">#{{ order.order_id }}</p>
          <div class="table-responsive">
         <div class="tertal">
                 <p><span class="tit">Sub Total: </span>${{ cart.product_total|floatformat:2 }}<br>
@@ -48,33 +49,68 @@
                   <tr>
                     <th class="item">Item</th>
                     <th class="recip">Recipient</th>
+                    <th class="action"> Action</th>
                 
                   </tr>
 
                 </thead>
                 <tbody>
 
-                
+
                 
                   {% for item in subbies %}
-                  <tr class="subbie">
-                    <td class="item">{{ item.subscription.title }}</td>
-                   
-                    <td class="recip">
-                    <span class="sendto">send to:</span><br>
-                    {% if item.recipient %}
-                        {% with item.recipient as item %}
-                         {% include "customers/address_display.html" %}
-                        {% endwith %}
-                        
-                        
-                            <a href="{% url "add_recipient" %}?itm={{item.id}}&next=checkout" class="btn btn-primary pcta">Change Address</a>
-                        {% else %}
-                            <a href="{% url "add_recipient" %}?itm={{item.id}}&next=checkout" class="btn btn-primary pcta">Add Address</a>
-                    {% endif %}
-                    </td>
-                    
-                  </tr>
+
+
+                    {% get_last_record item.recipient as the_last_record %}
+
+                      
+                    <tr class="subbie">
+                      {% if item.subscription.type == 2 %}
+                        {% get_first_month the_last_record as the_first_month %}
+                        {% get_second_month the_last_record as the_second_month %}
+                      
+                        <td class="item">{{ item.subscription.title }}<br>
+                          <span class="subitem">starting with Issue {{ the_last_record }}<br> ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span>
+                        </td>
+                         
+                        <td class="recip">
+                          <span class="sendto">send to:</span><br>
+                          {% if item.recipient %}
+                            {% with item.recipient as item %}
+                             {% include "customers/address_display.html" %}
+                            {% endwith %}
+                            
+                               
+                          {% endif %}
+                        </td>
+
+                      {% else %}
+                        {% get_first_month item.subscription.first_issue as the_first_month %}
+                        {% get_second_month item.subscription.first_issue as the_second_month %}
+
+                        <td class="item">{{ item.subscription.title }}<br>
+                          <span class="subitem">starting with Issue {{ item.subscription.first_issue }}<br> ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span>
+                        </td>
+                         
+                        <td class="recip">
+                          <span class="sendto">send to:</span><br>
+                          {% if item.recipient %}
+                            {% with item.recipient as item %}
+                             {% include "customers/address_display.html" %}
+                            {% endwith %}
+                                <a href="{% url "add_recipient" %}?itm={{item.id}}&next=checkout" class="btn btn-primary pcta">Change Address</a>
+                          {% else %}
+                                <a href="{% url "add_recipient" %}?itm={{item.id}}&next=checkout" class="btn btn-primary pcta">Add Address</a>
+                          {% endif %}
+                        </td>
+                      {% endif %}
+                      <td class="action">
+                      
+                      
+                      <a href="{% url "remove_from_cart" item.flug %}"><i class="fa fa-times fa-lg"></i></a>
+                      </td>
+                      
+                    </tr>
                   {% endfor %}
 
 
@@ -97,6 +133,11 @@
                             {% endif %}
                         {% endif %}
                     </td>
+
+                     <td class="action"><a href="{% url "increment_cart" item.flug %}"><i class="fa fa-plus fa-lg"></i></a>
+                    <a href="{% url "decrement_cart" item.flug %}"><i class="fa fa-minus fa-lg"></i></a>
+                    <a href="{% url "remove_from_cart" item.flug %}"><i class="fa fa-times fa-lg"></i></a>
+                    </td>
                    
                   </tr>
                   {% endfor %}
@@ -117,21 +158,12 @@
           </table>
           </div>
 
-<div id ="usergo">
-    <h2>Account Details</h2>
-    {% if user.is_authenticated %}
-        <p>You're logged in as {{ user }}</p>
 
-    {% else %}
-    <p>You're a guest. Login or Register</p>
-
-    {% endif %}
-</div>
    
          
 <div id="paystub" >
 
-        <h2>Payment Details</h2>
+        
 
  <section class="messages">
     {% if messages %}
@@ -145,52 +177,43 @@
 
     <div class="thirdsies-right">
 
-    <div class='col-sm-8 col-sm-offset-2 orderbox clearfix' >
-      <h2>Order Details</h2>
-      <ul>
-      {% for item in order.items_as_list %}
-           <li>{{ item|safe }}</li>
-      {% endfor %}
-      </ul>
-          <p class="dim">ID: {{ order.order_id }}</p>
-          <p>Total: ${{ order.total|floatformat:2 }}</p>
-      
-  </div>
+    <div id ="usergo">
+    <h2>Account Details</h2>
+    {% if user.is_authenticated %}
+        <p><i class="fa fa-user" aria-hidden="true"></i> You're logged in as {% if user.first_name %} 
+          {{user.first_name}} {{ user.last_name}} 
+          {% else %}
+          {{ user }}
+          {% endif %} </p>
+
+    {% elif not user.is_authenticated and subbies %}
+    <p>Purchasing a subscription requires an account. <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a> to save your order information.</p>
+    {% else %}
+    <p>You're checking out as a guest. No problem! However, if you were to <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a>, we can save your order details for you.</p>
+    {% endif %}
+
+</div>
+
+   
 
   <div class="trustbox">
-    <ul class="accepted">
-      <li><img class="cc-icon" src="/assets/i/visa.png"></li>
-      <li><img class="cc-icon" src="/assets/i/mastercard.png"></li>
-      <li><img class="cc-icon" src="/assets/i/discover.png"></li>
-    </ul>
-    <ul class="accepted">
-      <li><img class="cc-icon" src="/assets/i/american_express.png"></li>
-      <li><img class="cc-icon" src="/assets/i/jcb.png"></li>
-      <li><img class="cc-icon" src="/assets/i/diners_club.png"></li>
-    </ul>
-    <img class="secure" src="/assets/i/comodo.png">
+    <img class="credit" src="/assets/i/credit-cards.svg">
+    <a href="https://www.positivessl.com" style="font-family: arial; font-size: 10px; color: #212121; text-decoration: none; text-align:center; width:100%; display: block; margin: 20px auto;"><img style = "max-width: 96px;" src="https://www.positivessl.com/images-new/PositiveSSL_tl_trans.png" alt="SSL Certificate" title="SSL Certificate" border="0" /></a>
+    <div class="reassure">
+    <p>This transaction is protected by a 2048 bit industry standard SSL certificate.</p> 
+    </div>
   </div>
+  <a class="btn btn-primary" href="{% url "email" order.order_id %}">EMAIls<i class="fa fa-times fa-lg"></i></a>
+  <a class="btn btn-primary" href="{% url "email_preview" order.order_id %}">EMAIl rpeveew<i class="fa fa-times fa-lg"></i></a>
 
 </div>
 
 <div class="halfsies-left">
  
+
+
   <form autocomplete="on" action="" method="POST" id="payment-form" >{% csrf_token %}
-  <h2>User</h2>
-
-   <div id="div_id_name" class="form-group">
-      <label for="id_password" class="control-label ">Passwerd </label>
-      <div class="controls ">
-        <input type="text" class="textinput textInput form-control" size="20" value="{{ order.customer.name }}" name="name"/> 
-      </div>
-    </div>
-
-     <div id="div_id_name" class="form-group">
-      <label for="id_password2" class="control-label ">Paaswerd2 </label>
-      <div class="controls ">
-        <input type="text" class="textinput textInput form-control" size="20" value="{{ order.customer.name }}" name="name"/> 
-      </div>
-    </div>
+  
 
     <h2>Payment</h2>
     {{ pay_form }}
@@ -203,14 +226,14 @@
     <div id="div_id_name" class="form-group">
       <label for="id_name" class="control-label ">Name </label>
       <div class="controls ">
-        <input type="text" class="textinput textInput form-control" size="20" value="{{ order.customer.name }}" name="name"/> 
+        <input type="text" class="textinput textInput form-control" size="20" value="{% if user.first_name %}{{user.first_name}} {{ user.last_name}}{% endif %}" name="name" > 
       </div>
     </div>
 
     <div id="div_id_email" class="form-group">
       <label for="id_email" class="control-label ">Email </label>
       <div class="controls ">
-        <input type="text" class="textinput textInput form-control" size="20" value="{{ order.customer.email }}" name="email" />
+        <input type="text" class="textinput textInput form-control" size="20" value="{% if user.email %}{{user.email}}{% endif %}" name="email" />
       </div>
     </div>
 
@@ -219,13 +242,13 @@
       <div id="div_id_card" >
         <label for="id_card" class="control-label">Card Number </label>
         <div class="controls ">
-          <input type="tel" class="textinput textInput form-control cc-number" autocomplete="cc-exp" size="20" data-stripe="number" placeholder="•••• •••• •••• ••••" required>
+          <input type="tel" class="textinput textInput form-control cc-number" autocomplete="cc-exp" size="20" data-stripe="number" placeholder="•••• •••• •••• ••••" required {% if paygo == False or usergo == False %} disabled{%endif%}>
         </div>
       </div>
 
       <div id="cvc" >
         <label>CVC</label>
-        <input type="tel" class="form-control cc-cvc" size="4" data-stripe="cvc" autocomplete="off" placeholder="•••" required>
+        <input type="tel" class="form-control cc-cvc" size="4" data-stripe="cvc" autocomplete="off" placeholder="•••" required {% if paygo == False or usergo == False %} disabled{%endif%}>
       </div>
 
     </div>
@@ -237,26 +260,27 @@
           
       <div id="card_month" class="form-group">
         <label>Exp Month</label>
-        <input type="tel" class="form-control" size="2" data-stripe="exp-month" placeholder="MM">
+        <input type="tel" class="form-control" size="2" data-stripe="exp-month" placeholder="MM" {% if paygo == False or usergo == False %} disabled{%endif%}>
       </div>
 
     
       <div id ="card_year" class="form-group">
         <label>Exp Year</label>
-        <input type="tel" class="form-control" size="4" data-stripe="exp-year" placeholder="YYYY">
+        <input type="tel" class="form-control" size="4" data-stripe="exp-year" placeholder="YYYY" {% if paygo == False or usergo == False %} disabled{%endif%}>
       </div>
                 
     </div>
 
     
-    <button type="submit" class="btn btn-primary pcta">
+    <button type="submit" class="btn btn-primary pcta {% if paygo == True %} {% else %}disabled{% endif %}">
         <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-        Submit Payment
+        <i class="fa fa-lock"></i>Submit Payment
     </button>
-    <a class="btn btn-default" href="{% url 'cart_empty' %}" role="button">Cancel</a>
+    <a class="btn btn-default pcta" href="{% url 'cart_empty' %}" role="button">Cancel</a>
 
 
   </form>
+
     </div>
   
   </div>

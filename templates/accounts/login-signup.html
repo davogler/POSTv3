@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+{% load crispy_forms_tags %}
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+<section class="content-static">
+  <div class="brick clearfix">
+  
+
+    <div class="wrapper content">
+    <div class="twocol">
+     <h2>Log In</h2>
+        <form method='POST' action=''>{% csrf_token %}
+        {{ form|crispy }}
+        
+
+        <input type='submit' value='{% if submit_btn %}{{ submit_btn }}{% else %}Submit{% endif %}' class='btn btn-primary' />
+        </form>
+        <a href="{% url "password_reset_recover" %}">Forget your Password?</a>
+    </div>
+
+    <div class="or">
+    <em>-or-</em>
+    </div>
+
+    <div class="twocol_2">
+    <h2>Sign Up</h2>
+    <p>Sign up for an account to purchase and renew subscriptions.</p>
+    <a class='btn btn-primary' href="{% url 'signup' %}{% if request.GET.next %}?next={{ request.GET.next}}{% endif %}">Sign Up</a>
+    </div>
+</div>
+</section>
+
+
+
+{% endblock %}

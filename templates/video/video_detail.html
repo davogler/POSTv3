@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.title|striptags }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}article {{ object.slug }}{% endblock %}
+
+{% load fb_versions %}
+{% load static %}
+
+{% block extrahead %}
+   
+{% endblock %}
+
+
+{% block smmeta %}
+{% version_object article.hero 'large' as hero_large %}
+    <meta property="og:title" content="{{ object.title|striptags }}">
+{% if object.intro %}
+    <meta name="description" content="{{ object.intro }}">
+{% else %}  
+    <meta name="description" content="{{ object.standfirst }}">
+{% endif %} 
+    <meta property='og:url' content='http://{{ site.domain }}{{ object.get_absolute_url }}'>
+{% if object.hero_alt %}    
+    <meta property='og:image' content="http://{{ site.domain }}{% version object.hero_alt 'large' %}">
+{% else %}  
+    <meta property='og:image' content="http://{{ site.domain }}{% version object.hero 'large' %}">
+{% endif %} 
+    <meta property="og:image:type" content="image/jpg">
+    <meta property="og:image:width" content="{{ hero_large.width }}">
+    <meta property="og:image:height" content="{{ hero_large.height }}">
+    
+    
+    
+
+
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@postrochester">
+    <meta name="twitter:creator" content="@postrochester">
+    <meta name="twitter:title" content="{{ object.title|striptags }}">
+{% if object.intro %}
+    <meta name="twitter:description" content="{{ object.intro }}">
+{% else %}  
+    <meta name="twitter:description" content="{{ object.standfirst }}">
+{% endif %} 
+{% if object.hero_alt %}
+    <meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero_alt 'small' %}">
+{% else %}  
+    <meta name="twitter:image:src" content="http://{{ site.domain }}{% version object.hero 'small' %}">
+{% endif %} 
+     <link rel="canonical" href="http://{{ site.domain }}{{ object.get_absolute_url }}">
+  
+    
+{% endblock %}
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+<section class="content-static">
+    <div class="brick clearfix">
+    
+    <h2> {{ video.title }}</h2>
+    {% if video.vimeo_id %}
+    <iframe src="https://player.vimeo.com/video/{{ video.vimeo_id }}?title=0&byline=0&portrait=0" width="960" height="540" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+    {% endif %}
+    {% if video.youtube_id %}
+    <iframe width="960" height="540" src="https://www.youtube.com/embed/{{ video.youtube_id }}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+    
+    <p>{{video.caption_text|safe}}</p>
+    </div>
+
+
+    <div id="ender" class="brick notsolast clearfix">
+        <aside class="more">
+            {% if video.article %}
+            <div class="vidthu clearfix">
+                <p class="which_vidthu">
+                Read the full article:</p>
+                <a href="{{ video.article.get_absolute_url }}">
+                <img class="thumbnail" src="{% version video.article.hero 'product_thumb' %} " alt="{{ object.hero.filename }}" /> <h4>{{ video.article.title }}</h4></a>
+            </div>
+            {% endif %}
+     
+            <div class="socialper">
+            
+            <ul class="social-buttons cf clearfix">
+                <li>
+                    <a href="http://twitter.com/share" class="socialite twitter-share" data-text="{{ object.title }} " data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-count="vertical" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a>
+                </li>
+                <li>
+                    <a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite googleplus-one" data-size="tall" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" rel="nofollow" target="_blank"><span class="vhidden">Share on Google+</span></a>
+                </li>
+                <li>
+                    <a href="http://www.facebook.com/sharer.php?u=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite facebook-like" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" data-send="false" data-layout="box_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Share on Facebook</span></a>
+                </li>
+                <li>
+                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite linkedin-share" data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-counter="top" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a>
+                </li>
+                
+            </ul>
+            
+            </div>
+                    
+        </aside>
+                    
+        <aside class="creators clearfix">
+            
+            <p>Creator{% if video.creator.count > 1 %}s{% endif %}:</p>
+            
+            <ul class="vidcreator">
+            {% for creator in video.creator.all %}
+                <li>
+                    {% if creator.link %}<a href="{{creator.link}}">{% endif %}
+                    {{ creator.name }}{% if creator.link %}</a>{% endif %} {{ creator.colophon }}
+                </li>
+            {% endfor %}
+            </ul>
+
+        </aside>
+                                        
+    </div><!--brick-->   
+
+    <div class="brick clearfix">
+
+        <div  class="nexte clearfix">
+
+            <ul class="morevid">
+            <h3>More Videos</h3>
+
+               {% for video in ttl %}
+                    <li class = "video_tile">
+                       <a href="{{ video.get_absolute_url }}">
+                        
+                         <img class="vidthumb" src="{% version video.thumbnail 'small' %}" alt="{{ video.thumbnail.filename }}" />
+                         <h3>{{ video.title|truncatechars:31 }}</h3>
+                         <i class="fa fa-play-circle"></i>
+                        </a>
+                    </li>
+               {% endfor %}
+               
+            </ul>
+            <h3 class="more"><a href="{% url 'video_list' %}">See All Videos <i class="fa fa-arrow-circle-right"></i></a></h3>
+            
+        </div>    
+    </div>   
+
+</section>
+    
+
+ 
+
+{% endblock %}
+
+{% block extrajs %}
+    <script src="{{ STATIC_URL }}js/vendor/imagezoom.js"></script>
+{% endblock %}
+
+{% block inlinejs %}<script type="text/javascript">{{ object.special_js|safe }}</script>
+
+
+</script>
+{% endblock %}
+{% block inlinecss %}<style type="text/css">{{ object.special_css|safe }}</style>
+{% endblock %}

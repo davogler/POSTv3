@@ -7,8 +7,19 @@ import datetime
 
 
 class Subscription(models.Model):
+    ROLLING_ONE_YEAR = 1
+    RENEWAL = 2
+    OTHER = 3
+    TYPE_CHOICES = (
+        (ROLLING_ONE_YEAR, 'Rolling One Year'),
+        (RENEWAL, 'Renewal'),
+        (OTHER, 'Other')
+    )
     title = models.CharField(max_length=200)
     sku = models.CharField(max_length=200, help_text='Enter as ABC-##')
+    term = models.IntegerField(default=6)
+    type = models.IntegerField(choices=TYPE_CHOICES, default=ROLLING_ONE_YEAR)
+    first_issue = models.IntegerField(help_text='Integer value of first issue')
     cutoff_date = models.DateTimeField(
         default=datetime.datetime.now, help_text='Last date to order subscription and still get this issue', blank=True)
     slug = models.SlugField(max_length=50, unique=True)

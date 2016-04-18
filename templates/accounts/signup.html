@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+
+
+{% block content %}
+
+<section class="content-static">
+  <div class="brick clearfix">
+        <h2>Sign Up for an Account</h2>
+
+         <div class="messages">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class='alert {% if "success" in message.tags %}alert-success{% elif "warning" in message.tags%}alert-warning{% elif "error" in message.tags %}alert-danger{% endif %} alert-dismissible' role='alert'>
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                    {% if "safe" in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="halfsies-left">
+            <form method='POST' action=''>{% csrf_token %}
+            {{ form|crispy }}
+
+            
+
+            <input type='submit' value='{% if submit_btn %}{{ submit_btn }}{% else %}Submit{% endif %}' class='btn btn-primary' />
+            {{ request.GET.urlencode }}
+            {{ request.GET.next }}
+            </form>
+        </div>
+
+        <div class="thirdsies-right">
+            <p>Creating an account will allow you to purchase subscriptions- and we'll save your order history for you.</p>
+            <img src="{{ STATIC_URL }}/i/binstock-ig.jpg" alt="POST Rochester Magazine"
+        </div>
+       
+    </div>
+
+   
+    
+</div>
+</section>
+
+
+
+{% endblock %}

@@ -1,146 +1,187 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
 import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+import filebrowser.fields
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Article'
-        db.create_table(u'articles_article', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('tagline', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('intro', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('body', self.gf('django.db.models.fields.TextField')()),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50)),
-            ('hero', self.gf('filebrowser.fields.FileBrowseField')(max_length=200, null=True, blank=True)),
-            ('screen', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('pub_date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2013, 10, 13, 0, 0))),
-            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['articles.Author'], null=True, blank=True)),
-            ('photog', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['articles.Photog'], null=True, blank=True)),
-            ('sponsor', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['articles.Sponsor'], null=True, blank=True)),
-            ('more_info', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('special_js', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('special_css', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('status', self.gf('django.db.models.fields.IntegerField')(default=2)),
-        ))
-        db.send_create_signal(u'articles', ['Article'])
+    dependencies = [
+    ]
 
-        # Adding model 'Image'
-        db.create_table(u'articles_image', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('article', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['articles.Article'])),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=35)),
-            ('image', self.gf('filebrowser.fields.FileBrowseField')(max_length=200, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'articles', ['Image'])
-
-        # Adding model 'Sponsor'
-        db.create_table(u'articles_sponsor', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('adimg', self.gf('filebrowser.fields.FileBrowseField')(max_length=200, null=True, blank=True)),
-            ('adlink', self.gf('django.db.models.fields.URLField')(max_length=200)),
-            ('endorsement', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('instances', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('paid_for', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('add_date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2013, 10, 13, 0, 0))),
-        ))
-        db.send_create_signal(u'articles', ['Sponsor'])
-
-        # Adding model 'Author'
-        db.create_table(u'articles_author', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('link', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
-            ('colophon', self.gf('django.db.models.fields.TextField')(blank=True)),
-        ))
-        db.send_create_signal(u'articles', ['Author'])
-
-        # Adding model 'Photog'
-        db.create_table(u'articles_photog', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('link', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
-            ('colophon', self.gf('django.db.models.fields.TextField')(blank=True)),
-        ))
-        db.send_create_signal(u'articles', ['Photog'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'Article'
-        db.delete_table(u'articles_article')
-
-        # Deleting model 'Image'
-        db.delete_table(u'articles_image')
-
-        # Deleting model 'Sponsor'
-        db.delete_table(u'articles_sponsor')
-
-        # Deleting model 'Author'
-        db.delete_table(u'articles_author')
-
-        # Deleting model 'Photog'
-        db.delete_table(u'articles_photog')
-
-
-    models = {
-        u'articles.article': {
-            'Meta': {'ordering': "['-pub_date']", 'object_name': 'Article'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['articles.Author']", 'null': 'True', 'blank': 'True'}),
-            'body': ('django.db.models.fields.TextField', [], {}),
-            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'hero': ('filebrowser.fields.FileBrowseField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'intro': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'more_info': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'photog': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['articles.Photog']", 'null': 'True', 'blank': 'True'}),
-            'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 10, 13, 0, 0)'}),
-            'screen': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'}),
-            'special_css': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'special_js': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'sponsor': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['articles.Sponsor']", 'null': 'True', 'blank': 'True'}),
-            'status': ('django.db.models.fields.IntegerField', [], {'default': '2'}),
-            'tagline': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'articles.author': {
-            'Meta': {'ordering': "['name']", 'object_name': 'Author'},
-            'colophon': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'link': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'articles.image': {
-            'Meta': {'object_name': 'Image'},
-            'article': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['articles.Article']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('filebrowser.fields.FileBrowseField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '35'})
-        },
-        u'articles.photog': {
-            'Meta': {'ordering': "['name']", 'object_name': 'Photog'},
-            'colophon': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'link': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'articles.sponsor': {
-            'Meta': {'ordering': "['-add_date']", 'object_name': 'Sponsor'},
-            'add_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 10, 13, 0, 0)'}),
-            'adimg': ('filebrowser.fields.FileBrowseField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'adlink': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
-            'endorsement': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'instances': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
-            'paid_for': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
-        }
-    }
-
-    complete_apps = ['articles']
+    operations = [
+        migrations.CreateModel(
+            name='Article',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=250)),
+                ('tagline', models.TextField(blank=True)),
+                ('show_tagline', models.BooleanField(default=True, help_text=b'check to show tagline on article summary page')),
+                ('intro', models.TextField(help_text=b'For article list view teaser- can be identical to standfirst if desired.', blank=True)),
+                ('standfirst', models.TextField(help_text=b'First paragraph in article body.', blank=True)),
+                ('body', models.TextField()),
+                ('slug', models.SlugField(unique_for_date=b'pub_date')),
+                ('hero', filebrowser.fields.FileBrowseField(help_text=b'Choose an huge image for this article. Minimum 1280 x 900', max_length=200, null=True, verbose_name=b'Hero Image', blank=True)),
+                ('hero_alt', filebrowser.fields.FileBrowseField(help_text=b'For displaying in SM metadata. (FB:1280x670) Optional.', max_length=200, null=True, verbose_name=b'Hero Alternate Image', blank=True)),
+                ('hero_credit', models.CharField(max_length=250, blank=True)),
+                ('screen', models.BooleanField(default=False, help_text=b'check for dark image needing light screen in header')),
+                ('pub_date', models.DateTimeField(default=datetime.datetime.now, blank=True)),
+                ('more_info', models.TextField(blank=True)),
+                ('featured', models.BooleanField(default=False)),
+                ('special_js', models.TextField(blank=True)),
+                ('special_css', models.TextField(help_text=b'Mainly h2.unique and p.tagline', null=True, blank=True)),
+                ('logo_fill', models.CharField(default=b'#333333', help_text=b'Hex color for Post logo #333333', max_length=250)),
+                ('logo_outline', models.CharField(default=b'#ffffff', help_text=b'Hex color for Post logo outline #ffffff', max_length=250)),
+                ('nav_color', models.CharField(default=b'#0073b6', help_text=b'Hex color for Nav links #0073b6', max_length=250)),
+                ('nav_hover', models.CharField(default=b'#a7a7a7', help_text=b'Hex color for Nav link hover state #a7a7a7', max_length=250)),
+                ('template_name', models.CharField(help_text=b'enter optional template to override default', max_length=250, blank=True)),
+                ('mapcode', models.TextField(help_text=b'Straight up JS to display map.', null=True, blank=True)),
+                ('status', models.IntegerField(default=2, choices=[(1, b'Published'), (2, b'Draft')])),
+                ('popular', models.BooleanField(default=False)),
+            ],
+            options={
+                'ordering': ['-pub_date'],
+                'verbose_name_plural': 'Articles',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Author',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=250)),
+                ('link', models.URLField(blank=True)),
+                ('colophon', models.TextField(blank=True)),
+            ],
+            options={
+                'ordering': ['name'],
+                'verbose_name_plural': 'Authors',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Illus',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=250)),
+                ('link', models.URLField(blank=True)),
+                ('colophon', models.TextField(blank=True)),
+            ],
+            options={
+                'ordering': ['name'],
+                'verbose_name_plural': 'Illustrators',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Image',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=35)),
+                ('image', filebrowser.fields.FileBrowseField(help_text=b'Inline image, yo. 960 640 or 525', max_length=200, null=True, verbose_name=b'Inline IMage', blank=True)),
+                ('caption', models.CharField(max_length=500, null=True, blank=True)),
+                ('article', models.ForeignKey(to='articles.Article')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Issue',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('volume', models.CharField(help_text=b'As in Issue X', max_length=250)),
+                ('month', models.CharField(help_text=b'As Month/Month 2014', max_length=250)),
+                ('slug', models.SlugField(unique_for_date=b'pub_date')),
+                ('title', models.CharField(default=b'A Magazine About Rochester', help_text=b'A Magazine About Rochester', max_length=250)),
+                ('tagline', models.TextField(default=b'Stories From the City We Love', help_text=b'Stories From the City We Love', blank=True)),
+                ('inside', models.TextField(help_text=b'Brief listing of what is inside this issue.', null=True, blank=True)),
+                ('hero', filebrowser.fields.FileBrowseField(help_text=b'Choose a huge image for this article. Minimum 1280 x 900', max_length=200, null=True, verbose_name=b'Hero Image', blank=True)),
+                ('hero_alt', filebrowser.fields.FileBrowseField(help_text=b'For displaying in SM metadata. (FB:1280 x 670) Optional.', max_length=200, null=True, verbose_name=b'Hero Alternate Image', blank=True)),
+                ('pub_date', models.DateTimeField(default=datetime.datetime.now, help_text=b'Pick first of first month, for ordering', blank=True)),
+                ('cover_img', filebrowser.fields.FileBrowseField(help_text=b'Upload a cover image; pick any version', max_length=200, null=True, verbose_name=b'Cover Image', blank=True)),
+                ('special_js', models.TextField(blank=True)),
+                ('special_css', models.TextField(help_text=b'Mainly h2.unique and p.tagline', null=True, blank=True)),
+                ('logo_fill', models.CharField(default=b'#333333', help_text=b'Hex color for Post logo #333333', max_length=250)),
+                ('logo_outline', models.CharField(default=b'#ffffff', help_text=b'Hex color for Post logo outline #ffffff', max_length=250)),
+                ('nav_color', models.CharField(default=b'#0073b6', help_text=b'Hex color for Nav links #0073b6', max_length=250)),
+                ('nav_hover', models.CharField(default=b'#a7a7a7', help_text=b'Hex color for Nav link hover state #a7a7a7', max_length=250)),
+                ('template_name', models.CharField(help_text=b'enter optional template to override default', max_length=250, blank=True)),
+                ('screen', models.BooleanField(default=False, help_text=b'check for dark image needing light screen in header')),
+                ('price', models.FloatField(default=6.0, null=True, blank=True)),
+                ('shipping', models.FloatField(default=4.0, null=True, blank=True)),
+                ('he_link', models.URLField(max_length=250, null=True, blank=True)),
+                ('in_stores', models.BooleanField(default=False, help_text=b'Is this currently at newstands?')),
+                ('sku', models.CharField(max_length=200, null=True, blank=True)),
+                ('for_sale', models.BooleanField(default=False, help_text=b'This will make it show up on product page.')),
+                ('status', models.IntegerField(default=2, choices=[(1, b'Published'), (2, b'Draft')])),
+            ],
+            options={
+                'ordering': ['-pub_date'],
+                'verbose_name_plural': 'Issues',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Photog',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=250)),
+                ('link', models.URLField(blank=True)),
+                ('colophon', models.TextField(blank=True)),
+            ],
+            options={
+                'ordering': ['name'],
+                'verbose_name_plural': 'Photographers',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Sponsor',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=250)),
+                ('adimg', filebrowser.fields.FileBrowseField(help_text=b'Upload an image to be used for advertising min width 525px', max_length=200, null=True, verbose_name=b'Ad Image', blank=True)),
+                ('adlink', models.URLField()),
+                ('endorsement', models.TextField(blank=True)),
+                ('add_date', models.DateTimeField(default=datetime.datetime(2016, 1, 24, 23, 55, 16, 175249))),
+            ],
+            options={
+                'ordering': ['-add_date'],
+                'verbose_name_plural': 'Sponsors',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='article',
+            name='author',
+            field=models.ManyToManyField(to='articles.Author', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='article',
+            name='illus',
+            field=models.ManyToManyField(to='articles.Illus', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='article',
+            name='issue',
+            field=models.ForeignKey(blank=True, to='articles.Issue', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='article',
+            name='photog',
+            field=models.ManyToManyField(to='articles.Photog', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='article',
+            name='sponsor',
+            field=models.ForeignKey(blank=True, to='articles.Sponsor', null=True),
+            preserve_default=True,
+        ),
+    ]

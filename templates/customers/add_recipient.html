@@ -10,6 +10,7 @@
 {% block headernav %}
 {% load article_tags %}
 {% banner request %} 
+{% load crispy_forms_tags %}
 {% endblock %}
 
 {% block content %}
@@ -17,18 +18,64 @@
 <section class="content-static">
   <div class="brick clearfix">
   
+  <p>To whom can we send this? Fill out the recipient details below{% if user.is_authenticated and recip_list %} or choose one that you've already used{% endif %}.</p>
+      <div class="halfsies-left">
+          <div id="recipadd">
+            
+            <form method='POST'  action=''>{% csrf_token %}
+                  
 
-    <div class="wrapper content">
+                  {% crispy recipient_form %}
+
+                   
+            </form>
+          </div>
+      </div>
+
+      <div class="thirdsies-right">
+
+        {% if user.is_authenticated and recip_list %}
+
+
+       <legend class="fs-title">Saved Addresses</legend>
+        <form action="{% url 'add_existing_recipient' %}" method="POST" id="registration-form" class="form-horizontal">{% csrf_token %} 
+
+        {% for item in recip_list %}
+
+        <div class="radio">  
+          <label> 
+            <input type="radio" name="recipOption"  value="{{ item.id }}" {% if forloop.last %}checked{% endif %}>
+            {% include "customers/address_display.html" %}
+          </label>
+          <input type="hidden" name="itm" value="{{itm}}">
+          <input type="hidden" name="rec" value="{{rec}}">
+          <input type="hidden" name="next" value="{{next}}">
+        </div>
+        {% endfor %}
+
+
+
+         <button type="submit" class="btn btn-primary pcta">
+                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                    Choose
+                </button>
+        </form>
+
+        {% else %}
+
         
-      
-        <h2>Add Address</h2>
-<form method='POST' action=''>{% csrf_token %}
-      {{ recipient_form.as_p }}
 
-        <input type='submit' class='btn btn-default' value='To The Moon'/>
-</form>
-  
-  </div>
+        {% endif %}
+
+      </div>
+
+
+
+
+
+    </div>
+
+
 
 </section>
 

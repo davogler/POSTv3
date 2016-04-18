@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Order Details | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<section class="content-static">
+    <div class="brick clearfix">
+
+   {% if user.is_staff %}
+   {% include "admin_nav.html" %} 
+    {% endif %}
+    
+   
+
+
+
+    <div class="wrapper content">
+        
+      
+        <h2>Order # {{ order.order_id }}</h2>
+        <p>{{ order.payer_name }}<br>
+        {{ order.payer_email }}<br>
+         {{ order.timestamp }}</p> 
+         <p> STATUS: {{ order.status }} 
+         <div class="table-responsive">
+        <div class="tertal">
+                <p><span class="tit">Sub Total: </span>${{ cart.product_total|floatformat:2 }}<br>
+                <span class="tit">Shipping:</span> ${{ cart.shipping_total|floatformat:2 }}</p>
+                <hr>
+                <p><span class="tit">Grand Total:</span> ${{ cart.total|floatformat:2 }}</p>
+                
+
+            </div>
+
+
+  <table class="table ordershow">
+                 <thead>
+                  <tr>
+                    <th class="item">Item</th>
+                    <th class="recip">Recipient</th>
+                
+                  </tr>
+
+                </thead>
+                <tbody>
+
+                
+                
+                  {% for item in subbies %}
+                  <tr class="subbie">
+                    <td class="item">{{ item.subscription.title }}</td>
+                   
+                    <td class="recip">
+                    <span class="sendto">send to:</span><br>
+                    {% if item.recipient %}
+                        {% with item.recipient as item %}
+                         {% include "customers/address_display.html" %}
+                        {% endwith %}
+                        
+                        
+                           
+                    {% endif %}
+                    </td>
+                    
+                  </tr>
+                  {% endfor %}
+
+
+                  {% for item in singles|slice:":1" %}
+                    
+                  <tr>
+                    <td class="item">{{ item.single.month }} issue ({{item.quantity}})</td>
+                    <td rowspan="{{ singles|length }}" class="recip">
+                        {% if forloop.first %}
+                        <span class="sendto">send to:</span><br>
+                            {% if order.main_recipient %}
+                                    
+                                    {% with order.main_recipient as item %}
+                                        {% include "customers/address_display.html" %}
+                                    {% endwith %}
+                                    
+                                    
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                   
+                  </tr>
+                  {% endfor %}
+
+                  {% for item in singles|slice:"1:" %}
+                    
+                  <tr>
+                    <td class="item">{{ item.single.month }} issue ({{item.quantity}})</td>
+                    
+                   
+                  </tr>
+                  {% endfor %}
+               
+
+
+               </tbody>
+                
+          </table>
+          </div>
+
+          </div>
+                                        
+    </div><!--brick-->   
+
+    
+
+</section>
+    
+
+ 
+
+{% endblock %}

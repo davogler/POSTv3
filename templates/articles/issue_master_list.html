@@ -61,25 +61,26 @@
     	<div class="hgroup">
     		<h2 class="list"><a href="{{ object.get_absolute_url }}">{{ object.volume }}</a></h2>
     		<p class="tagline-list">{{ object.month }}</p>
-    		{% if object.for_sale %}
-    		<div class="btnprice">
-                <form class="prodqty" method='POST' action='{% url "add_to_cart" object.slug %}'>
-                {% csrf_token %}
-                     <input type='submit' class="prodmit btn btn-primary pcta" value='Buy Now' />
-                </form>
-    			
-    		</div>
-    		{% else %}
-    		<a  class="btn btn-default pcta" >Sold Out!</a>
-    		{% endif %}
+
     	</div>
     	<div class="inside-desc">
     		<p>{{ object.inside }}</p>
     		
     		
-    	</div>	 
-    	
-    	
+    	 
+    	   {% if object.for_sale %}
+            <div class="btnprice">
+                <form class="prodqty" method='POST' action='{% url "add_to_cart" object.slug %}'>
+                {% csrf_token %}
+                     <input type='submit' class="prodmit btn btn-primary pcta" value='Buy It: $11' />
+                     <span>$7+$4 S/H</span>
+                </form>
+                
+            </div>
+            {% else %}
+            <a  class="btn btn-default pcta" >Sold Out!</a>
+            {% endif %}
+    	</div> 
     	       	
     	
     </article>
@@ -90,4 +91,9 @@
     </section>
    
 {% endblock %}
+
+<div class="btnprice">
+                <a data-cart-add="pb20151112" data-cart-show="1" class="btn btn-primary pcta">Buy It: $11</a>
+                <span>$7+$4 S/H</span>
+            </div>
 

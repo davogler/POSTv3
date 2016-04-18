@@ -1,0 +1,57 @@
+<h2>Completed Orders</h2>
+
+
+
+
+<table class="table ordershow">
+             <thead>
+              <tr>
+                <th class="orderno">Order</th>
+                <th class="orderdate">Date</th>
+                <th class="orderdesc">Items</th>
+                <th class="orderamt">Amount</th>
+                
+              </tr>
+
+            </thead>
+            <tbody>
+            {% for order in orderlist %}
+                <tr>
+                <td>
+                    <a href="{{ order.get_absolute_url }}">
+                        <h3>{{ order.order_id }}</h3>
+                    </a> 
+                </td>
+                <td> {{ order.timestamp|date:"F j, Y" }} </td>
+
+                <td></td>
+                
+                <td> ${{ order.total|floatformat:2 }} </td>
+                
+                </tr>
+
+                {% for item in order.cart.cartitem_set.all %}
+                <tr>
+                <td></td>
+                 <td></td>
+                <td>
+                
+                   {% if item.subscription %} {{ item.subscription }} 
+                   {% elif item.single %} {{ item.single }} issue ({{item.quantity}}) {% endif %}
+                </td>
+                <td></td>
+                
+                <td></td>
+                </tr>
+                {% endfor %}
+                <tr class = "ender">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+                
+          </table>
+

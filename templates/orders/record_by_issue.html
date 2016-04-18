@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<section class="content-static">
+    <div class="brick clearfix">
+
+    {% if user.is_staff %}
+   {% include "admin_nav.html" %} 
+    {% endif %}    
+
+        <h2>Records for Issue {{issue}}</h2>
+        <p>Everything ever recorded</p>
+
+        <table class="table ordershow records">
+             <thead>
+              <tr>
+                
+                <th class="recip">Last Name</th>
+                <th class="recip">First Name</th>
+                <th class="recip">Org</th>
+                <th class="status">Address</th>
+                <th class="status">Address2</th>
+                <th class="status">Zip</th>
+                <th class="status">State</th>
+                <th class="status">Country</th>
+                <th class="status">Orginating Order</th>
+                <th class="status">Issue</th>
+            
+              </tr>
+
+            </thead>
+            <tbody>
+        
+            {% for record in records %}
+                
+                <tr>
+                
+               
+                <td> {{ record.recipient.last_name }} </td>
+                <td> {{ record.recipient.first_name }} </td>
+                <td> {{ record.recipient.org }} </td>
+                <td> {{ record.recipient.address_line1 }} </td>
+                <td> {{ record.recipient.address_line2 }} </td>
+                <td> {{ record.recipient.postal_code }} </td>
+                <td> {{ record.recipient.state }} </td>
+                <td> {{ record.recipient.country }} </td>
+               
+                
+                <td> <a href="{{record.originating_order.get_absolute_url}}">{{ record.originating_order }}</a> </td>
+                 <td> <a href="{% url 'record_by_issue' record.issue %}">{{ record.issue }} </a></td>
+                 
+                </tr>
+
+            {% endfor %}
+            </tbody>
+                
+          </table>
+        
+        <div class="form-controls">
+          <a href="#" class= "btn btn-primary">Download</a>
+        </div>
+      
+    </div>
+</section>
+
+
+{% endblock %}

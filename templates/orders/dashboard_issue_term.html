@@ -1,0 +1,75 @@
+
+{% load order_tags %}
+{% load customer_tags %}
+
+{% regroup records by recipient as recipient_list %}
+
+    <table class="table subshow">
+        <tbody>
+                <thead>
+              <tr>
+                <th class="orderdesc">Recipient</th>
+                <th class="substatus">Status</th>
+                <th class="orderdate"></th>
+                <th class="orderdate"></th>
+
+
+                
+              </tr>
+
+            </thead>
+
+            {% for recipient in recipient_list %}
+            <tr>
+                        <td>
+                {% for item in recipient.list %}
+                {% if forloop.first %}
+                    {% get_first_month item.issue as the_first_month %}
+                    {% get_second_month item.issue as the_second_month %}
+                    {% get_active_status the_first_month as active_status %}
+
+                    {% include "customers/address_display.html" with item=item.recipient %}
+                    </td>
+                   
+
+                    <td class="substatus">
+                    {% get_recip_status item.recipient.id as status %} 
+                    {% if status == "Active" %}
+                    <i class="fa fa-circle" style="color:green;" aria-hidden="true"></i>
+                    {% else %}
+                    <i class="fa fa-circle-o" style="color:gray;" aria-hidden="true"></i> 
+                    {% endif %}
+
+                    {{status}}<br>
+                    Last Issue: {{ item.issue }}<br>
+                    ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})
+                     </td>
+
+                     <td></td>
+
+
+                    <td>
+                   <a href="{% url "edit_recipient" %}?rec={{item.recipient.id}}&next=dashboard" class="btn btn-primary edit_rec">Change Address</a>
+                   {% if active_status %}
+                       <form class="renew" method='POST' action='{% url 'add_renewal' slug="one-year-renewal" recipient_id=item.recipient.id %}'>
+                            {% csrf_token %}
+                            <input type='submit' class="btn btn-primary subrenew" value='Renew Now' />
+                        </form>
+                    {% else %}
+                        <form class="add" method='POST' action='{% url 'add_again' item.recipient.id %}'>
+                            {% csrf_token %}
+                            <input type='submit' class="btn btn-primary subrenew" value='Subscribe Again' >
+                        </form>
+                    {% endif %}
+                    </td>
+            </tr>
+
+                 
+                {% endif %}
+                {% endfor %}
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+

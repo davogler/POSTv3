@@ -11,6 +11,9 @@
 {% banner request %} 
 {% endblock %}
 
+{% load cart_tags %}
+{% load order_tags %}
+
 {% block content %}
 
 <section class="content-static">
@@ -18,12 +21,12 @@
   
  {% load article_tags %}
     {{ block.super }}
-    <div class="wrapper content">
+    <div class="wrapper content clearfix">
         
       
         <h2>My Cart</h2>
         {% if empty %}
-            <p class="lead cart">{{ empty_message }} Here are some things you can put in it:</p>
+            <p class="lead cart">{{ empty_message }} Never fear! Here are some things you can put in it:</p>
             
              {% issue_slider request %}
         {% else %}
@@ -48,7 +51,7 @@
             
          
           <!-- Table -->
-          <table class="table cartshow">
+          <table class="table cartshow ">
                  <thead>
                   <tr>
                     <th class="item">Item</th>
@@ -63,18 +66,41 @@
                 
                 
                   {% for item in subbies %}
-                  <tr>
-                    <td class="item">{{ item.subscription.title }}</td>
                    
-                    <td class="qty">{{ item.quantity }}</td>
-                    <td class="subttl">${{ item.line_total|floatformat:0 }}</td>
-                    
-                    <td class="action">
-                    <a href="{% url "update_cart" item.flug %}"><i class="fa fa-plus fa-lg"></i></a>
-                    
-                    <a href="{% url "remove_from_cart" item.flug %}"><i class="fa fa-times fa-lg"></i></a>
-                    </td>
-                  </tr>
+                    {% get_last_record item.recipient as the_last_record %}
+                    {% if the_last_record %}
+                      {% get_first_month the_last_record as the_first_month %}
+                      {% get_second_month the_last_record as the_second_month %}
+
+                      <tr>
+                        <td class="item">{{ item.subscription.title }} for {{item.recipient}}
+                        <span class="subitem">starting with Issue {{ the_last_record }} ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span> </td>
+                       
+                        <td class="qty">{{ item.quantity }}</td>
+                        <td class="subttl">${{ item.line_total|floatformat:0 }}</td>
+                        
+                        <td class="action">
+                        
+                        
+                        <a href="{% url "remove_from_cart" item.flug %}"><i class="fa fa-times fa-lg"></i></a>
+                        </td>
+                      </tr>
+                    {% else %}
+                      {% get_first_month item.subscription.first_issue as the_first_month %}
+                      {% get_second_month item.subscription.first_issue as the_second_month %}
+                      <tr>
+                        <td class="item">{{ item.subscription.title }} <span class="subitem">starting with Issue {{ item.subscription.first_issue }} ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span></td>
+                       
+                        <td class="qty">{{ item.quantity }}</td>
+                        <td class="subttl">${{ item.line_total|floatformat:0 }}</td>
+                        
+                        <td class="action">
+                        <a href="{% url "update_cart" item.flug %}"><i class="fa fa-plus fa-lg"></i></a>
+                        
+                        <a href="{% url "remove_from_cart" item.flug %}"><i class="fa fa-times fa-lg"></i></a>
+                        </td>
+                      </tr>
+                    {% endif %}
                   {% endfor %}
 
                   {% for item in singles %}

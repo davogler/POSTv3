@@ -1,0 +1,47 @@
+{% extends "password_reset/base.html" %}{% load i18n %}{% load url from future %}{% load i18n grp_tags %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<section class="content-static">
+  <div class="brick clearfix">
+<div class="g-d-c g-d-10 g-centered">
+<form method="post" action="{% url "password_reset_reset" token %}">
+<fieldset class="grp-module grp-module-login">
+    <h1>
+        <span class="grp-admin-title">{% if grappelli_admin_title %}{{ grappelli_admin_title }}{% else %}{% get_admin_title %}{% endif %}</span>
+        <span class="grp-current-page">{% trans "Password Reset" %}</span>
+    </h1>
+    
+    <div class="grp-module">
+		<div class="grp-row grp-errors">
+		{% if invalid %}{% url "password_reset_recover" as recovery_url %}
+			<p>{% blocktrans %}Sorry, this password reset link is invalid. You can still <a href="{{ recovery_url }}">request a new one</a>.{% endblocktrans %}</p>
+		{% else %}
+			<p>{% blocktrans %}Hi, <strong>{{ username }}</strong>. Please choose your new password.{% endblocktrans %}</p>
+		</div>
+			
+				{% csrf_token %}
+				<div class="grp-row">
+				{{ form.as_p }}
+				</div>
+		</fieldset>
+				
+				<div class="grp-module grp-submit-row">
+				    <input type="submit" value="{% trans "Set new password" %}" class='btn btn-primary pcta'>
+				     
+				    
+				</div>
+				
+				
+			</form>
+	{% endif %}
+	</div>
+</div>
+
+</div>
+
+</section>
+{% endblock %}
+
+

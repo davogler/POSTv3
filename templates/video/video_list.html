@@ -1,0 +1,121 @@
+{% extends "base.html" %} 
+
+{% block title %}Rochester Videos | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+{% load fb_versions %}
+
+{% block smmeta %}
+    <meta name="description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+
+    <meta property='og:title' content='Post. This is Rochester'>
+    <meta name="description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+    <meta property='og:url' content='http://{{ site.domain }}{{ flatpage.url }}'>
+    <meta property='og:image' content='https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-ash4/1000837_175802752593615_1524246974_n.jpg'>
+    
+    
+    
+    
+
+
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@postrochester">
+    <meta name="twitter:creator" content="@postrochester">
+    <meta name="twitter:title" content="Post. This is Rochester">
+    <meta name="twitter:description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+    <meta name='twitter:image' content='https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-ash4/1000837_175802752593615_1524246974_n.jpg'>
+{% endblock %}
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+<section class="content-static">
+    <div class="brick clearfix">
+
+    <h2>Post Videos</h2>
+    <p>Short documentaries created by the POST team.</p>
+<ul class="videolist">
+   {% for video in post_videos %}
+        <li class = "video_tile">
+            <a href="{{ video.get_absolute_url }}">
+            
+             <img class="vidthumb" src="{% version video.thumbnail 'small' %}" alt="{{ video.thumbnail.filename }}" />
+             <h3>{{ video.title }}</h3>
+             <i class="fa fa-play-circle"></i>
+            </a>
+        </li>
+   {% endfor %}
+   </ul>
+    
+    </div>
+
+{% if ad1 %}
+<div class="brick clearfix underwriter">
+    <p>Special thanks to our underwriters:</p>
+    <div class="banner728">
+        <a id="ad1" href="{{ad1.adlink}}" onclick="ga('send','event','Outgoing Ad Clicks','{{ad1.name}}')" target="_blank">
+        <img class="fullwidead" src="{{ ad1.adimg.url}}" alt="{{ad1.name}}" />
+
+    </a>
+    </div>
+
+</div>
+{% endif %}
+
+
+<div class="brick clearfix">
+
+    <h2>Community Videos</h2>
+    <p>A curated collection of locally-focused documentaries.</p>
+<ul class="com_videolist">
+   {% for video in community_videos %}
+        <li class = "video_tile">
+           <a href="{{ video.get_absolute_url }}">
+            
+             <img class="vidthumb" src="{% version video.thumbnail 'small' %}" alt="{{ video.thumbnail.filename }}" />
+             <h3>{{ video.title|truncatechars:31 }}</h3>
+             <i class="fa fa-play-circle"></i>
+            </a>
+        </li>
+   {% endfor %}
+   </ul>
+    
+    </div>
+
+{% if ad2 %}
+<div class="brick clearfix underwriter">
+    <p>Special thanks to our underwriters:</p>
+    <div class="banner728">
+        <a id="ad2" href="{{ad2.adlink}}"  target="_blank">
+        <img class="fullwidead" src="{{ ad2.adimg.url}}" alt="{{ad2.name}}" />
+        
+    </a>
+    </div>
+
+</div>
+{% endif %}
+
+</section>
+
+
+{% endblock %}
+
+{% block inlinejs %}
+<script type="text/javascript">
+    $('#ad1').on('click', function() {
+        ga('send','event','Outgoing Ad Clicks','{{ad1.name}}');
+    });
+    $('#ad2').on('click', function() {
+        ga('send','event','Outgoing Ad Clicks','{{ad2.name}}');
+    });
+
+</script>
+
+
+{% endblock %}

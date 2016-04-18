@@ -28,8 +28,8 @@
 		                       
 		                       #outline path { fill: {{ Issue.logo_outline }}; }
 		                       #phil path { fill: {{ Issue.logo_fill }}; }
-		                       #widenav nav.mm ul li a, #popnav a.toggly, #widecart a.cartlink{color: {{ Issue.nav_color }};}
-		                       #widenav nav.mm ul li a:hover, #widecart a.cartlink:hover{color: {{ Issue.nav_hover }};}     
+		                       #widenav nav.mm ul li a, #popnav a.toggly, #widecart a.cartlink, #widecart a.loglink {color: {{ Issue.nav_color }};}
+		                       #widenav nav.mm ul li a:hover, #widecart a.cartlink:hover, #widecart a.loglink:hover{color: {{ Issue.nav_hover }};}     
 		 </style>
 		{% endif %}
 		
@@ -38,8 +38,8 @@
 		                       
 		                       #outline path { fill: {{ article.logo_outline }}; }
 		                       #phil path { fill: {{ article.logo_fill }}; }
-		                       #widenav nav.mm ul li a, #popnav a.toggly, #widecart a.cartlink{color: {{ article.nav_color }};}
-		                       #widenav nav.mm ul li a:hover,#widecart a.cartlink:hover{color: {{ article.nav_hover }};}   
+		                       #widenav nav.mm ul li a, #popnav a.toggly, #widecart a.cartlink, #widecart a.loglink{color: {{ article.nav_color }};}
+		                       #widenav nav.mm ul li a:hover,#widecart a.cartlink:hover, #widecart a.loglink:hover{color: {{ article.nav_hover }};}   
 		 </style>
 		{% endif %}
 		
@@ -51,10 +51,13 @@
 		<li><a href="/about/" title="About Post">about</a></li>
 		<li><a href="{% url 'article_list' %}" title="Read More Articles">articles</a></li>
 		<li><a href="{% url 'issue_master_list' %}" title="See All Issues">issues</a></li>
+		<li><a href="{% url 'video_list' %}" title="Watch Rochester Videos">videos</a></li>
 		<li><a href="/newsstands/" title="Newsstands">newsstands</a></li>
 		<li><a href="/advertise/" title="Advertise">advertise</a></li>
 		<li><a href="/subscribe/" title="Subscribe">subscribe</a></li>
+		<li id="poplog"></li>
 		<li id="popcart"></li>
+		
   
 		{% if user.is_authenticated %}
 		{% load article_tags %}
@@ -67,7 +70,13 @@
 	
 </nav>
 <div id="widecart">
-	<a intent in-standard-prepend="#widecart" in-mobile-prepend="#popcart" in-tablet-prepend="#widecart" class="cartlink" href="/cart/" title="My Cart"><span class="title_popcart">my cart</span> <i class="fa fa-shopping-cart fa-lg"></i>{{ request.session.items_total }}</a>
+	{% if user.is_authenticated %}
+         <a intent in-standard-prepend="#widecart" in-mobile-prepend="#poplog" in-tablet-prepend="#widecart" class="loglink" href="{% url 'dashboard' %}">Account</a>
+     {% else %}
+        <a intent in-standard-prepend="#widecart" in-mobile-prepend="#poplog" in-tablet-prepend="#widecart" class="loglink" href="{% url 'auth_login' %}">Login</a>
+     {% endif %}
+	
+	<a intent in-standard-prepend="#widecart" in-mobile-prepend="#popcart" in-tablet-prepend="#widecart" class="cartlink" href="/cart/" title="My Cart"><span class="title_popcart">my cart</span> <i class="fa fa-shopping-cart fa-lg"></i><span class="ct-badge">{{ request.session.items_total }}</span></a>
 
 </div>
 </div>

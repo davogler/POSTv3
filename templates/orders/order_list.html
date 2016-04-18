@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<section class="content-static">
+    <div class="brick clearfix">
+
+    {% if user.is_staff %}
+   {% include "admin_nav.html" %} 
+    {% endif %}    
+
+        <h2>Orders</h2>
+        <p>Everything ever ordered</p>
+
+        <table class="table ordershow">
+             <thead>
+              <tr>
+                <th class="item">Order</th>
+                <th class="recip">Payer</th>
+                <th class="status">Status</th>
+            
+              </tr>
+
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                <td>
+                    <a href="{{ order.get_absolute_url }}">
+                        <h3>{{ order.order_id }}</h3>
+                    </a> 
+                </td>
+                <td> {{ order.payer_name }} </td>
+                <td> {{ order.status }} </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+                
+          </table>
+
+        <ul class=" ">
+           {% for order in orders %}
+            <li class = " ">
+                <a href="{{ order.get_absolute_url }}">
+                
+                 
+                 <h3>{{ order.order_id }}</h3>
+                
+                </a>
+            </li>
+            {% endfor %}
+       </ul>   
+    </div>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,562 @@
+{% extends "articles/article_detail.html" %}
+
+{% block extrahead %}{{ block.super }}
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script> 
+{% endblock %}
+
+{% load fb_versions %}
+{% load static %}
+
+{% block headernav %}
+<div id="popnav"></div>
+<header class="banner">
+	<div class="headerwrap{% if object.screen %} screen{% endif %}">
+    	
+    	
+    	{% include "nav.html" %}
+    	
+    	
+    </div>
+    <img class="sticky" src="{% version object.hero 'large' %}" alt="{{ object.hero.filename }}" />
+    <div class="hr-flat"> </div>
+	
+</header>
+
+{% endblock %}
+
+{% block content %}
+
+
+<article class="full">
+ 	<header>
+     	<div id="mainmap"> </div>
+     	
+     	<div class="hgroup">
+	        	<h2 class="unique"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
+	        	<p class="tagline">{{ object.tagline }}</p>
+     	</div>
+ 	</header>
+ 
+{% block mapcode %}
+
+	<script type="text/javascript"> 
+	var map = L.mapbox.map('mainmap', 'dvpost.ia0on66j', {attributionControl: false, scrollWheelZoom: false}).setView([43.155261763602375, -77.6007056236267], 11);
+ map.zoomControl.setPosition('topright');
+ 
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+var geojson = {
+    type: 'FeatureCollection',
+    features: [{
+        type: 'Feature',
+        properties: {
+           	title: 'Abbott\'s',
+        	description: '4791 Lake Avenue',
+    		'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Washington,_D.C.'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.6091638, 43.2581755 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'LuGia\'s',
+        	description: '4719 County Road 117<br>Spencerport',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.7564322, 43.167013 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Don\'s Original',
+        	description: '4900 Culver Road<br>Seabreeze',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.5379117, 43.2344048 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Hedonist',
+        	description: '672 South Ave.<br> Rochester',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.6041539, 43.1424053 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Seneca Farms',
+        	description: '2485 Route 54A<br> Penn Yan',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.0718933, 42.6551152 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Orbaker\’s Drive In',
+        	description: '4793 Route 104<br> Williamson',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.153563, 43.2359877 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Bruster\’s Real Ice Cream',
+        	description: '1041 Ridge Road<br> Webster',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.4550554, 43.2091424 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Pittsford Farms Dairy',
+        	description: '44 N Main St.<br> Pittsford',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.5127722, 43.0940934]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Moonlight Creamery',
+        	description: '36 West Ave.<br> Fairport',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.443065, 43.101679]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Eat Me',
+        	description: 'The Hungerford Bldg<Br> Rochester',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.5829746, 43.1612099 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Netsin\’s',
+        	description: '290 Culver Parkway<Br> Rochester',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.5518167, 43.1718256 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Russell\’s',
+        	description: '2385 Chili Ave.<Br> Rochester',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.6964969, 43.128509 ]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Schaller\’s Drive-In',
+        	description: '965 Edgemere Drive<br> Greece',
+        	'marker-size': 'medium',
+        	"marker-symbol": 'ice-cream',
+        	'marker-color': '#0073b6',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.6523125, 43.2785988 ]
+        }
+    }]
+};
+
+myLayer.setGeoJSON(geojson);
+
+map.featureLayer.on('ready', function(e) {
+    document.getElementById('abt').onclick= abtLink;
+    document.getElementById('don').onclick= donLink;
+    document.getElementById('lug').onclick= lugLink;
+    document.getElementById('hed').onclick= hedLink;
+    document.getElementById('sen').onclick= senLink;
+    document.getElementById('orb').onclick= orbLink;
+    document.getElementById('bru').onclick= bruLink;
+    document.getElementById('pit').onclick= pitLink;
+    document.getElementById('moon').onclick= moonLink;
+    document.getElementById('eat').onclick= eatLink;
+    document.getElementById('net').onclick= netLink;
+    document.getElementById('rus').onclick= rusLink;
+    document.getElementById('scha').onclick= schaLink;
+});
+
+
+
+function abtLink() {
+         myLayer.eachLayer(function(layer) {        
+   		 	if (layer.feature.properties.description === 'Abbott\'s') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		});
+};
+
+function donLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Don\'s Original') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function lugLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'LuGia\'s') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function hedLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Hedonist') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function senLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Seneca Farms') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+
+function orbLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Orbaker\’s Drive In') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function bruLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Bruster\’s Real Ice Cream') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function pitLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Pittsford Farms Dairy') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function moonLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Moonlight Creamery') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function eatLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Eat Me') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function netLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Netsin\’s') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function rusLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Russell\’s') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+function schaLink() {
+         myLayer.eachLayer(function(layer) {
+   		 	if (layer.feature.properties.title === 'Schaller\’s Drive-In') {
+   		 	 map.setView(layer.getLatLng(), 14);
+       		 layer.openPopup();
+    		}
+		}); 
+};
+
+
+
+
+
+
+
+
+
+myLayer.on('mouseover', function(e) {
+    e.layer.openPopup();
+});
+myLayer.on('mouseout', function(e) {
+    e.layer.closePopup();
+});
+	
+	</script>
+
+
+{% endblock %}
+
+<section class="content">
+
+	<div class="brick first">
+		 <section class="primary">
+		<p><em>{{ object.standfirst|safe }}</em></p>
+		
+		</section> 
+		<aside class="secondary">
+			<div id="authorship" class="authorship clearfix">
+				
+				
+				{% if object.author.all %}
+				<p>by 
+				
+				{% for author in object.author.all %}
+				    {% if author.link %}
+					  <a href="{{ author.link }}">{{ author.name }}</a>
+					{% else %}
+					  {{ author.name }}
+					{% endif %}
+					{% if forloop.last %}{% else %}
+					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
+					{% endif %}
+				{% endfor %}
+				</p>
+				{% endif %}
+				
+				
+				{% if object.photog.all %}
+				<p>photography by 
+				
+				{% for photog in object.photog.all %}
+				    {% if photog.link %}
+					  <a href="{{ photog.link }}">{{ photog.name }}</a>
+					{% else %}
+					  {{ photog.name }}
+					{% endif %}
+					{% if forloop.last %}{% else %}
+					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
+					{% endif %}
+				{% endfor %}
+				</p>
+				{% endif %}
+			
+			
+				{% if object.illus.all %}
+				<p>Illustrations by 
+				
+				{% for illus in object.illus.all %}
+				    {% if illus.link %}
+					  <a href="{{ illus.link }}">{{ illus.name }}</a>
+					{% else %}
+					  {{ illus.name }}
+					{% endif %}
+					{% if forloop.last %}{% else %}
+					{% ifequal forloop.revcounter0 1 %}&amp; {% else %}, {% endifequal %}
+					{% endif %}
+				{% endfor %}
+				</p>
+				{% endif %}
+			</div>
+			
+			{% block mapsidebar %} {% endblock %}
+			
+		</aside>      		
+	</div>
+	
+	
+
+
+    
+    {{ object.body|safe }}
+    
+    
+    
+ <div id="ender" class="brick last clearfix">
+ 	        	<aside class="more">
+ 	        	 	{% if object.issue %}
+ 	        	 	<div class="isthu clearfix">
+ 	        		 	<p class="which_isthu"><img class="cover_img" src="/media/{{ object.issue.cover_img }}" alt="{{ object.issue.month }}">
+                         This article originally appeared in the {{ object.issue.month }} issue of POST. <a href="/subscribe">Subscribe</a> for more.</p>
+ 	           	
+ 	           		</div>
+ 	        		{% endif %}
+ 	        		<p>{{ object.more_info|safe }}</p>
+ 	        		
+ 	        		
+ 	        		
+ 	        		
+ 	        		
+ 	        		<div class="socialper">
+ 	        		
+ 	        		<ul class="social-buttons cf clearfix">
+ 	        		    <li>
+ 	        		        <a href="http://twitter.com/share" class="socialite twitter-share" data-text="{{ object.title }} " data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-count="vertical" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite googleplus-one" data-size="tall" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" rel="nofollow" target="_blank"><span class="vhidden">Share on Google+</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.facebook.com/sharer.php?u=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite facebook-like" data-href="http://{{ site.domain }}{{ object.get_absolute_url }}" data-send="false" data-layout="box_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Share on Facebook</span></a>
+ 	        		    </li>
+ 	        		    <li>
+ 	        		        <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://{{ site.domain }}{{ object.get_absolute_url }}" class="socialite linkedin-share" data-url="http://{{ site.domain }}{{ object.get_absolute_url }}" data-counter="top" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a>
+ 	        		    </li>
+ 	        		    
+ 	        		</ul>
+ 	        		
+ 	        		</div>
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        	<aside class="creators clearfix">
+ 	        		
+ 	        		
+ 	        		{% if object.author.all %}
+ 	        		   {% for author in object.author.all %}
+ 	        			  <p>{{ author.colophon|safe }}</p>
+ 	        		   {% endfor %}
+ 	        		{% endif %}
+ 	        		
+ 	        		{% if object.photog.all %}
+ 	        		    {% for photog in object.photog.all %}
+ 	        			  <p>{{ photog.colophon|safe }}</p>
+ 	        			{% endfor %}
+ 	        		{% endif %}
+ 	        		
+ 	        		{% if object.illus.all %}
+ 	        		    {% for illus in object.illus.all %}
+ 	        			  <p>{{ illus.colophon|safe }}</p>
+ 	        			{% endfor %}
+ 	        		{% endif %}
+ 	        			
+ 	        			
+ 	        		
+ 	        		
+ 	        	
+ 	        	</aside>
+ 	        	
+ 	        <div class="sponsor"
+ 	             intent
+ 	             in-standard-after="#authorship">
+ 	            {% if object.sponsor %}
+ 	        		<p> sponsored by: </p>
+ 	        		<img src="{% version object.sponsor.adimg 'medium' %} " alt="{{ object.sponsor.name }}" />
+ 	        	{% endif %}
+ 	        </div>
+ 	        	
+ 	        	
+ 	        </div><!--brick-->   
+    
+    </section>
+    
+    	 </article>
+ 
+
+{% endblock %}

@@ -61,7 +61,9 @@
     {% endif %}
     	<div class="hgroup">
     		<h2 class="list"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
-    		<p class="tagline-list">{{ object.tagline }}</p>
+    		{% if object.show_tagline %}
+        <p class="tagline-list">{{ object.tagline|striptags }}</p>
+        {% endif %}
     		<p class="intro">{{ object.intro|safe }}</p>
     	</div>	        	
     	

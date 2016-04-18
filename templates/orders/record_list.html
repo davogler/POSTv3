@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<section class="content-static">
+    <div class="brick clearfix">
+
+    {% if user.is_staff %}
+   {% include "admin_nav.html" %} 
+    {% endif %}    
+
+        <h2>records</h2>
+        <p>Everything ever recorded</p>
+
+        <table class="table ordershow records">
+             <thead>
+              <tr>
+                <th class="item">Issue</th>
+                <th class="recip">Recipient</th>
+                <th class="status">Orginating Order</th>
+                <th class="status">Issue</th>
+            
+              </tr>
+
+            </thead>
+            <tbody>
+        {% regroup records by issue as issue_record_list %}
+            {% for record in issue_record_list %}
+                
+                <tr>
+                <td>
+                    <a href="{{ record.get_absolute_url }}">
+                        <h3>{{ record.grouper }} {{r}}</h3>
+                    </a> 
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+                {% for r in record.list %}
+                <tr>
+                <td></td>
+                <td> {{ r.recipient }} </td>
+                <td>  <a href="{{r.originating_order.get_absolute_url}}">{{ r.originating_order }}</a></td>
+                 <td> <a href="{% url 'record_by_issue' r.issue %}">{{ r.issue }} </a> </td>
+                 {% endfor %}
+                </tr>
+
+            {% endfor %}
+            </tbody>
+                
+          </table>
+
+      
+    </div>
+</section>
+
+
+{% endblock %}

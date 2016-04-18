@@ -30,3 +30,7 @@ class EmailBackend(BasicBackend):
                 return None
         if user.check_password(password):
             return user
+
+from django.contrib.auth.forms import AuthenticationForm
+
+AuthenticationForm.base_fields['username'].max_length = 75

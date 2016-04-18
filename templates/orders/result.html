@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+{% block title %}Order Confirmation | {{ block.super }}{% endblock %}
 
 {% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
 
@@ -21,9 +21,14 @@
     <div class="wrapper content">
         
       
-        <h2>THSNKS</h2>
+        <h2>THANKS FOR YOUR ORDER!</h2>
         
-            <p class="lead cart">{{ empty_message }} Here are some things you can put in it:</p>
+            <p class="lead cart">{{ empty_message }} Your order number is <br> <h3>{{ order.order_id}}</h3></p>
+            
+
+            <p>A confirmation email was sent to <em>{{ order.payer_name }}</em> at <a href="{{ order.payer_email }}">{{ order.payer_email }}</a>.</p>
+
+            <p>Thank you for your support!</p>
             
              {% issue_slider request %}
         

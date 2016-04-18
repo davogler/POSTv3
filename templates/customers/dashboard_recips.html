@@ -1,0 +1,67 @@
+{% load customer_tags %}
+
+<h2>Saved Recipients</h2>
+
+  <table class="table subshow">
+    <tbody>
+      <thead>
+        <tr>
+          <th class="orderdesc">Address</th>
+          <th class="orderdate">Subscription Status</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      {% for item in reciplist %}
+      <tr>
+        <td>
+          {% include "customers/address_display.html" %}
+        </td>
+
+        <td class="substatus">
+        {% get_recip_status item.id as status %} 
+        {% if status == "Active" %}
+        <i class="fa fa-circle" style="color:green;" aria-hidden="true"></i>
+        {% else %}
+        <i class="fa fa-circle-o" style="color:gray;" aria-hidden="true"></i> 
+        {% endif %}
+
+        {{status}}
+         </td>
+
+        <td>
+          <a class="btn {% if status == "Active" %}btn-default{% else %}btn-primary {% endif %} edit_rec" href="#" {% if status == "Active" %}disabled="disabled"{% endif %} data-remodal-target="modal-{{item.pk}}">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+          </a>
+        </td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% for item in reciplist %}
+<div class="remodal" data-remodal-id="modal-{{item.pk}}">
+          <button data-remodal-action="close" class="remodal-close"></button>
+          <h1>Please Confirm</h1>
+          <p>
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Are you sure you want to delete the recipient {{ item.first_name }} {{ item.last_name }}?  <br>This cannot be undone.
+          </p>
+          <br>
+         
+                <form action="{% url 'delete_recipient' pk=item.id %}" method="post" id="delete_form" id="form-modal-body">
+                    {% csrf_token %}
+                    
+                        <button class="remodal-cancel" data-remodal-action="cancel">
+                            <i class="icon-remove"></i>Cancel                       
+                        </button>
+                        <button type="submit" class="remodal-confirm" id="delete_submit">Delete!</button>
+                    </div>
+                </form>
+        </div>
+
+{% endfor %}
+
+
+
+          
