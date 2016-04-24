@@ -1,0 +1,61 @@
+{% extends "base.html" %} 
+
+{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+{% block smmeta %}
+    <meta name="description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+
+    <meta property='og:title' content='Post. This is Rochester'>
+    <meta name="description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+    <meta property='og:url' content='http://{{ site.domain }}{{ flatpage.url }}'>
+    <meta property='og:image' content='https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-ash4/1000837_175802752593615_1524246974_n.jpg'>
+    
+    
+    
+    
+
+
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@postrochester">
+    <meta name="twitter:creator" content="@postrochester">
+    <meta name="twitter:title" content="Post. This is Rochester">
+    <meta name="twitter:description" content="A bi-monthly magazine in Rochester, New York. We tell the hidden and untold story of Rochester's innovators, artists, entrepreneurs, dreamers, and doers.">
+    <meta name='twitter:image' content='https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-ash4/1000837_175802752593615_1524246974_n.jpg'>
+{% endblock %}
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+{% block content %}
+
+<section class="content-static">
+    <div class="brick clearfix">
+    
+    <div id="flipbook"> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_01_large.jpg" alt="page 10"></div> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_02_large.jpg" alt="page 10"></div> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_03_large.jpg" alt="page 10"></div> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_04_large.jpg" alt="page 10"></div> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_05_large.jpg" alt="page 10"></div> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_06_large.jpg" alt="page 10"></div> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_07_large.jpg" alt="page 10"></div> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_08_large.jpg" alt="page 10"></div> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_09_large.jpg" alt="page 10"></div> 
+        <div><img src="/media/uploads/issue15_flip/post_issue_15_janfeb_v2_page_10_large.jpg" alt="page 10"></div> 
+        <div>Page 2</div> 
+        <div>Page 3</div> 
+        <div>Page 4</div>
+    </div>
+    
+    </div>
+
+</section>
+
+
+{% endblock %}
