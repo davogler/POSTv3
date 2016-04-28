@@ -16,18 +16,18 @@ class Subscription(models.Model):
         (OTHER, 'Other')
     )
     title = models.CharField(max_length=200)
-    sku = models.CharField(max_length=200, help_text='Enter as ABC-##')
-    term = models.IntegerField(default=6)
+    sku = models.CharField(max_length=200, help_text='Enter as pb[year][first month][second month]')
+    term = models.IntegerField(default=6, help_text='default 6 issues in one year')
     type = models.IntegerField(choices=TYPE_CHOICES, default=ROLLING_ONE_YEAR)
     first_issue = models.IntegerField(help_text='Integer value of first issue')
-    cutoff_date = models.DateTimeField(
-        default=datetime.datetime.now, help_text='Last date to order subscription and still get this issue', blank=True)
+    #cutoff_date = models.DateTimeField(
+    #    default=datetime.datetime.now, help_text='Last date to order subscription and still get this issue', blank=True)
     slug = models.SlugField(max_length=50, unique=True)
-    price = models.FloatField(default=0.00, help_text='Not used right now')
+    price = models.FloatField(default=7.00, help_text='Cover Price')
     is_active = models.BooleanField(default=True)
     description = models.TextField(blank=True, null=True)
     image = FileBrowseField("Item Image", max_length=200, extensions=[
-                            ".jpg", ".png", ".gif"], blank=True, null=True, help_text='Item Image, 600-800px wide')
+                            ".jpg", ".png", ".gif"], blank=True, null=True, help_text='Item Image')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -35,7 +35,7 @@ class Subscription(models.Model):
         unique_together = ('title', 'slug')
         verbose_name = 'Subscription'
         verbose_name_plural = 'Subscriptions'
-        ordering = ['-cutoff_date']
+        ordering = ['-first_issue']
 
     def __unicode__(self):
         return self.title
