@@ -10,6 +10,7 @@ from django.template import Context, loader
 from django.http import HttpResponse
 from django.template import RequestContext
 import datetime
+from django.template.loader import get_template
 
 register = Library()
 register = template.Library()
@@ -22,4 +23,10 @@ def subscribe_button(request):
 
 register.inclusion_tag('catalog/subscribe_button.html')(subscribe_button)
 
+def now_accepting(request):
+    sub = Subscription.objects.filter(is_active=1).filter(type=1)[:1]
+    context_object_name = 'sub'
+    return {'sub': sub}
+
+register.inclusion_tag('catalog/now_accepting.html')(now_accepting)
 

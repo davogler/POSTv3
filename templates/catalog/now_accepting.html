@@ -1,0 +1,8 @@
+{% load order_tags %}
+
+{% for sub in sub %}
+{% get_first_month sub.first_issue as the_first_month %}
+{% get_second_month sub.first_issue as the_second_month %}
+<span class="subitem"> starting with Issue {{ sub.first_issue }} ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span>
+                        
+{% endfor %}

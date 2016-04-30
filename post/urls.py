@@ -56,4 +56,5 @@ urlpatterns = patterns('',
 
 urlpatterns += staticfiles_urlpatterns()
 
+
 handler404 = 'post.views.custom404'
