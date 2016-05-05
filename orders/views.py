@@ -44,53 +44,41 @@ def notify_purchase(email_context, payer_email, order_id):
 
 def checkout(request):
     try:
-
         the_cart_id = request.session['cart_id']
         cart = Cart.objects.get(id=the_cart_id)
-        print "we have a cart"
         subbies = CartItem.subbie_type.filter(cart=cart)
         singles = CartItem.single_type.filter(cart=cart)
         cart_items = CartItem.objects.filter(cart=cart)
 
-        print "subbies - %s" % subbies
-        print "singles - %s" % singles
-
     except:
-
         the_cart_id = None
-        print "we have no cart"
         return HttpResponseRedirect(reverse("view_cart"))
+
     try:
         user = request.user
     except:
         user = None
-    print "user is %s" % user
+
     try:
 
         new_order = Order.objects.get(cart=cart)
-        print "we got an order that exists"
     except Order.DoesNotExist:
         new_order = Order()
         new_order.cart = cart
-
         new_order.order_id = id_generator()
         new_order.save()
-        print "we made a new order and saved it"
     except:
         new_order = None
-        # work on some error message
-        print "narnia"
         return HttpResponseRedirect(reverse("view_cart"))
 
     if request.user.is_authenticated():
-        print "is_authenticated"
         new_order.user = request.user
+
     new_order.total = cart.total
     new_order.shipping = cart.shipping_total
     new_order.save()
     pay_form = PayForm()
     order = new_order
-    print "the order is %s" % order.order_id
 
     subgo = False
     singo = False
@@ -98,7 +86,6 @@ def checkout(request):
     usergo = False
 
     if subbies and singles:
-        print "both singles and subs here"
         for sub in subbies:
             if sub.recipient:
                 subgo = True
@@ -115,7 +102,6 @@ def checkout(request):
             paygo = False
 
     elif not subbies and singles:
-        print "we have singles but no subs"
         if order.main_recipient:
             singo = True
         else:
@@ -127,7 +113,6 @@ def checkout(request):
             paygo = False
 
     elif subbies and not singles:
-        print "we have subs but no singles"
         for sub in subbies:
             if sub.recipient:
                 subgo = True
@@ -140,35 +125,26 @@ def checkout(request):
             paygo = False
 
     # check user status
-    try:  # logged in
-        user = request.user
+    user=request.user
+    if user.is_authenticated():
         usergo = True
+    elif singles and not subbies:
+        usergo = True
+    else:
+        usergo = False
 
-    except:  # guest
-        if singles and not subbies:
-            usergo = True
-        else:
-            usergo = False
-
-    print "substatus is %s" % subgo
-    print "singstatus is %s" % singo
-    print "Proceed to payment %s" % paygo
-    print "user status is %s" % usergo
-    # stop here when reloading after entering addresses
 
     if request.POST:
         pay_form = PayForm(request.POST)
         token = request.POST['stripeToken']
         last4 = request.POST['last4']
         card_type = request.POST['card_type']
-        print request.POST
         payer_name = request.POST['name']
         payer_email = request.POST['email']
 
         if pay_form.is_valid():
             amount = int(order.total * 100)  # convert to cents
             fee = int(order.total * 100 * settings.TRINITY_FEE * .01)  # % of inputed ($) amount, in cents
-            print fee
 
             try:
                 customer = stripe.Customer.create(
@@ -232,10 +208,7 @@ def checkout(request):
                         ish += 1
 
                 for single in singles:
-                    print order.main_recipient
-                    print single.single.slug
                     ish = int(single.single.slug)
-                    print single.quantity
                     try:
                         bo = BackIssue.objects.get(
                             recipient=order.main_recipient, originating_order=order, issue=ish, quantity=single.quantity)
@@ -251,17 +224,15 @@ def checkout(request):
                 try:
                     the_cart_id = request.session['cart_id']
                     cart = Cart.objects.get(id=the_cart_id)
-                    print "we got a cart inorder to deactivate it"
                 except:
                     cart = False
-                    print "aint got not cart to deatviate"
                 if cart:
                     deactivate = Cart.objects.get(id=the_cart_id)
                     deactivate.active = False
                     deactivate.save()
                     del request.session['cart_id']
                     del request.session['items_total']
-                    print "we got all the way to end"
+
 
                 # now we notify.
                 current_site = Site.objects.get_current()
