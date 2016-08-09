@@ -42,28 +42,50 @@
 {% block content %}
 {% load catalog_tags %}
 <section class="content-static">
-	<div class="brick clearfix">
+<div class="brick clearfix">
 	
-	
-		
-		
-		
-		
+
 		<h3 id="delivered">Delivered to Your Door</h3>
-		<p>POST is printed six times a year and can arrive in your mailbox every other month. Show your support and become a subscriber today.</p>
+		<p>POST is printed four times a year and can arrive in your mailbox every four month. Become a subscriber today, and never have to worry about missing an issue.</p>
 		
 		<div class="cta-item clearfix oneyr">
-			<img src="/assets/i/mini_stack_covers.png" alt="stack of magazines" class="stack">
-			<p class="subber">A one-year subscription: $36 {% now_accepting request %}
-			
-			 {% subscribe_button request %}
-			</p>
+			<img src="/assets/i/stack2016.png" alt="stack of magazines" class="stack">
+			<div class="cta-desc"
+				<p class="subber">A one-year subscription is $36 {% now_accepting request %}
+				
+				 {% subscribe_button request %}
+				</p>
+			</div>
 			
 		</div>
+</div>
+
+<div class="brick clearfix">
 		
-		<h3 >Delivered to Your Inbox</h3>
-		<p>We send out updates and announcements to let you know what's happening.  We promise never to share your email with anyone else.</p>
+		<h3 >Delivered to Your Device</h3>
+		<p class="">Post is also available as a digital edition, viewable on any iOS device.  Each digital issue is $2.99, and a one-year auto-renewing digital subscription is $11.99. (Billed via iTunes account.) Purchasing an auto-renewing subscription will include the most recently published issue.</p>
 		
+
+		<div class="cta-item clearfix digyr">
+			<img src="/assets/i/ipad-pro-iphone-sm.png" alt="Post Digital App" class="stack">
+			<div class="cta-desc"
+				<p class="subber">Adding our app is free:<br>
+				
+				 <img src="/assets/i/appstore-135x40.svg" alt="POST Digital Edition" class="badger">
+				</p>
+			</div>
+			
+		</div>
+</div>
+
+<div class="brick clearfix">			
+		
+		<h3>Published on our Website</h3>
+		<p>Exclusive digital content as well as selected print articles will be published online at regular intervals.  We encourage you to share these articles on your social networks- Rochester's stories are something to be proud of!</p>
+
+	
+		<h3>Delivered to your inbox</h3>
+		<p>From time to time, we send out updates about new content or issues.  Sign up for our email list so you don't miss a thing!</p>
 		<div id="eml" class="cta-item eml clearfix">
 		
 			<i class="fa fa-inbox fa-5x"></i>
@@ -89,6 +111,9 @@
 		                
 		       </form>
 		</div>
+		
+				<h3>Privacy Policy</h3>
+		<p>Your privacy is of the utmost importance to us.  Any information that we collect from you, including your name, email, and address, will never be shared with any other organization.</p>
 		
 </div>
 

@@ -1282,11 +1282,18 @@ p.findat2{
 	padding: 10px 2%;
 	border-top: 1px solid #e0cbad;
 	border-bottom: 1px solid #e0cbad;
+	margin: 0 2%;
 }
 
 .cta-item.oneyr{
-	margin-top: 40px;
+	margin-top: 65px;
+	margin-bottom: 35px;
 	
+}
+
+.cta-item.digyr{
+margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 .cta-item.backish{
@@ -1350,6 +1357,16 @@ margin-top: 20px;
 	font-size: 3em;
 	
 	
+}
+
+img.diggy{
+	float: right;
+	width: 200px;
+}
+
+.lefty{
+	float: left;
+	width: 500px;
 }
 
 .avatard{
@@ -1543,12 +1560,15 @@ span.subitem{
 .tertal{
 	float: right;
 	border: 1px solid #e0cbad;
-	width: 200px;
+
 	padding: 10px 15px;
 	text-align: right;
-	margin: -60px 0 20px 0;
+
 	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 	text-transform: uppercase;
+	width: 100%;
+	margin: 10px 0 20px 0;
+
 }
 .tertal .tit{
 		text-transform: uppercase;
@@ -1580,6 +1600,7 @@ a.loglink{
 .cart-form-control{
 	float: right;
 	margin: 40px 0;
+	width: 100%;
 }
 
 .content-static .btn,
@@ -1604,6 +1625,10 @@ a.loglink{
 	height: 8rem;
 }
 
+.erro {
+	color: red;
+}
+
 #div_id_card{
 	width: 75%;
 	float: left;
@@ -1624,11 +1649,11 @@ a.loglink{
 	float: right;
 }
 .halfsies-left{
-	width: 50%;
+	width: 100%;
 	float: left;
 }
 .thirdsies-right{
-	width: 37%;
+	width: 100%;
 	float: right;
 }
 
@@ -1714,27 +1739,29 @@ legend.fs-title{
 	font-family: "MrsEavesRomanLiningRegular", Georgia, Times, serif;
 	text-transform: none;
 	font-weight: normal;
-	margin-bottom: 30px;
+	margin-bottom: 35px;
 	display: block;
 	position: 	relative;
+	
+	width: 100%;
 }
 
 .twocol{
-	width: 40%;
 	float: left;
+	width: 100%;
 }
 
 .or{
-	width: 8%;
 	float: left;
-	text-align: center;
 	padding-top: 15%;
 	margin-left: 5%;
+	width: 100%;
+	text-align: left;
 }
 
 .twocol_2{
-	width: 40%;
 	float: right;
+	width: 100%;
 }
 ul.reciplist{
 	padding: 0;
@@ -2277,6 +2304,36 @@ article.teaser .hgroup{
 .igbox{
 	width: 300px;
 }
+
+.cart-form-control{
+	width: auto;
+}
+
+.tertal{
+	width: 200px;
+	margin: -60px 0 20px 0;
+}
+
+.halfsies-left{
+	width: 50%;
+}
+.thirdsies-right{
+	width: 37%;
+}
+
+.twocol{
+	width: 40%;
+}
+
+.or{
+	width: 8%;
+	text-align: center;
+}
+
+.twocol_2{
+	width: 40%;
+}
+
 	
 }
 
@@ -2359,6 +2416,12 @@ article.teaser .hgroup{
     	margin-left: 100px;
     }
     
+    #submit_email_signup{
+    	margin-top: 0;
+    	font-family: "mrs_peaves_otroman", Georgia, Times, serif;
+    	font-size: .75em;
+    }
+    
     section.primary{
     	width: 68%;
     	float: left;
@@ -2420,7 +2483,11 @@ article.teaser .hgroup{
     
     img.stack{
     	
-    	margin: -40px 20px -10px -25px;
+    	margin: -60px 20px -50px -55px;
+    }
+    
+    .digyr img.stack{
+    	margin-bottom: -60px;
     }
     
    
