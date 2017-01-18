@@ -1,0 +1,78 @@
+<h2>Saved Payment Methods</h2>
+
+
+
+
+<table class="table ccshow">
+             <thead>
+              <tr>
+                <th class="ccno">Card Type</th>
+                <th class="ccdesc">Card Number</th>
+                <th class="ccdate">Date Added</th>
+                <th class="ccdate">Default</th>
+                <th></th>
+              </tr>
+
+            </thead>
+            <tbody>
+            {% for cc in cclist %}
+                <tr>
+                <td>
+                    
+                        <h3 class="type_{{ cc.card_type|slugify}}">{{ cc.card_type }}</h3>
+                   
+                </td>
+                
+
+               
+                
+                <td> &middot;&middot;&middot;&middot; &middot;&middot;&middot; &middot;&middot;&middot;&middot; {{ cc.last4 }} </td>
+
+                <td> {{ cc.timestamp|date:"F j, Y" }} </td>
+                <td>
+                {% if cc.default %}
+                  <img class="czech" src="/assets/i/czech.svg" alt="checkmark">
+                {% endif %}
+                </td>
+                <td>
+                  <a class="btn btn-primary edit_rec" href="#" data-remodal-target="modal-{{cc.pk}}">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove
+                  </a>
+                </td>
+                </tr>
+
+                
+                <tr class = "ender">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+                
+          </table>
+
+          {% for cc in cclist %}
+      <div class="remodal" data-remodal-id="modal-{{cc.pk}}">
+          <button data-remodal-action="close" class="remodal-close"></button>
+          <h1>Please Confirm</h1>
+          <p>
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Are you sure you want to delete the {{cc.card_type}} card ending in  {{cc.last4}}?   <br>This cannot be undone.
+          </p>
+          <br>
+         
+              <form action="{% url 'delete_creditcard' pk=cc.id %}" method="post" id="delete_form" id="form-modal-body">
+                    {% csrf_token %}
+                    
+                        <button class="remodal-cancel" data-remodal-action="cancel">
+                            <i class="icon-remove"></i>Cancel                       
+                        </button>
+                        <button type="submit" class="remodal-confirm" id="delete_submit">Delete!</button>
+                    
+              </form>
+        </div>
+
+{% endfor %}
+

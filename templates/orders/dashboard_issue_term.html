@@ -2,6 +2,7 @@
 {% load order_tags %}
 {% load customer_tags %}
 
+
 {% regroup records by recipient as recipient_list %}
 
     <table class="table subshow">
@@ -21,13 +22,13 @@
 
             {% for recipient in recipient_list %}
             <tr>
-                        <td>
+                        
                 {% for item in recipient.list %}
                 {% if forloop.first %}
                     {% get_first_month item.issue as the_first_month %}
                     {% get_second_month item.issue as the_second_month %}
-                    {% get_active_status the_first_month as active_status %}
-
+                   
+                    <td>
                     {% include "customers/address_display.html" with item=item.recipient %}
                     </td>
                    
@@ -42,7 +43,14 @@
 
                     {{status}}<br>
                     Last Issue: {{ item.issue }}<br>
-                    ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})
+                    {% if item.issue < 19 %}
+                        ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})
+                    {% else %}
+                        {% get_season item.issue as the_season %}
+                        {% get_year item.issue as the_year %}
+                        ({{ the_season }} {{the_year|date:"Y"}})
+                    {% endif %}
+
                      </td>
 
                      <td></td>
@@ -50,7 +58,7 @@
 
                     <td>
                    <a href="{% url "edit_recipient" %}?rec={{item.recipient.id}}&next=dashboard" class="btn btn-primary edit_rec">Change Address</a>
-                   {% if active_status %}
+                   {% if status == "Active" %}
                        <form class="renew" method='POST' action='{% url 'add_renewal' slug="one-year-renewal" recipient_id=item.recipient.id %}'>
                             {% csrf_token %}
                             <input type='submit' class="btn btn-primary subrenew" value='Renew Now' />

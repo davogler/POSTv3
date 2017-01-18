@@ -26,14 +26,15 @@ def get_recip_status(recipient_id):
     print "last issue is %s" % last_issue
 
     if last_issue is not None:
-        issue_3 = datetime.date(2014, 1, 1) # issue 3 is jan 2014
-        month_delta = (last_issue - 3) * 2 +1
-        issue_delta = relativedelta(months=month_delta)
-        second_month = issue_3 + issue_delta
+        #season will attach to issue middle month (jan, mar, jun, or sep)
+        issue_19 = datetime.date(2016, 10, 1)  # issue 19 is oct 2016
+        months = (last_issue-19)*3 + 1
+        issue_delta = relativedelta(months=months)
+        last_month = issue_19 + issue_delta #date object
 
-        #return second_month
+        #expiration flips to expire at the first day of the last month of each quarterly pub
 
-        if now > second_month:
+        if now > last_month:
             return "Expired"
         else:
             return "Active"

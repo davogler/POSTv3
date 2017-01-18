@@ -184,6 +184,7 @@ INSTALLED_APPS = (
     'insta',
     'video',
     'sponsors',
+    'subscribers',
     'password_reset',
     
 )

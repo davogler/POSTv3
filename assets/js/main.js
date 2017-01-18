@@ -148,3 +148,30 @@ intent.on('tablet', function() {
 intent.on('standard', function() {
    	$('ul#nav').css('display','block');
    });
+
+
+
+$(function setupDeselectEvent() {
+        var selected = {};
+        $('input[type="radio"]').on('click', function() {
+            if (this.name in selected && this != selected[this.name])
+                $(selected[this.name]).trigger("deselect");
+            selected[this.name] = this;
+        }).filter(':checked').each(function() {
+            selected[this.name] = this;
+        });
+    });
+
+function handler() {
+        //alert('clicked');
+        $('form#savedccform .buttonrow').hide();
+        $('form#payment-form').css('display', 'block');
+    }
+
+    
+$('input[name="ccRadios"]#ccRadioNew').on('deselect', function() {
+    //alert('Radio ' + this.id + ' deselected');
+    $('form#savedccform .buttonrow').show();
+    $('form#payment-form').css('display', 'none');
+});
+    

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Order Confirmation | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+
+{% block headernav %}
+{% load order_tags %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<section class="content-static">
+  <div class="brick clearfix">
+
+  {% if user.is_staff %}
+   {% include "admin_nav.html" %} 
+{% endif %}
+  
+
+    {{ block.super }}
+    <div class="wrapper content">
+        {% load catalog_tags %}
+        {% get_latest_issue as latest_issue %}
+        {% get_next_latest_issue as next_latest_issue %}
+        {% load order_tags %}
+        
+      
+        <h2>Renewals for Issue {{ issue }}</h2>
+        <div class="mininav">
+            <a class="btn btn-default" href="{% url 'renewals' issue|add:-1 %}"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a> 
+            
+            <form class="mid_inputer" action="{% url 'renewals_get' %}" method="GET">
+            <input class="midbox" type="text" name="issue" value="{{issue}}" />
+            </form>
+            <a class="btn btn-default" href="{% url 'renewals' issue|add:1 %}"><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+        </div>
+
+
+
+        <p>Listed here are recipients whose subscriptions expire with Issue {{expiring_issue}}. These will need to be notified and renewed before Issue {{ issue }} is mailed.
+        
+      
+
+        <table class="table ordershow">
+                 <thead>
+                  <tr>
+                    
+                    <th class="recip">Recipient</th>
+                    <th class="recip">Payer</th>
+                    <th class="action"> Auto Renew?</th>
+                    <th class="action"> Notify</th>
+                    <th class="action"> Renew</th>
+                
+                  </tr>
+
+                </thead>
+                <tbody>
+
+        {% for record in expiring_records %}
+            <tr>
+                <td> {{ record }}</td>
+                 <td> {{ record.originating_order.payer_name }}</td>
+                <td> {% get_auto_renew record as auto %} {{auto}}</td>
+                <td> {{ record.originating_order.user }}</td>
+                <td> {% get_dat_cc record.originating_order.user as cc %} {{cc}}</td>
+           
+
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+
+       
+    
+ 
+
+  
+  </div>
+
+</section>
+
+{% endblock %}
+
+
+

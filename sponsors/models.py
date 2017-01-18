@@ -9,7 +9,7 @@ class Advert(models.Model):
     adlink = models.URLField() 
     position = models.IntegerField(unique=True)
     is_active = models.BooleanField(default=True)
-    add_date = models.DateTimeField(default=now())    
+    add_date = models.DateTimeField(default=now)    
     
     class Meta:
         ordering = ['-add_date']

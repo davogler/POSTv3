@@ -11,9 +11,10 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 from customers.forms import RecipientAddressForm
-from customers.models import Recipient
+from customers.models import Recipient, CreditCard
+from catalog.models import Subscription
 from cart.models import CartItem, Cart
-from orders.models import Order
+from orders.models import Order, Record
 from django.contrib import messages
 
 # Create your views here.
@@ -22,16 +23,13 @@ from django.contrib import messages
 def add_existing_recipient(request):
 
     if request.method == 'POST':
-        print "existing add view"
+        print "adding an existing recipient"
         print request.POST
         id = request.POST.get("recipOption", "")
+        #get the recipient object
         recipient = Recipient.objects.get(id=id)
         print recipient
-        # check if recipient is one of the users
-        # if recipient.user != request.user:
-        # bye
-        #     return HttpResponseRedirect(reverse("checkout")
-        # else:
+
         try:
             next = request.POST.get("next")
         except:
@@ -39,30 +37,95 @@ def add_existing_recipient(request):
         print "next is %s" % next
 
         try:
-            itm = request.POST.get("itm")
-        except:
-            itm = None
-        print "itm is %s" % itm
-
-        try:
             rec = request.POST.get("rec")
         except:
             rec = None
         print "rec is %s" % rec
 
+        try:
+            itm = request.POST.get("itm")
+        except:
+            # item is a single, not a subbie
+            itm = None
+        print "itm is %s" % itm
+
+        if rec != "None":
+            # single, order has main recip; assign.
+            print "were getting order with a main recipient-a single"
+            order = Order.objects.get(id=rec)
+            order.main_recipient = recipient
+            order.save()
+
         if itm != "None":
-            # subbie
-            print "were getting cart itme with itm"
+            # if itm exists, this item is a subbie, so get it and its cart
+            print "we are getting cart item with itm = %s" % itm
+            ci = CartItem.objects.get(id=itm)
+            cart = Cart.objects.get(id=ci.cart.id)
+        #     items = CartItem.objects.filter(cart=cart)
+        #     print "here follows a list of items in the cart"
+        #     print items
+        #     for item in items:      
+        #         print "item recipient is %s" % item.recipient
+        #         print "item subscritpion is %s" % item.subscription
+        #         # for each item, check if it has same recipient and if it is a subbie
+        #         # get starting issue from subscription
+        #         # subtract one to get last active issue
+        #         starting_issue = item.subscription.first_issue
+        #         last_issue = starting_issue -1 
+        #         print "starting issue is %s" % starting_issue
+        #         print "last issue is %s" % last_issue
+        #         try: 
+        #             # look for records with this recip and starting issue
+        #             record = Record.objects.get(recipient=recipient, issue=starting_issue)
+        #             print "we have a record, it is %s" % record
+        #         except:
+        #             record = None
+        #             print "record retrieve excpetion"
+                
+        #         if recipient == item.recipient and item.subscription:
+        #             print "changed address to active recipient!"
+
+        #             messages.error(request,
+        #                            "This recipient has an active subscription. \
+        #                            This subscription will be added after the current subscription ends",
+        #                            extra_tags='safe')
+        #             return HttpResponseRedirect(reverse("checkout"))
+        #         elif record != None and item.subscription:
+        #             print "added an active recipient to a fresh unassigned subbie"
+        #             # need to turn into a renewal
+        #             # maybe bump to add_renewal url?
+        #             renewal = Subscription.objects.get(slug="one-year-renewal")
+        #             ci.subscription = renewal
+        #             ci.save()
+        #             messages.error(request,
+        #                            "This recipient has an active subscription. \
+        #                            New issues will be added after the current subscription ends",
+        #                            extra_tags='safe')
+        #             return HttpResponseRedirect(reverse("checkout"))
+        #         else:
+        #             print "did not detect recipient as active"
+        #             return HttpResponseRedirect(reverse("checkout"))
+
+        # # check if recipient is one of the users
+        # # if recipient.user != request.user:
+        # # bye
+        # #     return HttpResponseRedirect(reverse("checkout")
+        # # else:
+
+
+        
+
+
+
+        # this should go in sequence above when i figure it out
+        if itm != "None":
+            # this item is a subbie, assign new recip to it
+            print "were getting cart item with itm = %s" % itm
             ci = CartItem.objects.get(id=itm)
             ci.recipient = recipient
             ci.save()
 
-        if rec != "None":
-            # single, order main recip
-            print "were getting oder with rec"
-            order = Order.objects.get(id=rec)
-            order.main_recipient = recipient
-            order.save()
+
 
         return HttpResponseRedirect(reverse("checkout"))
     else:
@@ -129,42 +192,67 @@ def edit_recipient(request):
 
 
 def add_recipient(request):
-    print request.GET
-    try:
-        next = request.GET.get("next")
-    except:
-        next = None
-
-    try:
-        itm = request.GET.get("itm")
+    next = request.GET.get("next", None)
+    rec = request.GET.get("rec", None)
+    itm = request.GET.get("itm", None)
+    print next, rec, itm
+    user = request.user
+    if itm:
+        print "we have subbie item"
         ci = CartItem.objects.get(id=itm)
         cart = ci.cart
         all_cartitems = cart.cartitem_set.all()
-        busy_recips = []
-        for ci in all_cartitems:
-            if ci.subscription:
-                if ci.subscription.type == 2:
-                    busy_recips.append(ci.recipient)
-                else:
-                    pass
-        busy_ids = [bi.id for bi in busy_recips]
+        incart_recipients = []
+        for c in all_cartitems:
+            if c.subscription and c.recipient:
+                incart_recipients.append(c.recipient.id)
+            else:
+                pass
+        
+        first_issue = ci.subscription.first_issue if ci.subscription else None
+        
+        print "cart item is %s" % ci
+        print "subscription is %s" % ci.subscription
+        print "first issue is %s" % first_issue
+        record_set = Record.objects.filter(issue=first_issue)
+        print "record set %s" % record_set
+        active_recipients = []
+        for record in record_set:
+            if record.recipient:
+                active_recipients.append(record.recipient.id)
+            else:
+                pass
+        print active_recipients
 
-    except:
+
+        
+        
+
+    else:
+        print "we don't have subbie item"
         itm = None
-        busy_ids = None
+        incart_recipients = None
+        active_recipients = None
 
-    try:
-        rec = request.GET.get("rec")
-    except:
-        rec = None
 
-    # add context of existing recipients
-    user = request.user
+    
+   
+
+    # add context of existing recipients in cart
+    
     if user.is_authenticated():
-        pass
         recip_list = Recipient.objects.filter(user=user)
-        if busy_ids:
-            recip_list = recip_list.exclude(id__in=busy_ids)
+        
+       
+
+        
+        if incart_recipients:
+            # incart are recips that are already in the cart (renewal or new)
+            recip_list = recip_list.exclude(id__in=incart_recipients)
+            
+        if active_recipients:
+            # active are recips that already getting an issue (via record)
+            recip_list = recip_list.exclude(id__in=active_recipients)
 
     else:
         recip_list = None
@@ -260,3 +348,10 @@ def purchase_notify(email_context, recipient):
     msg.attach_alternative(html_part, "text/html")
     print "purchase nofication sent"
     return msg.send(True)
+
+def delete_creditcard(request, pk):
+    cc = CreditCard.objects.get(pk=pk)
+    cc.delete()
+    messages.success(request, "Successfully Removed Credit Card.")
+    return HttpResponseRedirect(reverse("dashboard"))
+

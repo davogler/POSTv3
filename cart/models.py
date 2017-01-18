@@ -39,6 +39,7 @@ class CartItem(models.Model):
     flug = models.SlugField(max_length=50, null=True, blank=True)
     subscription = models.ForeignKey(Subscription, null=True, blank=True)
     begin_date = models.DateField(null=True, blank=True)
+    auto_renew = models.BooleanField(default=True)
     single = models.ForeignKey(Issue, null=True, blank=True)
     quantity = models.IntegerField(default=1)
     line_total = models.FloatField(default=0.00)

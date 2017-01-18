@@ -15,15 +15,13 @@ class Subscription(models.Model):
         (RENEWAL, 'Renewal'),
         (OTHER, 'Other')
     )
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, default="One-Year Subscription")
     sku = models.CharField(max_length=200, help_text='Enter as pb[year][first month][second month]')
-    term = models.IntegerField(default=6, help_text='default 6 issues in one year')
+    term = models.IntegerField(default=4, help_text='default 4 issues in one year')
     type = models.IntegerField(choices=TYPE_CHOICES, default=ROLLING_ONE_YEAR)
     first_issue = models.IntegerField(help_text='Integer value of first issue')
-    #cutoff_date = models.DateTimeField(
-    #    default=datetime.datetime.now, help_text='Last date to order subscription and still get this issue', blank=True)
     slug = models.SlugField(max_length=50, unique=True)
-    price = models.FloatField(default=7.00, help_text='Cover Price')
+    price = models.FloatField(default=36.00, help_text='Cover Price')
     is_active = models.BooleanField(default=True)
     description = models.TextField(blank=True, null=True)
     image = FileBrowseField("Item Image", max_length=200, extensions=[

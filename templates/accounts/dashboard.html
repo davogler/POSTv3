@@ -15,6 +15,11 @@
 
 
 <section class="content-static">
+
+{% if user.is_staff %}
+   {% include "admin_nav.html" %} 
+{% endif %}
+
   <div class="brick clearfix">
 
      {% if messages %}
@@ -27,10 +32,7 @@
         </div>
     {% endif %}
 
-    {% if user.is_staff %}
-   {% include "admin_nav.html" %} 
-    {% endif %}
-     
+    
     
     <h2>{{ user.first_name }} {{user.last_name }}</h2>
         <p><i class="fa fa-user" aria-hidden="true"></i> {{ user.username }} [<a href="{% url 'auth_logout' %}">Logout</a>]</p>
@@ -42,10 +44,17 @@
    <div class="brick clearfix">
         {% dashboard_orders request %} 
     </div>
+    
+    <div class="brick clearfix">
+        {% dashboard_ccs request %} 
+    </div>
+
 
     <div class="brick clearfix">
         {% dashboard_recips request %} 
     </div>
+
+    
 
 </section>
 

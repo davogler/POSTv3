@@ -27,12 +27,3 @@ class PayForm(forms.Form):
     #        widget = forms.PasswordInput()
     #    )
 
-
-class OrderForm(forms.ModelForm):
-    #default = forms.BooleanField(label='Make Default')
-
-    class Meta:
-        model = Order
-        fields = [
-                  
-                  "notes"]

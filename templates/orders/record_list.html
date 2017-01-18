@@ -25,48 +25,52 @@
    {% include "admin_nav.html" %} 
     {% endif %}    
 
-        <h2>records</h2>
-        <p>Everything ever recorded</p>
+        <h2>Records for Issue {{ issue }}</h2>
+       
 
-        <table class="table ordershow records">
-             <thead>
-              <tr>
-                <th class="item">Issue</th>
-                <th class="recip">Recipient</th>
-                <th class="status">Orginating Order</th>
-                <th class="status">Issue</th>
+        <div class="mininav">
+            <a class="btn btn-default" href="{% url 'records' issue|add:-1 %}"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a> 
             
-              </tr>
+            <form class="mid_inputer" action="{% url 'records_get' %}" method="GET">
+            <input class="midbox" type="text" name="issue" value="{{issue}}" />
+            </form>
+            <a class="btn btn-default" href="{% url 'records' issue|add:1 %}"><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+        </div>
 
-            </thead>
-            <tbody>
-        {% regroup records by issue as issue_record_list %}
-            {% for record in issue_record_list %}
+         <p>All shipping records for Issue {{issue}}</p>
+
+        <table class="table ordershow">
+                 <thead>
+                  <tr>
+                    
+                    <th class="recip">Recipient</th>
+                    <th class="recip">Payer</th>
+                    <th class="action"> Auto Renew?</th>
+                    <th class="action"> Notify</th>
+                    <th class="action"> Renew</th>
                 
-                <tr>
-                <td>
-                    <a href="{{ record.get_absolute_url }}">
-                        <h3>{{ record.grouper }} {{r}}</h3>
-                    </a> 
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                </tr>
-                {% for r in record.list %}
-                <tr>
-                <td></td>
-                <td> {{ r.recipient }} </td>
-                <td>  <a href="{{r.originating_order.get_absolute_url}}">{{ r.originating_order }}</a></td>
-                 <td> <a href="{% url 'record_by_issue' r.issue %}">{{ r.issue }} </a> </td>
-                 {% endfor %}
-                </tr>
+                  </tr>
 
-            {% endfor %}
-            </tbody>
-                
-          </table>
+                </thead>
+                <tbody>
 
+        {% for record in records %}
+            <tr>
+                <td> {{ record }}</td>
+                 <td> {{ record.originating_order.payer_name }}</td>
+                <td> </td>
+                <td> {{ record.originating_order.user }}</td>
+                <td>  <a href="{{record.originating_order.get_absolute_url}}">{{ record.originating_order }}</a></td>
+           
+
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+       
       
     </div>
 </section>

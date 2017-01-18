@@ -8,7 +8,8 @@
         <tr>
           <th class="orderdesc">Address</th>
           <th class="orderdate">Subscription Status</th>
-          <th></th>
+          <th class="orderdate"></th>
+          <th class="orderdate"></th>
         </tr>
       </thead>
 
@@ -21,18 +22,20 @@
         <td class="substatus">
         {% get_recip_status item.id as status %} 
         {% if status == "Active" %}
-        <i class="fa fa-circle" style="color:green;" aria-hidden="true"></i>
+        <i class="fa fa-circle" style="color:green;" aria-hidden="true"></i><br>Active
         {% else %}
-        <i class="fa fa-circle-o" style="color:gray;" aria-hidden="true"></i> 
+        <i class="fa fa-circle-o" style="color:gray;" aria-hidden="true"></i> <br>Inactive
         {% endif %}
+         </td>
 
-        {{status}}
+         <td>
          </td>
 
         <td>
           <a class="btn {% if status == "Active" %}btn-default{% else %}btn-primary {% endif %} edit_rec" href="#" {% if status == "Active" %}disabled="disabled"{% endif %} data-remodal-target="modal-{{item.pk}}">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
           </a>
+          <a href="{% url "edit_recipient" %}?rec={{item.id}}&next=dashboard" class="btn btn-primary edit_rec">Change Address</a>
         </td>
 
       </tr>
@@ -41,7 +44,7 @@
   </table>
 
 {% for item in reciplist %}
-<div class="remodal" data-remodal-id="modal-{{item.pk}}">
+      <div class="remodal" data-remodal-id="modal-{{item.pk}}">
           <button data-remodal-action="close" class="remodal-close"></button>
           <h1>Please Confirm</h1>
           <p>
@@ -49,15 +52,15 @@
           </p>
           <br>
          
-                <form action="{% url 'delete_recipient' pk=item.id %}" method="post" id="delete_form" id="form-modal-body">
+              <form action="{% url 'delete_recipient' pk=item.id %}" method="post" id="delete_form" id="form-modal-body">
                     {% csrf_token %}
                     
                         <button class="remodal-cancel" data-remodal-action="cancel">
                             <i class="icon-remove"></i>Cancel                       
                         </button>
                         <button type="submit" class="remodal-confirm" id="delete_submit">Delete!</button>
-                    </div>
-                </form>
+                   
+              </form>
         </div>
 
 {% endfor %}

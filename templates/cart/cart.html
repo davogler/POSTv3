@@ -48,7 +48,7 @@
 
           
 
-            
+           
          
           <!-- Table -->
           <table class="table cartshow ">
@@ -68,13 +68,23 @@
                   {% for item in subbies %}
                    
                     {% get_last_record item.recipient as the_last_record %}
-                    {% if the_last_record %}
+
+                    {% if the_last_record %} <!-- renewal, find last record to find start issue -->
                       {% get_first_month the_last_record as the_first_month %}
                       {% get_second_month the_last_record as the_second_month %}
 
                       <tr>
                         <td class="item">{{ item.subscription.title }} for {{item.recipient}}
-                        <span class="subitem">starting with Issue {{ the_last_record }} ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span> </td>
+                        <span class="subitem">renewing with Issue {{ the_last_record }} 
+                        {% if the_last_record < 19 %} {{ the_last_record}}
+                        
+                         ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})
+                        
+                        {% else %}
+                          {% get_season the_last_record as the_season %}
+                          {% get_year the_last_record as the_year %}
+                          ({{ the_season }} {{the_year|date:"Y"}})
+                        {% endif %}</span> </td>
                        
                         <td class="qty">{{ item.quantity }}</td>
                         <td class="subttl">${{ item.line_total|floatformat:0 }}</td>
@@ -85,11 +95,21 @@
                         <a href="{% url "remove_from_cart" item.flug %}"><i class="fa fa-times fa-lg"></i></a>
                         </td>
                       </tr>
-                    {% else %}
+                    {% else %} <!-- no last record, new subscriber -->
+                      
                       {% get_first_month item.subscription.first_issue as the_first_month %}
                       {% get_second_month item.subscription.first_issue as the_second_month %}
-                      <tr>
-                        <td class="item">{{ item.subscription.title }} <span class="subitem">starting with Issue {{ item.subscription.first_issue }} ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span></td>
+                      
+                      <tr> 
+                        <td class="item">{{ item.subscription.title }} <span class="subitem">starting with Issue {{item.subscription.first_issue}} 
+                        
+                       
+                          {% get_season item.subscription.first_issue as the_season %}
+                          {% get_year item.subscription.first_issue as the_year %}
+                          ({{ the_season }} {{the_year|date:"Y"}})
+                        
+
+                        </span></td>
                        
                         <td class="qty">{{ item.quantity }}</td>
                         <td class="subttl">${{ item.line_total|floatformat:0 }}</td>

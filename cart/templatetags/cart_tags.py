@@ -11,10 +11,17 @@ register = template.Library()
 def get_last_record(recipient):
     try:
         last_record = Record.objects.filter(recipient = recipient).order_by('issue').last()
-        return last_record.issue + 1
+        if last_record != None:
+            print "last record be %s " % last_record
+        return int(last_record.issue + 1)
     except:
+        print "last record is none"
         return None
 
 
+@register.simple_tag
+def get_larst_record(recipient, issue):
+    return recipient
 
+    # improve fetching last record to account for lapses
 

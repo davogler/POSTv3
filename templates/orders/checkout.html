@@ -49,6 +49,7 @@
                   <tr>
                     <th class="item">Item</th>
                     <th class="recip">Recipient</th>
+                    <th class="action"> Auto Renew</th>
                     <th class="action"> Action</th>
                 
                   </tr>
@@ -64,13 +65,18 @@
                     {% get_last_record item.recipient as the_last_record %}
 
                       
-                    <tr class="subbie">
-                      {% if item.subscription.type == 2 %}
+                    <tr class="subbie"> 
+                      {% if item.subscription.type == 2 %} <!-- 2 is renewal -->
                         {% get_first_month the_last_record as the_first_month %}
                         {% get_second_month the_last_record as the_second_month %}
+                        {% get_season the_last_record as the_season %}
+                        {% get_year the_last_record as the_year %}
+                          
                       
                         <td class="item">{{ item.subscription.title }}<br>
-                          <span class="subitem">starting with Issue {{ the_last_record }}<br> ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span>
+                          <span class="subitem">renewing with Issue {{ the_last_record }}<br> 
+                          ({{ the_season }} {{the_year|date:"Y"}}) 
+                          </span>
                         </td>
                          
                         <td class="recip">
@@ -84,12 +90,15 @@
                           {% endif %}
                         </td>
 
-                      {% else %}
-                        {% get_first_month item.subscription.first_issue as the_first_month %}
-                        {% get_second_month item.subscription.first_issue as the_second_month %}
+                      {% else %} <!-- 1 is rolling 1 year -->
+
+                        {% get_season item.subscription.first_issue as the_season %}
+                          {% get_year item.subscription.first_issue as the_year %}
+
+
 
                         <td class="item">{{ item.subscription.title }}<br>
-                          <span class="subitem">starting with Issue {{ item.subscription.first_issue }}<br> ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span>
+                          <span class="subitem">starting with Issue {{ item.subscription.first_issue }}<br> ({{ the_season }} {{the_year|date:"Y"}})</span>
                         </td>
                          
                         <td class="recip">
@@ -105,6 +114,17 @@
                         </td>
                       {% endif %}
                       <td class="action">
+                      <form action="{% url 'toggle_renew' item.id %}" method="POST" id="autocheck" >{% csrf_token %}
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="autoRenew" {% if item.auto_renew %} checked {% else %} {% endif %} onclick="this.form.submit();"> 
+                          </label>
+                        </div>
+
+                        </form>
+                      </td>
+                      <td class="action">
+
                       
                       
                       <a href="{% url "remove_from_cart" item.flug %}"><i class="fa fa-times fa-lg"></i></a>
@@ -133,6 +153,9 @@
                             {% endif %}
                         {% endif %}
                     </td>
+
+                      <td class="action">
+                      </td>
 
                      <td class="action"><a href="{% url "increment_cart" item.flug %}"><i class="fa fa-plus fa-lg"></i></a>
                     <a href="{% url "decrement_cart" item.flug %}"><i class="fa fa-minus fa-lg"></i></a>
@@ -187,10 +210,12 @@
           {% endif %} </p>
 
     {% elif not user.is_authenticated and subbies %}
-    <p>Purchasing a subscription requires an account. <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a> to save your order information.</p>
+   
+    <p class="error-block">Purchasing a subscription requires an account. <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a> to save your order information.</p>
     {% else %}
-    <p>You're checking out as a guest. No problem! However, if you were to <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a>, we can save your order details for you.</p>
+    <p class="warning-block">You're checking out as a guest. No problem! However, if you were to <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a>, we can save your order details for you.</p>
     {% endif %}
+    
 
 </div>
 
@@ -209,81 +234,106 @@
 </div>
 
 <div class="halfsies-left">
+
+ <h2>Payment</h2>
+
+  {% if user.is_authenticated and user.creditcard_set.all %}
+
+      {% checkout_ccs request paygo %} 
+      
+  {% endif %}
  
 
+ 
+    <form autocomplete="on" action="" method="POST" id="payment-form" >{% csrf_token %}
+    
 
-  <form autocomplete="on" action="" method="POST" id="payment-form" >{% csrf_token %}
-  
+     
+      {{ pay_form }}
 
-    <h2>Payment</h2>
-    {{ pay_form }}
-
-    <div class="erro">
-      <span class="payment-errors"></span>
-    </div>
-
-
-    <div id="div_id_name" class="form-group">
-      <label for="id_name" class="control-label ">Name </label>
-      <div class="controls ">
-        <input type="text" class="textinput textInput form-control" size="20" value="{% if user.first_name %}{{user.first_name}} {{ user.last_name}}{% endif %}" name="name" > 
+      <div class="erro">
+        <span class="payment-errors"></span>
       </div>
-    </div>
 
-    <div id="div_id_email" class="form-group">
-      <label for="id_email" class="control-label ">Email </label>
-      <div class="controls ">
-        <input type="text" class="textinput textInput form-control" size="20" value="{% if user.email %}{{user.email}}{% endif %}" name="email" />
-      </div>
-    </div>
 
-    <div class="form-group clearfix">
-
-      <div id="div_id_card" >
-        <label for="id_card" class="control-label">Card Number </label>
+      <div id="div_id_name" class="form-group">
+        <label for="id_name" class="control-label ">Name </label>
         <div class="controls ">
-          <input type="tel" class="textinput textInput form-control cc-number" autocomplete="cc-exp" size="20" data-stripe="number" placeholder="•••• •••• •••• ••••" required {% if paygo == False or usergo == False %} disabled{%endif%}>
+          <input type="text" class="textinput textInput form-control" size="20" value="{% if user.first_name %}{{user.first_name}} {{ user.last_name}}{% endif %}" name="name" > 
         </div>
       </div>
 
-      <div id="cvc" >
-        <label>CVC</label>
-        <input type="tel" class="form-control cc-cvc" size="4" data-stripe="cvc" autocomplete="off" placeholder="•••" required {% if paygo == False or usergo == False %} disabled{%endif%}>
+      <div id="div_id_email" class="form-group">
+        <label for="id_email" class="control-label ">Email </label>
+        <div class="controls ">
+          <input type="text" class="textinput textInput form-control" size="20" value="{% if user.email %}{{user.email}}{% endif %}" name="email" />
+        </div>
+      </div>
+      
+
+      
+
+      <div class="form-group clearfix">
+
+        <div id="div_id_card" >
+          <label for="id_card" class="control-label">Card Number </label>
+          <div class="controls ">
+            <input type="tel" class="textinput textInput form-control cc-number" autocomplete="cc-exp" size="20" data-stripe="number" placeholder="•••• •••• •••• ••••" required {% if paygo == False or usergo == False %} disabled{%endif%}>
+          </div>
+        </div>
+
+        <div id="cvc" >
+          <label>CVC</label>
+          <input type="tel" class="form-control cc-cvc" size="4" data-stripe="cvc" autocomplete="off" placeholder="•••" required {% if paygo == False or usergo == False %} disabled{%endif%}>
+        </div>
+
       </div>
 
+      
+
+      <div class="form-group clearfix">
+
+            
+        <div id="card_month" class="form-group">
+          <label>Exp Month</label>
+          <input type="tel" class="form-control" size="2" data-stripe="exp-month" placeholder="MM" {% if paygo == False or usergo == False %} disabled{%endif%}>
+        </div>
+
+      
+        <div id ="card_year" class="form-group">
+          <label>Exp Year</label>
+          <input type="tel" class="form-control" size="4" data-stripe="exp-year" placeholder="YYYY" {% if paygo == False or usergo == False %} disabled{%endif%}>
+        </div>
+                  
+      </div>
+
+      <div class="form-group clearfix">
+        <button type="submit" class="btn btn-primary pcta {% if paygo == True %} {% else %}disabled{% endif %}">
+            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+            <i class="fa fa-lock"></i>Submit Payment
+        </button>
+        <a class="btn btn-default pcta" href="{% url 'cart_empty' %}" role="button">Cancel</a>
+      </div>
+
+
+    </form>
+
+ 
+
+    {% if subbies %}
+          <div class="auto_msg">
+            <p>By selecting "Auto-Renew" for one or more subscriptions in your order, you agree to let us charge your selected payment method again next year and automatically renew your subscription. (You'll never miss an issue!)  We'll send you an email before we do that, and you can cancel any time.  More info can be found in our <a href="#">Terms &amp; Conditions</a>.
+          </div>
+      {% endif %}
+
     </div>
-
-    
-
-    <div class="form-group clearfix">
-
           
-      <div id="card_month" class="form-group">
-        <label>Exp Month</label>
-        <input type="tel" class="form-control" size="2" data-stripe="exp-month" placeholder="MM" {% if paygo == False or usergo == False %} disabled{%endif%}>
-      </div>
-
-    
-      <div id ="card_year" class="form-group">
-        <label>Exp Year</label>
-        <input type="tel" class="form-control" size="4" data-stripe="exp-year" placeholder="YYYY" {% if paygo == False or usergo == False %} disabled{%endif%}>
-      </div>
-                
-    </div>
-
-    
-    <button type="submit" class="btn btn-primary pcta {% if paygo == True %} {% else %}disabled{% endif %}">
-        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-        <i class="fa fa-lock"></i>Submit Payment
-    </button>
-    <a class="btn btn-default pcta" href="{% url 'cart_empty' %}" role="button">Cancel</a>
+ 
 
 
-  </form>
-
-    </div>
-  
   </div>
+  
+</div>
 
 </section>
 
@@ -339,14 +389,17 @@
       $('.cc-number').payment('formatCardNumber');
       $('.cc-exp').payment('formatCardExpiry');
       $('.cc-cvc').payment('formatCardCVC');
-      
-                       
-      
+      {% if user.is_authenticated and user.creditcard_set.all %}
+        $('form#payment-form').css('display', 'none');
+      {% endif %}
       
     });
   </script>
 
+  
+
 {% endblock %}
 
+  
 
 

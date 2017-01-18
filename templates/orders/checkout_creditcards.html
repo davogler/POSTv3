@@ -1,0 +1,37 @@
+
+
+<div class="form-group clearfix">
+    <form id="savedccform" method="post" action="{% url 'checkout_saved_cc' %}">{% csrf_token %}
+        {% for cc in cclist %}
+            <div class="radio">
+            <label>
+              <input type="radio" name="ccRadios" id="ccRadio{{ forloop.counter }}"  value="{{cc.id}}" {% if forloop.last %}checked{% endif %}>
+              <span class="type_{{cc.card_type|slugify}}">{{ cc.card_type }}</span>   <span class="dotboost">&middot;&middot;&middot;&middot; &middot;&middot;&middot; &middot;&middot;&middot;&middot;</span> {{ cc.last4 }}
+            </label>
+          </div>
+        {% endfor %}
+
+          <div class="radio">
+            <label>
+              <input type="radio" name="ccRadios" id="ccRadioNew" value="new" onclick="handler()">
+              Use a new card
+            </label>
+          
+        
+        <div class="form-group clearfix">
+          <button type="submit" class="btn btn-primary pcta {% if paygo == True %} {% else %}disabled{% endif %}">
+            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+            <i class="fa fa-lock"></i>Submit Payment
+          </button>
+        <a class="btn btn-default pcta" href="{% url 'cart_empty' %}" role="button">Cancel</a>
+        </div>
+    </form>
+
+
+</div>
+
+
+
+
+
+

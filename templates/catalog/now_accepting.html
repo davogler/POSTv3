@@ -1,8 +1,18 @@
 {% load order_tags %}
 
 {% for sub in sub %}
-{% get_first_month sub.first_issue as the_first_month %}
-{% get_second_month sub.first_issue as the_second_month %}
-<span class="subitem"> starting with Issue {{ sub.first_issue }} ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span>
-                        
+
+{% if sub.first_issue < 19 %}
+
+    {% get_first_month sub.first_issue as the_first_month %}
+    {% get_second_month sub.first_issue as the_second_month %}
+    
+    <span class="subitem"> starting with Issue {{ sub.first_issue }} ({{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}})</span>
+{% else %}
+
+    {% get_season sub.first_issue as the_season %}
+    {% get_year sub.first_issue as the_year %}
+     <span class="subitem"> starting with Issue {{ sub.first_issue }} ({{ the_season }} {{the_year|date:"Y"}})</span>
+
+{% endif %}                
 {% endfor %}

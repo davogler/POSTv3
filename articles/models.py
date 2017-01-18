@@ -93,7 +93,7 @@ class Article(models.Model):
     def get_author(self):
         for name in self.author.all():
             return name
-        endfor
+        
 
     def get_feednail(self):
         version = self.hero.version_generate("threeup")
@@ -189,7 +189,7 @@ class Sponsor(models.Model):
                             ".jpg", ".png", ".gif"], blank=True, null=True, help_text='Upload an image to be used for advertising min width 525px')
     adlink = models.URLField()
     endorsement = models.TextField(blank=True)
-    add_date = models.DateTimeField(default=now())
+    add_date = models.DateTimeField(default=now)
 
     class Meta:
         ordering = ['-add_date']

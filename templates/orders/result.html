@@ -30,6 +30,10 @@
 
             <p>Thank you for your support!</p>
             
+            {% if user.is_authenticated %}
+            <p>Go to your <a href="{% url 'dashboard' %}">dashboard.</a>
+            {% endif %}
+            
              {% issue_slider request %}
         
             

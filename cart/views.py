@@ -173,7 +173,7 @@ def add_subscribe_again_to_cart(request, recipient_id):
         #qty = request.POST['qty']
         print "we got post add to cart"
         try:
-            print "we got post and add subscription"
+            print "we got post and add subscribe again to card"
             subscription = Subscription.objects.filter(is_active=1).filter(type=1).first()
             print subscription
             flug = subscription.slug
@@ -285,6 +285,21 @@ def add_renewal_to_cart(request, slug, recipient_id):
             print subscription
             recipient = Recipient.objects.get(id=recipient_id)
             print recipient
+            # check if renewal item of same recip is in cart already
+            items = CartItem.objects.filter(cart=cart)
+            print items
+            for item in items:
+                
+                if recipient == item.recipient and item.subscription:
+                    print "already in cart!"
+                    messages.error(request, 
+                                    "This renewal is already in your cart. <a href='/cart/'>View Cart</a>",
+                                    extra_tags='safe')
+                    return HttpResponseRedirect(reverse("dashboard"))
+                else:
+                    pass
+
+
             cart_item = CartItem.objects.create(cart=cart, subscription=subscription, flug=slug, recipient=recipient)
             print cart_item
             cart_item.line_total = subscription.price
@@ -321,6 +336,6 @@ def delete(request):
         deactivate.active = False
         deactivate.save()
         del request.session['cart_id']
-        #del request.session['items_total']
+        del request.session['items_total']
 
     return HttpResponseRedirect(reverse("view_cart"))

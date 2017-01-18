@@ -1,7 +1,12 @@
+{% load catalog_tags %}
+{% get_latest_issue as latest_issue %}
+{% get_next_latest_issue as next_latest_issue %}
+
 <ul id="admin_nav">
         
         <li><a href="{% url 'order_list' %}" title="Orders">orders</a></li>
-        <li><a href="{% url 'record_list' %}" title="Records">records</a></li>
+        <li><a href="{% url 'records' latest_issue.first_issue %}" title="Records">records (for {{latest_issue.first_issue}})</a></li>
+        <li><a href="{% url 'renewals' latest_issue.first_issue %}" title="Renewals">renewals (for {{latest_issue.first_issue}})</a></li>
 
   
         
