@@ -1,5 +1,5 @@
 from django.contrib import admin
-from orders.models import Order, Record, BackIssue
+from orders.models import Order, Record, BackIssue, Coupon
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -17,6 +17,15 @@ class RecordAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Record, RecordAdmin)
+
+class CouponAdmin(admin.ModelAdmin):
+    list_display = ('code', 'percent_discount', )
+
+    class Meta:
+        model = Coupon
+
+
+admin.site.register(Coupon, CouponAdmin)
 
 
 class BackIssueAdmin(admin.ModelAdmin):

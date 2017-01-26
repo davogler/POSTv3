@@ -15,13 +15,49 @@ from django.contrib.sites.models import Site
 
 from orders.forms import PayForm
 from cart.models import Cart, CartItem
-from customers.models import CreditCard
-from orders.models import Order, Record, BackIssue
+from customers.models import CreditCard, Recipient
+from orders.models import Order, Record, BackIssue, Coupon
 from customers.views import purchase_notify
 from catalog.templatetags.catalog_tags import get_latest_issue
 
 
 # Create your views here.
+
+def accept_coupon(request):
+    if request.POST:
+        code = request.POST.get("couponCode", "")
+        order_id = request.POST.get("orderID", "")
+        print "accepting_coupn"
+        print code, order_id
+        if code and order_id:
+            try:
+                coupon = Coupon.objects.get(code=code)
+                print coupon
+                percent_discount = coupon.percent_discount
+                print percent_discount
+
+                order = Order.objects.get(order_id=order_id)
+                print order
+                # new_total = order.total - order.total * (float(percent_discount) / 100)
+                # order.total = new_total
+                # print new_total
+                order.coupon = coupon
+                order.save()
+                print "made it"
+                return HttpResponseRedirect(reverse("checkout"))
+
+
+
+            except:
+                coupon = None
+                print "exception"
+                return HttpResponseRedirect(reverse("checkout"))
+        
+
+    else:
+        return HttpResponseRedirect(reverse("checkout"))
+
+
 
 def renewals_get(request):
     # prepare default
@@ -94,6 +130,18 @@ def toggle_renew(request, item_id):
     return HttpResponseRedirect(reverse("checkout"))
 
 
+def promos(request):
+    promo_pool = Recipient.objects.filter(type = "Promo")
+    staff_pool = Recipient.objects.filter(type = "Staff")
+
+    context = {
+        "promo_pool": promo_pool,
+        "staff_pool": staff_pool,
+    }
+    template = "orders/promos.html"
+    return render(request, template, context)
+
+
 def notify_purchase(email_context, payer_email, order_id):
     c = Context(email_context)
     sender = settings.DEFAULT_FROM_EMAIL
@@ -110,6 +158,93 @@ def notify_purchase(email_context, payer_email, order_id):
     msg.send()
 
     return msg.send(True)
+
+def add_credit_card(request):
+    pay_form = PayForm()
+    if request.user.is_authenticated():
+        user=request.user
+    else:
+        return HttpResponseRedirect(reverse("home"))
+    if request.POST:
+        print request.POST
+        pay_form = PayForm(request.POST)
+        token = request.POST['stripeToken']
+        last4 = request.POST['last4']
+        card_type = request.POST['card_type']
+        payer_name = request.POST['name']
+        payer_email = request.user
+
+        if pay_form.is_valid():
+            
+            try:
+                customer = stripe.Customer.create(
+                    source=token,
+                    description=payer_email,
+                    api_key=settings.TRINITY_API_KEY,
+                )
+
+                if request.user.is_authenticated():
+                    try:
+                        # see if any other cc exist, and un default them
+                        credit_cards = CreditCard.objects.filter(user=user)
+                        for card in credit_cards:
+                            card.default = False
+                            card.save()
+                    except:
+                        pass
+                    cc = CreditCard(user=user, last4=last4, card_type=card_type)
+                    cc.stripe_id = customer.id
+                    cc.payer_name = payer_name
+                    cc.payer_email = payer_email
+                    cc.save()
+
+                else:
+                    print "no user at hand"
+                    pass
+            except stripe.CardError, e:
+
+                # Since it's a decline, stripe.error.CardError will be caught
+                body = e.json_body
+                err = body['error']
+
+                print "Status is: %s" % e.http_status
+                print "Type is: %s" % err['type']
+                print "Code is: %s" % err['code']
+
+                print "Message is: %s" % err['message']
+                messages.error(request, "%s The payment could not be completed." % err['message'])
+            except stripe.error.InvalidRequestError, e:
+                # Invalid parameters were supplied to Stripe's API
+                messages.error(request, "%s The payment could not be completed." % err['message'])
+            except stripe.error.AuthenticationError, e:
+                # Authentication with Stripe's API failed (maybe you changed API keys recently)
+                messages.error(request, "%s The payment could not be completed." % err['message'])
+            except stripe.error.APIConnectionError, e:
+                # Network communication with Stripe failed
+                messages.error(request, "%s The payment could not be completed." % err['message'])
+            except stripe.error.StripeError, e:
+                # Display a very generic error to the user, and maybe send yourself an email
+                messages.error(request, "%s The payment could not be completed." % err['message'])
+            except Exception, e:
+                # Something else happened, completely unrelated to Stripe
+                messages.error(request, "Something bizzare happened. The payment could not be completed.")
+
+        messages.success(request, "You successfully added a credit card!")
+        return HttpResponseRedirect(reverse("dashboard"))
+
+
+    context = {
+       
+        "pay_form": pay_form,
+   
+
+    }
+    template = "orders/add_credit_card.html"
+    return render(request, template, context)
+
+
+
+    
 
 
 def checkout_saved_cc(request):
@@ -319,6 +454,12 @@ def checkout(request):
 
     new_order.total = cart.total
     new_order.shipping = cart.shipping_total
+    if new_order.coupon:
+        coupon = new_order.coupon
+        percent_discount = coupon.percent_discount
+        new_total = new_order.total - new_order.total * (float(percent_discount) / 100)
+        print new_total
+        new_order.total = new_total
     new_order.save()
     pay_form = PayForm()
     order = new_order

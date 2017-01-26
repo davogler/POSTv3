@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+
+
+{% block headernav %}
+{% load article_tags %}
+{% banner request %} 
+{% load crispy_forms_tags %}
+{% endblock %}
+
+{% block content %}
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<section class="content-static">
+  <div class="brick clearfix">
+  
+      <div class="halfsies-left">
+
+                  
+
+                
+
+ <h2>Add A Credit Card</h2>
+
+  
+ 
+    <form autocomplete="on" action="" method="POST" id="payment-form" >{% csrf_token %}
+    
+
+     
+      {{ pay_form }}
+
+      <div class="erro">
+        <span class="payment-errors"></span>
+      </div>
+
+
+      <div id="div_id_name" class="form-group">
+        <label for="id_name" class="control-label ">Name </label>
+        <div class="controls ">
+          <input type="text" class="textinput textInput form-control" size="20" value="{% if user.first_name %}{{user.first_name}} {{ user.last_name}}{% endif %}" name="name" > 
+        </div>
+      </div>
+
+      
+
+      
+
+      <div class="form-group clearfix">
+
+        <div id="div_id_card" >
+          <label for="id_card" class="control-label">Card Number </label>
+          <div class="controls ">
+            <input type="tel" class="textinput textInput form-control cc-number" autocomplete="cc-exp" size="20" data-stripe="number" placeholder="•••• •••• •••• ••••" required {% if paygo == False or usergo == False %} disabled{%endif%}>
+          </div>
+        </div>
+
+        <div id="cvc" >
+          <label>CVC</label>
+          <input type="tel" class="form-control cc-cvc" size="4" data-stripe="cvc" autocomplete="off" placeholder="•••" required {% if paygo == False or usergo == False %} disabled{%endif%}>
+        </div>
+
+      </div>
+
+      
+
+      <div class="form-group clearfix">
+
+            
+        <div id="card_month" class="form-group">
+          <label>Exp Month</label>
+          <input type="tel" class="form-control" size="2" data-stripe="exp-month" placeholder="MM" {% if paygo == False or usergo == False %} disabled{%endif%}>
+        </div>
+
+      
+        <div id ="card_year" class="form-group">
+          <label>Exp Year</label>
+          <input type="tel" class="form-control" size="4" data-stripe="exp-year" placeholder="YYYY" {% if paygo == False or usergo == False %} disabled{%endif%}>
+        </div>
+                  
+      </div>
+
+      <div class="form-group clearfix">
+        <button type="submit" class="btn btn-primary pcta">
+            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+            <i class="fa fa-lock"></i>Add Card
+        </button>
+        <a class="btn btn-default pcta" href="{% url 'cart_empty' %}" role="button">Cancel</a>
+      </div>
+
+
+    </form>
+
+ 
+
+
+
+    </div>
+          
+
+                   
+            </form>
+          </div>
+      </div>
+
+     
+
+
+
+    </div>
+
+
+
+</section>
+
+{% endblock %}
+
+
+
+{% block inlinejs %}
+
+<script src="{{ STATIC_URL }}js/vendor/jquery.payment.js"></script>
+
+<script type="text/javascript">
+    // This identifies your website in the createToken call below
+    Stripe.setPublishableKey('pk_CsG24ZSjBprYMnDHbs1AABi2sxQy7');
+
+    var stripeResponseHandler = function(status, response) {
+      var $form = $('#payment-form');
+
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // token contains id, last4, and card type
+        var token = response.id;
+        var last4 = response.card.last4;
+        var card_type = response.card.brand
+        // Insert the token into the form so it gets submitted to the server
+        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        $form.append($('<input type="hidden" name="last4" />').val(last4));
+        $form.append($('<input type="hidden" name="card_type" />').val(card_type));
+        // and re-submit
+        $form.get(0).submit();
+      }
+    };
+
+    jQuery(function($) {
+      $('#payment-form').submit(function(e) {
+        var $form = $(this);
+
+        // Disable the submit button to prevent repeated clicks
+        $form.find('button').prop('disabled', true);
+
+        Stripe.card.createToken($form, stripeResponseHandler);
+
+        // Prevent the form from submitting with the default action
+        return false;
+      });
+    });
+
+    jQuery(function($) {
+      
+      $('.cc-number').payment('formatCardNumber');
+      $('.cc-exp').payment('formatCardExpiry');
+      $('.cc-cvc').payment('formatCardCVC');
+     
+      
+    });
+  </script>
+
+  
+
+{% endblock %}
+
+
+

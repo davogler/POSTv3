@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Order Confirmation | {{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }}flatpage {{ flatpage.title|slugify }}{% endblock %}
+
+
+
+{% block headernav %}
+{% load order_tags %}
+{% load article_tags %}
+{% banner request %} 
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<section class="content-static">
+  <div class="brick clearfix">
+
+  {% if user.is_staff %}
+   {% include "admin_nav.html" %} 
+{% endif %}
+  
+
+    {{ block.super }}
+    <div class="wrapper content">
+        {% load catalog_tags %}
+        {% get_latest_issue as latest_issue %}
+        {% get_next_latest_issue as next_latest_issue %}
+        {% load order_tags %}
+        
+      
+        <h2>Promo Pool</h2>
+       
+
+
+
+        <p>These are recipients available as promos.  These may or may not be ordered for a given issue.</p>
+        
+      
+
+        <table class="table ordershow">
+                 <thead>
+                  <tr>
+                    <th class="mid">org</th>
+                    <th class="mid">First</th>
+                    <th class="mid">Last</th>
+                    <th class="addy">Address 1</th>
+                    <th class="addy"> Address 2</th>
+                    <th class="itty"> City</th>
+                    <th class="itty"> State</th>
+                    <th class="itty"> Zip</th>
+                    <th class="mid"> type</th>
+                
+                  </tr>
+
+                </thead>
+                <tbody>
+
+        {% for promo in promo_pool %}
+            <tr>
+                <td> {{ promo.org }}</td>
+                 <td> {{ promo.first_name }}</td>
+                 <td> {{ promo.last_name }}</td>
+                 <td> {{ promo.address_line1 }}</td>
+                 <td> {{ promo.address_line2 }}</td>
+
+                 <td> {{ promo.city }}</td>
+                 <td> {{ promo.state_province }}</td>
+                 <td> {{ promo.type }}</td>
+                 <td> {{ promo.postal_code }}</td>
+                
+           
+
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+
+ 
+
+  
+  </div>
+
+</section>
+
+{% endblock %}
+
+
+

@@ -30,18 +30,31 @@
 
     <div class="wrapper content">
         
-      
+      <div class="orderhead">
         <h2>My Order</h2>
          <p class="order-id-dim">#{{ order.order_id }}</p>
+       </div>  
          <div class="table-responsive">
-        <div class="tertal">
-                <p><span class="tit">Sub Total: </span>${{ cart.product_total|floatformat:2 }}<br>
-                <span class="tit">Shipping:</span> ${{ cart.shipping_total|floatformat:2 }}</p>
-                <hr>
-                <p><span class="tit">Grand Total:</span> ${{ cart.total|floatformat:2 }}</p>
-                
 
-            </div>
+         <div id ="usergo">
+   
+    {% if user.is_authenticated %}
+        <p><i class="fa fa-user" aria-hidden="true"></i> You're logged in as <br>{% if user.first_name %} 
+          {{user.first_name}} {{ user.last_name}} 
+          {% else %}
+          {{ user }}
+          {% endif %} </p>
+
+    {% elif not user.is_authenticated and subbies %}
+   
+    <p class="error-block">Purchasing a subscription requires an account. <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a> to save your order information.</p>
+    {% else %}
+    <p class="warning-block">You're checking out as a guest. No problem! However, if you were to <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a>, we can save your order details for you.</p>
+    {% endif %}
+    
+
+</div>
+        
 
 
   <table class="table ordershow">
@@ -179,16 +192,29 @@
                </tbody>
                 
           </table>
+        {% if not order.coupon %}
+         <form class="form-inline" id="coupon-form" action="{% url 'accept_coupon' %}" method="POST" >{% csrf_token %}
+            
+            <div class="form-group">
+              <label for="couponCode">Coupon Code</label>
+              <input type="text" name="couponCode" class="form-control" id="couponCode" placeholder="ENTER CODE">
+            </div>
+            <input type="hidden" name="orderID" value="{{order.order_id}}">
+            <button type="submit" class="btn btn-default ">Submit</button>
+        
+        </form>
+        {% endif %}
           </div>
+        
 
 
    
          
-<div id="paystub" >
+<div id="paystub" class="clearfix" >
 
         
 
- <section class="messages">
+ <section class="messages clearfix">
     {% if messages %}
         {% for message in messages %}
             <div class='alert {% if "success" in message.tags %}alert-success{% elif "warning" in message.tags%}alert-warning{% elif "error" in message.tags %}alert-danger{% endif %} alert-dismissible' role='alert'>
@@ -198,26 +224,21 @@
     {% endif %}
     </section>
 
-    <div class="thirdsies-right">
+    <div class="thirdsies-right clearfix">
 
-    <div id ="usergo">
-    <h2>Account Details</h2>
-    {% if user.is_authenticated %}
-        <p><i class="fa fa-user" aria-hidden="true"></i> You're logged in as {% if user.first_name %} 
-          {{user.first_name}} {{ user.last_name}} 
-          {% else %}
-          {{ user }}
-          {% endif %} </p>
+     <div class="tertal">
+        <p><span class="tit">Sub Total: </span>${{ cart.product_total|floatformat:2 }}<br>
+        <span class="tit">Shipping:</span> ${{ cart.shipping_total|floatformat:2 }}</p>
+        {% if order.coupon %}
+        <span class="tit">Discount:</span> ${% dolla_discount order as discount %} -{{discount|floatformat:2}}</p>
+        {% endif %}
+        <hr> 
+        <p><span class="tit">Grand Total:</span> ${{ order.total|floatformat:2 }}</p>
+        
 
-    {% elif not user.is_authenticated and subbies %}
+     </div>
+
    
-    <p class="error-block">Purchasing a subscription requires an account. <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a> to save your order information.</p>
-    {% else %}
-    <p class="warning-block">You're checking out as a guest. No problem! However, if you were to <a href="{% url 'auth_login' %}?next={% url 'checkout' %}">LOGIN</a> or <a href="{% url 'signup' %}?next={% url 'checkout' %}">REGISTER</a>, we can save your order details for you.</p>
-    {% endif %}
-    
-
-</div>
 
    
 
@@ -392,6 +413,14 @@
       {% if user.is_authenticated and user.creditcard_set.all %}
         $('form#payment-form').css('display', 'none');
       {% endif %}
+      
+      $('#coupon-form input').focus(function(){
+                  $('#coupon-form button.btn').removeClass('btn-default');
+                  $('#coupon-form button.btn').addClass('btn-primary');
+                }).blur(function(){
+                  $('#coupon-form button.btn').removeClass('btn-primary');
+                  $('#coupon-form button.btn').addClass('btn-default');
+         });
       
     });
   </script>

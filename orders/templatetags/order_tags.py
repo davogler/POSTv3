@@ -173,3 +173,11 @@ def get_auto_renew(record):
     except:
         auto = None
     return auto
+
+
+@register.assignment_tag
+def dolla_discount(order):
+    cart = order.cart
+    print cart.total
+    print order.total
+    return (cart.total - order.total)

@@ -43,6 +43,11 @@ class CreditCard(models.Model):
 class Recipient(models.Model):
 
     """Model to store recipients"""
+    TYPE_CHOICES = (
+        ("Standard", "Standard"),
+        ("Promo", "Promo"),
+        ("Staff", "Staff"),
+    )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     first_name = models.CharField("First Name", max_length=45, blank=True)
     last_name = models.CharField("Last Name", max_length=45, blank=True)
@@ -55,6 +60,7 @@ class Recipient(models.Model):
                                       blank=True)
     country = models.CharField("Country", max_length=40,
                                blank=True)
+    type = models.CharField(max_length=120, choices=TYPE_CHOICES, default="Standard")
 
     def __unicode__(self):
         if self.org:
@@ -67,4 +73,5 @@ class Recipient(models.Model):
 
     class Meta:
         verbose_name_plural = "Recipients"
+        ordering = ["last_name"]
 

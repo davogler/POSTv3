@@ -352,6 +352,13 @@ def purchase_notify(email_context, recipient):
 def delete_creditcard(request, pk):
     cc = CreditCard.objects.get(pk=pk)
     cc.delete()
+    try:
+        cc_default = CreditCard.objects.get(default=True)
+    except:
+        cc_default = CreditCard.objects.latest('timestamp')
+        cc_default.default=True
+        cc_default.save()
+
     messages.success(request, "Successfully Removed Credit Card.")
     return HttpResponseRedirect(reverse("dashboard"))
 

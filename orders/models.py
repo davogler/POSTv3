@@ -16,12 +16,24 @@ STATUS_CHOICES = (
     ("Refunded", "Refunded"),
 )
 
+class Coupon(models.Model):
+    percent_discount = models.DecimalField(max_digits=4, decimal_places=1, default=0.0)
+    code = models.CharField(max_length=120, default='ABC123', unique=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
+    class Meta:
+        verbose_name = 'Coupon'
+        verbose_name_plural = 'Coupons'
+        ordering = ['-timestamp', ]
+
+    def __unicode__(self):
+        return self.code
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     order_id = models.CharField(max_length=120, default='ABC123', unique=True)
-    #credit_card = models.ForeignKey(CreditCard, null=True, blank=True)
+    #has_coupon = models.NullBooleanField(null=True, default=False)
+    coupon = models.ForeignKey(Coupon, blank=True, null=True)
     cart = models.ForeignKey(Cart)
     payer_name = models.CharField(max_length=120)
     payer_email = models.EmailField()
