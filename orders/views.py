@@ -12,12 +12,15 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.sites.models import Site
+from django.db.models import Q
+from django.contrib.auth.models import User
 
 from orders.forms import PayForm
 from cart.models import Cart, CartItem
-from customers.models import CreditCard, Recipient
+from customers.models import CreditCard, Recipient, Comp
 from orders.models import Order, Record, BackIssue, Coupon
 from customers.views import purchase_notify
+from catalog.models import Subscription
 from catalog.templatetags.catalog_tags import get_latest_issue
 
 
@@ -46,13 +49,10 @@ def accept_coupon(request):
                 print "made it"
                 return HttpResponseRedirect(reverse("checkout"))
 
-
-
             except:
                 coupon = None
                 print "exception"
-                return HttpResponseRedirect(reverse("checkout"))
-        
+                return HttpResponseRedirect(reverse("checkout"))       
 
     else:
         return HttpResponseRedirect(reverse("checkout"))
@@ -77,13 +77,13 @@ def renewals(request, issue):
     expiring_issue = int(issue) - 1
 
     # get all recipients of the next issue and make a list.
-    upcoming_issue_records = Record.objects.filter(issue=issue)
+    upcoming_issue_records = Record.objects.filter(issue=issue).exclude(originating_order=None)
     upcoming_issue_recipients = set()
     for record in upcoming_issue_records:
         upcoming_issue_recipients.add(record.recipient)
     # prefetch orders and carts to go with every record that is expiring.
     # exclude those who are on the above list for the next issue -  remaining are the expiring records
-    expiring_records = Record.objects.filter(issue=expiring_issue).exclude(
+    expiring_records = Record.objects.filter(issue=expiring_issue).exclude(originating_order=None).exclude(
         recipient__in=upcoming_issue_recipients).prefetch_related('originating_order__cart')
 
     # # here is list of carts from the expiring recrods
@@ -129,14 +129,49 @@ def toggle_renew(request, item_id):
     print c
     return HttpResponseRedirect(reverse("checkout"))
 
+def promo_to_record(request):
+    latest_issue = get_latest_issue()
+    latest_issue_number = latest_issue.first_issue
+    issue = request.POST.get('issue', latest_issue_number)
+    type = request.POST.get('promoType', "")
+
+    promo_id_list = request.POST.getlist('promoId')
+
+    for id in promo_id_list:
+        recipient = Comp.objects.get(id=id)
+        record, created = Record.objects.get_or_create(
+            recipient=recipient,
+            issue=issue,
+        )
+
+    messages.success(request, "Successfully created mailing records!")
+    return HttpResponseRedirect(reverse("promos"))
+
+
+
+
 
 def promos(request):
-    promo_pool = Recipient.objects.filter(type = "Promo")
-    staff_pool = Recipient.objects.filter(type = "Staff")
+    promo_pool = Comp.objects.filter(Q(comp_type="Promo") | Q(comp_type="VIP"))
+    staff_pool = Comp.objects.filter(comp_type = "Staff")
+    advertiser_pool = Comp.objects.filter(comp_type = "Advertiser")
+
+    latest_issue = get_latest_issue()
+    issue = latest_issue.first_issue
+
+    records_already_added=Record.objects.filter(issue=issue, originating_order=None)
+    promo_already_added = []
+    for record in records_already_added:
+        promo_already_added.append(record.recipient.comp)
+    print "promo already added is"
+    print promo_already_added
 
     context = {
+        "issue": issue,
         "promo_pool": promo_pool,
         "staff_pool": staff_pool,
+        "advertiser_pool": advertiser_pool,
+        "promo_already_added": promo_already_added,
     }
     template = "orders/promos.html"
     return render(request, template, context)
@@ -244,7 +279,126 @@ def add_credit_card(request):
 
 
 
+def checkout_auto_renewal(request):
+    """for admin charging of auto renews"""
+    customer = request.POST.get('ccStripeId', "")
+    record_id = request.POST.get('recordId', "")
+    user_id = request.POST.get('userId', "")
+    issue = request.POST.get('issueNo', "")
+    cc = CreditCard.objects.get(stripe_id=customer)
+    user = User.objects.get(id=user_id)
+    record = Record.objects.get(id=record_id)
+    sub = Subscription.objects.get(sku="pbrenewal")
+
+    cart = Cart(user=user)
+    cart.save()
+    cart_item = CartItem(cart=cart,
+                         subscription=sub,
+                         flug=sub.slug,
+                         line_total=sub.price,
+                         recipient=record.recipient,
+                         )
+    cart_item.save()
+    cart.product_total = cart_item.line_total
+    cart.total = cart_item.line_total
+    cart.save()
+    order=Order(cart=cart,
+                user=user,
+                total=cart.total,
+                payer_name=user.get_full_name(),
+                payer_email=user.email,
+                )
+    order.order_id = id_generator()
+    order.save()
+    amount = int(order.total * 100)  # convert to cents
+    fee = int(order.total * 100 * settings.TRINITY_FEE * .01)  # % of inputed ($) amount, in cents
+    try:
+        charge = stripe.Charge.create(
+            amount=amount,  # amount in cents, again
+            currency="usd",
+            application_fee=fee,
+            customer=customer,
+            api_key=settings.TRINITY_API_KEY,
+        )
+
+        order.status = "Finished"
+        order.last4 = cc.last4
+        order.card_type = cc.card_type
+        order.save()
+
+        recipient = record.recipient
+        last_record = Record.objects.filter(recipient=recipient).order_by('issue').last()
+        ish = last_record.issue + 1
+        # try:
+        #    all_record = Record.objects.get(recipient=sub.recipient, originating_order=order, issue=ish)
+
+        for x in range(0, cart_item.subscription.term):
+            try:
+                record = Record.objects.get(recipient=recipient, originating_order=order, issue=ish)
+                pass
+            except Record.DoesNotExist:
+                new_record = Record(recipient=recipient, originating_order=order, issue=ish)
+                new_record.save()
+            ish += 1
+
+        order.status = "Recorded"
+        order.save()
+
+        # now we notify.
+        subbies = CartItem.subbie_type.filter(cart=cart)
+        current_site = Site.objects.get_current()
+        local = settings.LOCAL
+        email_context = {
+            "cart": cart,
+            "subbies": subbies,
+            "order": order,
+            "current_site": current_site,
+            "local": local,
+        }
+
+        if settings.EMAIL_NOTIFICATIONS is True:
+            recipient = order.payer_email
+            print "email notifications are true and we're about to send to %s" % recipient
+
+            purchase_notify(email_context, recipient)
+
+        else:
+            print "email settings not true"
+            pass
+
+    except stripe.CardError, e:
+
+        # Since it's a decline, stripe.error.CardError will be caught
+        body = e.json_body
+        err = body['error']
+
+        print "Status is: %s" % e.http_status
+        print "Type is: %s" % err['type']
+        print "Code is: %s" % err['code']
+
+        print "Message is: %s" % err['message']
+        messages.error(request, "%s The payment could not be completed." % err['message'])
+    except stripe.error.InvalidRequestError, e:
+        # Invalid parameters were supplied to Stripe's API
+        messages.error(request, "%s The payment could not be completed." % err['message'])
+    except stripe.error.AuthenticationError, e:
+        # Authentication with Stripe's API failed (maybe you changed API keys recently)
+        messages.error(request, "%s The payment could not be completed." % err['message'])
+    except stripe.error.APIConnectionError, e:
+        # Network communication with Stripe failed
+        messages.error(request, "%s The payment could not be completed." % err['message'])
+    except stripe.error.StripeError, e:
+        # Display a very generic error to the user, and maybe send yourself an email
+        messages.error(request, "%s The payment could not be completed." % err['message'])
+    except Exception, e:
+        # Something else happened, completely unrelated to Stripe
+        messages.error(request, "Something bizzare happened. The payment could not be completed.")
+
+
     
+
+    messages.success(request, "Renewal completed successfully")
+    return HttpResponseRedirect(reverse('renewals', args=(issue,)))
 
 
 def checkout_saved_cc(request):
@@ -692,6 +846,7 @@ def checkout(request):
 
 
 def email_preview(request, order_id):
+    """debug function for prviewing test email"""
     current_site = Site.objects.get_current()
     local = settings.LOCAL
     order = Order.objects.get(order_id=order_id)
@@ -714,6 +869,7 @@ def email_preview(request, order_id):
 
 
 def email(request, order_id):
+    """debug function for firing test email"""
     current_site = Site.objects.get_current()
     local = settings.LOCAL
     order = Order.objects.get(order_id=order_id)

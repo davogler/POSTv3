@@ -24,7 +24,7 @@ class CreditCard(models.Model):
         verbose_name = 'Credit Card'
         verbose_name_plural = 'Credit Cards'
         ordering = ['-timestamp', ]
-        #unique_together = ("user", "default")
+        # unique_together = ("user", "default")
 
     def __unicode__(self):
         return self.last4
@@ -40,8 +40,8 @@ class CreditCard(models.Model):
                 pass
         super(CreditCard, self).save(*args, **kwargs)
 
-class Recipient(models.Model):
 
+class Recipient(models.Model):
     """Model to store recipients"""
     TYPE_CHOICES = (
         ("Standard", "Standard"),
@@ -69,9 +69,25 @@ class Recipient(models.Model):
             return "%s %s" % (self.first_name, self.last_name)
 
     def get_address(self):
-        return "%s %s, %s, %s, %s, %s, %s, %s" %(self.first_name, self.last_name, self.org, self.address_line1, self.address_line2, self.city, self.state_province, self.postal_code)
+        return "%s %s, %s, %s, %s, %s, %s, %s" % (self.first_name, self.last_name, self.org, self.address_line1, self.address_line2, self.city, self.state_province, self.postal_code)
 
     class Meta:
         verbose_name_plural = "Recipients"
         ordering = ["last_name"]
 
+class Comp(Recipient):
+    """Recipient of complimentary issue"""
+    COMP_TYPE_CHOICES = (
+        ("Promo", "Promo"),
+        ("Staff", "Staff"),
+        ("Advertiser", "Advertiser"),
+        ("VIP", "VIP"),
+        ("Winner", "Winner")
+    )
+
+    comp_type = models.CharField(max_length=120, choices=COMP_TYPE_CHOICES, default="VIP")
+    notes = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = "Comp Recipients"
+        ordering = ["last_name"]

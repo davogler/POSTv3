@@ -1562,6 +1562,32 @@ tr.ender
 	height: 2px;
 }
 
+table.record{
+	font-size: .8em;
+	margin-bottom: 20px;
+}
+
+table.record tbody tr:nth-child(even) {
+   background-color: #e4e9ee;
+}
+
+table.record tbody tr.hilite{
+	background-color: #dbefdf;
+}
+
+span.legend{
+	background-color: #dbefdf;
+	width: 2em;
+	height: .9em;
+	display: inline-block;
+	border: 1px solid #e0cbad;
+}
+
+table .czechbox{
+	padding: 10px;
+	text-align: center;
+}
+
 span.type_visa{
 	display: inline-block;
 	background-image: url('../i/visa.svg');
@@ -1685,6 +1711,16 @@ span.subitem{
 	color: #7e7b7b;
 	font-size: .9em;
 	font-style: italic;
+}
+
+h2.inline-hdr{
+	display: inline-block;
+	margin-bottom: .6em;
+	margin-right: .6em;
+}
+
+h2.inline-hdr+a.btn{
+	margin-top: -.6em;
 }
 
 table.ccshow{
@@ -1836,10 +1872,60 @@ td.substatus{
 }
 
 #usergo{
-	border-bottom: 1px solid #e0cbad;
+	
 	margin-bottom: 50px;
+	float: right;
+	text-align: right;
 }
 
+#coupon-form{
+	width: 100%;
+	float: right;
+	text-align: right;
+	display: inline-block;
+	padding: 20px 0 12px 0;
+	xmargin: 16px 0 0 0;
+	 border-bottom: 1px solid #e0cbad;
+	
+	
+}
+
+#coupon-form .form-group{
+	xwidth: 50%;
+	vertical-align: middle;
+	
+	
+}
+
+#coupon-form label{
+	float: left;
+	display: inline-block;
+	xtext-align: left;
+	width: 45%;
+	font-family: "helvetica_neueregular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: .9em;
+	text-transform: uppercase;
+	font-weight: normal;
+	vertical-align: middle;
+	padding-top: 5px;
+
+}
+
+#coupon-form input{
+	width: 50%;
+	vertical-align: middle;
+	padding: .24em 1em;
+	
+}
+
+#coupon-form button{
+	xwidth: 50%;
+	xvertical-align: middle;
+	margin-top: -8px;
+	xheight: 2em;
+	padding: .20em 1em;
+	
+}
 img.secure{
 float: right;	
 margin: 20px 45% 0 0;
@@ -2471,7 +2557,11 @@ article.teaser .hgroup{
 
 .tertal{
 	width: 200px;
-	margin: -60px 0 20px 0;
+	margin: 10px 0 20px 0;
+}
+
+.orderhead{
+	float: left;
 }
 
 .halfsies-left{

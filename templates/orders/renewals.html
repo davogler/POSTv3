@@ -31,7 +31,17 @@
         {% get_latest_issue as latest_issue %}
         {% get_next_latest_issue as next_latest_issue %}
         {% load order_tags %}
-        
+
+    <section class="messages clearfix">
+    {% if messages %}
+        {% for message in messages %}
+            <div class='alert {% if "success" in message.tags %}alert-success{% elif "warning" in message.tags%}alert-warning{% elif "error" in message.tags %}alert-danger{% endif %} alert-dismissible' role='alert'>
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+            {% if "safe" in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</div>
+        {% endfor %}
+    {% endif %}
+    </section>  
+
       
         <h2>Renewals for Issue {{ issue }}</h2>
         <div class="mininav">
@@ -71,8 +81,18 @@
                 <td> {{ record }}</td>
                  <td> {{ record.originating_order.payer_name }}</td>
                 <td> {% get_auto_renew record as auto %} {{auto}}</td>
-                <td> {{ record.originating_order.user }}</td>
-                <td> {% get_dat_cc record.originating_order.user as cc %} {{cc}}</td>
+                <td> {{ record.originating_order.user }}email them</td>
+                <td> {% if auto = True %}
+                {% get_dat_cc record.originating_order.user as cc %} 
+                <form action="{% url 'checkout_auto_renewal'%}" method="POST" >{% csrf_token %}
+                    <input type="hidden" name="userId" value="{{record.originating_order.user.id}}">
+                    <input type="hidden" name="ccStripeId" value="{{cc.stripe_id}}">
+                    <input type="hidden" name="recordId" value="{{record.id}}">
+                    <input type="hidden" name="issueNo" value="{{issue}}">
+                    <button class="btn btn-primary" type="submit">Renew!</button>
+                </form>
+                {% endif %}
+                </td>
            
 
             </tr>

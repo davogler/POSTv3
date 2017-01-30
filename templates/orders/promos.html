@@ -23,6 +23,16 @@
   {% if user.is_staff %}
    {% include "admin_nav.html" %} 
 {% endif %}
+
+ <section class="messages clearfix">
+    {% if messages %}
+        {% for message in messages %}
+            <div class='alert {% if "success" in message.tags %}alert-success{% elif "warning" in message.tags%}alert-warning{% elif "error" in message.tags %}alert-danger{% endif %} alert-dismissible' role='alert'>
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+            {% if "safe" in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</div>
+        {% endfor %}
+    {% endif %}
+    </section>
   
 
     {{ block.super }}
@@ -32,61 +42,55 @@
         {% get_next_latest_issue as next_latest_issue %}
         {% load order_tags %}
         
-      
-        <h2>Promo Pool</h2>
-       
-
-
-
-        <p>These are recipients available as promos.  These may or may not be ordered for a given issue.</p>
+        <h1>Promo Pool</h1>
+            <p>These are recipients available as promos.  These may or may not be ordered for a given issue.</p>
+        {% if promo_pool %}
+        <div class="brick clearfix"> 
+        <h2 >VIP/Promo Pool </h2>
+        <span class='legend'></span> = Already added to issue {{issue}}.
+        {% include "orders/promo_table.html" with comp_list=promo_pool type="vip" %}
+        </div>
+        {% endif %}
         
-      
+        {% if staff_pool %}
+        <div class="brick clearfix">
+        <h2>Staff Pool </h2>
+        <span class='legend'></span> = Already added to issue {{issue}}.
+        {% include "orders/promo_table.html" with comp_list=staff_pool type="staff" %}
+        </div>
+        {% endif %}
+        
+        {% if advertiser_pool %}
+        <div class="brick clearfix">
+         <h2>Advertiser Pool</h2>
+         <span class='legend'></span> = Already added to issue {{issue}}.
+        {% include "orders/promo_table.html" with comp_list=advertiser_pool type="ad" %}
+        </div>
+        {% endif %}
 
-        <table class="table ordershow">
-                 <thead>
-                  <tr>
-                    <th class="mid">org</th>
-                    <th class="mid">First</th>
-                    <th class="mid">Last</th>
-                    <th class="addy">Address 1</th>
-                    <th class="addy"> Address 2</th>
-                    <th class="itty"> City</th>
-                    <th class="itty"> State</th>
-                    <th class="itty"> Zip</th>
-                    <th class="mid"> type</th>
-                
-                  </tr>
-
-                </thead>
-                <tbody>
-
-        {% for promo in promo_pool %}
-            <tr>
-                <td> {{ promo.org }}</td>
-                 <td> {{ promo.first_name }}</td>
-                 <td> {{ promo.last_name }}</td>
-                 <td> {{ promo.address_line1 }}</td>
-                 <td> {{ promo.address_line2 }}</td>
-
-                 <td> {{ promo.city }}</td>
-                 <td> {{ promo.state_province }}</td>
-                 <td> {{ promo.type }}</td>
-                 <td> {{ promo.postal_code }}</td>
-                
-           
-
-            </tr>
-        {% endfor %}
-        </tbody>
-        </table>
-
-
- 
 
   
   </div>
 
 </section>
+
+{% endblock %}
+
+{% block inlinejs %}
+
+<script src="{{ STATIC_URL }}js/vendor/jquery.payment.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $('th input:checkbox').click(function(e) {
+        var table = $(e.target).closest('table');
+        $('td input:checkbox', table).attr('checked', e.target.checked);
+    });
+});
+  </script>
+
+  
 
 {% endblock %}
 

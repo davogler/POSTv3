@@ -41,15 +41,21 @@
 
          <p>All shipping records for Issue {{issue}}</p>
 
-        <table class="table ordershow">
+
+
+        <table class="table ordershow record">
                  <thead>
                   <tr>
                     
-                    <th class="recip">Recipient</th>
-                    <th class="recip">Payer</th>
-                    <th class="action"> Auto Renew?</th>
-                    <th class="action"> Notify</th>
-                    <th class="action"> Renew</th>
+                    <th class="mid">org</th>
+                    <th class="mid">First</th>
+                    <th class="mid">Last</th>
+                    <th class="addy"> Address 1</th>
+                    <th class="addy"> Address 2</th>
+                    <th class="itty"> City</th>
+                    <th class="itty"> State</th>
+                    <th class="itty"> Zip</th>
+                    <th class="mid"> type</th>
                 
                   </tr>
 
@@ -58,12 +64,15 @@
 
         {% for record in records %}
             <tr>
-                <td> {{ record }}</td>
-                 <td> {{ record.originating_order.payer_name }}</td>
-                <td> </td>
-                <td> {{ record.originating_order.user }}</td>
-                <td>  <a href="{{record.originating_order.get_absolute_url}}">{{ record.originating_order }}</a></td>
-           
+                <td> {{ record.recipient.org }}</td>
+                 <td> {{ record.recipient.first_name }}</td>
+                 <td> {{ record.recipient.last_name }}</td>
+                 <td> {{ record.recipient.address_line1 }}</td>
+                 <td> {{ record.recipient.address_line2 }}</td>
+                 <td> {{ record.recipient.city }}</td>
+                 <td> {{ record.recipient.state_province }}</td>
+                 <td> {{ record.recipient.postal_code }}</td>
+                 <td> {{ record.recipient.comp.comp_type }}</td>
 
             </tr>
         {% endfor %}
