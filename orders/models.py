@@ -59,9 +59,16 @@ class Order(models.Model):
         return reverse('order_detail', args=[self.order_id])
 
 class Record(models.Model):
+    RECORD_CHOICES = (
+        ("Notified", "Notified"),
+        ("Renewed", "Renewed"),
+        ("Borked", "Borked"),
+        ("Refunded", "Refunded"),
+        )
     recipient = models.ForeignKey(Recipient, null=True, blank=True)
     originating_order = models.ForeignKey(Order, null=True, blank=True)
     issue = models.IntegerField()
+    status = models.CharField(max_length=120, choices=RECORD_CHOICES, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 

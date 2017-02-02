@@ -1,10 +1,12 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.views.generic import ListView, DetailView
 from orders.utils import id_generator
 from django.contrib import messages
 import stripe
+import csv
+from datetime import datetime
 from django.template import Context
 from django.utils.html import strip_tags
 from django.template.loader import get_template
@@ -14,12 +16,14 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.sites.models import Site
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 from orders.forms import PayForm
 from cart.models import Cart, CartItem
 from customers.models import CreditCard, Recipient, Comp
 from orders.models import Order, Record, BackIssue, Coupon
-from customers.views import purchase_notify
+from customers.views import purchase_notify, notify_html
 from catalog.models import Subscription
 from catalog.templatetags.catalog_tags import get_latest_issue
 
@@ -845,8 +849,57 @@ def checkout(request):
     return render(request, template, context)
 
 
+
+
+def email_pending_renewal_preview(request, record_id):
+    """debug function for previewing pending renewal meail"""
+    current_site = Site.objects.get_current()
+    local = settings.LOCAL
+    record = Record.objects.get(id=record_id)
+    renewal = Subscription.objects.filter(is_active=1).filter(type=2).latest('first_issue')
+
+    context = {
+        "current_site": current_site,
+        "local": local,
+        "record": record,
+        "renewal": renewal,
+    }
+    template = "orders/pending_renewal_notify_email.html"
+    return render(request, template, context)
+
+def email_pending_renewal(request, record_id):
+    """sends pre-renewal notice from renewals page"""
+    current_site = Site.objects.get_current()
+    local = settings.LOCAL
+    record = Record.objects.get(id=record_id)
+    renewal = Subscription.objects.filter(is_active=1).filter(type=2).latest('first_issue')
+    recipient = record.originating_order.user.email
+
+    email_context = {
+        "current_site": current_site,
+        "local": local,
+        "record": record,
+        "renewal": renewal,
+    }
+    subject = "Your POST Renewal"
+    template = "orders/pending_renewal_notify_email.html"
+
+    if settings.EMAIL_NOTIFICATIONS is True:
+        
+        print "email notifications are true and we're about to send"
+
+        notify_html(email_context, recipient, template, subject)
+        record.status = "Notified"
+        record.save()
+
+    else:
+        print "email settings not true"
+        pass
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 def email_preview(request, order_id):
-    """debug function for prviewing test email"""
+    """debug function for prviewing purchase notification email"""
     current_site = Site.objects.get_current()
     local = settings.LOCAL
     order = Order.objects.get(order_id=order_id)
@@ -869,7 +922,7 @@ def email_preview(request, order_id):
 
 
 def email(request, order_id):
-    """debug function for firing test email"""
+    """debug function for firing purchase notification email"""
     current_site = Site.objects.get_current()
     local = settings.LOCAL
     order = Order.objects.get(order_id=order_id)
@@ -968,6 +1021,86 @@ def record_by_issue(request, issue):
     context = {"records": records, "issue": issue}
     template = "orders/record_by_issue.html"
     return render(request, template, context)
+
+
+@staff_member_required
+def comps_export(request, type):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="comp_list_{}_{}.csv"'.format(type, datetime.now().strftime('%Y-%m-%d'))
+    if type =="vip":
+        comps = Comp.objects.filter(Q(comp_type="Promo") | Q(comp_type="VIP"))
+    elif type =="ad":
+        comps = Comp.objects.filter(comp_type = "Advertiser")
+    elif type == "staff":
+        comps = Comp.objects.filter(comp_type = "Staff")
+    elif type == "all":
+        comps = Comp.objects.all()
+    else:
+        comps = Comp.objects.all()
+    writer = csv.writer(response)
+
+    writer.writerow([
+                    "Organization",
+                    "First Name",
+                    "Last Name",
+                    "Address 1", 
+                    "Address 2", 
+                    "City", 
+                    "State",
+                    "Zip",
+                    "type",
+                    ])
+    for comp in comps:
+        writer.writerow([
+                        comp.org,
+                        comp.first_name,
+                        comp.last_name,
+                        comp.address_line1,
+                        comp.address_line2,
+                        comp.city,
+                        comp.state_province,
+                        comp.postal_code,
+                        comp.comp_type,
+                        ])               
+    return response
+
+@staff_member_required
+def records_export(request, issue):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="records_list_%s.csv"' % datetime.now().strftime('%Y-%m-%d')
+    records = Record.objects.filter(issue=issue)
+
+    writer = csv.writer(response)
+
+    writer.writerow([
+                    "Organization",
+                    "First Name",
+                    "Last Name",
+                    "Address 1", 
+                    "Address 2", 
+                    "City", 
+                    "State",
+                    "Zip",
+                    "type",
+                    ])
+    for record in records:
+        try:
+            typ = record.recipient.comp.comp_type
+        except:
+            typ = "Paid"
+        writer.writerow([
+                        record.recipient.org,
+                        record.recipient.first_name,
+                        record.recipient.last_name,
+                        record.recipient.address_line1,
+                        record.recipient.address_line2,
+                        record.recipient.city,
+                        record.recipient.state_province,
+                        record.recipient.postal_code,
+                        typ,
+                        ])        
+        
+    return response
 
 # view to turn order into record.
 

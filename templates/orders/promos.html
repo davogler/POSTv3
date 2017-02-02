@@ -45,7 +45,7 @@
         <h1>Promo Pool</h1>
             <p>These are recipients available as promos.  These may or may not be ordered for a given issue.</p>
         {% if promo_pool %}
-        <div class="brick clearfix"> 
+        <div class="brick clearfix promoblock"> 
         <h2 >VIP/Promo Pool </h2>
         <span class='legend'></span> = Already added to issue {{issue}}.
         {% include "orders/promo_table.html" with comp_list=promo_pool type="vip" %}
@@ -53,7 +53,7 @@
         {% endif %}
         
         {% if staff_pool %}
-        <div class="brick clearfix">
+        <div class="brick clearfix promoblock">
         <h2>Staff Pool </h2>
         <span class='legend'></span> = Already added to issue {{issue}}.
         {% include "orders/promo_table.html" with comp_list=staff_pool type="staff" %}
@@ -61,7 +61,7 @@
         {% endif %}
         
         {% if advertiser_pool %}
-        <div class="brick clearfix">
+        <div class="brick clearfix promoblock">
          <h2>Advertiser Pool</h2>
          <span class='legend'></span> = Already added to issue {{issue}}.
         {% include "orders/promo_table.html" with comp_list=advertiser_pool type="ad" %}

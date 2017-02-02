@@ -186,6 +186,7 @@ INSTALLED_APPS = (
     'sponsors',
     'subscribers',
     'password_reset',
+    'csvimport.app.CSVImportConf',
     
 )
 

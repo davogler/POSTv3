@@ -81,7 +81,14 @@
                 <td> {{ record }}</td>
                  <td> {{ record.originating_order.payer_name }}</td>
                 <td> {% get_auto_renew record as auto %} {{auto}}</td>
-                <td> {{ record.originating_order.user }}email them</td>
+                <td> 
+                {% if record.status = 'Notified' %}
+                <button class="btn btn-default">Sent <i class="fa fa-check" aria-hidden="true"></i></button>
+                {% else %}
+                <a href="{% url 'email_pending_renewal' record.id %}" class="btn btn-primary">
+                Send <i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                {% endif %}
+                </td>
                 <td> {% if auto = True %}
                 {% get_dat_cc record.originating_order.user as cc %} 
                 <form action="{% url 'checkout_auto_renewal'%}" method="POST" >{% csrf_token %}

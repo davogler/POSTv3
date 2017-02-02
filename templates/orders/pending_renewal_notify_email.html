@@ -6,7 +6,7 @@
 <head>
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Billing e.g. invoices and receipts</title>
+<title>POST Renewal</title>
 
 
 <style type="text/css">
@@ -71,104 +71,32 @@ background-color: #f6f6f6;
                                         <img style="font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 32px; color: #000; line-height: 1.2em; font-weight: 500; text-align: center; margin: 40px 0 0;"src = "http://{{ current_site }}/assets/i/post-logo-sm-2x.png" width="240" >
                                     </td>
                                 </tr><tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                        <h2 class="aligncenter" style="font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 24px; color: #000; line-height: 1.2em; font-weight: 400; text-align: center; margin: 40px 0 0;" align="center">Thank you for your order!</h2>
+                                        <h2 class="aligncenter" style="font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 24px; color: #000; line-height: 1.2em; font-weight: 400; text-align: center; margin: 40px 0 0;" align="center">Your POST Renewal</h2>
                                     </td>
                                 </tr><tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">
                                         <table class="invoice" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 80%; margin: 40px auto;">
                                         <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">Hello!<br><br>
-                                        <p>Our records indicate that a subscription associated with this email address is up for renewal. The recipient of this subscription is:<br>
-                                        {% if item.recipient %}
-                                            {% with item.recipient as item %}
+                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">Hello!<br>
+                                        <p>Our records indicate that a subscription associated with this email address is up for renewal.<br>
+                                         The recipient of this subscription is:</p>
+                                        
+                                            {% with record.recipient as item %}
                                             {% include "customers/address_display.html" %}
                                             {% endwith %}
+                                        <br>{% get_auto_renew record as auto %}
+                                         {% if auto = True %}
+                                        <p>{% get_dat_cc record.originating_order.user as cc %}Because you have chosen to auto-renew your subscription and you've stored your credit card information with us, we'll charge your <strong>{{cc.card_type}}</strong> ending in <strong>{{cc.last4}}</strong> for the amount listed below. No action is required on your part!  You'll receive a receipt when the payment is successful.</p>
+                                        {% else %}
+                                        <p>Renew your subscription today at <a href="{% if local = True %}http{% else %}https{% endif %}://{{current_site}}/subscribe/">{{current_site}}/subscribe</a>.  While you're at it, take advantage of our auto-renewing subscription feature- you'll never miss an issue!</p>
                                         {% endif %}
   
-                                        <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />Order #{{order.order_id}}<br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />{{order.timestamp}}</td>
+                                        </td>
                                             </tr>
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">
                                                     <table class="invoice-items" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;">
 
                                                      
-                                                    
-                                                {% if subbies %}
-
-                                                <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-
-                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top"><h3>Subscriptions</h3></td>
-                                                        
-                                                        <td class="alignright" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top"></td>
-                                                    </tr>
-
-                                                    {% for item in subbies %}
-
-                                                    
-
-                                                    <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                        {% get_last_record item.recipient as the_last_record %}
-                                                        {% if the_last_record %}
-                                                            {% get_first_month the_last_record as the_first_month %}
-                                                            {% get_second_month the_last_record as the_second_month %}
-                                                            {% else %}
-                                                            {% get_first_month item.subscription.first_issue as the_first_month %}
-                                                            {% get_second_month item.subscription.first_issue as the_second_month %}
-                                                        {% endif %}
-
-                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">{{ item.subscription.title }} 
-                                                        starting {{ the_first_month|date:"M" }}/{{the_second_month|date:"M Y"}}
-                                                        
-
-                                                        <br><span class="sendto"><em>send to:</em></span>
-                                                        {% if item.recipient %}
-                                                            {% with item.recipient as item %}
-                                                            {% include "customers/address_display.html" %}
-                                                            {% endwith %}
-                                                        {% endif %}
-                                                        </td>
-                                                        
-                                                        <td class="alignright" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">${{ item.line_total|floatformat:0 }}</td>
-                                                    </tr>
-
-                                                    {% endfor %}
-
-                                                {% endif %}
-
-                                                {% if singles %}
-
-                                                    <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-
-                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid; margin: 0; padding: 5px 0;" valign="top"><h3>Single Issues</h3></td>
-                                                        
-                                                        <td class="alignright" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top"></td>
-                                                    </tr>
-                                                    
                                                 
-
-                                                    {% for item in singles %}
-                                                    <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-
-                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top;  margin: 0; padding: 5px 0;" valign="top">{{ item.single.month }} issue ({{item.quantity}})
-
-                                                        
-
-                                                        </td>
-
-                                                        <td class="alignright" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  margin: 0; padding: 5px 0;" align="right" valign="top">${{ item.line_total|floatformat:0 }}</td>
-                                                    </tr>
-                                                    {% endfor %}
-
-
-                                                    <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-
-                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top;  margin: 0; padding: 5px 0;" valign="top"><span class="sendto"><em>send to:</em></span><br>
-                                                            {% if order.main_recipient %}
-                                                                    
-                                                                    {% with order.main_recipient as item %}
-                                                                        {% include "customers/address_display.html" %}
-                                                                    {% endwith %}
-                                                                    
-                                                                    
-                                                            {% endif %}
 
                                                         
 
@@ -177,13 +105,14 @@ background-color: #f6f6f6;
                                                         <td class="alignright" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  margin: 0; padding: 5px 0;" align="right" valign="top"></td>
                                                     </tr>
 
-                                                {% endif %}  
-
+                                               
                                                 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
 
-                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">Shipping: </td>
+                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">
+                                                        {{renewal.title}}
+                                                        </td>
 
-                                                        <td class="alignright" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">${{ order.shipping|floatformat:2 }}</td>
+                                                        <td class="alignright" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">${{ renewal.price|floatformat:2 }}</td>
                                                     </tr>  
 
                                                    
@@ -192,8 +121,16 @@ background-color: #f6f6f6;
 
                                                   <tr class="total" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                   <td class="alignright" width="80%" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Total</td>
-                                                            <td class="alignright" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">${{ order.total|floatformat:2 }}</td>
+                                                            <td class="alignright" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">${{ renewal.price|floatformat:2 }}</td>
                                                         </tr>
+                                                        
+                                                        <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+	                                                      <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">{% if auto = True %}	                                                      <p>If you'd like to update your credit card prior to this transaction, you can do so by logging into <a href="{% if local = True %}http{% else %}https{% endif %}://{{current_site}}/account/login/">your account</a>.</p>
+	                                                      <p>If you'd like to cancel your auto-renewing subscription, reply to this email or let us know at <a href="mailto:info@postrochester.com">info@postrochester.com</a></p>
+	                                                      <p>Thank you for your support!</p>{% else %}<p>Thank you for your support!</p>{% endif %}
+	                
+	                                                      </td>
+                                                                                                  </tr>
 
                                                         </table></td>
                                             </tr></table></td>

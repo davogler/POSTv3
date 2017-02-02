@@ -64,7 +64,7 @@
 
         {% for record in records %}
             <tr>
-                <td> {{ record.recipient.org }}</td>
+                 <td> {{ record.recipient.org }}</td>
                  <td> {{ record.recipient.first_name }}</td>
                  <td> {{ record.recipient.last_name }}</td>
                  <td> {{ record.recipient.address_line1 }}</td>
@@ -78,7 +78,7 @@
         {% endfor %}
         </tbody>
         </table>
-
+        <a class="btn btn-default" href="{% url 'records_export' issue %}">Download CSV <i class="fa fa-cloud-download" aria-hidden="true"></i></a>
        
       
     </div>

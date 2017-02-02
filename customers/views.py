@@ -323,6 +323,29 @@ def delete_recipient(request, pk):
     messages.success(request, "Successfully Removed Client.")
     return HttpResponseRedirect(reverse("dashboard"))
 
+def notify_html(email_context, recipient, template, subject):
+    c = Context(email_context)
+    sender = settings.DEFAULT_FROM_EMAIL
+    admin_cc = settings.DEFAULT_ADMIN_CC
+    recipients = [recipient, admin_cc, ]
+    template = get_template(template)
+    headers = {
+        "X-SMTPAPI": json.dumps({
+            "unique_args": {
+                "campaign_id": 999
+            },
+            "category": "notice"
+        })
+    }
+    html_part = template.render(c)
+
+    text_part = strip_tags(html_part)
+
+    msg = EmailMultiAlternatives(subject, text_part, sender, recipients, headers=headers)
+    msg.attach_alternative(html_part, "text/html")
+    print "purchase nofication sent"
+    return msg.send(True)
+
 
 def purchase_notify(email_context, recipient):
 

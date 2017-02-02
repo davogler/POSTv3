@@ -2,6 +2,7 @@
 *.pot
 *.pyc
 .git
+media
 media/uploads
 settings_private.py
 settings_local.py

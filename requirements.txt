@@ -1,6 +1,8 @@
 Django==1.8.12
 Pillow==2.7.0
+chardet==2.3.0
 django-crispy-forms==1.5.2
+django-csvimport==2.5
 django-filebrowser==3.5.7
 django-grappelli==2.6.5
 django-password-reset==0.7
